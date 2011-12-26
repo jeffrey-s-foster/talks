@@ -72,11 +72,12 @@ private
         params[:talk][:start_time] = Chronic.parse("#{$1} at #{$2}")
         params[:talk][:end_time] = Chronic.parse("#{$1} at #{$3}")
       else
-        flash[:alert] = "Malformed Date/time string"
+        params[:talk][:start_time] = params[:talk][:end_time] = nil
       end
     else
       params[:talk][:start_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_start_time]}")
       params[:talk][:end_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_end_time]}")
+      errors.add(nil, "Malformed date or time") if not (params[:talk][:start_time] && params[:talk][:end_time])
     end
   end
 

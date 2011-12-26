@@ -2,6 +2,8 @@
 
 <%= form_for @talk do |f| %>
 
+<%= f.error_messages :header_message => "Invalid talk", :message => nil, :header_tag => :div %>
+
 <table class="edit-talk">
 
 <tr><th>Title</th><td><%= f.text_field :title %></td></tr>

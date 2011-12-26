@@ -23,11 +23,17 @@ table {
 }
 
 h1, h2, h3, h4 {
-    color: $primary_color;
+    color: $complementary_color;
 }
 
-span.error {
+.error, #error_explanation {
     color: red;
+}
+
+.errorExplanation, #error_explanation {
+    div, h2 { background-color: red; color: white; font-weight: bold; font-size: large; padding: 3px; margin: 0px;}
+    border: 1px solid red;
+    margin-bottom: 10px;
 }
 span.comment {
     font-size: x-small;
