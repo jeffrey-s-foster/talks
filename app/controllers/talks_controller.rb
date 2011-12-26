@@ -71,6 +71,8 @@ private
       if params[:temp_date_time] =~ /(.*) from (.*) to (.*)/ then
         params[:talk][:start_time] = Chronic.parse("#{$1} at #{$2}")
         params[:talk][:end_time] = Chronic.parse("#{$1} at #{$3}")
+      else
+        flash[:alert] = "Malformed Date/time string"
       end
     else
       params[:talk][:start_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_start_time]}")

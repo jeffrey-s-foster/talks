@@ -2,9 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "global";
+
 table.edit-talk {
   th {
-    color: blue;
+    color: $secondary_color_b;
     text-align: right;
     padding-right: 10px;
   };
@@ -32,7 +34,7 @@ table.edit-talk {
 .show-talk {
   .title {
      font-size: x-large;
-     color: firebrick;
+     color: $primary_color_2;
   }
   .speaker {
      font-size: large;

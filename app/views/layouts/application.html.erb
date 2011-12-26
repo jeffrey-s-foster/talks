@@ -8,6 +8,25 @@
 </head>
 <body>
 
+<div class="site-title">
+  <%= link_to "talks.cs.umd.edu", root_path %>
+</div>
+
+<div class="login-bar">
+  <% if current_user then %>
+    <%= link_to current_user.email, edit_user_registration_path %>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <%= link_to "Log out", destroy_user_session_path(user_session), :method => :delete %>
+  <% else %>
+     <%= link_to "Log in", new_user_session_path %>
+     &nbsp;&nbsp;|&nbsp;&nbsp;
+     <%= link_to "Register", new_user_registration_path %>
+  <% end %>
+</div>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <%= yield %>
 
 </body>

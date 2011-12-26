@@ -1,1 +1,8 @@
 Placeholder README
+
+Notes on things that need to change when deployed:
+* config/environments/production.rb, update config.action_mailer.default_url_options
+* config/initializers/devise.rb, update config.mailer_sender
+
+Colors:
+* http://colorschemedesigner.com/#0041YqqvKv5v5
