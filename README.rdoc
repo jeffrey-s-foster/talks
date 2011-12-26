@@ -1,0 +1,27 @@
+= Talks.cs.umd.edu
+
+== Permission model
+
+* Global roles
+  * :admin - permission to do anything on the site
+    * Only :admin can create a new list
+  * :poster - permission to create a talk
+* Relationships
+  * Each talk has_one creator (user, can't be empty)
+  * Each talk has_and_belongs_to_many lists (may be empty)
+  * Each list has_and_belongs_to_many posters (users)
+  * Each list has_and_belongs_to_many admins (users)
+* Local roles
+  * A talk may be created by anyone with :poster permission
+  * A talk may be added to a list by anyone with permission to post to that list
+  * A talk may be edited/deleted by the creator of the talk or by an admin of any list the talk is posted to
+  * A user may be granted or revoked list poster or admin permission by an admin of that list
+
+== Notes on things that need to change when deployed
+
+* config/environments/production.rb, update config.action_mailer.default_url_options
+* config/initializers/devise.rb, update config.mailer_sender
+
+== Miscellaneous
+
+* {Color scheme}[http://colorschemedesigner.com/#0041YqqvKv5v5]
