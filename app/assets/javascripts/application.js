@@ -6,4 +6,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require_tree .
+//= require ckeditor/ckeditor
+//= require ckeditor/adapters/jquery
+
+CKEDITOR_BASEPATH = "/assets/ckeditor/";

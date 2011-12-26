@@ -1,0 +1,26 @@
+<h1><%= @title %></h1>
+
+<%= form_for @talk do |f| %>
+
+<table class="edit-talk">
+
+<tr><th>Title</th><td><%= f.text_field :title %></td></tr>
+<tr><th>Speaker</th><td><%= f.text_field :speaker %></td></tr>
+
+<tr class="space-above"><th>Date</th><td><%= text_field_tag :temp_date, @date %> <span class="comment">(mm/dd/yyyy, e.g., <i>12/31/2011</i>)</span></td></tr>
+<tr><th>Start time</th><td><%= text_field_tag :temp_start_time, @start_time %> <span class="comment">(hh:mm a/pm, e.g., <i>3:00 pm</i>)</span></td></tr>
+<tr><th>End time</th><td><%= text_field_tag :temp_end_time, @end_time %></td></tr>
+
+
+<tr class="space-above abstract"><th>Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
+
+</table>
+
+<p>
+<%= f.submit %>
+
+<% end %>
+
+<script>
+  $("#temp_date").datepicker( { minDate: new Date() } );
+</script>

@@ -1,0 +1,14 @@
+<h1>All talks</h1>
+
+<% @talks.each do |t| %>
+
+<p>
+<%= t.id %>
+<%= link_to t.title, talk_path(t.id) %>
+(<%= link_to "edit", edit_talk_path(t.id) %>,
+<%= link_to "delete", talk_path(t.id), :confirm => 'Are you sure?', :method => :delete %>)
+
+<% end %>
+
+<p>
+<%= link_to "new", new_talk_path %>
