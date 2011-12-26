@@ -12,7 +12,7 @@ class TalksController < ApplicationController
   def show
     @talk = Talk.find(params[:id])
     if @talk.start_time && @talk.end_time
-      @time = (@talk.start_time.strftime "%A %B %-d, %Y, ") + (@talk.start_time.strftime("%l:%M").lstrip)
+      @time = (@talk.start_time.strftime "%A, %B %-d, %Y, ") + (@talk.start_time.strftime("%l:%M").lstrip)
       if ((@talk.start_time.hour < 12) == (@talk.end_time.hour < 12)) # both am or both pm
         @time << "-" << (@talk.end_time.strftime("%l:%M %P").lstrip)
       else
@@ -66,10 +66,16 @@ class TalksController < ApplicationController
 private
 
   def adjust(params)
-#    params[:talk][:start_time] = Time.zone.parse("#{params[:temp_date]} #{params[:temp_start_time]}", "%m/%d/%Y %I:%M %P").to_datetime
-#    params[:talk][:end_time] = Time.zone.parse("#{params[:temp_date]} #{params[:temp_end_time]}", "%m/%d/%Y %I:%M %P").to_datetime
-    params[:talk][:start_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_start_time]}")
-    params[:talk][:end_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_end_time]}")
+    if params[:temp_date_time] != "" then
+      # TODO: handle parsing errors here
+      if params[:temp_date_time] =~ /(.*) from (.*) to (.*)/ then
+        params[:talk][:start_time] = Chronic.parse("#{$1} at #{$2}")
+        params[:talk][:end_time] = Chronic.parse("#{$1} at #{$3}")
+      end
+    else
+      params[:talk][:start_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_start_time]}")
+      params[:talk][:end_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_end_time]}")
+    end
   end
 
 end
