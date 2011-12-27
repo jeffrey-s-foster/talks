@@ -2,17 +2,19 @@
 
 == Permission model
 
+(See app/models/ability.rb for full details)
+
 * Global roles
-  * :perm_admin - permission to do anything on the site
+  * :perm_site_admin - permission to do anything on the site
     * Only admins can create a new list
   * :perm_create_talk - permission to create a talk
 * Relationships
-  * Each talk has_one creator (user, can't be empty)
+  * Each talk belongs_to one owner (user, can't be empty)
   * Each talk has_and_belongs_to_many lists (may be empty)
   * Each list has_and_belongs_to_many posters (users)
   * Each list has_and_belongs_to_many admins (users)
 * Local roles
-  * A talk may be created by anyone with :poster permission
+  * A talk may be created by anyone with :perm_create_talk permission
   * A talk may be added to a list by anyone with permission to post to that list
   * A talk may be edited/deleted by the creator of the talk or by an admin of any list the talk is posted to
   * A user may be granted or revoked list poster or admin permission by an admin of that list

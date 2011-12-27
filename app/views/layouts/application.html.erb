@@ -13,23 +13,28 @@
 </div>
 
 <div class="login-bar">
-  <% if user_signed_in? %>
-    <% if can? :edit_user, current_user %>
-      <%= link_to current_user.name, edit_user_registration_path %>
-    <% else %>
-      <%= current_user.name %>
-    <% end %>
-    <% if can? :site_admin, nil then %>
+  <div class="left">
+    <% if can? :create, Talk %><%= link_to "new talk", new_talk_path %><% end %>
+  </div>
+  <div class="right">
+    <% if user_signed_in? %>
+      <% if can? :edit_user, current_user %>
+        <%= link_to current_user.name, edit_user_registration_path %>
+      <% else %>
+        <%= current_user.name %>
+      <% end %>
+      <% if can? :site_admin, nil then %>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to "admin", admin_index_path %>
+      <% end %>
       &nbsp;&nbsp;|&nbsp;&nbsp;
-      <%= link_to "admin", admin_index_path %>
+      <%= link_to "log out", destroy_user_session_path(user_session), :method => :delete %>
+    <% else %>
+       <%= link_to "log in", new_user_session_path %>
+       &nbsp;&nbsp;|&nbsp;&nbsp;
+       <%= link_to "register", new_user_registration_path %>
     <% end %>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <%= link_to "Log out", destroy_user_session_path(user_session), :method => :delete %>
-  <% else %>
-     <%= link_to "Log in", new_user_session_path %>
-     &nbsp;&nbsp;|&nbsp;&nbsp;
-     <%= link_to "Register", new_user_registration_path %>
-  <% end %>
+  </div>
 </div>
 
 <p class="notice"><%= notice %></p>
