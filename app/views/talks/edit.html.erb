@@ -22,7 +22,7 @@
 
 <% if can? :edit_owner, @talk %>
 <th>Owner</th>
-<td><%= f.collection_select(:owner_id, User.all, :id, :email_and_name) %></td>
+<td><%= f.collection_select(:owner_id, User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }, :id, :email_and_name) %></td>
 <% end %>
 
 </table>
