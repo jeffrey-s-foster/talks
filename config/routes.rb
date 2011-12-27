@@ -5,7 +5,7 @@ Talks::Application.routes.draw do
 
   namespace :admin do
     get :index
-    resources :users, :only => [:index, :edit, :update, :delete]
+    resources :users, :only => [:index, :edit, :update, :destroy]
   end
   
   root :to => "talks#index"

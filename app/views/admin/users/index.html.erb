@@ -15,7 +15,13 @@
       <% if u.perm_site_admin %>admin <% end %>
       <% if u.perm_create_talk %>create_talk <% end %>
     </td>
-    <td><%= u.last_sign_in_at %></td>
+    <td>
+      <% if not u.confirmed_at %>
+        (not confirmed)
+      <% else %>
+        <%= u.last_sign_in_at %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 </table>
