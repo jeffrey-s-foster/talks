@@ -21,6 +21,7 @@
 
 * config/environments/production.rb, update config.action_mailer.default_url_options
 * config/initializers/devise.rb, update config.mailer_sender
+* app/views/layouts/application.html.erb, change "talk.cs.umd.edu"
 
 == Miscellaneous
 
