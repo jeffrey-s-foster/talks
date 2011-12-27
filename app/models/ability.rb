@@ -2,6 +2,18 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :edit_user, user if user
+    user ||= User.new # guest user (not logged in)
+
+    if user.perm_create_talk || user.perm_site_admin
+      can :create_talk, Talk
+    end
+
+    if user.perm_site_admin
+      can :site_admin, :all
+      can :edit_user, :all
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

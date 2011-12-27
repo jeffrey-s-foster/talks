@@ -1,0 +1,21 @@
+<h1>Users</h1>
+
+<table class="users-table">
+  <tr><th>Actions</th><th>Id</th><th>Email</th><th>Name</th><th>Perms</th><th>Last signed in</th></tr>
+  <% @users.each do |u| %>
+  <tr>
+    <td>
+      <%= link_to "edit", edit_admin_user_path(u) %> &nbsp;
+      <%= link_to "delete", admin_user_path(u), :confirm => "Are you sure?", :method => :delete %>
+    </td>
+    <td><%= u.id %></td>
+    <td><%= u.email %></td>
+    <td><%= u.name %></td>
+    <td>
+      <% if u.perm_site_admin %>admin <% end %>
+      <% if u.perm_create_talk %>create_talk <% end %>
+    </td>
+    <td><%= u.last_sign_in_at %></td>
+  </tr>
+  <% end %>
+</table>
