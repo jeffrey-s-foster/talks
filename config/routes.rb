@@ -1,7 +1,7 @@
 Talks::Application.routes.draw do
-  devise_for :users
-
   resources :talks
+  resources :lists
+  devise_for :users
 
   namespace :admin do
     get :index

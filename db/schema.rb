@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111227190913) do
+ActiveRecord::Schema.define(:version => 20111227222025) do
+
+  create_table "lists", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lists_talks", :id => false, :force => true do |t|
+    t.integer "list_id"
+    t.integer "talk_id"
+  end
+
+  add_index "lists_talks", ["list_id"], :name => "index_lists_talks_on_list_id", :unique => true
+  add_index "lists_talks", ["talk_id"], :name => "index_lists_talks_on_talk_id", :unique => true
 
   create_table "talks", :force => true do |t|
     t.text     "title",      :default => ""
@@ -23,6 +38,8 @@ ActiveRecord::Schema.define(:version => 20111227190913) do
     t.datetime "updated_at"
     t.integer  "owner_id"
   end
+
+  add_index "talks", ["start_time"], :name => "index_talks_on_start_time"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "",    :null => false

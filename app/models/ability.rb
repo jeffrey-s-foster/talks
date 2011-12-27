@@ -16,6 +16,7 @@ class Ability
       can :edit_user, :all
       can :edit, Talk
       can :edit_owner, Talk
+      can :create, List
     end
 
     # Define abilities for the passed in user here. For example:
