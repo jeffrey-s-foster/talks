@@ -4,6 +4,7 @@ class TalksController < ApplicationController
   end
 
   def new
+    authorize! :create, Talk
     @talk = Talk.new
     @title = "Create new talk"
     render :action => "edit"
@@ -24,6 +25,7 @@ class TalksController < ApplicationController
   end
 
   def create
+    authorize! :create, Talk
     adjust params
     @talk = Talk.new(params[:talk])
     @talk.owner = current_user
@@ -38,6 +40,7 @@ class TalksController < ApplicationController
 
   def edit
     @talk = Talk.find(params[:id])
+    authorize! :edit, @talk
     @title = "Edit talk"
     if @talk.start_time && @talk.end_time
       @date = @talk.start_time.strftime("%m/%d/%Y")
@@ -48,6 +51,7 @@ class TalksController < ApplicationController
 
   def update
     @talk = Talk.find(params[:id])
+    authorize! :edit, @talk
     adjust params
 #    @talk.owner = current_user # shouldn't just change the owner
     logger.info "Start_time: #{params[:talk][:start_time]}"
@@ -61,6 +65,7 @@ class TalksController < ApplicationController
 
   def destroy
     @talk = Talk.find(params[:id])
+    authorize! :edit, @talk
     @talk.destroy
     redirect_to talks_path
   end

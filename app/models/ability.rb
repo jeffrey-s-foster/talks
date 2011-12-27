@@ -6,12 +6,15 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.perm_create_talk || user.perm_site_admin
-      can :create_talk, Talk
+      can :create, Talk
     end
+
+    can :edit, Talk, :owner_id => user.id
 
     if user.perm_site_admin
       can :site_admin, :all
       can :edit_user, :all
+      can :edit, Talk
     end
 
     # Define abilities for the passed in user here. For example:
