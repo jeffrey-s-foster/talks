@@ -3,5 +3,9 @@ Talks::Application.routes.draw do
 
   resources :talks
 
+  namespace :admin do
+    get :index
+  end
+  
   root :to => "talks#index"
 end
