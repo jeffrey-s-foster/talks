@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111226200401) do
+ActiveRecord::Schema.define(:version => 20111226235126) do
 
   create_table "talks", :force => true do |t|
     t.text     "title",      :default => ""
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(:version => 20111226200401) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.boolean  "perm_admin"
+    t.boolean  "perm_create_talk"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

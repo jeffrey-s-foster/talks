@@ -3,9 +3,9 @@
 == Permission model
 
 * Global roles
-  * :admin - permission to do anything on the site
-    * Only :admin can create a new list
-  * :poster - permission to create a talk
+  * :perm_admin - permission to do anything on the site
+    * Only admins can create a new list
+  * :perm_create_talk - permission to create a talk
 * Relationships
   * Each talk has_one creator (user, can't be empty)
   * Each talk has_and_belongs_to_many lists (may be empty)
