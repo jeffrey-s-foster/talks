@@ -1,6 +1,9 @@
 class Talk < ActiveRecord::Base
+  belongs_to :owner, :class_name => "User"
+
   validate :start_end_same_day
   validate :start_end_not_error
+  validates_presence_of :owner
 
   def start_end_same_day
     if start_time && end_time && (start_time.to_date != end_time.to_date)

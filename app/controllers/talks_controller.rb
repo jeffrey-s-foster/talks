@@ -26,6 +26,7 @@ class TalksController < ApplicationController
   def create
     adjust params
     @talk = Talk.new(params[:talk])
+    @talk.owner = current_user
     logger.info "Start_time: #{params[:talk][:start_time]}"
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
@@ -48,6 +49,7 @@ class TalksController < ApplicationController
   def update
     @talk = Talk.find(params[:id])
     adjust params
+#    @talk.owner = current_user # shouldn't just change the owner
     logger.info "Start_time: #{params[:talk][:start_time]}"
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.update_attributes(params[:talk])
