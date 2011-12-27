@@ -8,4 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :perm_site_admin, :perm_create_talk
 
   validates :name, :presence => true
+
+  def name_and_email
+    "#{name} &lt;#{email}&gt;".html_safe
+  end
+
+  def email_and_name
+    "#{email} (#{name})".html_safe
+  end
 end

@@ -10,4 +10,8 @@
 
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 
-</div>
+<% if can? :edit, @talk %>
+<p>
+<%= link_to "edit talk", edit_talk_path(@talk) %>
+</p>
+<% end %>

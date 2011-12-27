@@ -20,6 +20,11 @@
 
 <tr class="space-above abstract"><th>Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
 
+<% if can? :edit_owner, @talk %>
+<th>Owner</th>
+<td><%= f.collection_select(:owner_id, User.all, :id, :email_and_name) %></td>
+<% end %>
+
 </table>
 
 <p>
