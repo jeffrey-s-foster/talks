@@ -5,7 +5,10 @@
 
   <table class="edit-list">
 
-  <tr><th>Name</th><td><%= f.text_field :name %></td></tr>
+    <tr>
+      <th>Name</th>
+      <td><%= if can? :edit_name, @list then f.text_field :name else @list.name end %></td>
+    </tr>
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
   <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>

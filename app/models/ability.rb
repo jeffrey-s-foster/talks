@@ -11,6 +11,10 @@ class Ability
 
     can :edit, Talk, :owner_id => user.id
 
+    can :edit, List do |l|
+      l.owners.exists? user
+    end
+
     if user.perm_site_admin
       can :site_admin, :all
       can :edit_user, :all

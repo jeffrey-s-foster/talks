@@ -1,12 +1,17 @@
 <div class="show-list">
 
-<% if can? :edit_name, @list %>
 <div class="name"><%= @list.name %></div>
-<% end %>
 
 <div class="short-descr"><%= @list.short_descr.html_safe %></div>
 
 <div class="long-descr"><%= @list.long_descr.html_safe %></dev>
+
+<div class="organizers">
+  <% if @list.owners %>
+    This list is organized by
+    <%= join_with_and(@list.owners, :name) %>
+  <% end %>
+</div>
 
 <% if can? :edit, @list %>
 <p>
