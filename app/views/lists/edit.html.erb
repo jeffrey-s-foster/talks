@@ -52,7 +52,7 @@
 
 <script>
   $("span.button_remove").click(function () {
-    $("#" + $(this).attr("data_target")).parent().remove();
+    $(this).parent().remove();
   })
   $("span.button_add").click(function () {
     next_owner = "owner_" + ($(this).parent().children().length - 2).toString();
