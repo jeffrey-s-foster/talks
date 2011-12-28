@@ -11,6 +11,8 @@ class ListsController < ApplicationController
     authorize! :create, List
     @list = List.new
     @title = "Create new list"
+    @owners = []
+    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
     render :action => "edit"
   end
 
