@@ -6,7 +6,24 @@
 
 <div class="time"><%= @talk.time_to_long_s  %></div>
 
-<div class="abstract"><%= @talk.abstract.html_safe %></div>
+<hr/>
+
+<div class="abstract">
+<span class="title">Abstract</span>
+<% if @talk.abstract == "" %>
+  <div class="abstract-body">(No abstract yet)</div>
+<% else %>
+  <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
+<% end %>
+</div>
+
+<hr/>
+
+<div class="lists">
+<% if not (@talk.lists.empty?) %>
+  This talk is part of the following lists: <%= render :partial => "lists_to_links", :locals => {:talk => @talk } %>
+<% end %>
+</div>
 
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 

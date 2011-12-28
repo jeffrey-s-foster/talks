@@ -36,6 +36,6 @@
 <div class="organizers">
   <% if @list.owners.length > 0 %>
     This list is organized by
-    <%= join_with_and(@list.owners, :name) %>
+    <%= join_with_and(@list.owners.map { |u| u.name }) %>
   <% end %>
 </div>

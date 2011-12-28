@@ -1,0 +1,8 @@
+<!--
+
+  parameters
+  - talk - the talk whose lists to render
+
+-->
+
+<%= join_with_and(talk.lists.map { |l| link_to l.name, l }).html_safe %>
