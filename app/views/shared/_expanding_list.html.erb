@@ -27,7 +27,7 @@
 <%= content_tag(:span, "add another", :class => "button_add") %>
 
 <script>
-  var num_<%= name %> = <%= current_elts.length %>;
+  var num_<%= name %> = <%= if current_elts.length > 0 then current_elts.length else 1 end %>;
   var button_remove_handler = function () { $(this).parent().remove(); }
   $("div.<%= name %>_proto").hide();
   $("span.button_remove").click(button_remove_handler);

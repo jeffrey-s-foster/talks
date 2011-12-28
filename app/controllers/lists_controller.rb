@@ -26,6 +26,7 @@ class ListsController < ApplicationController
 
   def create
     authorize! :create, List
+    adjust params
     @list = List.new(params[:list])
 
     if @list.save
@@ -38,6 +39,7 @@ class ListsController < ApplicationController
   def update
     authorize! :edit, List
     @list = List.find(params[:id])
+    adjust params
     if not (can? :edit_name, @list) then
       params[:list].delete :name
     end
@@ -55,5 +57,16 @@ class ListsController < ApplicationController
     @list.destroy
 
     redirect_to lists_url
+  end
+
+private
+
+  def adjust(params)
+    owners = []
+    params.each_pair { |k,v|
+      next unless k =~ /owner_\d+/
+      owners << User.find(v)
+    }
+    params[:list][:owners] = owners
   end
 end
