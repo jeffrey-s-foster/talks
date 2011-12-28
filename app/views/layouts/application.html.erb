@@ -14,7 +14,8 @@
 
 <div class="login-bar">
   <div class="left">
-    <% if can? :create, Talk %><%= link_to "new talk", new_talk_path %><% end %>
+    <%= link_to "all lists", lists_path %>
+    <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
     <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
     <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
   </div>

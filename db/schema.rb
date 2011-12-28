@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111227222025) do
+ActiveRecord::Schema.define(:version => 20111227235256) do
 
   create_table "lists", :force => true do |t|
     t.string   "name"
@@ -20,13 +20,29 @@ ActiveRecord::Schema.define(:version => 20111227222025) do
     t.datetime "updated_at"
   end
 
+  create_table "lists_owners", :id => false, :force => true do |t|
+    t.integer "list_id"
+    t.integer "owner_id"
+  end
+
+  add_index "lists_owners", ["list_id"], :name => "index_lists_owners_on_list_id"
+  add_index "lists_owners", ["owner_id"], :name => "index_lists_owners_on_owner_id"
+
+  create_table "lists_posters", :id => false, :force => true do |t|
+    t.integer "list_id"
+    t.integer "poster_id"
+  end
+
+  add_index "lists_posters", ["list_id"], :name => "index_lists_posters_on_list_id"
+  add_index "lists_posters", ["poster_id"], :name => "index_lists_posters_on_poster_id"
+
   create_table "lists_talks", :id => false, :force => true do |t|
     t.integer "list_id"
     t.integer "talk_id"
   end
 
-  add_index "lists_talks", ["list_id"], :name => "index_lists_talks_on_list_id", :unique => true
-  add_index "lists_talks", ["talk_id"], :name => "index_lists_talks_on_talk_id", :unique => true
+  add_index "lists_talks", ["list_id"], :name => "index_lists_talks_on_list_id"
+  add_index "lists_talks", ["talk_id"], :name => "index_lists_talks_on_talk_id"
 
   create_table "talks", :force => true do |t|
     t.text     "title",      :default => ""
