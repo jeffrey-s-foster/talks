@@ -1,17 +1,8 @@
-<div class="show-list">
-
 <div class="name"><%= @list.name %></div>
 
 <div class="short-descr"><%= @list.short_descr.html_safe %></div>
 
 <div class="long-descr"><%= @list.long_descr.html_safe %></dev>
-
-<div class="organizers">
-  <% if @list.owners.length > 0 %>
-    This list is organized by
-    <%= join_with_and(@list.owners, :name) %>
-  <% end %>
-</div>
 
 <% if can? :edit, @list %>
 <p>
@@ -22,3 +13,29 @@
 <%= link_to "delete list", @list, :confirm => 'Are you sure?', :method => :delete %>
 </p>
 <% end %>
+
+<hr/>
+
+<% if @upcoming then %>
+  <span class="header">Upcoming talks</span> (<%= link_to "See all talks", show_all_list_path(@list) %>)
+<% else %>
+  <span class="header">All talks (including past talks)</span> (<%= link_to "See upcoming talks only", @list %>)
+<% end %>
+
+<div class="short-talks">
+  <% if @talks.length == 0 %>
+    No <%= if @upcoming then "upcoming" end %> talks
+  <% end %>
+
+  <%= render :partial => "talks", :locals => { :talks => @talks } %>
+
+</div>
+
+<hr/>
+
+<div class="organizers">
+  <% if @list.owners.length > 0 %>
+    This list is organized by
+    <%= join_with_and(@list.owners, :name) %>
+  <% end %>
+</div>

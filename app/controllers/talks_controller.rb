@@ -1,5 +1,11 @@
 class TalksController < ApplicationController
+
+  def upcoming
+    @talks = Talk.upcoming
+  end
+
   def index
+    authorize! :site_admin, :all
     @talks = Talk.all
   end
 
@@ -18,16 +24,6 @@ class TalksController < ApplicationController
 
   def show
     @talk = Talk.find(params[:id])
-    if @talk.start_time && @talk.end_time
-      @time = (@talk.start_time.strftime "%A, %B %-d, %Y, ") + (@talk.start_time.strftime("%l:%M").lstrip)
-      if ((@talk.start_time.hour < 12) == (@talk.end_time.hour < 12)) # both am or both pm
-        @time << "-" << (@talk.end_time.strftime("%l:%M %P").lstrip)
-      else
-        @time << (@talk.start_time.strftime " %P-") << (@talk.end_time.strftime("%l:%M %P").lstrip)
-      end
-    else
-      @time = "(Time not yet available)"
-    end
   end
 
   def create

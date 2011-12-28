@@ -16,4 +16,23 @@ class Talk < ActiveRecord::Base
     errors.add(:start_time, "- Invalid start time") if not start_time
     errors.add(:end_time, "- Invalid end time") if not end_time
   end
+
+  def self.upcoming
+    where("start_time > ?", Time.zone.now)
+  end
+
+  def time_to_long_s
+    t = ""
+    if start_time && end_time
+      t = (start_time.strftime "%A, %B %-d, %Y, ") + (start_time.strftime("%l:%M").lstrip)
+      if ((start_time.hour < 12) == (end_time.hour < 12)) # both am or both pm
+        t << "-" << (end_time.strftime("%l:%M %P").lstrip)
+      else
+        t << (start_time.strftime " %P-") << (end_time.strftime("%l:%M %P").lstrip)
+      end
+    else
+      t = "(Time not yet available)"
+    end
+    return t
+  end
 end

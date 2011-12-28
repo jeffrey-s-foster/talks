@@ -3,8 +3,18 @@ class ListsController < ApplicationController
     @lists = List.all.sort { |a,b| a.name <=> b.name }
   end
 
+  # Show upcoming talks (TODO)
   def show
     @list = List.find(params[:id])
+    @talks = @list.talks.upcoming
+    @upcoming = true
+  end
+
+  def show_all
+    @list = List.find(params[:id])
+    @talks = @list.talks.sort { |a,b| a.start_time <=> b.start_time }
+    @upcoming = false
+    render :action => "show"
   end
 
   def new

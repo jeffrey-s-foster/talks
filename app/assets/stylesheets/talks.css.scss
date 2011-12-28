@@ -25,6 +25,8 @@ table.edit-talk {
 }
 
 .show-talk {
+    padding-left: 50px;	
+    padding-right: 50px;
   .title {
      font-size: x-large;
      color: $primary_color_2;
@@ -32,4 +34,8 @@ table.edit-talk {
   .speaker {
      font-size: large;
   }
+}
+
+table.talks-table {
+  td { border: 1px solid black; padding: 3px; }
 }

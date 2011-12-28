@@ -1,6 +1,13 @@
 Talks::Application.routes.draw do
-  resources :talks
-  resources :lists
+  resources :talks do
+    get :upcoming
+  end
+
+  resources :lists do
+    member do
+      get :show_all
+    end
+  end
   devise_for :users
 
   namespace :admin do
@@ -8,5 +15,5 @@ Talks::Application.routes.draw do
     resources :users, :only => [:index, :edit, :update, :destroy]
   end
   
-  root :to => "talks#index"
+  root :to => "talks#upcoming"
 end

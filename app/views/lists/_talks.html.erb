@@ -1,0 +1,14 @@
+<!-- parameters:
+
+   talks - Array of talks to list
+
+-->
+
+<% talks.each do |t| %>
+
+  <div class="short-talk">
+    <div class="title"><%= link_to t.title, t %></div>
+    <div class="speaker"><%= t.speaker %></div>
+    <div class="time_loc"><%= t.time_to_long_s %></div>
+  </div>
+<% end %>

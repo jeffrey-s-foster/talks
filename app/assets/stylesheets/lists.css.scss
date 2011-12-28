@@ -15,12 +15,20 @@ table.edit-list {
   };
 }
 
-.show-list {
-  .name {
-      font-size: x-large;
-      color: $primary_color_2;
-  }
-  .short_descr {
-      font-size: large;
-  }
+.name {
+    font-size: x-large;
+    color: $primary_color_2;
+}
+.short_descr {
+    font-size: large;
+}
+.long_descr { }
+
+.header {
+    color: $complementary_color_2;
+    font-size: x-large;
+}
+
+.organizers {
+    font-style: italic;
 }
