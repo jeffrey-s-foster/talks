@@ -13,16 +13,6 @@ table.edit-list {
   input[type=text] {
       width: 600px;
   };
-  td.button {
-    text-align: right;
-  }
-  .button_remove, .button_add {
-      color: gray;
-      font-size: x-small;
-  }
-  .button_remove:hover, .button_add:hover {
-      cursor: pointer;
-  };
 }
 
 .show-list {

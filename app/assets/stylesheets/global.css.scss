@@ -81,6 +81,14 @@ th.align-top {
     padding-top: 5px;
 }
 
+/* for _expanding_list.html.erb */
 div._proto {
     display: none;
+};
+.button_remove, .button_add {
+    color: gray;
+    font-size: x-small;
+}
+.button_remove:hover, .button_add:hover {
+    cursor: pointer;
 };

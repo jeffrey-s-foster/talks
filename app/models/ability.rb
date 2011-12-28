@@ -15,6 +15,10 @@ class Ability
       l.owners.exists? user
     end
 
+    can :add_talk, List do |l|
+      (l.owners.exists? user) || (l.posters.exists? user)
+    end
+
     if user.perm_site_admin
       can :site_admin, :all
       can :edit_user, :all
@@ -23,7 +27,7 @@ class Ability
       can :edit_owner, :all
       can :create, :all
       can :destroy, :all
-      can :edit_name, :all
+      can :add_talk, :all
     end
 
     # Define abilities for the passed in user here. For example:

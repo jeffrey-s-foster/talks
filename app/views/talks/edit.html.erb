@@ -20,10 +20,20 @@
 
 <tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
 
+<tr class="space-above">
+  <th class="align-top">Lists</th>
+  <td>
+    <%= render :partial => "shared/expanding_list", :locals => { :name => "posted", :current_elts => @posted, :all_elts => @lists, :elt_to_string => :name } %>
+  </td>
+</tr>
+
 <% if can? :edit_owner, @talk %>
-<th>Owner</th>
-<td><%= f.collection_select(:owner_id, User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }, :id, :email_and_name) %></td>
+<tr>
+  <th>Owner</th>
+  <td><%= f.collection_select(:owner_id, User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }, :id, :email_and_name) %></td>
+</tr>
 <% end %>
+
 
 </table>
 
