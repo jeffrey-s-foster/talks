@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111228003145) do
+ActiveRecord::Schema.define(:version => 20111228013137) do
 
   create_table "lists", :force => true do |t|
-    t.string   "name"
-    t.text     "short_descr"
+    t.string   "name",        :default => ""
+    t.text     "short_descr", :default => ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "long_descr"
+    t.text     "long_descr",  :default => ""
   end
 
   create_table "lists_owners", :id => false, :force => true do |t|
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(:version => 20111228003145) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",                                  :default => ""
     t.boolean  "perm_site_admin",                       :default => false
     t.boolean  "perm_create_talk"
   end

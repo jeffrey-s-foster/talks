@@ -8,17 +8,20 @@ class ListsController < ApplicationController
   end
 
   def new
+    authorize! :create, List
     @list = List.new
     @title = "Create new list"
     render :action => "edit"
   end
 
   def edit
+    authorize! :edit, List
     @list = List.find(params[:id])
-    @title = "Edit talk"
+    @title = "Edit list"
   end
 
   def create
+    authorize! :create, List
     @list = List.new(params[:list])
 
     if @list.save
@@ -29,7 +32,11 @@ class ListsController < ApplicationController
   end
 
   def update
+    authorize! :edit, List
     @list = List.find(params[:id])
+    if not (can? :edit_name, @list) then
+      params[:list].delete :name
+    end
 
     if @list.update_attributes(params[:list])
       redirect_to @list, notice: 'List was successfully updated.'
@@ -39,6 +46,7 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, List
     @list = List.find(params[:id])
     @list.destroy
 

@@ -1,6 +1,8 @@
 <div class="show-list">
 
+<% if can? :edit_name, @list %>
 <div class="name"><%= @list.name %></div>
+<% end %>
 
 <div class="short-descr"><%= @list.short_descr.html_safe %></div>
 
@@ -9,6 +11,8 @@
 <% if can? :edit, @list %>
 <p>
 <%= link_to "edit list", edit_list_path(@list) %>
+<% end %>
+<% if can? :destroy, @list %>
 &nbsp;&nbsp;
 <%= link_to "delete list", @list, :confirm => 'Are you sure?', :method => :delete %>
 </p>
