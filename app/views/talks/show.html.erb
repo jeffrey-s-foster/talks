@@ -13,5 +13,7 @@
 <% if can? :edit, @talk %>
 <p>
 <%= link_to "edit talk", edit_talk_path(@talk) %>
+&nbsp;&nbsp;
+<%= link_to "delete talk", @talk, :confirm => 'Are you sure?', :method => :delete %>
 </p>
 <% end %>

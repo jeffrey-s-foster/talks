@@ -24,7 +24,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to @list, notice: 'List was successfully created.'
     else
-      render action: "new"
+      render action: "edit"
     end
   end
 

@@ -5,10 +5,6 @@
 <p>
   <%= t.id %>
   <%= link_to t.title, talk_path(t.id) %>
-  <% if can? :edit, t %>
-    (<%= link_to "edit", edit_talk_path(t.id) %>,
-    <%= link_to "delete", talk_path(t.id), :confirm => 'Are you sure?', :method => :delete %>)
-  <% end %>
 </p>
 
 <% end %>
