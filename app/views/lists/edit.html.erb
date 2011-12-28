@@ -9,7 +9,7 @@
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
   <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>
-<% if @owners.length > 0 %>
+<% if @owners && @owners.length > 0 %>
   <% @owners.each_index do |i| %>
     <span>
     <%= select_tag "owner_#{i}", options_from_collection_for_select(@users, :id, :email_and_name, @owners[i].id), :include_blank => true %>
