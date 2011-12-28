@@ -14,9 +14,9 @@ class Ability
     if user.perm_site_admin
       can :site_admin, :all
       can :edit_user, :all
-      can :edit, Talk
-      can :edit_owner, Talk
-      can :create, List
+      can :edit, :all
+      can :edit_owner, :all
+      can :create, :all
     end
 
     # Define abilities for the passed in user here. For example:

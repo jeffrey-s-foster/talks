@@ -1,6 +1,31 @@
-<h1>Editing list</h1>
+<h1><%= @title %></h1>
 
-<%= render 'form' %>
+<%= form_for(@list) do |f| %>
+  <%= f.error_messages :header_message => "Invalid talk", :message => nil, :header_tag => :div %>
 
-<%= link_to 'Show', @list %> |
-<%= link_to 'Back', lists_path %>
+  <table class="edit-list">
+
+  <tr><th>Name</th><td><%= f.text_field :name %></td></tr>
+  <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
+  <tr class="long_description"><th>Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
+  </table>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+  <p>
+    <span class="comment">
+      The name of the list should be a short, abbreviated name, e.g.,
+      "PL Reading Group." The name will be shown on the home page and
+      used to sort any list of lists. The short description will be
+      shown on the <%= link_to "all lists", lists_path %> page next to
+      the short name, and on any talk announcements, so this text
+      should still be short, but sligthly more descriptive, e.g.,
+      "Programming Languages Reading Group."  The long description
+      will be shown only on the list's own page, and can contain whatever
+      text you want potential attendees of your series to know (e.g.,
+      typical topics, schedule, etc.)
+    </span>
+  </p>
+<% end %>
