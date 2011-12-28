@@ -12,6 +12,7 @@ class ListsController < ApplicationController
     @list = List.new
     @title = "Create new list"
     @owners = []
+    @posters = []
     @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
     render :action => "edit"
   end
@@ -21,6 +22,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @title = "Edit list"
     @owners = @list.owners.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @posters = @list.posters.sort { |a,b| a.email_and_name <=> b.email_and_name }
     @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
   end
 
@@ -64,9 +66,18 @@ private
   def adjust(params)
     owners = []
     params.each_pair { |k,v|
-      next unless k =~ /owner_\d+/
+      next unless k =~ /owner_(\d+)/
+      next if v == ""
       owners << User.find(v)
     }
     params[:list][:owners] = owners
+
+    posters = []
+    params.each_pair { |k,v|
+      next unless k =~ /poster_(\d+)/
+      next if v == ""
+      posters << User.find(v)
+    }
+    params[:list][:posters] = posters
   end
 end

@@ -13,15 +13,18 @@
   <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>
       <%= render :partial => "shared/expanding_list", :locals => { :name => "owner", :current_elts => @owners, :all_elts => @users, :elt_to_string => :email_and_name } %>
-</td></tr>
+  </td></tr>
+  <tr><th class="align-top">Poster(s)</th><td>
+      <%= render :partial => "shared/expanding_list", :locals => { :name => "poster", :current_elts => @posters, :all_elts => @users, :elt_to_string => :email_and_name } %>
+  </td></tr>
+
   </table>
 
   <p>
     <%= f.submit %>
   </p>
 
-  <p>
-    <span class="comment">
+  <p class="comment">
       The name of the list should be a short, abbreviated name, e.g.,
       "PL Reading Group." The name will be shown on the home page and
       used to sort any list of lists. The short description will be
@@ -32,6 +35,12 @@
       will be shown only on the list's own page, and can contain whatever
       text you want potential attendees of your series to know (e.g.,
       typical topics, schedule, etc.)
-    </span>
+  </p>
+
+  <p class="comment">
+    Anyone who is an <i>owner</i> of the list can change its
+    descriptions, set of owners, and set of posters. Anyone who is
+    an <i>owner</i> or a <i>poster</i> of the list can add a talk to
+    the list.
   </p>
 <% end %>

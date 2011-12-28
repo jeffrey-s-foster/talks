@@ -7,7 +7,7 @@
 <div class="long-descr"><%= @list.long_descr.html_safe %></dev>
 
 <div class="organizers">
-  <% if @list.owners %>
+  <% if @list.owners.length > 0 %>
     This list is organized by
     <%= join_with_and(@list.owners, :name) %>
   <% end %>
