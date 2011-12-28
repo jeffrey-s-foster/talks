@@ -9,9 +9,24 @@
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
   <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>
-<% @owners.each_index do |i| %>
-<%= select_tag "owner_#{i}", options_from_collection_for_select(@users, :id, :email_and_name, @owners[i].id), :include_blank => true %><br/>
+<% if @owners.length > 0 %>
+  <% @owners.each_index do |i| %>
+    <span>
+    <%= select_tag "owner_#{i}", options_from_collection_for_select(@users, :id, :email_and_name, @owners[i].id), :include_blank => true %>
+    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+    </span>
+  <% end %>
+<% else %>
+    <span>
+    <%= select_tag "owner_0", options_from_collection_for_select(@users, :id, :email_and_name), :include_blank => true %>
+    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+    </span>
 <% end %>
+<span class="owner_proto">
+  <%= select_tag "owner_proto", options_from_collection_for_select(@users, :id, :email_and_name), :include_blank => true %>
+  <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+</span>
+<%= content_tag(:span, "add more owners", :class => "button_add") %>
 </td></tr>
   </table>
 
@@ -34,3 +49,15 @@
     </span>
   </p>
 <% end %>
+
+<script>
+  $("span.button_remove").click(function () {
+    $("#" + $(this).attr("data_target")).parent().remove();
+  })
+  $("span.button_add").click(function () {
+    next_owner = "owner_" + ($(this).parent().children().length - 2).toString();
+    $(this).prev().before($(this).prev().clone().removeClass("owner_proto"));
+    $(this).prev().prev().children("#owner_proto").attr("name", next_owner).attr("id", next_owner);
+//    $(this).prev().before($(this).prev().clone().removeClass("owner_proto") .children("#owner_proto").attr("name", next_owner).attr("id", next_owner).parent());
+  })
+</script>

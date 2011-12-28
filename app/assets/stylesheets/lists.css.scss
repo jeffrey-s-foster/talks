@@ -16,7 +16,16 @@ table.edit-list {
   td.button {
     text-align: right;
   }
-
+  .button_remove, .button_add {
+      color: gray;
+      font-size: x-small;
+  }
+  .button_remove:hover, .button_add:hover {
+      cursor: pointer;
+  };
+  span.owner_proto {
+      display: none;
+  };
 }
 
 .show-list {
