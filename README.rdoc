@@ -1,5 +1,33 @@
 = Talks.cs.umd.edu
 
+== Local installation (for testing)
+
+This web app requires Rails 3.1 and was developed under
+ruby-1.9.2-p180. I recommend using {rvm}[http://beginrescueend.com/]
+to install Ruby. Then do
+
+  # skip the following steps if you're already using 1.9.2
+  rvm install ruby-1.9.2
+  rvm 1.9.2
+  rvm default
+  gem install rails
+
+  cd talks/
+  bundle install   # install all necessary packages
+  rake db:migrate  # create the database
+  script/rails s   # start the server on localhost:3000
+
+Then go to localhost:3000 and create an account for yourself. The
+email sending probably won't work if you're on a local machine, so
+look in log/development.log for the confirmation email that was sent
+(search for "Confirm my account"), and enter the link. You'll probably
+also want to make yourself an administrator, which you can do with
+
+  sqlite3 db/development.sqlite3
+  > update users set perm_site_admin = "1" where id = "1";
+
+(You can probably set the confirmation info using sqlite3, also.)
+
 == Permission model
 
 (See app/models/ability.rb for full details)
