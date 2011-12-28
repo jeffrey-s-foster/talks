@@ -55,9 +55,10 @@
     $(this).parent().remove();
   })
   $("span.button_add").click(function () {
-    next_owner = "owner_" + ($(this).parent().children().length - 2).toString();
-    $(this).prev().before($(this).prev().clone().removeClass("owner_proto"));
-    $(this).prev().prev().children("#owner_proto").attr("name", next_owner).attr("id", next_owner);
-//    $(this).prev().before($(this).prev().clone().removeClass("owner_proto") .children("#owner_proto").attr("name", next_owner).attr("id", next_owner).parent());
+    var next_owner = "owner_" + ($(this).parent().children().length - 2).toString();
+    var next_owner_element = $(this).prev().clone();
+    $(next_owner_element).children("#owner_proto").attr("name", next_owner).attr("id", next_owner);
+    $(next_owner_element).removeClass("owner_proto");
+    $(this).prev().before(next_owner_element);
   })
 </script>
