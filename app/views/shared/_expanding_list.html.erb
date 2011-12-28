@@ -1,0 +1,43 @@
+<!--  Inputs:
+
+  name - what to use in tags (e.g., "owner")
+  current_elts - list of currently selected elements
+  all_elts - all elements that can be selected from
+  elt_to_string - method to turn element into a string
+
+  -->
+
+<% if current_elts.length > 0 %>
+  <% current_elts.each_index do |i| %>
+    <div>
+    <%= select_tag "#{name}_#{i}", options_from_collection_for_select(all_elts, :id, elt_to_string, current_elts[i].id), :include_blank => true %>
+    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+    </div>
+  <% end %>
+<% else %>
+    <div>
+    <%= select_tag "#{name}_0", options_from_collection_for_select(all_elts, :id, elt_to_string), :include_blank => true %>
+    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+    </div>
+<% end %>
+<div class="<%= name %>_proto">
+  <%= select_tag "#{name}_proto", options_from_collection_for_select(all_elts, :id, elt_to_string), :include_blank => true %>
+  <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
+</div>
+<%= content_tag(:span, "add another", :class => "button_add") %>
+
+<script>
+  var num_<%= name %> = <%= current_elts.length %>;
+  var button_remove_handler = function () { $(this).parent().remove(); }
+  $("div.<%= name %>_proto").hide();
+  $("span.button_remove").click(button_remove_handler);
+  $("span.button_add").click(function () {
+    var next_elt_id = "<%= name %>_" + num_<%= name %>.toString();
+    num_<%= name %>++;
+    var next_elt = $(this).prev().clone();
+    $(next_elt).children("#<%= name %>_proto").attr("name", next_elt_id).attr("id", next_elt_id);
+    $(next_elt).removeClass("<%= name %>_proto").show();
+    $(next_elt).children(".button_remove").click(button_remove_handler);
+    $(this).prev().before(next_elt);
+  })
+</script>

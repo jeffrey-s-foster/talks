@@ -9,24 +9,7 @@
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
   <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>
-<% if @owners.length > 0 %>
-  <% @owners.each_index do |i| %>
-    <div>
-    <%= select_tag "owner_#{i}", options_from_collection_for_select(@users, :id, :email_and_name, @owners[i].id), :include_blank => true %>
-    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
-    </div>
-  <% end %>
-<% else %>
-    <div>
-    <%= select_tag "owner_0", options_from_collection_for_select(@users, :id, :email_and_name), :include_blank => true %>
-    <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
-    </div>
-<% end %>
-<div class="owner_proto">
-  <%= select_tag "owner_proto", options_from_collection_for_select(@users, :id, :email_and_name), :include_blank => true %>
-  <%= content_tag(:span, "remove", :class => "button_remove") %><br/>
-</div>
-<%= content_tag(:span, "add another owner", :class => "button_add") %>
+      <%= render :partial => "shared/expanding_list", :locals => { :name => "owner", :current_elts => @owners, :all_elts => @users, :elt_to_string => :email_and_name } %>
 </td></tr>
   </table>
 
@@ -49,18 +32,3 @@
     </span>
   </p>
 <% end %>
-
-<script>
-  var num_owners = <%= @owners.length %>;
-  var button_remove_handler = function () { $(this).parent().remove(); }
-  $("span.button_remove").click(button_remove_handler);
-  $("span.button_add").click(function () {
-    var next_owner = "owner_" + num_owners.toString();
-    num_owners++;
-    var next_owner_element = $(this).prev().clone();
-    $(next_owner_element).children("#owner_proto").attr("name", next_owner).attr("id", next_owner);
-    $(next_owner_element).removeClass("owner_proto");
-    $(next_owner_element).children(".button_remove").click(button_remove_handler);
-    $(this).prev().before(next_owner_element);
-  })
-</script>
