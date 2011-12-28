@@ -7,7 +7,12 @@
 
   <tr><th>Name</th><td><%= f.text_field :name %></td></tr>
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
-  <tr class="long_description"><th>Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
+  <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
+  <tr><th class="align-top">Owner(s)</th><td>
+<% @owners.each do |u| %>
+<%= u.email_and_name %><br/>
+<% end %>
+</td></tr>
   </table>
 
   <p>

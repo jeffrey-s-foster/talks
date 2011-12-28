@@ -18,7 +18,7 @@
 <tr><th>End time</th><td><%= text_field_tag :temp_end_time, @end_time %></td></tr>
 
 
-<tr class="space-above abstract"><th>Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
+<tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
 
 <% if can? :edit_owner, @talk %>
 <th>Owner</th>
