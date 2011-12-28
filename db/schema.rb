@@ -21,20 +21,20 @@ ActiveRecord::Schema.define(:version => 20111227235256) do
   end
 
   create_table "lists_owners", :id => false, :force => true do |t|
-    t.integer "list_id"
+    t.integer "owned_list_id"
     t.integer "owner_id"
   end
 
-  add_index "lists_owners", ["list_id"], :name => "index_lists_owners_on_list_id"
+  add_index "lists_owners", ["owned_list_id"], :name => "index_lists_owners_on_owned_list_id"
   add_index "lists_owners", ["owner_id"], :name => "index_lists_owners_on_owner_id"
 
   create_table "lists_posters", :id => false, :force => true do |t|
-    t.integer "list_id"
+    t.integer "poster_list_id"
     t.integer "poster_id"
   end
 
-  add_index "lists_posters", ["list_id"], :name => "index_lists_posters_on_list_id"
   add_index "lists_posters", ["poster_id"], :name => "index_lists_posters_on_poster_id"
+  add_index "lists_posters", ["poster_list_id"], :name => "index_lists_posters_on_poster_list_id"
 
   create_table "lists_talks", :id => false, :force => true do |t|
     t.integer "list_id"
