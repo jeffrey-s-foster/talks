@@ -19,6 +19,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     @title = "Edit list"
     @owners = @list.owners.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
   end
 
   def create
