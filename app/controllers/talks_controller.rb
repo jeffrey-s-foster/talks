@@ -14,6 +14,7 @@ class TalksController < ApplicationController
     @talk = Talk.new
     @title = "Create new talk"
     @posted = []
+    @talk.owner = current_user
     if can? :site_admin, :all then
       @lists = List.all.sort { |a,b| a.name <=> b.name }
     else
@@ -30,7 +31,7 @@ class TalksController < ApplicationController
     authorize! :create, Talk
     adjust params
     @talk = Talk.new(params[:talk])
-    @talk.owner = current_user
+    @talk.owner = current_user unless can? :edit_owner, @talk
     logger.info "Start_time: #{params[:talk][:start_time]}"
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
@@ -89,7 +90,7 @@ private
   def adjust(params)
     if params[:temp_date_time] != "" then
       # TODO: handle parsing errors here
-      if params[:temp_date_time] =~ /(.*) from (.*) to (.*)/ then
+      if (params[:temp_date_time] =~ /(.*) from (.*) to (.*)/) || (params[:temp_date_time] =~ /(.*) from (.*)\s*-\s*(.*)/) then
         params[:talk][:start_time] = Chronic.parse("#{$1} at #{$2}")
         params[:talk][:end_time] = Chronic.parse("#{$1} at #{$3}")
       else
