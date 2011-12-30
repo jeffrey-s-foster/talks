@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111229013114) do
+ActiveRecord::Schema.define(:version => 20111230215527) do
 
   create_table "lists", :force => true do |t|
     t.string   "name",        :default => ""
@@ -37,14 +37,6 @@ ActiveRecord::Schema.define(:version => 20111229013114) do
   add_index "lists_posters", ["poster_id"], :name => "index_lists_posters_on_poster_id"
   add_index "lists_posters", ["poster_list_id"], :name => "index_lists_posters_on_poster_list_id"
 
-  create_table "lists_subscribers", :id => false, :force => true do |t|
-    t.integer "subscribed_list_id"
-    t.integer "subscriber_id"
-  end
-
-  add_index "lists_subscribers", ["subscribed_list_id"], :name => "index_lists_subscribers_on_subscribed_list_id"
-  add_index "lists_subscribers", ["subscriber_id"], :name => "index_lists_subscribers_on_subscriber_id"
-
   create_table "lists_talks", :id => false, :force => true do |t|
     t.integer "list_id"
     t.integer "talk_id"
@@ -52,6 +44,19 @@ ActiveRecord::Schema.define(:version => 20111229013114) do
 
   add_index "lists_talks", ["list_id"], :name => "index_lists_talks_on_list_id"
   add_index "lists_talks", ["talk_id"], :name => "index_lists_talks_on_talk_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "subscribable_id"
+    t.string   "subscribable_type"
+    t.integer  "user_id"
+    t.string   "kind"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["subscribable_id"], :name => "index_subscriptions_on_subscribable_id"
+  add_index "subscriptions", ["subscribable_type"], :name => "index_subscriptions_on_subscribable_type"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "talks", :force => true do |t|
     t.text     "title",      :default => ""

@@ -1,6 +1,8 @@
 class Talk < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_and_belongs_to_many :lists
+  has_many :subscriptions, :as => :subscribable
+#  has_many :subscribers, :through => :subscriptions, :class_name => "User"
 
   validate :start_end_same_day
   validate :start_end_not_error

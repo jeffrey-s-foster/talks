@@ -21,12 +21,15 @@
   </div>
   <div class="right">
     <% if user_signed_in? %>
-      <% if can? :edit_user, current_user %>
+      <%= link_to current_user.name, current_user %>
+<!--
+    <% if can? :edit_user, current_user %>
         <%= link_to current_user.name, edit_user_registration_path %>
       <% else %>
         <%= current_user.name %>
       <% end %>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
+-->
+    &nbsp;&nbsp;|&nbsp;&nbsp;
       <%= link_to "log out", destroy_user_session_path(user_session), :method => :delete %>
     <% else %>
        <%= link_to "log in", new_user_session_path %>

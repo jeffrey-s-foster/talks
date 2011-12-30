@@ -8,7 +8,9 @@ Talks::Application.routes.draw do
       get :show_all
     end
   end
-  devise_for :users
+
+  devise_for :users, :path_prefix => "profile"
+  resources :users, :only => [:show]
 
   namespace :admin do
     get :index

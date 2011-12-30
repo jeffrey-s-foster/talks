@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :owned_lists, :foreign_key => "owner_id", :association_foreign_key => "owned_list_id", :join_table => "lists_owners", :class_name => "List"
   has_and_belongs_to_many :poster_lists, :foreign_key => "poster_id", :association_foreign_key => "poster_list_id", :join_table => "lists_posters", :class_name => "List"
-  has_and_belongs_to_many :subscribed_lists, :foreign_key => "subscriber_id", :association_foreign_key => "subscribed_list_id", :join_table => "lists_subscribers", :class_name => "List"
+  has_many :subscriptions
+
   validates :name, :presence => true
 
   def name_and_email
