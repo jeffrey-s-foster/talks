@@ -4,11 +4,12 @@ class Talk < ActiveRecord::Base
 
   validate :start_end_same_day
   validate :start_end_not_error
+  validate :start_less_than_end
   validates_presence_of :owner
 
   def start_end_same_day
     if start_time && end_time && (start_time.to_date != end_time.to_date)
-      errors.add(:internal, "Internal error - start time and end time must be on same day")
+      errors.add(:internal_error, "- start time and end time must be on same day")
     end
   end
 
@@ -17,8 +18,13 @@ class Talk < ActiveRecord::Base
     errors.add(:end_time, "- Invalid end time") if not end_time
   end
 
+  def start_less_than_end
+    errors.add(:end_time, "- End time must be greater than start time") if not (end_time > start_time)
+  end
+
   def self.upcoming
-    where("start_time > ?", Time.zone.now)
+    # use end_time so talks going on now still appear
+    where("end_time > ?", Time.zone.now)
   end
 
   def time_to_long_s
