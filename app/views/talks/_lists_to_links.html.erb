@@ -5,4 +5,4 @@
 
 -->
 
-<%= join_with_and(talk.lists.map { |l| link_to l.name, l }).html_safe %>
+<%= join_with_and(talk.lists.sort { |a,b| a.name <=> b.name }.map { |l| link_to l.name, l }).html_safe %>

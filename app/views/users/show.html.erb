@@ -2,10 +2,32 @@
   <%= link_to "Edit profile", edit_user_registration_path %>
 <% end %>
 
-<h2>Lists you own or can post to</h2>
+<h2>Lists you own</h2>
 
-<h2>Upcoming talks you posted</h2>
+<ul>
+  <% @owned_lists.each do |l| %>
+    <li><%= link_to l.name, l %></li>
+  <% end %>
+</ul>
 
-<h2>Subscribed lists</h2>
+<h2>Lists you can post to</h2>
 
-<h2>Subscribed talks</h2>
+<ul>
+  <% @poster_lists.each do |l| %>
+    <li><%= link_to l.name, l %></li>
+  <% end %>
+</ul>
+
+<h2>Lists you subscribe to</h2>
+
+<ul>
+  <% @subscribed_lists.each do |l| %>
+    <li><%= link_to l.name, l %></li>
+  <% end %>
+</ul>
+
+<h2>Your talks (upcoming)</h2>
+
+Link for all owned talks
+
+<%= link_to "Edit profile", edit_user_registration_path, :remote => true %>

@@ -15,14 +15,32 @@ table.edit-list {
   };
 }
 
-.name {
-    font-size: x-large;
-    color: $primary_color_2;
+.list-descr {
+    .name {
+	font-size: x-large;
+	color: $primary_color_2;
+    }
+    .short_descr {
+	font-size: large;
+    }
+    .long_descr { }
 }
-.short_descr {
-    font-size: large;
+.actions {
+    display: block;
+    float: right;
+    border: 2px solid $secondary_color_b_2;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: $secondary_color_b_2;
+    .action {
+	padding-left: 5px;
+	padding-right: 5px;
+    }
+    a {
+	text-decoration: none;
+	color: black;
+    }
 }
-.long_descr { }
 
 .header {
     color: $complementary_color_2;

@@ -6,6 +6,8 @@ Talks::Application.routes.draw do
   resources :lists do
     member do
       get :show_all
+      get :subscribe
+      get :unsubscribe
     end
   end
 
