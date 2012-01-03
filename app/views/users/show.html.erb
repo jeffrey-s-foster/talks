@@ -26,6 +26,14 @@
   <% end %>
 </ul>
 
+<h2>Talks you subscribe to</h2>
+
+<ul>
+  <% @subscribed_talks.each do |t| %>
+    <li><%= link_to t.title, t %></li>
+  <% end %>
+</ul>
+
 <h2>Your talks (upcoming)</h2>
 
 Link for all owned talks

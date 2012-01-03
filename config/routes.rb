@@ -1,6 +1,10 @@
 Talks::Application.routes.draw do
   resources :talks do
     get :upcoming
+    member do
+      get :subscribe
+      get :unsubscribe
+    end
   end
 
   resources :lists do

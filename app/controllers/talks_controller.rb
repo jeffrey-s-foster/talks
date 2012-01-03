@@ -85,6 +85,37 @@ class TalksController < ApplicationController
     redirect_to talks_path
   end
 
+  def subscribe
+    # TODO: This code is yucky!
+   @subscription = Subscription.where(:subscribable_id => params[:id], :subscribable_type => "Talk", :user_id => current_user.id)
+   case @subscription.length
+   when 0
+     @subscription = Subscription.new
+   when 1
+     @subscription = @subscription.first
+   else
+     logger.error "Multiple subscriptions: subscribable_id = #{params[:id]}, subscribable_type = List, user_id = #{current_user.id}"
+     render :template => "500.html"
+   end
+   @subscription.subscribable = Talk.find(params[:id])
+   @subscription.user = current_user
+   @subscription.kind = :kind_full
+   @subscription.save
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to action: "show" }
+    end
+  end
+
+  def unsubscribe
+    @talk = Talk.find(params[:id])
+    @talk.subscribers.delete(current_user)
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to action: "show" }
+    end
+  end
+
 private
 
   def adjust(params)

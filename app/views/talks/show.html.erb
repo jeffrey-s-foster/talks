@@ -1,5 +1,14 @@
 <div class="show-talk">
 
+  <div class="actions">
+    <% if can? :edit, @talk %>
+      <span class="action"><%= link_to "edit", edit_talk_path(@talk) %></span>
+      <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure?', :method => :delete %></span>
+    <% end %>
+    <span class="action subscribe"><%= link_to "subscribe", subscribe_talk_path(@talk), :remote => true %></span>
+    <span class="action unsubscribe"><%= link_to "unsubscribe", unsubscribe_talk_path(@talk), :remote => true %></span>
+  </div>
+
 <div class="title"><%= @talk.title %></div>
 
 <div class="speaker"><%= @talk.speaker %></div>
@@ -27,10 +36,12 @@
 
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 
-<% if can? :edit, @talk %>
-<p>
-<%= link_to "edit talk", edit_talk_path(@talk) %>
-&nbsp;&nbsp;
-<%= link_to "delete talk", @talk, :confirm => 'Are you sure?', :method => :delete %>
-</p>
-<% end %>
+<script>
+  <% if @talk.subscribers.exists? current_user %>
+    $(".subscribe").hide();
+    $(".unsubscribe").click(function () { $("body").spin() });
+  <% else %>
+    $(".unsubscribe").hide();
+    $(".subscribe").click(function () { $("body").spin() });
+  <% end %>
+</script>
