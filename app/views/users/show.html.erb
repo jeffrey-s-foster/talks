@@ -21,21 +21,25 @@
 <h2>Lists you subscribe to</h2>
 
 <ul>
-  <% @subscribed_lists.each do |l| %>
-    <li><%= link_to l.name, l %></li>
+  <% @subscribed_lists.each do |l,k| %>
+    <li>
+      <%= link_to l.name, l %>
+      <% if k==:kind_watch %>(watch)<% end %>
+    </li>
   <% end %>
 </ul>
 
 <h2>Talks you subscribe to</h2>
 
 <ul>
-  <% @subscribed_talks.each do |t| %>
-    <li><%= link_to t.title, t %></li>
+  <% @subscribed_talks.each do |t,k| %>
+    <li>
+      <%= link_to t.title, t %>
+      <% if k==:kind_watch %>(watch)<% end %>
+    </li>
   <% end %>
 </ul>
 
 <h2>Your talks (upcoming)</h2>
 
 Link for all owned talks
-
-<%= link_to "Edit profile", edit_user_registration_path, :remote => true %>

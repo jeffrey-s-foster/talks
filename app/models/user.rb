@@ -21,11 +21,11 @@ class User < ActiveRecord::Base
     "#{email} (#{name})".html_safe
   end
 
-  def subscribed_lists_full
-    subscriptions.where(:subscribable_type => "List").map { |s| List.find(s.subscribable_id) }
+  def subscribed_lists
+    subscriptions.where(:subscribable_type => "List").map { |s| [List.find(s.subscribable_id), s.kind] }
   end
 
-  def subscribed_talks_full
-    subscriptions.where(:subscribable_type => "Talk").map { |s| Talk.find(s.subscribable_id) }
+  def subscribed_talks
+    subscriptions.where(:subscribable_type => "Talk").map { |s| [Talk.find(s.subscribable_id), s.kind] }
   end
 end

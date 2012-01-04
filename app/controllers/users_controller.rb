@@ -4,8 +4,8 @@ class UsersController < ApplicationController
     @owned_lists = @user.owned_lists.sort { |a,b| a.name <=> b.name }
     @poster_lists = @user.poster_lists.sort { |a,b| a.name <=> b.name }
     # TODO: next lines are yucky
-    @subscribed_lists = @user.subscribed_lists_full
-    @subscribed_talks = @user.subscribed_talks_full
+    @subscribed_lists = @user.subscribed_lists
+    @subscribed_talks = @user.subscribed_talks
   end
 
 # if params[:user][:password].blank?
