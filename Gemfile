@@ -16,6 +16,7 @@ gem 'devise'
 gem 'dynamic_form'
 gem 'cancan'
 gem 'symbolize', :require => 'symbolize/active_record'
+gem 'bourbon'
 
 # Gems used only for assets and not required
 # in production environments by default.

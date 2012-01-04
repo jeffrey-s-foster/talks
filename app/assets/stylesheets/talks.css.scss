@@ -49,3 +49,20 @@ table.edit-talk {
 table.talks-table {
   td { border: 1px solid black; padding: 3px; }
 }
+
+.short-talks {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    .title a {
+	font-size: large;
+	color: $primary_color_2;
+    }
+    .speaker {
+	color: $secondary_color_b_2;
+    }
+    .time_loc {
+	padding-bottom: 20px;
+    }
+}

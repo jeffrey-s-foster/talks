@@ -33,6 +33,8 @@ GEM
     ansi (1.4.1)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
+    bourbon (1.2.0)
+      sass (>= 3.1)
     builder (3.0.0)
     cancan (1.6.7)
     chronic (0.6.6)
@@ -127,6 +129,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  bourbon
   cancan
   chronic
   coffee-rails (~> 3.1.1)

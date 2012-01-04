@@ -2,6 +2,7 @@
 
 /* Color scheme */
 $primary_color: #fd2c2c;
+$primary_color_dim: $primary_color - 64;
 $secondary_color_a: #fd942c;
 $secondary_color_b: #1f859d;
 $complementary_color: #23ca23;
@@ -51,7 +52,7 @@ div.site-title {
     font-size: xx-large;
     font-family: "Gill Sans", sans-serif;
     font-weight: bold;
-    background-color: $primary_color;
+    @include linear-gradient(45deg, $primary_color, $primary_color_dim);
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -79,33 +80,4 @@ div.login-bar {
 th.align-top {
     vertical-align: top;
     padding-top: 5px;
-}
-
-/* for _expanding_list.html.erb */
-div._proto {
-    display: none;
-};
-.button_remove, .button_add {
-    color: gray;
-    font-size: x-small;
-}
-.button_remove:hover, .button_add:hover {
-    cursor: pointer;
-};
-
-.short-talks {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
-    .title a {
-	font-size: large;
-	color: $primary_color_2;
-    }
-    .speaker {
-	color: $secondary_color_b_2;
-    }
-    .time_loc {
-	padding-bottom: 20px;
-    }
 }

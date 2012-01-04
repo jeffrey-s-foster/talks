@@ -29,7 +29,7 @@ table.edit-list {
     display: block;
     float: right;
     border: 2px solid $secondary_color_b_2;
-    border-radius: 10px;
+    @include border-radius(10px);
     padding: 10px;
     background-color: $secondary_color_b_2;
     .action {
@@ -50,3 +50,15 @@ table.edit-list {
 .organizers {
     font-style: italic;
 }
+
+/* for _expanding_list.html.erb */
+div._proto {
+    display: none;
+};
+.button_remove, .button_add {
+    color: gray;
+    font-size: x-small;
+}
+.button_remove:hover, .button_add:hover {
+    cursor: pointer;
+};
