@@ -39,7 +39,7 @@ table.edit-talk {
   }
   .abstract {
       .title { font-weight: bold; color: black; font-size: large;};
-      .abstract-body { };
+      .abstract-body { font-family: $georgia; };
   }
   .comment {
       padding-top: 10px;

@@ -2,7 +2,6 @@
 
 /* Color scheme */
 $primary_color: #fd2c2c;
-$primary_color_dim: $primary_color - 64;
 $secondary_color_a: #fd942c;
 $secondary_color_b: #1f859d;
 $complementary_color: #23ca23;
@@ -52,7 +51,7 @@ div.site-title {
     font-size: xx-large;
     font-family: "Gill Sans", sans-serif;
     font-weight: bold;
-    @include linear-gradient(45deg, $primary_color, $primary_color_dim);
+    @include linear-gradient(45deg, $primary_color, darken($primary_color, 25%));
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -80,4 +79,30 @@ div.login-bar {
 th.align-top {
     vertical-align: top;
     padding-top: 5px;
+}
+
+@mixin badge {
+    @include inline-block;
+    background-image: url(icons.png);
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    margin: 0px;
+}
+.subscribed {
+    @include badge;
+    background-position: 0px 0px;
+}
+.watched {
+    @include badge;
+    background-position: -32px 0px;
+}
+
+input[type=submit] {
+    @include button(shiny, $complementary_color_2);
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }

@@ -6,4 +6,16 @@ class List < ActiveRecord::Base
   has_and_belongs_to_many :posters, :foreign_key => "poster_list_id", :association_foreign_key => "poster_id", :join_table => "lists_posters", :class_name => "User"
   has_many :subscriptions, :as => :subscribable, :include => :user
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
+
+  def self.subscription(list, user)
+    s = Subscription.where(:subscribable_id => list.id, :subscribable_type => "List", :user_id => user.id)
+    return nil if s.length == 0
+    return s.first if s.length == 1
+    logger.error "Multiple subscriptions #{s}"
+    return nil
+  end
+
+  def subscription(user)
+    return List.subscription(self, user)
+  end
 end

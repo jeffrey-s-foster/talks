@@ -1,15 +1,22 @@
 <div class="list-descr">
   <div class="actions">
     <% if can? :edit, @list %>
-    <span class="action"><%= link_to "edit", edit_list_path(@list) %></span>
+      <div class="action"><%= link_to "edit", edit_list_path(@list) %></div>
     <% end %>
     <% if can? :destroy, @list %>
-      <span class="action"><%= link_to "delete", @list, :confirm => 'Are you sure?', :method => :delete %></span>
+      <div class="action"><%= link_to "delete", @list, :confirm => 'Are you sure?', :method => :delete %></div>
     <% end %>
-    <span class="action subscribe"><%= link_to "subscribe", subscribe_list_path(@list), :remote => true %></span>
-    <span class="action unsubscribe"><%= link_to "unsubscribe", unsubscribe_list_path(@list), :remote => true %></span>
+    <div class="subscribe-table">
+      <div class="action subscribe"><%= link_to "subscribe", subscribe_list_path(@list), :remote => true %></div>
+      <div class="action unsubscribe"><%= link_to "unsubscribe", unsubscribe_list_path(@list), :remote => true %></div>
+      <div class="action watch"><%= link_to "watch", watch_list_path(@list), :remote => true %></div>
+    </div>
   </div>
-  <div class="name"><%= @list.name %></div>
+  <div class="name">
+    <%= @list.name %>
+    <span class="subscribed"></span>
+    <span class="watched"></span>
+  </div>
 
   <div class="short-descr"><%= @list.short_descr.html_safe %></div>
 
@@ -41,11 +48,21 @@
 </div>
 
 <script>
-  <% if @list.subscribers.exists? current_user %>
-    $(".subscribe").hide();
-    $(".unsubscribe").click(function () { $("body").spin() });
-  <% else %>
-    $(".unsubscribe").hide();
+  <% if not @subscription %>
+    $(".subscribed").hide();
+    $(".watched").hide();
     $(".subscribe").click(function () { $("body").spin() });
+    $(".watch").click(function () { $("body").spin() });
+    $(".unsubscribe").hide();
+  <% elsif @subscription.kind == :kind_watch %>
+    $(".subscribed").hide();
+    $(".subscribe").click(function () { $("body").spin() });
+    $(".watch").hide();
+    $(".unsubscribe").click(function () { $("body").spin() });
+  <% elsif @subscription.kind == :kind_full %>
+    $(".watched").hide();
+    $(".subscribe").hide();
+    $(".watch").click(function () { $("body").spin() });
+    $(".unsubscribe").click(function () { $("body").spin() });
   <% end %>
 </script>

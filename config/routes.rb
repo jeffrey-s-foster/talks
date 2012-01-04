@@ -3,6 +3,7 @@ Talks::Application.routes.draw do
     get :upcoming
     member do
       get :subscribe
+      get :watch
       get :unsubscribe
     end
   end
@@ -11,6 +12,7 @@ Talks::Application.routes.draw do
     member do
       get :show_all
       get :subscribe
+      get :watch
       get :unsubscribe
     end
   end

@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
   def email_and_name
     "#{email} (#{name})".html_safe
   end
+
+  def subscribed_lists_full
+    subscriptions.where(:subscribable_type => "List").map { |s| List.find(s.subscribable_id) }
+  end
+
+  def subscribed_talks_full
+    subscriptions.where(:subscribable_type => "Talk").map { |s| Talk.find(s.subscribable_id) }
+  end
 end
