@@ -29,6 +29,10 @@ class Talk < ActiveRecord::Base
     where("end_time > ?", Time.zone.now)
   end
 
+  def upcoming?
+    end_time > Time.zone.now
+  end
+
   def time_to_long_s
     t = ""
     if start_time && end_time
@@ -42,5 +46,15 @@ class Talk < ActiveRecord::Base
       t = "(Time not yet available)"
     end
     return t
+  end
+
+  # least upper bound of two kinds
+  def self.lub_kinds(k1, k2)
+    return :kind_owned if k1 == :kind_owned || k2 == :kind_owned
+    return :kind_full if k1 == :kind_full || k2 == :kind_full
+    return :kind_watch if k1 == :kind_watch || k2 == :kind_watch
+    return nil if k1 == nil && k2 == nil
+    logger.error "Asked for lub of kinds #{k1} and #{k2}"
+    return nil
   end
 end

@@ -18,4 +18,15 @@ class List < ActiveRecord::Base
   def subscription(user)
     return List.subscription(self, user)
   end
+
+  def self.lub_kinds(k1, k2)
+    return :kind_owned if k1 == :kind_owned || k2 == :kind_owned
+    return :kind_poster if k1 == :kind_poster || k2 == :kind_poster
+    return :kind_full if k1 == :kind_full || k2 == :kind_full
+    return :kind_watch if k1 == :kind_watch || k2 == :kind_watch
+    return nil if k1 == nil && k2 == nil
+    logger.error "Asked for lub of kinds #{k1} and #{k2}"
+    return nil
+  end
+
 end

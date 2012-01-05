@@ -26,9 +26,9 @@
 <hr/>
 
 <% if @upcoming then %>
-  <span class="header">Upcoming talks</span> (<%= link_to "See all talks", show_all_list_path(@list) %>)
+  <h2>Upcoming talks</h2> (<%= link_to "See all talks", show_all_list_path(@list) %>)
 <% else %>
-  <span class="header">All talks (including past talks)</span> (<%= link_to "See upcoming talks only", @list %>)
+  <h2>All talks (including past talks)</h2> (<%= link_to "See upcoming talks only", @list %>)
 <% end %>
 
 <div class="short-talks">

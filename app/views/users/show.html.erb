@@ -2,44 +2,29 @@
   <%= link_to "Edit profile", edit_user_registration_path %>
 <% end %>
 
-<h2>Lists you own</h2>
+<h2>Your lists</h2>
 
 <ul>
-  <% @owned_lists.each do |l| %>
-    <li><%= link_to l.name, l %></li>
-  <% end %>
-</ul>
-
-<h2>Lists you can post to</h2>
-
-<ul>
-  <% @poster_lists.each do |l| %>
-    <li><%= link_to l.name, l %></li>
-  <% end %>
-</ul>
-
-<h2>Lists you subscribe to</h2>
-
-<ul>
-  <% @subscribed_lists.each do |l,k| %>
+  <% @lists.each do |l,k| %>
     <li>
       <%= link_to l.name, l %>
-      <% if k==:kind_watch %>(watch)<% end %>
+      <% case k %>
+      <% when :kind_owned %>
+        (owned)
+      <% when :kind_posted %>
+        (poster)
+      <% when :kind_watch %>
+        (watch)
+      <% when :kind_full %>
+        <!-- subscribed, at usual -->
+      <% end %>
     </li>
   <% end %>
 </ul>
 
-<h2>Talks you subscribe to</h2>
+<h2>Your Upcoming Talks</h2>
 
-<ul>
-  <% @subscribed_talks.each do |t,k| %>
-    <li>
-      <%= link_to t.title, t %>
-      <% if k==:kind_watch %>(watch)<% end %>
-    </li>
-  <% end %>
-</ul>
+<div class="short-talks">
+  <%= render :partial => "lists/talks", :locals => { :talks => @talks.map {|t,k| t} } %>
+</div>
 
-<h2>Your talks (upcoming)</h2>
-
-Link for all owned talks

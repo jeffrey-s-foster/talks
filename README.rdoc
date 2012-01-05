@@ -75,3 +75,8 @@ Foo but not tag Bar.  This list is automatically updated whenever new
 talks are put in the system.
 
 Also, having iCal and e-mail support are obviously warranted/needed.
+
+3) More efficient queries in functions added to models/list.rb and models/user.rb
+
+4) Clean up lists/show (link to all)
+5) Finish talks display for user (badges?)

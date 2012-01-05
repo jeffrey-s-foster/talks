@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
   def show
-    @user = current_user
-    @owned_lists = @user.owned_lists.sort { |a,b| a.name <=> b.name }
-    @poster_lists = @user.poster_lists.sort { |a,b| a.name <=> b.name }
-    # TODO: next lines are yucky
-    @subscribed_lists = @user.subscribed_lists
-    @subscribed_talks = @user.subscribed_talks
+    @lists = current_user.subscribed_lists_all
+    @talks = current_user.subscribed_talks_all
   end
 
 # if params[:user][:password].blank?
