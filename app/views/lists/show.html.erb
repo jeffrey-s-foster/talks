@@ -1,15 +1,17 @@
 <div class="list-descr">
   <div class="actions">
-    <% if can? :edit, @list %>
-      <div class="action"><%= link_to "edit", edit_list_path(@list) %></div>
-    <% end %>
-    <% if can? :destroy, @list %>
-      <div class="action"><%= link_to "delete", @list, :confirm => 'Are you sure?', :method => :delete %></div>
-    <% end %>
+    <div class="action-table">
+      <% if can? :edit, @list %>
+        <div class="action"><%= link_to image_tag("buttons/edit.png"), edit_list_path(@list) %></div>
+      <% end %>
+      <% if can? :destroy, @list %>
+        <div class="action"><%= link_to image_tag("buttons/delete.png"), @list, :confirm => 'Are you sure?', :method => :delete %></div>
+      <% end %>
+    </div>
     <div class="subscribe-table">
-      <div class="action subscribe"><%= link_to "subscribe", subscribe_list_path(@list), :remote => true %></div>
-      <div class="action unsubscribe"><%= link_to "unsubscribe", unsubscribe_list_path(@list), :remote => true %></div>
-      <div class="action watch"><%= link_to "watch", watch_list_path(@list), :remote => true %></div>
+      <div class="action subscribe"><%= link_to image_tag("buttons/subscribe.png"), subscribe_list_path(@list), :remote => true %></div>
+      <div class="action unsubscribe"><%= link_to image_tag("buttons/unsubscribe.png"), unsubscribe_list_path(@list), :remote => true %></div>
+      <div class="action watch"><%= link_to image_tag("buttons/watch.png"), watch_list_path(@list), :remote => true %></div>
     </div>
   </div>
   <div class="name">
@@ -26,9 +28,9 @@
 <hr/>
 
 <% if @upcoming then %>
-  <h2>Upcoming talks</h2> (<%= link_to "See all talks", show_all_list_path(@list) %>)
+  <h2>Upcoming talks</h2>
 <% else %>
-  <h2>All talks (including past talks)</h2> (<%= link_to "See upcoming talks only", @list %>)
+  <h2>All talks (including past talks)</h2>
 <% end %>
 
 <div class="short-talks">
@@ -38,6 +40,14 @@
 
   <%= render :partial => "talks", :locals => { :talks => @talks } %>
 </div>
+
+<span class="comment">
+  <% if @upcoming then %>
+    <%= link_to "See all talks", show_all_list_path(@list) %>
+    <% else %>
+    <%= link_to "See upcoming talks only", @list %>
+    <% end %>
+</span>
 
 <div class="organizers">
   <hr/>

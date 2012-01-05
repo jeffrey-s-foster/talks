@@ -25,6 +25,7 @@ class TalksController < ApplicationController
 
   def show
     @talk = Talk.find(params[:id])
+    @subscription = @talk.subscription current_user
   end
 
   def create
@@ -86,21 +87,29 @@ class TalksController < ApplicationController
   end
 
   def subscribe
-    # TODO: This code is yucky!
-   @subscription = Subscription.where(:subscribable_id => params[:id], :subscribable_type => "Talk", :user_id => current_user.id)
-   case @subscription.length
-   when 0
-     @subscription = Subscription.new
-   when 1
-     @subscription = @subscription.first
-   else
-     logger.error "Multiple subscriptions: subscribable_id = #{params[:id]}, subscribable_type = List, user_id = #{current_user.id}"
-     render :template => "500.html"
-   end
-   @subscription.subscribable = Talk.find(params[:id])
-   @subscription.user = current_user
-   @subscription.kind = :kind_full
-   @subscription.save
+    @talk = Talk.find(params[:id])
+    @subscription = Talk.subscription(@talk, current_user)
+    if @subscription then
+      @subscription.kind = :kind_full
+    else
+      @subscription = Subscription.new(:subscribable => @talk, :user => current_user, :kind => :kind_full)
+    end
+    @subscription.save
+    respond_to do |format|
+      format.js { }
+      format.html { redirect_to action: "show" }
+    end
+  end
+
+  def watch
+    @talk = Talk.find(params[:id])
+    @subscription = Talk.subscription(@talk, current_user)
+    if @subscription then
+      @subscription.kind = :kind_watch
+    else
+      @subscription = Subscription.new(:subscribable => @talk, :user => current_user, :kind => :kind_full)
+    end
+    @subscription.save
     respond_to do |format|
       format.js { }
       format.html { redirect_to action: "show" }

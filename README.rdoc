@@ -56,6 +56,7 @@ also want to make yourself an administrator, which you can do with
 == Miscellaneous
 
 * {Color scheme}[http://colorschemedesigner.com/#0041YqqvKv5v5]
+* {Button generator}[http://www.help4web.net/rss_button/index.php] - left-side background color 23ca23, right-side background color 888888, vertical bar position 12
 
 == TODO list
 
@@ -80,3 +81,4 @@ Also, having iCal and e-mail support are obviously warranted/needed.
 
 4) Clean up lists/show (link to all)
 5) Finish talks display for user (badges?)
+

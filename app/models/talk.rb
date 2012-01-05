@@ -33,6 +33,18 @@ class Talk < ActiveRecord::Base
     end_time > Time.zone.now
   end
 
+  def self.subscription(talk, user)
+    s = Subscription.where(:subscribable_id => talk.id, :subscribable_type => "Talk", :user_id => user.id)
+    return nil if s.length == 0
+    return s.first if s.length == 1
+    logger.error "Multiple subscriptions #{s}"
+    return nil
+  end
+
+  def subscription(user)
+    return Talk.subscription(self, user)
+  end
+
   def time_to_long_s
     t = ""
     if start_time && end_time
