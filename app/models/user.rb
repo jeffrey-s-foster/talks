@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
           when :kind_subscriber
             talks[t] = :kind_subscriber_through
           when :kind_watcher
-            talks[t] = :kind_watcher_through
+            talks[t] = :kind_watcher_through unless talks[t] == :kind_subscriber
           end
         end
       end
