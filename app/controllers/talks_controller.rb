@@ -2,6 +2,7 @@ class TalksController < ApplicationController
 
   def upcoming
     @talks = Talk.upcoming
+    @talk_subscriptions = current_user.subscribed_talks(params[:all])
   end
 
   def index

@@ -44,7 +44,7 @@
     No <%= if @upcoming then "upcoming" end %> talks
   <% end %>
 
-  <%= render :partial => "shared/talks", :locals => { :talks => @talks } %>
+  <%= render :partial => "shared/talks", :locals => { :talks => @talks, :subscriptions => Hash.new } %>
 </div>
 
 <span class="comment">

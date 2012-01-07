@@ -1,13 +1,29 @@
 <% if false %>
  parameters:
 
-   talks - Array of talks to list
+   talks - array of talks, sorted and uniqified
+   subscriptions - hash map from talks to subscription kind
 
 <% end %>
 
 <% talks.each do |t| %>
   <div class="short-talk">
-    <div class="title"><%= link_to t.title, t %></div>
+    <div class="title">
+      <%= link_to t.title, t %>
+      <% if t.owner? current_user %>
+        <span class="badge-owner"></span>
+      <% end %>
+      <% case subscriptions[t] %>
+      <% when :kind_subscriber %>
+        <span class="badge-subscriber"></span>
+      <% when :kind_watcher %>
+        <span class="badge-watcher"></span>
+      <% when :kind_subscriber_through %>
+        <span class="badge-subscriber-through"></span>
+      <% when :kind_watcher_through %>
+        <span class="badge-watcher-through"></span>
+      <% end %>
+    </div>
     <div class="speaker"><%= t.speaker %></div>
     <div class="time_loc"><%= t.time_to_long_s %></div>
   </div>

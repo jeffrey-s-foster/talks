@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   # TODO: check performance
-  # DIRECTLY subscribed talks only
+  # Returns hash table mapping talks to subscription kind (:kind_subscriber{_through} or :kind_watcher{_through})
   def subscribed_talks(all = false)
     talks = {} # map from talk to kind
 
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
         if all || t.upcoming? then
           case k
           when :kind_subscriber
-            talks[t] = :kind_subsriber_trough
+            talks[t] = :kind_subscriber_through
           when :kind_watcher
             talks[t] = :kind_watcher_through
           end
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    return talks.to_a
+    return talks
   end
 
 end
