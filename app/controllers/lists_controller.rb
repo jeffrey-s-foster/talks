@@ -3,19 +3,14 @@ class ListsController < ApplicationController
     @lists = List.all.sort { |a,b| a.name <=> b.name }
   end
 
-  # Show upcoming talks (TODO)
   def show
     @list = List.find(params[:id])
-    @talks = @list.talks.upcoming
-    @upcoming = true
-    @subscription = @list.subscription current_user
-  end
-
-  def show_all
-    @list = List.find(params[:id])
-    @talks = @list.talks.sort { |a,b| a.start_time <=> b.start_time }
-    @upcoming = false
-    render :action => "show"
+    if params[:all]
+      @talks = @list.talks.sort { |a,b| a.start_time <=> b.start_time }
+    else
+      @talks = @list.talks.upcoming { |a,b| a.start_time <=> b.start_time }
+    end
+    @upcoming = !(params[:all])
   end
 
   def new
@@ -73,40 +68,10 @@ class ListsController < ApplicationController
   end
 
   def subscribe
-    @list = List.find(params[:id])
-    @subscription = List.subscription(@list, current_user)
-    if @subscription then
-      @subscription.kind = :kind_full
-    else
-      @subscription = Subscription.new(:subscribable => @list, :user => current_user, :kind => :kind_full)
-    end
-    @subscription.save
+    l = List.find(params[:id])
+    do_subscription(l, params[:do])
     respond_to do |format|
-      format.js { }
-      format.html { redirect_to action: "show" }
-    end
-  end
-
-  def watch
-    @list = List.find(params[:id])
-    @subscription = List.subscription(@list, current_user)
-    if @subscription then
-      @subscription.kind = :kind_watch
-    else
-      @subscription = Subscription.new(:subscribable => @list, :user => current_user, :kind => :kind_watch)
-    end
-    @subscription.save
-    respond_to do |format|
-      format.js { }
-      format.html { redirect_to action: "show" }
-    end
-  end
-
-  def unsubscribe
-    @list = List.find(params[:id])
-    @list.subscribers.delete(current_user)
-    respond_to do |format|
-      format.js { }
+      format.js { render "shared/_update_badges.js.erb", :locals => { :subscribable => l } }
       format.html { redirect_to action: "show" }
     end
   end

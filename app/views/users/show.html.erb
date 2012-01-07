@@ -5,26 +5,39 @@
 <h2>Your lists</h2>
 
 <ul>
-  <% @lists.each do |l,k| %>
+  <% @lists.each do |l| %>
     <li>
       <%= link_to l.name, l %>
-      <% case k %>
-      <% when :kind_owned %>
-        (owned)
-      <% when :kind_posted %>
-        (poster)
-      <% when :kind_watch %>
-        (watch)
-      <% when :kind_full %>
-        <!-- subscribed, at usual -->
+      <% if l.owner? current_user %>
+        <span class="badge-owner"></span>
+      <% end %>
+      <% if l.poster? current_user %>
+        <span class="badge-poster"></span>
+      <% end %>
+      <% if @list_subscriptions[l] == :kind_subscriber %>
+        <span class="badge-subscriber"></span>
+      <% end %>
+      <% if @list_subscriptions[l] == :kind_watcher %>
+        <span class="badge-watcher"></span>
       <% end %>
     </li>
   <% end %>
 </ul>
 
-<h2>Your Upcoming Talks</h2>
+<% if @upcoming then %>
+   <h2>Your Upcoming Talks</h2>
+<% else %>
+   <h2>Your Talks (including past talks)</h2>
+<% end %>
 
 <div class="short-talks">
-  <%= render :partial => "lists/talks", :locals => { :talks => @talks.map {|t,k| t} } %>
+  <%= render :partial => "shared/talks", :locals => { :talks => @talks.map {|t,k| t} } %>
 </div>
 
+<span class="comment">
+  <% if @upcoming then %>
+    <%= link_to "See all talks", user_path(current_user, :all => true) %>
+  <% else %>
+    <%= link_to "See only upcoming talks", current_user %>
+  <% end %>
+</span>

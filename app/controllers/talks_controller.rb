@@ -87,40 +87,10 @@ class TalksController < ApplicationController
   end
 
   def subscribe
-    @talk = Talk.find(params[:id])
-    @subscription = Talk.subscription(@talk, current_user)
-    if @subscription then
-      @subscription.kind = :kind_full
-    else
-      @subscription = Subscription.new(:subscribable => @talk, :user => current_user, :kind => :kind_full)
-    end
-    @subscription.save
+    t = Talk.find(params[:id])
+    do_subscription(t, params[:do])
     respond_to do |format|
-      format.js { }
-      format.html { redirect_to action: "show" }
-    end
-  end
-
-  def watch
-    @talk = Talk.find(params[:id])
-    @subscription = Talk.subscription(@talk, current_user)
-    if @subscription then
-      @subscription.kind = :kind_watch
-    else
-      @subscription = Subscription.new(:subscribable => @talk, :user => current_user, :kind => :kind_full)
-    end
-    @subscription.save
-    respond_to do |format|
-      format.js { }
-      format.html { redirect_to action: "show" }
-    end
-  end
-
-  def unsubscribe
-    @talk = Talk.find(params[:id])
-    @talk.subscribers.delete(current_user)
-    respond_to do |format|
-      format.js { }
+      format.js { render "shared/_update_badges.js.erb", :locals => { :subscribable => t } }
       format.html { redirect_to action: "show" }
     end
   end

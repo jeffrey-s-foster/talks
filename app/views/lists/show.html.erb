@@ -2,22 +2,28 @@
   <div class="actions">
     <div class="action-table">
       <% if can? :edit, @list %>
-        <div class="action"><%= link_to image_tag("buttons/edit.png"), edit_list_path(@list) %></div>
+        <div class="action"><%= link_to "edit", edit_list_path(@list) %></div>
       <% end %>
       <% if can? :destroy, @list %>
-        <div class="action"><%= link_to image_tag("buttons/delete.png"), @list, :confirm => 'Are you sure?', :method => :delete %></div>
+        <div class="action"><%= link_to"delete", @list, :confirm => 'Are you sure?', :method => :delete %></div>
       <% end %>
     </div>
     <div class="subscribe-table">
-      <div class="action subscribe"><%= link_to image_tag("buttons/subscribe.png"), subscribe_list_path(@list), :remote => true %></div>
-      <div class="action unsubscribe"><%= link_to image_tag("buttons/unsubscribe.png"), unsubscribe_list_path(@list), :remote => true %></div>
-      <div class="action watch"><%= link_to image_tag("buttons/watch.png"), watch_list_path(@list), :remote => true %></div>
+      <div class="action subscribe"><%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %></div>
+      <div class="action unsubscribe"><%= link_to "unsubscribe", subscribe_list_path(@list, :do => "unsubscribe"), :remote => true %></div>
+      <div class="action watch"><%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %></div>
     </div>
   </div>
   <div class="name">
     <%= @list.name %>
-    <span class="subscribed"></span>
-    <span class="watched"></span>
+    <% if @list.owner? current_user %>
+      <span class="badge-owner"></span>
+    <% end %>
+    <% if @list.poster? current_user %>
+      <span class="badge-poster"></span>
+    <% end %>
+    <span class="badge-subscriber"></span>
+    <span class="badge-watcher"></span>
   </div>
 
   <div class="short-descr"><%= @list.short_descr.html_safe %></div>
@@ -38,14 +44,14 @@
     No <%= if @upcoming then "upcoming" end %> talks
   <% end %>
 
-  <%= render :partial => "talks", :locals => { :talks => @talks } %>
+  <%= render :partial => "shared/talks", :locals => { :talks => @talks } %>
 </div>
 
 <span class="comment">
   <% if @upcoming then %>
-    <%= link_to "See all talks", show_all_list_path(@list) %>
+    <%= link_to "See all talks", list_path(@list, :all => true) %>
     <% else %>
-    <%= link_to "See upcoming talks only", @list %>
+    <%= link_to "See only upcoming talks", @list %>
     <% end %>
 </span>
 
@@ -58,21 +64,11 @@
 </div>
 
 <script>
-  <% if not @subscription %>
-    $(".subscribed").hide();
-    $(".watched").hide();
-    $(".subscribe").click(function () { $("body").spin() });
-    $(".watch").click(function () { $("body").spin() });
-    $(".unsubscribe").hide();
-  <% elsif @subscription.kind == :kind_watch %>
-    $(".subscribed").hide();
-    $(".subscribe").click(function () { $("body").spin() });
-    $(".watch").hide();
-    $(".unsubscribe").click(function () { $("body").spin() });
-  <% elsif @subscription.kind == :kind_full %>
-    $(".watched").hide();
-    $(".subscribe").hide();
-    $(".watch").click(function () { $("body").spin() });
-    $(".unsubscribe").click(function () { $("body").spin() });
-  <% end %>
+  $(".subscribe").click(function () { $("body").spin() });
+  $(".watch").click(function () { $("body").spin() });
+  $(".unsubscribe").click(function () { $("body").spin() });
+</script>
+
+<script>
+  <%= render :partial => "shared/update_badges.js.erb", :locals => { :subscribable => @list } %>
 </script>

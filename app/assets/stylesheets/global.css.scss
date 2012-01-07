@@ -81,24 +81,6 @@ th.align-top {
     padding-top: 5px;
 }
 
-@mixin badge {
-    @include inline-block;
-    background-image: url(icons.png);
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 24px;
-    padding: 0px;
-    margin: 0px;
-}
-.subscribed {
-    @include badge;
-    background-position: 0px 0px;
-}
-.watched {
-    @include badge;
-    background-position: -32px 0px;
-}
-
 input[type=submit] {
     @include button(shiny, $complementary_color_2);
     padding-left: 5px;

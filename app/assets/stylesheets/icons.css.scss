@@ -1,0 +1,32 @@
+@mixin badge {
+    @include inline-block;
+    background-image: url(icons.png);
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-bottom: -2px;
+}
+.badge-subscriber {
+    @include badge;
+    background-position: 0px 0px;
+}
+.badge-watcher {
+    @include badge;
+    background-position: -32px 0px;
+}
+.badge-subscriber-through {
+    @include badge;
+    background-position: -64px 0px;
+}
+.badge-owner {
+    @include badge;
+    background-position: 0px -32px;
+}
+.badge-poster {
+    @include badge;
+    background-position: -32px -32px;
+}
+.badge-watcher-through {
+    @include badge;
+    background-position: -64px -32px;
+}

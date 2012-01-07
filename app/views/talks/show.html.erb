@@ -3,21 +3,24 @@
   <div class="actions">
     <div class="action-table">
       <% if can? :edit, @talk %>
-        <span class="action"><%= link_to image_tag("buttons/edit.png"), edit_talk_path(@talk) %></span>
-        <span class="action"><%= link_to image_tag("buttons/delete.png"), @talk, :confirm => 'Are you sure?', :method => :delete %></span>
+        <span class="action"><%= link_to "edit", edit_talk_path(@talk) %></span>
+        <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure?', :method => :delete %></span>
       <% end %>
     </div>
     <div class="subscribe-table">
-      <span class="action subscribe"><%= link_to image_tag("buttons/subscribe.png"), subscribe_talk_path(@talk), :remote => true %></span>
-      <span class="action unsubscribe"><%= link_to image_tag("buttons/unsubscribe.png"), unsubscribe_talk_path(@talk), :remote => true %></span>
-      <div class="action watch"><%= link_to image_tag("buttons/watch.png"), watch_talk_path(@talk), :remote => true %></div>
+      <span class="action subscribe"><%= link_to "subscribe", subscribe_talk_path(@talk, :do => "subscribe"), :remote => true %></span>
+      <span class="action unsubscribe"><%= link_to"unsubscribe", subscribe_talk_path(@talk, :do => "unsubscribe"), :remote => true %></span>
+      <div class="action watch"><%= link_to "watch", subscribe_talk_path(@talk, :do => "watch"), :remote => true %></div>
     </div>
   </div>
 
 <div class="title">
   <%= @talk.title %>
-  <span class="subscribed"></span>
-  <span class="watched"></span>
+  <span class="badge-subscriber"></span>
+  <span class="badge-watcher"></span>
+    <% if @talk.owner? current_user %>
+      <span class="badge-owner"></span>
+    <% end %>
 </div>
 
 <div class="speaker"><%= @talk.speaker %></div>
@@ -46,21 +49,33 @@
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 
 <script>
+  $(".subscribe").click(function () { $("body").spin() });
+  $(".watch").click(function () { $("body").spin() });
+  $(".unsubscribe").click(function () { $("body").spin() });
+</script>
+
+<script>
+  <%= render :partial => "shared/update_badges.js.erb", :locals => { :subscribable => @talk } %>
+</script>
+
+<% if false %>
+<script>
   <% if not @subscription %>
-    $(".subscribed").hide();
-    $(".watched").hide();
+    $(".badge-subscriber").hide();
+    $(".badge-watcher").hide();
     $(".subscribe").click(function () { $("body").spin() });
     $(".watch").click(function () { $("body").spin() });
     $(".unsubscribe").hide();
   <% elsif @subscription.kind == :kind_watch %>
-    $(".subscribed").hide();
+    $(".badge-subscriber").hide();
     $(".subscribe").click(function () { $("body").spin() });
     $(".watch").hide();
     $(".unsubscribe").click(function () { $("body").spin() });
   <% elsif @subscription.kind == :kind_full %>
-    $(".watched").hide();
+    $(".badge-watcher").hide();
     $(".subscribe").hide();
     $(".watch").click(function () { $("body").spin() });
     $(".unsubscribe").click(function () { $("body").spin() });
   <% end %>
 </script>
+<% end %>

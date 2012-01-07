@@ -7,26 +7,31 @@ class List < ActiveRecord::Base
   has_many :subscriptions, :as => :subscribable, :include => :user
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
 
-  def self.subscription(list, user)
-    s = Subscription.where(:subscribable_id => list.id, :subscribable_type => "List", :user_id => user.id)
+  def subscription(user)
+    s = Subscription.where(:subscribable_id => id, :subscribable_type => "List", :user_id => user.id)
     return nil if s.length == 0
     return s.first if s.length == 1
     logger.error "Multiple subscriptions #{s}"
     return nil
   end
 
-  def subscription(user)
-    return List.subscription(self, user)
+  def owner?(user)
+    return owners.include? user
   end
 
-  def self.lub_kinds(k1, k2)
-    return :kind_owned if k1 == :kind_owned || k2 == :kind_owned
-    return :kind_poster if k1 == :kind_poster || k2 == :kind_poster
-    return :kind_full if k1 == :kind_full || k2 == :kind_full
-    return :kind_watch if k1 == :kind_watch || k2 == :kind_watch
-    return nil if k1 == nil && k2 == nil
-    logger.error "Asked for lub of kinds #{k1} and #{k2}"
-    return nil
+  def poster?(user)
+    return posters.include? user
   end
+
+  def watcher?(user)
+    s = subscription(user)
+    return s && (s.kind == :kind_watcher)
+  end
+
+  def subscriber?(user)
+    s = subscription(user)
+    return s && (s.kind == :kind_subscriber)
+  end
+
 
 end

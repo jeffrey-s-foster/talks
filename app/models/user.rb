@@ -29,43 +29,33 @@ class User < ActiveRecord::Base
 
   # TODO: check performance
   # DIRECTLY subscribed talks only
-  def subscribed_talks(include_past = false)
+  def subscribed_talks(all = false)
+    talks = {} # map from talk to kind
+
+    # directly subscribed talks
     subscriptions
       .where(:subscribable_type => "Talk")
       .map { |s|
         t = Talk.find(s.subscribable_id)
-        if include_past || t.upcoming? then [t, s.kind] else nil end
+        if all || t.upcoming? then talks[t] = s.kind else nil end
        }
       .compact
-  end
 
-  # TODO: check performance
-  # talks subscribed directly and via lists; INCLUDES directly subscribed talks; DOES NOT include owned talks
-  def subscribed_talks_all(include_past = false)
-    lists = subscribed_lists_all
-    talks = {} # map from talk to kind
-    lists.map { |l,k|
-      k = :kind_full if k == :kind_owner # owners subscribe fully to all talks on their lists
-      l.talks.each { |t|
-        if include_past || t.upcoming? then
-          talks[t] = Talk.lub_kinds(talks[t], k) # talks[t] == nil if t not present
+    # subscriptions via lists, whicih take precedence over directly subscribing/watching
+    subscribed_lists.each do |l,k|
+      l.talks.each do |t|
+        if all || t.upcoming? then
+          case k
+          when :kind_subscriber
+            talks[t] = :kind_subsriber_trough
+          when :kind_watcher
+            talks[t] = :kind_watcher_through
+          end
         end
-      }
-    }
-    subscribed_talks(include_past).each { |t,k|
-      talks[t] = Talk.lub_kinds(talks[t], k) # talks[t] == nil if t not present
-    }
-    owned_talks.each { |t|
-      talks[t] = Talk.lub_kinds(talks[t], :kind_owned)
-    }
-    talks.to_a.sort { |a,b| a[0].title <=> b[0].title }
+      end
+    end
+
+    return talks.to_a
   end
 
-  def subscribed_lists_all
-    lists = {} # map from list to kind
-    subscribed_lists.map { |l,k| lists[l] = List.lub_kinds(lists[l], k) }
-    poster_lists.map { |l| lists[l] = List.lub_kinds(lists[l], :kind_poster) }
-    owned_lists.map { |l| lists[l] = List.lub_kinds(lists[l], :kind_owned) }
-    lists.to_a.sort { |a,b| a[0].name <=> b[0].name }
-  end
 end

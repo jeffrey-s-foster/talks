@@ -12,11 +12,11 @@ class Ability
     can :edit, Talk, :owner_id => user.id
 
     can :edit, List do |l|
-      l.owners.exists? user
+      l.owner? user
     end
 
     can :add_talk, List do |l|
-      (l.owners.exists? user) || (l.posters.exists? user)
+      (l.owner? user) || (l.poster? user)
     end
 
     if user.perm_site_admin
