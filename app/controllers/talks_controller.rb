@@ -43,12 +43,7 @@ class TalksController < ApplicationController
     if @talk.save
       redirect_to @talk
     else
-      @posted = @talk.lists
-      if can? :site_admin, :all then
-        @lists = List.all.sort { |a,b| a.name <=> b.name }
-      else
-        @lists = (current_user.owned_lists + current_user.poster_lists).sort { |a,b| a.name <=> b.name }.uniq
-      end
+      copute_edit_fields
       render :action => "edit"
     end
   end

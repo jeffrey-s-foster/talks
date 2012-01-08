@@ -26,10 +26,7 @@ class ListsController < ApplicationController
   def edit
     authorize! :edit, List
     @list = List.find(params[:id])
-    @title = "Edit list"
-    @owners = @list.owners.sort { |a,b| a.email_and_name <=> b.email_and_name }
-    @posters = @list.posters.sort { |a,b| a.email_and_name <=> b.email_and_name }
-    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    compute_edit_fields
   end
 
   def create
@@ -40,6 +37,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to @list, notice: 'List was successfully created.'
     else
+      compute_edit_fields
       render action: "edit"
     end
   end
@@ -55,6 +53,7 @@ class ListsController < ApplicationController
     if @list.update_attributes(params[:list])
       redirect_to @list, notice: 'List was successfully updated.'
     else
+      compute_edit_fields
       render action: "edit"
     end
   end
@@ -94,5 +93,12 @@ private
       posters << User.find(v)
     }
     params[:list][:posters] = posters
+  end
+
+  def compute_edit_fields
+    @title = "Edit list"
+    @owners = @list.owners.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @posters = @list.posters.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
   end
 end
