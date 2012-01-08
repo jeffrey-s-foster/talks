@@ -8,6 +8,8 @@
 
 <tr><th>Title</th><td><%= f.text_field :title %></td></tr>
 <tr><th>Speaker</th><td><%= f.text_field :speaker %></td></tr>
+<tr><th>Venue</th><td><%= f.text_field :room %> <%= f.collection_select(:building_id, Building.all.sort { |a,b| a.abbrv <=> b.abbrv}, :id, :abbrv_and_name, :include_blank => true) %><span class="comment">Enter room and building</span></td></tr>
+</td></tr>
 
 <tr class="space-above"><th>Date/time</th>
 <td><%= text_field_tag :temp_date_time %></td></tr>

@@ -3,6 +3,7 @@ class Talk < ActiveRecord::Base
   has_and_belongs_to_many :lists, :include => :subscriptions
   has_many :subscriptions, :as => :subscribable, :include => :user
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
+  belongs_to :building
 
   validate :start_end_same_day
   validate :start_end_not_error

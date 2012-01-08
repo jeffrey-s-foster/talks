@@ -25,6 +25,7 @@
       <% end %>
     </div>
     <div class="speaker"><%= t.speaker %></div>
+    <%= render :partial => "shared/talk_venue", :locals => { :talk => t } %>
     <div class="time_loc"><%= t.time_to_long_s %></div>
   </div>
 <% end %>
