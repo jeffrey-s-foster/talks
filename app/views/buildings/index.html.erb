@@ -1,0 +1,35 @@
+<h1>Buildings</h1>
+
+<%= if @new then @new.error_messages end %>
+
+<%= form_tag buildings_update_path do %>
+
+<table class="building-table">
+  <tr>
+    <th>Abbrv</th>
+    <th>Long name </th>
+    <th>URL</th>
+    <th></th>
+  </tr>
+  <% @buildings.each do |b| %>
+    <tr>
+      <td><%= text_field_tag ("building_abbrv_#{b.id}"), b.abbrv, :class => :abbrv %></td>
+      <td><%= text_field_tag ("building_name_#{b.id}"), b.name, :class => :name %></td>
+      <td><%= text_field_tag ("building_url_#{b.id}"), b.url, :class => :url %></td>
+      <td><span class="comment"><%= link_to 'delete', b, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" %></span></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td><%= text_field_tag ("building_abbrv_new"), nil, :class => :abbrv %></td>
+    <td><%= text_field_tag ("building_name_new"), nil, :class => :name %></td>
+    <td><%= text_field_tag ("buidling_url_new"), nil, :class => :url %></td>
+    <td><i>New building</i></td>
+  </tr>
+<tr>
+</table>
+
+<p>
+        <%= submit_tag 'Update' %>
+</p>
+
+<% end %>

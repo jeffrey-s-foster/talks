@@ -12,6 +12,12 @@ Talks::Application.routes.draw do
     end
   end
 
+  namespace :buildings do
+    get :index
+    post :update
+  end
+  resources :buildings, :only => [:destroy]
+
   devise_for :users, :path_prefix => "profile"
   resources :users, :only => [:show]
 

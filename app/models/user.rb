@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :poster_lists, :foreign_key => "poster_id", :association_foreign_key => "poster_list_id", :join_table => "lists_posters", :class_name => "List"
   has_many :subscriptions
 
+  validates :email, :presence => true, :uniqueness => true
   validates :name, :presence => true
 
   def name_and_email

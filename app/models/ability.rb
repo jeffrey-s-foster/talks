@@ -28,6 +28,7 @@ class Ability
       can :create, :all
       can :destroy, :all
       can :add_talk, :all
+      can :edit_buildings, :all
     end
 
     # Define abilities for the passed in user here. For example:

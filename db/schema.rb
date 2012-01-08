@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111230215527) do
+ActiveRecord::Schema.define(:version => 20120108163819) do
+
+  create_table "buildings", :force => true do |t|
+    t.string   "abbrv"
+    t.string   "name"
+    t.text     "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "lists", :force => true do |t|
     t.string   "name",        :default => ""
@@ -59,14 +67,16 @@ ActiveRecord::Schema.define(:version => 20111230215527) do
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "talks", :force => true do |t|
-    t.text     "title",      :default => ""
-    t.text     "abstract",   :default => ""
-    t.text     "speaker",    :default => ""
+    t.text     "title",       :default => ""
+    t.text     "abstract",    :default => ""
+    t.text     "speaker",     :default => ""
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.integer  "building_id"
+    t.text     "room"
   end
 
   add_index "talks", ["start_time"], :name => "index_talks_on_start_time"

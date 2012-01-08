@@ -1,0 +1,9 @@
+// Place all the styles related to the buildings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.building-table {
+    input.abbrv { width: 50px; }
+    input.name { width: 250px; }
+    input.url { width: 400px; }
+}
