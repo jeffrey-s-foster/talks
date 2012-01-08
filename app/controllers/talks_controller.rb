@@ -56,30 +56,17 @@ class TalksController < ApplicationController
   def edit
     @talk = Talk.find(params[:id])
     authorize! :edit, @talk
-    @title = "Edit talk"
-    if @talk.start_time && @talk.end_time
-      @date = @talk.start_time.strftime("%m/%d/%Y")
-      @start_time = @talk.start_time.strftime("%l:%M %P").lstrip
-      @end_time = @talk.end_time.strftime("%l:%M %P").lstrip
-    end
-    @posted = @talk.lists
-    if can? :site_admin, :all then
-      @lists = List.all.sort { |a,b| a.name <=> b.name }
-    else
-      @lists = (current_user.owned_lists + current_user.poster_lists).sort { |a,b| a.name <=> b.name }.uniq
-    end
+    compute_edit_fields
   end
 
   def update
     @talk = Talk.find(params[:id])
     authorize! :edit, @talk
     adjust params
-#    @talk.owner = current_user # shouldn't just change the owner
-    logger.info "Start_time: #{params[:talk][:start_time]}"
-    logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.update_attributes(params[:talk])
       redirect_to @talk
     else
+      compute_edit_fields
       render :action => "edit"
     end
   end
@@ -126,6 +113,21 @@ private
       lists << l
     }
     params[:talk][:lists] = lists
+  end
+
+  def compute_edit_fields
+    @title = "Edit talk"
+    if @talk.start_time && @talk.end_time
+      @date = @talk.start_time.strftime("%m/%d/%Y")
+      @start_time = @talk.start_time.strftime("%l:%M %P").lstrip
+      @end_time = @talk.end_time.strftime("%l:%M %P").lstrip
+    end
+    @posted = @talk.lists
+    if can? :site_admin, :all then
+      @lists = List.all.sort { |a,b| a.name <=> b.name }
+    else
+      @lists = (current_user.owned_lists + current_user.poster_lists).sort { |a,b| a.name <=> b.name }.uniq
+    end
   end
 
 end

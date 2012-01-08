@@ -10,13 +10,20 @@ parameters:
   <% if not (talk.room || talk.building) %>
     <i>No venue yet</i>
   <% else %>
-    <%= talk.room %>
-    <% if talk.building %>
-      <% if talk.building.name != "" %>
-        <%= talk.building.name %> (<%= talk.building.abbrv %>)
-      <% else %>
-        <%= talk.building.abbrv %>
-      <% end %>
-    <% end %>
+    <%
+        loc = talk.room
+        if talk.building
+         if talk.building.name != ""
+           loc << " #{talk.building.name} (#{talk.building.abbrv})"
+         else
+	   loc << " #{talk.building.abbrv}"
+	 end
+       end
+     %>
+     <% if talk.building.url != "" %>
+       <%= link_to loc, talk.building.url %>
+     <% else %>
+       <%= loc %>
+     <% end %>
   <% end %>
 </div>
