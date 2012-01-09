@@ -18,14 +18,22 @@ $("body").spin(false);
   $(".badge-poster").hide();
 <% end %>
 
-<% if subscribable.watcher? current_user %>
-  $(".badge-watcher").show();
-<% else %>
-  $(".badge-watcher").hide();
-<% end %>
-
 <% if subscribable.subscriber? current_user %>
   $(".badge-subscriber").show();
+  $(".badge-watcher").hide();
+  $(".subscribe").hide();
+  $(".watch").show();
+  $(".unsubscribe").show();
+<% elsif subscribable.watcher? current_user %>
+  $(".badge-subscriber").hide();
+  $(".badge-watcher").show();
+  $(".subscribe").show();
+  $(".watch").hide();
+  $(".unsubscribe").show();
 <% else %>
   $(".badge-subscriber").hide();
+  $(".badge-watcher").hide();
+  $(".subscribe").show();
+  $(".watch").show();
+  $(".unsubscribe").hide();
 <% end %>
