@@ -20,7 +20,7 @@ parameters:
 	 end
        end
      %>
-     <% if talk.building.url != "" %>
+     <% if talk.building.url && (talk.building.url != "" ) %>
        <%= link_to loc, talk.building.url %>
      <% else %>
        <%= loc %>
