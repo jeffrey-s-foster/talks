@@ -60,25 +60,21 @@ also want to make yourself an administrator, which you can do with
 
 == TODO list
 
-1) LDAP support for UMCP Directory IDs.  Using these is one less barrier
+* LDAP support for UMCP Directory IDs.  Using these is one less barrier
 to adoption, since people already have a directory ID.  Ping Neil for
 Rails code to do this, since he uses it for his graduate admissions
 website.
 
 Also see:
 
-* {UMD CAS FAQ}[http://login.umd.edu/developer.html]
-* {devise_cas_authenticatable}[https://github.com/nbudin/devise_cas_authenticatable]
+ * {UMD CAS FAQ}[http://login.umd.edu/developer.html]
+ * {devise_cas_authenticatable}[https://github.com/nbudin/devise_cas_authenticatable]
 
-2) Support for tags.  The idea would be able to create a "smart" list
+* Support for tags.  The idea would be able to create a "smart" list
 based on tags indicated by the user.  For example, all talks that have tag
 Foo but not tag Bar.  This list is automatically updated whenever new
 talks are put in the system.
 
 Also, having iCal and e-mail support are obviously warranted/needed.
 
-3) More efficient queries in functions added to models/list.rb and models/user.rb
-
-4) Clean up lists/show (link to all)
-5) Finish talks display for user (badges?)
-
+* More efficient queries in functions added to models/list.rb and models/user.rb
