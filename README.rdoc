@@ -77,6 +77,4 @@ talks are put in the system.
 
 Also, having iCal and e-mail support are obviously warranted/needed.
 
-* More efficient queries in functions added to models/list.rb and models/user.rb
-
-* Put subscribe/watch through tags on views/talks/show.html.erb
+* More efficient queries in functions added to models/list.rb, models/user.rb, and models/talk.rb

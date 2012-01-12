@@ -65,14 +65,29 @@ class Talk < ActiveRecord::Base
     return false
   end
 
+  def subscriber?(user)
+    s = subscription(user)
+    return s && (s.kind == :kind_subscriber)
+  end
+
   def watcher?(user)
     s = subscription(user)
     return s && (s.kind == :kind_watcher)
   end
 
-  def subscriber?(user)
-    s = subscription(user)
-    return s && (s.kind == :kind_subscriber)
+  # returns :nil, :kind_subscriber_through, or :kind_watcher_through
+  def through(user)
+    k = nil
+    user.subscribed_lists.each do |l, kl|
+      if l.talks.exists? self then
+        if kl == :kind_subscriber
+          k = :kind_subscriber_through
+        elsif (kl == :kind_watcher) && (k != :kind_subscriber)
+          k = :kind_watcher_through
+        end
+      end
+    end
+    return k
   end
 
 end

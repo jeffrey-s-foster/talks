@@ -21,6 +21,12 @@
     <% if @talk.owner? current_user %>
       <span class="badge-owner"></span>
     <% end %>
+    <% case @talk.through current_user %>
+    <% when :kind_subscriber_through %>
+      <span class="badge-subscriber-through"></span>
+    <% when :kind_watcher_through %>
+      <span class="badge-watcher-through"></span>
+    <% end %>
 </div>
 
 <div class="speaker"><%= @talk.speaker %></div>
@@ -59,25 +65,3 @@
 <script>
   <%= render :partial => "shared/update_badges.js.erb", :locals => { :subscribable => @talk } %>
 </script>
-
-<% if false %>
-<script>
-  <% if not @subscription %>
-    $(".badge-subscriber").hide();
-    $(".badge-watcher").hide();
-    $(".subscribe").click(function () { $("body").spin() });
-    $(".watch").click(function () { $("body").spin() });
-    $(".unsubscribe").hide();
-  <% elsif @subscription.kind == :kind_watch %>
-    $(".badge-subscriber").hide();
-    $(".subscribe").click(function () { $("body").spin() });
-    $(".watch").hide();
-    $(".unsubscribe").click(function () { $("body").spin() });
-  <% elsif @subscription.kind == :kind_full %>
-    $(".badge-watcher").hide();
-    $(".subscribe").hide();
-    $(".watch").click(function () { $("body").spin() });
-    $(".unsubscribe").click(function () { $("body").spin() });
-  <% end %>
-</script>
-<% end %>
