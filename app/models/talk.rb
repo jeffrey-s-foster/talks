@@ -77,6 +77,7 @@ class Talk < ActiveRecord::Base
 
   # returns :nil, :kind_subscriber_through, or :kind_watcher_through
   def through(user)
+    return nil unless user
     k = nil
     user.subscribed_lists.each do |l, kl|
       if l.talks.exists? self then
