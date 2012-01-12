@@ -30,7 +30,7 @@ class TalksController < ApplicationController
 
   def show
     @talk = Talk.find(params[:id])
-    @subscription = @talk.subscription current_user
+    @subscription = @talk.subscription current_user if current_user
   end
 
   def create

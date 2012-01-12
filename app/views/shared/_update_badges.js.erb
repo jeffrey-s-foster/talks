@@ -6,34 +6,40 @@
 
 $("body").spin(false);
 
-<% if subscribable.owner? current_user %>
+<% if current_user && (subscribable.owner? current_user) %>
   $(".badge-owner").show();
 <% else %>
   $(".badge-owner").hide();
 <% end %>
 
-<% if subscribable.poster? current_user %>
+<% if current_user && (subscribable.poster? current_user) %>
   $(".badge-poster").show();
 <% else %>
   $(".badge-poster").hide();
 <% end %>
 
-<% if subscribable.subscriber? current_user %>
+<% if current_user && (subscribable.subscriber? current_user) %>
   $(".badge-subscriber").show();
   $(".badge-watcher").hide();
   $(".subscribe").hide();
   $(".watch").show();
   $(".unsubscribe").show();
-<% elsif subscribable.watcher? current_user %>
+<% elsif current_user && (subscribable.watcher? current_user) %>
   $(".badge-subscriber").hide();
   $(".badge-watcher").show();
   $(".subscribe").show();
   $(".watch").hide();
   $(".unsubscribe").show();
-<% else %>
+<% elsif current_user %>
   $(".badge-subscriber").hide();
   $(".badge-watcher").hide();
   $(".subscribe").show();
   $(".watch").show();
+  $(".unsubscribe").hide();
+<% else %>
+  $(".badge-subscriber").hide();
+  $(".badge-watcher").hide();
+  $(".subscribe").hide();
+  $(".watch").hide();
   $(".unsubscribe").hide();
 <% end %>
