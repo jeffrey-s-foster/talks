@@ -78,3 +78,7 @@ talks are put in the system.
 Also, having iCal and e-mail support are obviously warranted/needed.
 
 * More efficient queries in functions added to models/list.rb, models/user.rb, and models/talk.rb
+
+* Add ssl for ical feed?
+
+* Support rss feed?
