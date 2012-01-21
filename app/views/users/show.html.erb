@@ -25,9 +25,9 @@
 </ul>
 
 <% if @upcoming then %>
-   <h2>Your Upcoming Talks <%= link_to (image_tag "rss-icon.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %></h2>
+   <h2>Your Upcoming Talks <%= link_to (image_tag "ical-24-icon.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %></h2>
 <% else %>
-   <h2>Your Talks (including past talks) <%= link_to (image_tag "rss-icon.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %></h2>
+   <h2>Your Talks (including past talks) <%= link_to (image_tag "ical-24-icon.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %></h2>
 <% end %>
 
 <div class="short-talks">
