@@ -9,6 +9,7 @@ Talks::Application.routes.draw do
   resources :lists do
     member do
       get :subscribe
+      get :feed
     end
   end
 
@@ -19,7 +20,11 @@ Talks::Application.routes.draw do
   resources :buildings, :only => [:destroy]
 
   devise_for :users, :path_prefix => "profile"
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    member do
+      get :feed
+    end
+  end
 
   namespace :admin do
     get :index

@@ -75,6 +75,13 @@ class ListsController < ApplicationController
     end
   end
 
+  def feed
+    l = List.find(params[:id])
+    respond_to do |format|
+      format.ics { render :text => (generate_ical l.talks) }
+    end
+  end
+
 private
 
   def adjust(params)

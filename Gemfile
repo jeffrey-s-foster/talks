@@ -8,7 +8,7 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
-gem 'icalendar'
+gem 'ri_cal'
 gem 'RedCloth', :require => 'redcloth' # needed for rake doc:guides
 gem 'sass'
 gem 'chronic'

@@ -36,4 +36,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # turn a list of talks into a calendar
+  def generate_ical(talks)
+    cal = RiCal.Calendar do |cal|
+      talks.each do |t|
+        cal.event do |event|
+          event.summary = t.title
+          event.dtstart = t.start_time
+          event.dtend = t.end_time
+          if t.room && t.building
+            event.location = "#{t.room} #{t.building.abbrv}"
+          elsif t.room
+            event.location = t.room
+          end
+        end
+      end
+    end
+  end
+
 end

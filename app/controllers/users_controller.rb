@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def show
     @upcoming = not(params[:all])
     @list_subscriptions = Hash[current_user.subscribed_lists]
@@ -11,6 +12,16 @@ class UsersController < ApplicationController
     end
     @talks += @talk_subscriptions.keys
     @talks.sort! { |a,b| a.start_time <=> b.start_time }.uniq!
+  end
+
+  # TODO: add security
+  # Note that this can't require the user to log in...
+  def feed
+    user = User.find(params[:id])
+    @talks = user.subscribed_talks(true).keys
+    respond_to do |format|
+      format.ics { render :text => (generate_ical @talks) }
+    end
   end
 
 # if params[:user][:password].blank?
