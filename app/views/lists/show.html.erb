@@ -34,9 +34,9 @@
 <hr/>
 
 <% if @upcoming then %>
-  <h2>Upcoming talks <%= link_to (image_tag "ical-24-icon.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
+  <h2>Upcoming talks <%= link_to (image_tag "ical-24.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
 <% else %>
-  <h2>All talks (including past talks) <%= link_to (image_tag "ical-24-icon.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
+  <h2>All talks (including past talks) <%= link_to (image_tag "ical-24.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
 <% end %>
 
 <div class="short-talks">
