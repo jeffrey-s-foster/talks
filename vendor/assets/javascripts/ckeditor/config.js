@@ -8,7 +8,8 @@ CKEDITOR.editorConfig = function( config )
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
-    config.toolbar = "Custom";
+    config.toolbar = "Full";
+/*
     config.toolbar_Custom =
     [
 	{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
@@ -17,5 +18,5 @@ CKEDITOR.editorConfig = function( config )
 	{ name: 'colors', items : [ 'TextColor','BGColor' ] },
 	{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] },
    ];
-
+*/
 };

@@ -2,16 +2,17 @@
 
 <% @talks.each do |t| %>
 
-  <div><%= t.title %></div>
-  <div><%= t.speaker %></div>
+  <div style="font-size: x-large; color: #fe5f5f"><%= t.title %></div>
+  <div style="font-size: large;"><%= t.speaker %></div>
   <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  t } %></div>
+  <div><%= t.time_to_long_s %></div>
 
-  <div>
-    <span>Abstract</span>
+  <div style="display:block; padding-top: 15px;" >
+    <span style="font-weight: bold; font-size: large;">Abstract</span>
     <% if t.abstract == "" %>
-      <div>(No abstract yet)</div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif; font-style: italic;">(No abstract yet)</div>
     <% else %>
-      <div><%= t.abstract.html_safe %></div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= t.abstract.html_safe %></div>
     <% end %>
   </div>
 

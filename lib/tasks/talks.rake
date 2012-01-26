@@ -15,5 +15,14 @@ namespace :talks  do
 
   desc "Send email to subscribers of this week's talks"
   task :this_week => :environment do
+    Rails.logger.debug "Sending this weeky's talks..."
+    user = User.find(1)
+    talks = user.subscribed_talks(:this_week, [:kind_subscriber, :kind_subscriber_through]).keys
+    unless talks.empty?
+      Notifications.send_talks(user, talks, "This week's talks").deliver
+    else
+      Rails.logger.debug "Skipping #{user.email} - empty talks"
+    end
+    Rails.logger.debug "Done sending"
   end
 end
