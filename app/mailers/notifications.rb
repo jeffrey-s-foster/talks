@@ -4,6 +4,7 @@ class Notifications < ActionMailer::Base
     case time_interval
     when :today
       @talks = user.subscribed_talks(:today, [:kind_subscriber, :kind_subscriber_through]).keys
+	logger.debug "@talks = #{@talks.inspect}"
       @subject = "Today's talks"
     when :this_week
       @talks = user.subscribed_talks(:this_week, [:kind_subscriber, :kind_subscriber_through]).keys
