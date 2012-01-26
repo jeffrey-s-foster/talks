@@ -54,4 +54,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def fix_range(params)
+    params[:range] = :upcoming unless params[:range]
+    params[:range] = params[:range].to_sym
+  end
+
 end

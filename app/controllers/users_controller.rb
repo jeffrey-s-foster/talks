@@ -3,10 +3,15 @@ class UsersController < ApplicationController
   before_filter :generate_ical_secret
 
   def show
-    @upcoming = not(params[:all])
+    fix_range params
+    if params[:range] == :all
+      @upcoming = false
+    else
+      @upcoming = true
+    end
     @list_subscriptions = Hash[current_user.subscribed_lists]
     @lists = (current_user.owned_lists + current_user.poster_lists + @list_subscriptions.keys).sort { |a,b| a.name <=> b.name }.uniq
-    @talk_subscriptions = current_user.subscribed_talks(params[:all])
+    @talk_subscriptions = current_user.subscribed_talks(params[:range])
     if @upcoming then
       @talks = current_user.owned_talks.upcoming
     else
@@ -20,7 +25,7 @@ class UsersController < ApplicationController
   # Note that this can't require the user to log in...
   def feed
     user = User.find(params[:id])
-    @talks = user.subscribed_talks(true).to_a.map { |k,v| if (v == :kind_subscriber || v == :kind_subscriber_through) then k else nil end}.compact
+    @talks = user.subscribed_talks(:all).to_a.map { |k,v| if (v == :kind_subscriber || v == :kind_subscriber_through) then k else nil end}.compact
     respond_to do |format|
       if params[:key] == user.ical_secret
         format.ics { render :text => (generate_ical @talks) }

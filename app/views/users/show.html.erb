@@ -36,7 +36,7 @@
 
 <span class="comment">
   <% if @upcoming then %>
-    <%= link_to "See all talks", user_path(current_user, :all => true) %>
+    <%= link_to "See all talks", user_path(current_user, :range => :all) %>
   <% else %>
     <%= link_to "See only upcoming talks", current_user %>
   <% end %>

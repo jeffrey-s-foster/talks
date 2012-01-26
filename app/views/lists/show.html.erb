@@ -49,7 +49,7 @@
 
 <span class="comment">
   <% if @upcoming then %>
-    <%= link_to "See all talks", list_path(@list, :all => true) %>
+    <%= link_to "See all talks", list_path(@list, :range => :all) %>
     <% else %>
     <%= link_to "See only upcoming talks", @list %>
     <% end %>

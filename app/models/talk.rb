@@ -30,8 +30,33 @@ class Talk < ActiveRecord::Base
     where("end_time > ?", Time.zone.now)
   end
 
+  def self.today
+    where("end_time > ? and start_time < ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
+  end
+
+  def self.this_week
+    # In Rails 3.2, beginning/end_of_week take a start day parameter
+    where("end_time > ? and start_time < ?", Time.zone.now.beginning_of_week - 1.day, Time.zone.now.end_of_week - 1.day)
+  end
+
   def upcoming?
     end_time > Time.zone.now
+  end
+
+  def today?
+    (end_time > Time.zone.now.beginning_of_day) && (start_time < Time.zone.now.end_of_day)
+  end
+
+  def this_week?
+    (end_time > Time.zone.now.beginning_of_week - 1.day) && (start_time < Time.zone.now.end_of_week - 1.day)
+  end
+
+  # range may be :all, :today, :this_week, :upcoming
+  def match_range(range)
+    (range == :all) ||
+      (range == :upcoming && upcoming?) ||
+      (range == :today && today?) ||
+      (range == :this_week && this_week?)
   end
 
   def time_to_long_s

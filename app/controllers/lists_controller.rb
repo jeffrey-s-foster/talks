@@ -5,12 +5,15 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    if params[:all]
+    fix_range params
+    case params[:range]
+    when :all
       @talks = @list.talks.sort { |a,b| a.start_time <=> b.start_time }
+      @upcoming = false
     else
       @talks = @list.talks.upcoming { |a,b| a.start_time <=> b.start_time }
+      @upcoming = true
     end
-    @upcoming = !(params[:all])
   end
 
   def new

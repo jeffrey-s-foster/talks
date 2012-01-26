@@ -2,8 +2,9 @@ class TalksController < ApplicationController
 
   def upcoming
     @talks = Talk.upcoming
+    fix_range params
     if current_user
-      @talk_subscriptions = current_user.subscribed_talks(params[:all])
+      @talk_subscriptions = current_user.subscribed_talks(params[:range])
     else
       @talk_subscriptions = Hash.new
     end
