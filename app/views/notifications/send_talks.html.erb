@@ -1,0 +1,20 @@
+<h1><%= @subj %></h1>
+
+<% @talks.each do |t| %>
+
+  <div><%= t.title %></div>
+  <div><%= t.speaker %></div>
+  <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  t } %></div>
+
+  <div>
+    <span>Abstract</span>
+    <% if t.abstract == "" %>
+      <div>(No abstract yet)</div>
+    <% else %>
+      <div><%= t.abstract.html_safe %></div>
+    <% end %>
+  </div>
+
+  <hr/>
+
+<% end %>
