@@ -59,5 +59,5 @@ Talks::Application.configure do
   config.active_support.deprecation = :notify
 
   # Adjust as necessary
-  config.action_mailer.default_url_options = { :host => "bruce.cs.umd.edu:5000" }
+  config.action_mailer.default_url_options = { :host => "bruce.cs.umd.edu:6001" }
 end
