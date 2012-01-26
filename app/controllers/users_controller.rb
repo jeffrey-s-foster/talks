@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   # Note that this can't require the user to log in...
   def feed
     user = User.find(params[:id])
-#    @talks = user.subscribed_talks(:all).to_a.map { |k,v| if (v == :kind_subscriber || v == :kind_subscriber_through) then k else nil end}.compact
     @talks = user.subscribed_talks(:all, [:kind_subscriber, :kind_subscriber_through]).keys
     respond_to do |format|
       if params[:key] == user.ical_secret
