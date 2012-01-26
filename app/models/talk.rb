@@ -22,7 +22,7 @@ class Talk < ActiveRecord::Base
   end
 
   def start_less_than_end
-    errors.add(:end_time, "- End time must be greater than start time") if not (end_time > start_time)
+    errors.add(:end_time, "- End time must be greater than start time") if (start_time && end_time && (not (end_time > start_time)))
   end
 
   def self.upcoming

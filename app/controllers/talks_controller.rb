@@ -44,7 +44,7 @@ class TalksController < ApplicationController
     if @talk.save
       redirect_to @talk
     else
-      copute_edit_fields
+      compute_edit_fields
       render :action => "edit"
     end
   end
