@@ -26,4 +26,11 @@ class Admin::UsersController < ApplicationController
     @user.destroy
     redirect_to admin_users_path
   end
+
+  def reset_ical_secret
+    @user = User.find(params[:id])
+    @user.update_attribute(:ical_secret, nil)
+    redirect_to admin_users_path, :notice => "ical secret reset for #{@user.email}"
+  end
+
 end
