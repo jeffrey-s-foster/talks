@@ -2,7 +2,7 @@ namespace :talks  do
 
   desc "Send email to subscribers of today's talks"
   task :today => :environment do
-    Rails.logger.debug "Sending today's talks..."
+    Rails.logger.debug "Sending today's talks at #{Time.now}..."
     user = User.find(1)
     talks = user.subscribed_talks(:today, [:kind_subscriber, :kind_subscriber_through]).keys
     unless talks.empty?
@@ -10,12 +10,12 @@ namespace :talks  do
     else
       Rails.logger.debug "Skipping #{user.email} - empty talks"
     end
-    Rails.logger.debug "Done sending"
+    Rails.logger.debug "Done sending at #{Time.now}"
   end
 
   desc "Send email to subscribers of this week's talks"
   task :this_week => :environment do
-    Rails.logger.debug "Sending this weeky's talks..."
+    Rails.logger.debug "Sending this weeky's talks at #{Time.now}..."
     user = User.find(1)
     talks = user.subscribed_talks(:this_week, [:kind_subscriber, :kind_subscriber_through]).keys
     unless talks.empty?
@@ -23,6 +23,6 @@ namespace :talks  do
     else
       Rails.logger.debug "Skipping #{user.email} - empty talks"
     end
-    Rails.logger.debug "Done sending"
+    Rails.logger.debug "Done sending at #{Time.now}"
   end
 end
