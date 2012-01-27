@@ -84,8 +84,6 @@ talks are put in the system.
 
 * email preferences
 
-* ical for individual talks
-
 * watch implementation
 
 * write help
