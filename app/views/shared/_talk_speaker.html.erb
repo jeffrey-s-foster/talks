@@ -1,0 +1,19 @@
+<% if false %>
+
+ parameters:
+
+    talk
+
+<% end %>
+
+<div class="speaker">
+  <% if talk.speaker && talk.speaker != "" %>
+    <% if talk.speaker_url && talk.speaker_url != "" %>
+      <%= link_to talk.speaker, talk.speaker_url %>
+    <% else %>
+      <%= talk.speaker %>
+    <% end %> 
+  <% else %>
+    <i>No speaker yet</i>
+  <% end %>
+</div>

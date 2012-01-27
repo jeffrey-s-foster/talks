@@ -30,8 +30,7 @@
     <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
 </div>
 
-<div class="speaker"><%= @talk.speaker %></div>
-
+<%= render :partial => "shared/talk_speaker", :locals => { :talk => @talk } %>
 <%= render :partial => "shared/talk_venue", :locals => { :talk => @talk } %>
 
 <div class="time"><%= @talk.time_to_long_s  %></div>
