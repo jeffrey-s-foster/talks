@@ -2,6 +2,6 @@
 
 <ul>
   <% @lists.each do |l| %>
-    <li><%= link_to l.name, l %> <% if l.short_descr != "" %> - <%= l.short_descr %><% end %></li>
+    <li><%= link_to l.name, l %> <% unless l.short_descr.empty? %> - <%= l.short_descr %><% end %></li>
   <% end %>
 </ul>

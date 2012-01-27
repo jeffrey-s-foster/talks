@@ -38,13 +38,20 @@
 <hr/>
 
 <div class="abstract">
-<span class="title">Abstract</span>
-<% if @talk.abstract == "" %>
-  <div class="abstract-body">(No abstract yet)</div>
-<% else %>
-  <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
-<% end %>
+  <span class="title">Abstract</span>
+  <% if @talk.abstract == "" %>
+    <div class="abstract-body">(No abstract yet)</div>
+  <% else %>
+    <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
+  <% end %>
 </div>
+
+<% if (not @talk.bio.empty?) %>
+  <div class="bio">
+    <span class="title">Bio</span>
+    <div class="bio-body"><%= @talk.bio.html_safe %></div>
+  </div>
+<% end %>
 
 <hr/>
 

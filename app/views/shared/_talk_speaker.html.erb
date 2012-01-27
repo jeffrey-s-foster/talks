@@ -7,12 +7,10 @@
 <% end %>
 
 <div class="speaker">
-  <% if talk.speaker && talk.speaker != "" %>
-    <% if talk.speaker_url && talk.speaker_url != "" %>
+  <% if (not talk.speaker.empty?) && (not talk.speaker_url.empty?) %>
       <%= link_to talk.speaker, talk.speaker_url %>
-    <% else %>
+  <% elsif (not talk.speaker.empty?) %>
       <%= talk.speaker %>
-    <% end %> 
   <% else %>
     <i>No speaker yet</i>
   <% end %>

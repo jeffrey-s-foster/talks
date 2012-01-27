@@ -6,11 +6,17 @@ atom_feed :language => 'en-US' do |feed|
     feed.entry(t) do |entry|
       entry.url talk_url(t)
       entry.title t.title
-      if t.abstract
-        entry.content t.abstract, :type => 'html'
+      entry.author t.speaker
+      content = ""
+      unless t.abstract.empty?
+        content = t.abstract
       else  
-        entry.content "(No abstract yet)", :type => 'text'
+        content = "(No abstract yet)"
       end
+      unless t.bio.empty?
+        content << "Bio: " << t.bio
+      end
+      entry.content content, :type => 'html'
       # the strftime is needed to work with Google Reader.
 #      entry.updated(t.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ")) 
 #      entry.author item.user.handle

@@ -44,6 +44,10 @@ table.edit-talk {
       .title { font-weight: bold; color: black; font-size: large;};
       .abstract-body { font-family: $georgia; };
   }
+  .bio {
+      .title { font-weight: bold; color: black; font-size: large;};
+      .bio-body { font-family: $georgia; };
+  }
   .comment {
       padding-top: 10px;
   }

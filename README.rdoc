@@ -94,5 +94,3 @@ also want to make yourself an administrator, which you can do with
   or before 11:59p on the coming Friday -- probably the latter makes
   more sense and is more consistent with the email semantics) and
   "talks further out".
-
-* In the detailed talk info, a bio field would be nice.

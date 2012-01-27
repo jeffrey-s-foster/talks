@@ -12,15 +12,13 @@ parameters:
   <% else %>
     <%
         loc = talk.room
-        if talk.building
-         if talk.building.name != ""
+        if talk.building && (not talk.building.name.empty?)
            loc << " #{talk.building.name} (#{talk.building.abbrv})"
-         else
+        elsif talk.building
 	   loc << " #{talk.building.abbrv}"
-	 end
-       end
+	end
      %>
-     <% if talk.building && talk.building.url && (talk.building.url != "" ) %>
+     <% if talk.building && talk.building.url && (not talk.building.url.empty?) %>
        <%= link_to loc, talk.building.url %>
      <% else %>
        <%= loc %>
