@@ -34,7 +34,11 @@
 <hr/>
 
 <% if @upcoming then %>
-  <h2>Upcoming talks <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
+  <h2>Upcoming talks
+    <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %>
+    <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom) %>
+    <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
+  </h2>
 <% else %>
   <h2>All talks (including past talks) <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %></h2>
 <% end %>

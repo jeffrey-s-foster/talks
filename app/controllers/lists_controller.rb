@@ -79,9 +79,12 @@ class ListsController < ApplicationController
   end
 
   def feed
-    l = List.find(params[:id])
+    @list = List.find(params[:id])
+    @title = @list.name
+    @talks = @list.talks
     respond_to do |format|
-      format.ics { render :text => (generate_ical l.talks) }
+      format.ics { render :text => (generate_ical @list.talks) }
+      format.atom { render "shared/feed", :layout => false  }
     end
   end
 

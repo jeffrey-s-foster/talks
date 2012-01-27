@@ -25,12 +25,15 @@ class UsersController < ApplicationController
   # Note that this can't require the user to log in...
   def feed
     user = User.find(params[:id])
+    @title = "Your Talks"
     @talks = user.subscribed_talks(:all, [:kind_subscriber, :kind_subscriber_through]).keys
     respond_to do |format|
       if params[:key] == user.ical_secret
         format.ics { render :text => (generate_ical @talks) }
+        format.atom { render "shared/feed", :layout => false  }
       else
         format.ics { render :nothing => true, :status => :forbidden }
+        format.atom { render :nothing => true, :status => :forbidden }
       end
     end
   end

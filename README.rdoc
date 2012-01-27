@@ -75,10 +75,17 @@ based on tags indicated by the user.  For example, all talks that have tag
 Foo but not tag Bar.  This list is automatically updated whenever new
 talks are put in the system.
 
-Also, having iCal and e-mail support are obviously warranted/needed.
-
 * More efficient queries in functions added to models/list.rb, models/user.rb, and models/talk.rb
 
 * Add ssl for ical feed?
 
 * Support rss feed?
+- Only show upcoming talks?
+
+* email preferences
+
+* ical for individual talks
+
+* watch implementation
+
+* write help
