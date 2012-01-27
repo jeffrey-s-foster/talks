@@ -43,6 +43,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_ical_secret
+    @user = User.find(params[:id])
+    authorize! :edit_user, @user
+    @user.update_attribute(:ical_secret, nil)
+    redirect_to users_path, :notice => "ical secret reset for #{@user.email}"
+  end
+
 # if params[:user][:password].blank?
 #   params[:user].delete(:password)
 #   params[:user].delete(:password_confirmation)

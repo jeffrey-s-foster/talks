@@ -24,16 +24,13 @@ Talks::Application.routes.draw do
   resources :users, :only => [:index, :show] do
     member do
       get :feed
+      get :reset_ical_secret
     end
   end
 
   namespace :admin do
     get :index
-    resources :users, :only => [:index, :edit, :update, :destroy] do
-      member do
-        get :reset_ical_secret
-      end
-    end
+    resources :users, :only => [:edit, :update, :destroy]
   end
   
   root :to => "talks#upcoming"
