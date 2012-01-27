@@ -1,5 +1,5 @@
-<% if can? :edit_user, current_user %>
-  <%= link_to "Edit profile", edit_user_registration_path %>
+<% if can? :edit, current_user %>
+  <%= link_to "Edit profile", edit_user_path %>
 <% end %>
 
 <h2>Your lists</h2>

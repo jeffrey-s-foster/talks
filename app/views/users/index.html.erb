@@ -5,8 +5,8 @@
   <% @users.each do |u| %>
   <tr>
     <td>
-      <%= link_to "edit", edit_admin_user_path(u) %> &nbsp;
-      <%= link_to "delete", admin_user_path(u), :confirm => "Are you sure?", :method => :delete %>
+      <%= link_to "edit", edit_user_path(u) %> &nbsp;
+      <%= link_to "delete", user_path(u), :confirm => "Are you sure?", :method => :delete %>
       <%= link_to "ical_reset", reset_ical_secret_user_path(u), :confirm => "Are you sure?" %>
     </td>
     <td><%= u.id %></td>

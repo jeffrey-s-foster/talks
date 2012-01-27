@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :generate_ical_secret
+  before_filter :generate_ical_secret, :only => [:show, :feed]
 
   def index
     authorize! :site_admin, :all
@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
+    authorize! :edit, @user
     fix_range params
     if params[:range] == :all
       @upcoming = false
@@ -26,7 +28,37 @@ class UsersController < ApplicationController
     @talks.sort! { |a,b| a.start_time <=> b.start_time }.uniq!
   end
 
-  # TODO: add security
+  def edit
+    @user = User.find(params[:id])
+    authorize! :edit, @user
+  end
+
+  def update
+    @user = User.find(params[:id])
+    authorize! :edit, @user
+    if params[:user][:password].blank?
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
+    end
+    unless can? :site_admin, :all
+      params[:user].delete :perm_site_admin
+      params[:user].delete :perm_create_talk
+    end
+    if @user.update_attributes(params[:user])
+      logger.debug "Updated!"
+      redirect_to @user
+    else
+      render :action => "edit"
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    authorize! :site_admin, :all
+    @user.destroy
+    redirect_to users_path
+  end
+
   # Note that this can't require the user to log in...
   def feed
     user = User.find(params[:id])
@@ -45,15 +77,10 @@ class UsersController < ApplicationController
 
   def reset_ical_secret
     @user = User.find(params[:id])
-    authorize! :edit_user, @user
+    authorize! :edit, @user
     @user.update_attribute(:ical_secret, nil)
     redirect_to users_path, :notice => "ical secret reset for #{@user.email}"
   end
-
-# if params[:user][:password].blank?
-#   params[:user].delete(:password)
-#   params[:user].delete(:password_confirmation)
-# end
 
 private
 

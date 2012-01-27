@@ -21,7 +21,7 @@ Talks::Application.routes.draw do
   resources :buildings, :only => [:destroy]
 
   devise_for :users, :path_prefix => "profile"
-  resources :users, :only => [:index, :show] do
+  resources :users, :only => [:index, :show, :edit, :update, :destroy] do
     member do
       get :feed
       get :reset_ical_secret
@@ -30,7 +30,6 @@ Talks::Application.routes.draw do
 
   namespace :admin do
     get :index
-    resources :users, :only => [:edit, :update, :destroy]
   end
   
   root :to => "talks#upcoming"

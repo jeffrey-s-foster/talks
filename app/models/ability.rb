@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :edit_user, user if user
+    can :edit, user if user
     user ||= User.new # guest user (not logged in)
 
     if user.perm_create_talk || user.perm_site_admin
@@ -21,7 +21,6 @@ class Ability
 
     if user.perm_site_admin
       can :site_admin, :all
-      can :edit_user, :all
       can :edit, :all
       can :edit_name, :all
       can :edit_owner, :all
