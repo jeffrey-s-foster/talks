@@ -2,6 +2,11 @@ class UsersController < ApplicationController
 
   before_filter :generate_ical_secret
 
+  def index
+    authorize! :site_admin, :all
+    @users = User.all.sort { |a,b| a.email <=> b.email }
+  end
+
   def show
     fix_range params
     if params[:range] == :all

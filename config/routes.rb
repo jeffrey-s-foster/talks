@@ -21,7 +21,7 @@ Talks::Application.routes.draw do
   resources :buildings, :only => [:destroy]
 
   devise_for :users, :path_prefix => "profile"
-  resources :users, :only => [:show] do
+  resources :users, :only => [:index, :show] do
     member do
       get :feed
     end
