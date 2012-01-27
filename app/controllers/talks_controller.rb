@@ -1,7 +1,7 @@
 class TalksController < ApplicationController
 
   def upcoming
-    @talks = Talk.upcoming
+    @talks = Talk.upcoming.sort { |a,b| a.start_time <=> b.start_time }
     fix_range params
     if current_user
       @talk_subscriptions = current_user.subscribed_talks(params[:range])
