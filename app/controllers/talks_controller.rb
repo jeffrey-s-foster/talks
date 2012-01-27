@@ -83,6 +83,13 @@ class TalksController < ApplicationController
     end
   end
 
+  def calendar
+    @talk = Talk.find(params[:id])
+    respond_to do |format|
+      format.ics { render :text => (generate_ical [@talk]) }
+    end
+  end
+
 private
 
   def adjust(params)

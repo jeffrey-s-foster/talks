@@ -3,6 +3,7 @@ Talks::Application.routes.draw do
     get :upcoming
     member do
       get :subscribe
+      get :calendar
     end
   end
 

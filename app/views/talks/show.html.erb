@@ -27,6 +27,7 @@
     <% when :kind_watcher_through %>
       <span class="badge-watcher-through"></span>
     <% end %>
+    <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
 </div>
 
 <div class="speaker"><%= @talk.speaker %></div>

@@ -13,9 +13,9 @@ to install Ruby. Then do
   gem install rails
 
   cd talks/
-  bundle install   # install all necessary packages
-  rake db:migrate  # create the database
-  script/rails s   # start the server on localhost:3000
+  bundle install       # install all necessary packages
+  rake db:schema:load  # create the database
+  script/rails s       # start the server on localhost:3000
 
 Then go to localhost:3000 and create an account for yourself. The
 email sending probably won't work if you're on a local machine, so
@@ -60,22 +60,23 @@ also want to make yourself an administrator, which you can do with
 
 == TODO list
 
-* LDAP support for UMCP Directory IDs.  Using these is one less barrier
-to adoption, since people already have a directory ID.  Ping Neil for
-Rails code to do this, since he uses it for his graduate admissions
-website.
+* LDAP support for UMCP Directory IDs.  Using these is one less
+  barrier to adoption, since people already have a directory ID.  Ping
+  Neil for Rails code to do this, since he uses it for his graduate
+  admissions website.
 
-Also see:
+  Also see:
 
- * {UMD CAS FAQ}[http://login.umd.edu/developer.html]
- * {devise_cas_authenticatable}[https://github.com/nbudin/devise_cas_authenticatable]
+  * {UMD CAS FAQ}[http://login.umd.edu/developer.html]
+  * {devise_cas_authenticatable}[https://github.com/nbudin/devise_cas_authenticatable]
 
 * Support for tags.  The idea would be able to create a "smart" list
-based on tags indicated by the user.  For example, all talks that have tag
-Foo but not tag Bar.  This list is automatically updated whenever new
-talks are put in the system.
+  based on tags indicated by the user.  For example, all talks that
+  have tag Foo but not tag Bar.  This list is automatically updated
+  whenever new talks are put in the system.
 
-* More efficient queries in functions added to models/list.rb, models/user.rb, and models/talk.rb
+* More efficient queries in functions added to models/list.rb,
+  models/user.rb, and models/talk.rb
 
 * Add ssl for ical feed?
 
@@ -84,8 +85,16 @@ talks are put in the system.
 
 * email preferences
 
-* ical for individual talks
-
 * watch implementation
 
 * write help
+
+* Minor UI suggestion: In the "upcoming talks" it might be nice to
+  break it into "talks this week" (interpreted either as next 7 days,
+  or before 11:59p on the coming Friday -- probably the latter makes
+  more sense and is more consistent with the email semantics) and
+  "talks further out".
+
+* For the speaker names, it's always nice to be able to link that to their web page.
+
+* In the detailed talk info, a bio field would be nice.
