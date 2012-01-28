@@ -15,6 +15,9 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+    <div><%= f.check_box :opt_email_today %> <%= f.label :opt_email_today %>
+    <div><%= f.check_box :opt_email_this_week %> <%= f.label :opt_email_this_week %>
+
   <% if can? :site_admin, :all %>
     <div><%= f.check_box :perm_site_admin %> <%= f.label :perm_site_admin %>
     <div><%= f.check_box :perm_create_talk %> <%= f.label :perm_create_talk %>

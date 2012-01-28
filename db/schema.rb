@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120127190428) do
+ActiveRecord::Schema.define(:version => 20120127202257) do
 
   create_table "buildings", :force => true do |t|
     t.string   "abbrv"
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(:version => 20120127190428) do
     t.boolean  "perm_site_admin",                       :default => false
     t.boolean  "perm_create_talk"
     t.text     "ical_secret"
+    t.boolean  "opt_email_today",                       :default => true,  :null => false
+    t.boolean  "opt_email_this_week",                   :default => true,  :null => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

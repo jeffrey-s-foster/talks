@@ -83,8 +83,6 @@ also want to make yourself an administrator, which you can do with
 * Support rss feed?
   *Only show upcoming talks?
 
-* email preferences
-
 * watch implementation
 
 * write help
