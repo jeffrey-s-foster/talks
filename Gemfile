@@ -18,6 +18,8 @@ gem 'cancan'
 gem 'symbolize', :require => 'symbolize/active_record'
 gem 'bourbon'
 gem 'high_voltage'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 # Gems used only for assets and not required
 # in production environments by default.

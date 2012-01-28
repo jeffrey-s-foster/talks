@@ -1,0 +1,49 @@
+<p>
+  <table class="ruled">
+    <tr>
+      <th>Created at</th>
+      <th>Priority</th>
+      <th>Run at</th>
+      <th>Failed at</th>
+      <th>Attempts</th>
+      <th>Last error</th>
+      <th>Handler</th>
+      <th>Locked at</th>
+      <th>Locked by</th>
+      <th/>
+    <tr/>
+    <% flip = false %>
+    <% @jobs.each do |j| %>
+      <tr <%= flip = !flip; if flip then 'class="grey"'.html_safe end %> >
+	<td align=right><%= j.created_at.localtime %></td>
+	<td align=right><%= j.priority %></td>
+	<td align=right><%= if j.run_at then j.run_at.localtime end %></td>
+	<td align=right><%= if j.failed_at then j.failed_at.localtime end %></td>
+	<td align=right><%= j.attempts %></td>
+	<td align=right><%= if j.last_error then j.last_error.gsub("\\n", "<br/>").html_safe end %></td>
+	<td align=right width=30><%= j.handler.object.class %></td>
+	<td align=right><%= if j.locked_at then j.locked_at.localtime end %></td>
+	<td align=right><%= j.locked_by %></td>
+	<td><span class="comment"><%= link_to 'delete', jobs_delete_path(j), :confirm => 'Are you sure?', :method => :delete %></span></td>
+      </tr>
+    <% end %>
+    <% if @jobs.length > 0 then %>
+      <tr <%= flip = !flip; if flip then 'class="grey"'.html_safe end %> >
+	<td colspan=10 align=right><%= link_to 'delete all', jobs_delete_all_path, :confirm => 'Delete ALL:  Are you sure?', :method => :delete %></td>
+      </tr>
+    <% else %>
+      <tr class="grey"><td colspan=10 align=left><i>None</i></td></tr>
+    <% end %>
+  </table>
+</p>
+
+<p>
+  <table class="boxed">
+    <caption>Actions</caption>
+    <tr><td class="comment" width=300>Actions will be done immediately, and may take several seconds. Results will be shown at the top of the page.</td></tr>
+    <tr><td class="item"><%= link_to "Stop", jobs_do_stop_path %></td></tr>
+    <tr><td class="item"><%= link_to "Restart", jobs_do_restart_path %></td></tr>
+    <tr><td class="item"><%= link_to "Reload", jobs_do_reload_path %></td></tr>
+    <tr><td class="item"><%= link_to "Status", jobs_do_status_path %></td></tr>
+  </table>
+</p>

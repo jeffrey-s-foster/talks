@@ -31,6 +31,16 @@ Talks::Application.routes.draw do
   namespace :admin do
     get :index
   end
+
+  namespace :jobs do
+    get :index
+    match "delete/:id", :action => :delete, :via => [:delete], :as => :delete
+    delete :delete_all
+    get :do_stop
+    get :do_restart
+    get :do_reload
+    get :do_status
+  end
   
   root :to => "talks#upcoming"
 end
