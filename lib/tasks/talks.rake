@@ -1,11 +1,11 @@
 namespace :talks  do
 
   desc "Send email to subscribers of today's talks"
-  task :today => :environment do
+  task :send_today => :environment do
     Rails.logger.debug "Sending today's talks at #{Time.now}..."
-    User.all do |user|
+    User.all.each do |user|
       talks = user.subscribed_talks(:today, [:kind_subscriber, :kind_subscriber_through]).keys
-      next unless talks.opt_email_today
+      next unless user.opt_email_today
       unless talks.empty?
         Notifications.send_talks(user, talks, "Today's talks").deliver
       else
@@ -16,11 +16,11 @@ namespace :talks  do
   end
 
   desc "Send email to subscribers of this week's talks"
-  task :this_week => :environment do
+  task :send_this_week => :environment do
     Rails.logger.debug "Sending this weeky's talks at #{Time.now}..."
-    User.all do |user|
+    User.all.each do |user|
       talks = user.subscribed_talks(:this_week, [:kind_subscriber, :kind_subscriber_through]).keys
-      next unless talks.opt_email_this_week
+      next unless user.opt_email_this_week
       unless talks.empty?
         Notifications.send_talks(user, talks, "This week's talks").deliver
       else
