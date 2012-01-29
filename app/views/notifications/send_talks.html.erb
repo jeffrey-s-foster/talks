@@ -3,7 +3,7 @@
 <% @talks.each do |t| %>
 
   <div style="font-size: x-large; color: #fe5f5f"><%= t.title %></div>
-  <div style="font-size: large;"><%= render :partial => "shared/talk_speaker", :locals => { :talk => @talk } %></div>
+  <div style="font-size: large;"><%= render :partial => "shared/talk_speaker", :locals => { :talk => t } %></div>
   <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  t } %></div>
   <div><%= t.time_to_long_s %></div>
 
