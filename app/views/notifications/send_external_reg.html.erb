@@ -1,7 +1,7 @@
 <h1>Registration accepted</h1>
 
 <p>
-Thank you for registering for <%= link_to @talk.title, @talk %>
+Thank you for registering for <%= link_to @talk.title, @talk.url %>
 
 <p>
 Here is the registration information we recorded:
@@ -12,5 +12,5 @@ Here is the registration information we recorded:
 
 <p>
 You may
-<%= link_to "cancel your registration", cancel_external_registration_talk_path(@talk, :registration => @reg,
+<%= link_to "cancel your registration", cancel_external_registration_talk_url(@talk, :registration => @reg,
        :secret => @reg.secret) %> at any time.
