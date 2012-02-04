@@ -8,3 +8,5 @@ en:
       user:
         opt_email_today: "Receive reminders of today's talks"
         opt_email_this_week: "Receive reminers of this week's talks (on Sunday)"
+      talk:
+        request_reg: "Request registration?"

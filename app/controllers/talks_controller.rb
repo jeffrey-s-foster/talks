@@ -83,6 +83,39 @@ class TalksController < ApplicationController
     end
   end
 
+  def register
+    t = Talk.find(params[:id])
+    r = Registration.where(:talk_id => t, :user_id => current_user)
+    logger.error "Inconsistency, r is #{r}" if r.length > 1
+    case params[:do]
+    when "register"
+      if r.empty?
+        r = Registration.new(:talk_id => t.id, :user_id => current_user.id)
+        r.save
+        logger.debug "Saved #{r.inspect}"
+      end
+    when "unregister"
+      r[0].destroy if r[0]
+    end
+    respond_to do |format|
+      format.js { render "shared/_update_badges.js.erb", :locals => { :subscribable => t } }
+      format.html { redirect_to action: "show" }
+    end
+  end
+
+  def cancel_registration
+    r = Registration.find(params[:id])
+    authorize! :edit, r.talk
+    r.destroy
+    redirect_to :show_registrations_talk
+  end
+
+  def show_registrations
+    @talk = Talk.find(params[:id])
+    authorize! :edit, @talk
+    @regs = @talk.registrations
+  end
+
   def calendar
     @talk = Talk.find(params[:id])
     respond_to do |format|

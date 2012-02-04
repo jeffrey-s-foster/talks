@@ -33,5 +33,4 @@ class List < ActiveRecord::Base
     return s && (s.kind == :kind_subscriber)
   end
 
-
 end

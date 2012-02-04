@@ -43,3 +43,23 @@ $("body").spin(false);
   $(".watch").hide();
   $(".unsubscribe").hide();
 <% end %>
+
+<% if current_user && (subscribable.respond_to? :registered?) && (subscribable.registered? current_user) %>
+   $(".badge-registered").show();
+   $(".not-registered").hide();
+   $(".registered").show();
+   $(".register").hide();
+   $(".unregister").show();
+<% elsif current_user && (subscribable.respond_to? :registered?) %>
+   $(".badge-registered").hide();
+   $(".not-registered").show();
+   $(".registered").hide();
+   $(".register").show();
+   $(".unregister").hide();
+<% else %>
+   $(".not-registered").hide();
+   $(".registered").hide();
+   $(".badge-registered").hide();
+   $(".register").hide();
+   $(".unregister").hide();
+<% end %>

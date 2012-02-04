@@ -1,0 +1,19 @@
+<h1>Registrations</h1>
+
+<p>Talk title: <%= link_to @talk.title, @talk %>
+
+<table class="regs-table" border=1>
+  <tr><th>Actions</th><th>Email</th><th>Name</th><th>Org</th><th>Registered on</th></tr>
+
+<% @regs.each do |r| %>
+  <% if r.user_id > 0 %>
+    <tr>
+      <td><%= link_to "cancel", cancel_registration_talk_path(r), :method => :post %>
+      <td><%= r.user.email %></td>
+      <td><%= r.user.name %></td>
+      <td><%= r.user.organization %></td>
+      <td><%= r.updated_at %></td>
+  <% end %>
+<% end %>
+
+</table>

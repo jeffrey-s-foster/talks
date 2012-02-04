@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128161940) do
+ActiveRecord::Schema.define(:version => 20120203180907) do
 
   create_table "buildings", :force => true do |t|
     t.string   "abbrv"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(:version => 20120128161940) do
   add_index "lists_talks", ["list_id"], :name => "index_lists_talks_on_list_id"
   add_index "lists_talks", ["talk_id"], :name => "index_lists_talks_on_talk_id"
 
+  create_table "registrations", :force => true do |t|
+    t.integer  "talk_id"
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "organization"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "subscriptions", :force => true do |t|
     t.integer  "subscribable_id"
     t.string   "subscribable_type"
@@ -93,8 +104,9 @@ ActiveRecord::Schema.define(:version => 20120128161940) do
     t.integer  "owner_id"
     t.integer  "building_id"
     t.text     "room"
-    t.text     "speaker_url", :default => "", :null => false
-    t.text     "bio",         :default => "", :null => false
+    t.text     "speaker_url", :default => "",    :null => false
+    t.text     "bio",         :default => "",    :null => false
+    t.boolean  "request_reg", :default => false
   end
 
   add_index "talks", ["start_time"], :name => "index_talks_on_start_time"
@@ -121,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20120128161940) do
     t.text     "ical_secret"
     t.boolean  "opt_email_today",                       :default => true,  :null => false
     t.boolean  "opt_email_this_week",                   :default => true,  :null => false
+    t.text     "organization"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

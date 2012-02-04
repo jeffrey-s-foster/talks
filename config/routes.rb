@@ -4,6 +4,9 @@ Talks::Application.routes.draw do
     member do
       get :subscribe
       get :calendar
+      get :register
+      get :show_registrations
+      post :cancel_registration
     end
   end
 

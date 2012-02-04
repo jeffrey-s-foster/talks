@@ -1,7 +1,7 @@
 <h1>Users</h1>
 
-<table class="users-table">
-  <tr><th>Actions</th><th>Id</th><th>Email</th><th>Name</th><th>Perms</th><th>Last signed in</th></tr>
+<table class="users-table" border=1>
+  <tr><th>Actions</th><th>Id</th><th>Email</th><th>Name</th><th>Org</th><th>Perms</th><th>Last signed in</th></tr>
   <% @users.each do |u| %>
   <tr>
     <td>
@@ -12,6 +12,7 @@
     <td><%= u.id %></td>
     <td><%= u.email %></td>
     <td><%= u.name %></td>
+    <td><%= u.organization %></td>
     <td>
       <% if u.perm_site_admin %>admin <% end %>
       <% if u.perm_create_talk %>create_talk <% end %>

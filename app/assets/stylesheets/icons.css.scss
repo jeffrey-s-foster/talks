@@ -30,3 +30,7 @@
     @include badge;
     background-position: -64px -32px;
 }
+.badge-registered {
+    @include badge;
+    background-position: 0px -64px;
+}

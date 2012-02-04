@@ -6,6 +6,10 @@
         <span class="action"><%= link_to "edit", edit_talk_path(@talk) %></span>
         <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure?', :method => :delete %></span>
       <% end %>
+      <% if @talk.request_reg %>
+        <span class="action register"><%= link_to "register", register_talk_path(@talk, :do => "register") %></span>
+        <span class="action unregister"><%= link_to "unregister", register_talk_path(@talk, :do => "unregister") %></span>
+      <% end %>
     </div>
     <div class="subscribe-table">
       <span class="action subscribe"><%= link_to "subscribe", subscribe_talk_path(@talk, :do => "subscribe"), :remote => true %></span>
@@ -16,18 +20,19 @@
 
 <div class="title">
   <%= @talk.title %>
+  <span class="badge-registered"></span>
   <span class="badge-subscriber"></span>
   <span class="badge-watcher"></span>
-    <% if @talk.owner? current_user %>
-      <span class="badge-owner"></span>
-    <% end %>
-    <% case @talk.through current_user %>
-    <% when :kind_subscriber_through %>
-      <span class="badge-subscriber-through"></span>
-    <% when :kind_watcher_through %>
-      <span class="badge-watcher-through"></span>
-    <% end %>
-    <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
+  <% if @talk.owner? current_user %>
+    <span class="badge-owner"></span>
+  <% end %>
+  <% case @talk.through current_user %>
+  <% when :kind_subscriber_through %>
+    <span class="badge-subscriber-through"></span>
+  <% when :kind_watcher_through %>
+    <span class="badge-watcher-through"></span>
+  <% end %>
+  <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
 </div>
 
 <%= render :partial => "shared/talk_speaker", :locals => { :talk => @talk } %>
@@ -53,6 +58,25 @@
   </div>
 <% end %>
 
+<% if @talk.request_reg %>
+<hr/>
+<div class="registration not-registered">
+<b>Registration requested:</b>
+The organizer of this talk requests that you register if you
+are planning to attend. You can register by clicking the registration
+button (upper-right corner of the page). If you change your mind
+later, you can always unregister.
+</div>
+<div class="registration registered">
+<b>Registration requested:</b> Thank you for registering.
+</div>
+
+<% if can? :edit, @talk %>
+  <p>
+  <%= link_to "Show registrations", show_registrations_talk_path(@talk) %>
+<% end %>
+<% end %>
+
 <hr/>
 
 <div class="lists">
@@ -64,6 +88,8 @@
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 
 <script>
+  $(".register").click(function () { $("body").spin() });
+  $(".unregister").click(function () { $("body").spin() });
   $(".subscribe").click(function () { $("body").spin() });
   $(".watch").click(function () { $("body").spin() });
   $(".unsubscribe").click(function () { $("body").spin() });
