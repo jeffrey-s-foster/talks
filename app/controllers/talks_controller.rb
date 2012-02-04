@@ -92,7 +92,6 @@ class TalksController < ApplicationController
       if r.empty?
         r = Registration.new(:talk_id => t.id, :user_id => current_user.id)
         r.save
-        logger.debug "Saved #{r.inspect}"
       end
     when "unregister"
       r[0].destroy if r[0]
@@ -103,17 +102,34 @@ class TalksController < ApplicationController
     end
   end
 
-  def cancel_registration
-    r = Registration.find(params[:id])
-    authorize! :edit, r.talk
-    r.destroy
-    redirect_to :show_registrations_talk
-  end
-
   def show_registrations
     @talk = Talk.find(params[:id])
     authorize! :edit, @talk
     @regs = @talk.registrations
+    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
+  end
+
+  def add_registrations
+    authorize! :site_admin, :all
+    t = Talk.find(params[:id])
+    params.each_pair { |k,v|
+      next unless k =~ /user_(\d+)/
+      next if v == ""
+      u = User.find v
+      if Registration.where(:talk_id => t, :user_id => u).empty?
+        r = Registration.new(:talk_id => t.id, :user_id => u.id)
+        r.save
+      end
+    }
+    redirect_to show_registrations_talk_path(t)
+  end
+
+  def cancel_registration
+    r = Registration.find(params[:id])
+    t = r.talk
+    authorize! :edit, r.talk
+    r.destroy
+    redirect_to show_registrations_talk_path(t)
   end
 
   def calendar

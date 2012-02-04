@@ -17,3 +17,17 @@
 <% end %>
 
 </table>
+
+<% if can? :site_admin, :all %>
+
+<h2>Register more users</h2>
+
+<%= form_tag add_registrations_talk_path(@talk) do %>
+<p>
+  <%= render :partial => "shared/expanding_list", :locals => {:name => "user", :current_elts => [], :all_elts => @users, :elt_to_string => :email_and_name } %>
+
+<p>
+  <%= submit_tag 'Register' %>
+<% end %>
+
+<% end %>

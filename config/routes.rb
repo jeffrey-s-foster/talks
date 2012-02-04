@@ -7,6 +7,7 @@ Talks::Application.routes.draw do
       get :register
       get :show_registrations
       post :cancel_registration
+      post :add_registrations
     end
   end
 
