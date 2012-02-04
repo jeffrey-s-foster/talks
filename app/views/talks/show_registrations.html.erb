@@ -13,6 +13,16 @@
       <td><%= r.user.name %></td>
       <td><%= r.user.organization %></td>
       <td><%= r.updated_at %></td>
+    </tr>
+  <% else %>
+    <tr>
+      <td><%= link_to "cancel", cancel_external_registration_talk_path(@talk, :registration => r,
+       :secret => r.secret) %></td>
+      <td><%= r.email %></td>
+      <td><%= r.name %></td>
+      <td><%= r.organization %></td>
+      <td><%= r.updated_at %></td>
+    </tr>
   <% end %>
 <% end %>
 

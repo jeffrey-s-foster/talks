@@ -132,6 +132,32 @@ class TalksController < ApplicationController
     redirect_to show_registrations_talk_path(t)
   end
 
+  def external_register
+    @talk = Talk.find(params[:id])
+    @reg = Registration.new(:talk_id => @talk.id,
+                            :user_id => 0,
+                            :name => params[:name],
+                            :email => params[:email],
+                            :organization => params[:organization],
+                            :secret => SecureRandom.base64,
+                            )
+    if @reg.save
+      Notifications.send_external_reg(@reg).deliver
+    else
+      render :action => :show
+    end
+  end
+
+  def cancel_external_registration
+    @reg = Registration.find(params[:registration])
+    if @reg && (@reg.secret == params[:secret])
+      @reg.destroy
+      @success = true
+    else
+      @success = false
+    end
+  end
+
   def calendar
     @talk = Talk.find(params[:id])
     respond_to do |format|

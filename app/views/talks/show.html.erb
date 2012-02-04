@@ -58,23 +58,45 @@
   </div>
 <% end %>
 
-<% if @talk.request_reg %>
-<hr/>
-<div class="registration not-registered">
-<b>Registration requested:</b>
-The organizer of this talk requests that you register if you
-are planning to attend. You can register by clicking the registration
-button (upper-right corner of the page). If you change your mind
-later, you can always unregister.
-</div>
-<div class="registration registered">
-<b>Registration requested:</b> Thank you for registering.
-</div>
+<% if @talk.request_reg && current_user %>
+  <hr/>
+  <div class="registration not-registered">
+    <b>Registration requested:</b>
+    The organizer of this talk requests that you register if you
+    are planning to attend. You can register by clicking the registration
+    button (upper-right corner of the page). If you change your mind
+    later, you can always unregister.
+  </div>
+  <div class="registration registered">
+    <b>Registration requested:</b> Thank you for registering.
+  </div>
 
-<% if can? :edit, @talk %>
-  <p>
-  <%= link_to "Show registrations", show_registrations_talk_path(@talk) %>
-<% end %>
+  <% if can? :edit, @talk %>
+    <p>
+      <%= link_to "Show registrations", show_registrations_talk_path(@talk) %>
+  <% end %>
+
+<% elsif @talk.request_reg && (not current_user) %>
+  <hr/>
+  <div class="registration">
+    <b>Registration requested:</b>
+    The organizer of this talk requests that you register if you
+    are planning to attend. There are two ways to register:
+    (1) You can create an account on this site (click the "register"
+    link in the upper-right corner) and then register for this talk;
+    or (2) You can enter your details below and click the "Register
+    for talk" button. Either way, you can always cancel your
+    registration later.
+
+    <p>
+    <%= form_tag external_register_talk_path(@talk) do %>
+    <div>Name: <%= text_field_tag :name %></div>
+    <div>Email: <%= text_field_tag :email %></div>
+    <div>Organization: <%= text_field_tag :organization %></div>
+    <p>
+    <div><%= submit_tag "Register for talk" %></div>
+    <% end %>
+  </div>
 <% end %>
 
 <hr/>

@@ -1,0 +1,17 @@
+<h1>Registration accepted</h1>
+
+<p>
+Thank you for registering:
+
+<div>Name: <%= @reg.name %></div>
+<div>Email: <%= @reg.email %></div>
+<div>Organization: <%= @reg.organization %></div>
+
+<p>
+You should also receive a registration confirmation by email shortly. You
+can also 
+<%= link_to "cancel your registration", cancel_external_registration_talk_path(@talk, :registration => @reg,
+       :secret => @reg.secret) %>.
+
+<p>
+<%= link_to "Back to talk", @talk %>

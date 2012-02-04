@@ -1,0 +1,14 @@
+<h1>Cancel registration</h1>
+
+<% if @success %>
+<p>
+The following registration has been <b>cancelled</b>:
+
+<div>Name: <%= @reg.name %></div>
+<div>Email: <%= @reg.email %></div>
+<div>Organization: <%= @reg.organization %></div>
+
+<% else %>
+<p>
+Registration cancellation failed. Please contact the site administrator.
+<% end %>

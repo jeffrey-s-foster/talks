@@ -3,10 +3,10 @@ class CreateRegistrations < ActiveRecord::Migration
     create_table :registrations do |t|
       t.integer :talk_id
       t.integer :user_id
-      t.string :first_name
-      t.string :last_name
+      t.string :name
       t.string :email
       t.text :organization
+      t.string :secret
 
       t.timestamps
     end

@@ -8,6 +8,8 @@ Talks::Application.routes.draw do
       get :show_registrations
       post :cancel_registration
       post :add_registrations
+      post :external_register
+      get :cancel_external_registration
     end
   end
 
