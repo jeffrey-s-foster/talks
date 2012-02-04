@@ -11,6 +11,7 @@ class Notifications < ActionMailer::Base
 
   def send_external_reg(reg)
     @reg = reg
+    @talk = reg.talk
 
     mail :to => "#{@reg.name} <#{@reg.email}>",
          :subject => "[talks] Registration confirmation",
