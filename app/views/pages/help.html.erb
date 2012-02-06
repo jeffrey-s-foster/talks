@@ -153,11 +153,49 @@ The following icons are used on the site:
 
 <h2>Managing a list</h2>
 
-<i>(To be filled in)</i>
+<p>
+If you would like to add a new list to the site, please contact the
+site administrators and ask them to create the list for you; you'll
+need to supply at least a short name for the list, e.g., "PL Reading
+Group." Lists also have a short description (e.g., "Programming
+Languages Reading Group," shown on the list's page and on the page
+with <%= link_to "all lists", lists_path %>) and a long description
+(shown on the list's page).
 
-<h3>Posting a talk</h2>
+<p>
+Each list also has one or more <i>owners</i>; when you ask to have a
+list created for you, the site administrators will make you an owner
+of the list. As an owner, you can edit the list to change its name,
+short and long description, set of owners, and set of <i>posters</i>,
+who are people who have permission to add a talk to your list. Note:
+it is possible to remove yourself as an owner, so be sure not to do
+that inadvertantly. You can edit a list by going to the list's page
+and clicking on the edit button. This button will only appear if you
+are a list owner; contact the site administrators if you think you
+should be able to edit a list but cannot.
 
-<i>(To be filled in)</i>
+<h2>Posting a talk</h2>
+
+<p>
+If you want to add a new talk to the site, you need a permission added
+to your account; contact the site administrators to request this. Once
+you have permission, you can <%= link_to "create a new talk",
+new_talk_path %> (another link for this should appear in the bar
+above). Each talk has a title, speaker (with optional associated URL),
+venue, date/time, abstract, and speak bio (optional). A venue is a
+room and a building, where the latter is drawn from a set the site
+knows about. To have a new building added, contact the site
+administrators. You can also just leave the building blank, and give
+complete location information under "room."
+
+<p>
+When you create a talk, you become the owner of the talk, which gives
+you permission to edit the talk in the future. (Contact the site
+administrators to change the owner of a talk.)  Each talk can also be
+posted to zero or more lists. You must have permission to post to a
+list before you can do so; contact the owner of the list to get this
+permission. Note: after posting a talk to a list, you automatically
+give permission for the list owner to also edit the talk information.
 
 <p>
 <b>Important:</b>
@@ -165,7 +203,31 @@ Basic information about all lists and talks is <b>public</b>; thus,
 please do not put any information on this site you don't want the
 world to know about.
 
-<h3>Talks with registration</h3>
+<h2>Talks with registration</h2>
+
+<p>
+When creating a talk, you can optionally specify that the you request
+registration for the talk. If you select this option, then the talk
+page will include instructions asking attendees to register. If an
+attendee is logged into the site, they can register by clicking the
+"register" button; once registered, they can unregister by clicking
+the appropriate button.  If an attendee is not logged into the site
+and does not want to create an account (i.e., they are an <i>external
+user</i>), they will be presented with a short form to fill out to
+register, including their name, email address, and
+organization. External users who register will receive an email with a
+registration confirmation. (Note that logged-in users will <i>not</i>
+receive such an email.) The confirmation includes a link that allows
+external registrants to cancel their registration.
+
+<p>
+If you can edit a talk with registration, then on the talk page you
+will see a link "Show registrations" to list everyone who has
+registered. You can also cancel individual registrations, if
+necessary. You can register an external user yourself if you want by
+logging out of the site, going to the talk's page, and entering their
+information. You can ask the site administrators if you need to
+register a user with an account on the site.
 
 <h1>Other Information</h1>
 
