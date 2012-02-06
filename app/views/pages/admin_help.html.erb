@@ -1,0 +1,25 @@
+<h1>Admin Help</h1>
+
+<h2>ical_reset</h2>
+
+<p>
+Since calendar and rss programs can't log in to the site before
+requesting a feed, the site mantains a secret key for each user. This
+key is included in the user's calendar and rss URLs. In case that
+secret key is compromised, it can be reset via the ical_reset link on
+the show/edit users page.
+
+<h2>Manage delayed jobs</h2>
+
+<p>
+The site (will) use the delayed_job gem to schedule certain emails to
+occur later (this is part of the unimplemented watch feature). The
+delayed jobs are stored in the database, and pulled out by workers
+running in a separate process. That process can be controlled on the
+command line with script/delayed_job, or it can be controlled on the
+web site: the web site can stop, restart, reload, and request status
+for delayed jobs.
+
+<p>
+The delayed jobs management page also shows a list of current jobs
+given to worker threads, and allows individual jobs to be deleted.
