@@ -1,50 +1,52 @@
-<% parameters:
+<% if false %>
+
+parameters:
 
    talk - the talk
    changes - nil (new talk/no change annotations) or subset of Set(:title, :speaker, :venue, :time, :abstract, :bio)
 
-%>
+<% end %>
 
 <% unless !changes || changes.empty? %>
 <div style="background-color: #ffff00;">Changes from original talk announcement highlighted</div>
 <% end %>
 
-<% if changes && changes.include? :title %><div style="background-color: #ffff00"><% end %>
-  <div style="font-size: x-large; color: #fe5f5f;"><%= t.title %></div>
-<% if changes && changes.include? :title %></div><% end %>
+<% if changes && (changes.include? :title) %><div style="background-color: #ffff00"><% end %>
+  <div style="font-size: x-large; color: #fe5f5f;"><%= talk.title %></div>
+<% if changes && (changes.include? :title) %></div><% end %>
 
-<% if changes && changes.include? :speaker %><div style="background-color: #ffff00"><% end %>
-  <div style="font-size: large;"><%= render :partial => "shared/talk_speaker", :locals => { :talk => t } %></div>
-<% if changes.include? :speaker %></div><% end %>
+<% if changes && (changes.include? :speaker) %><div style="background-color: #ffff00"><% end %>
+  <div style="font-size: large;"><%= render :partial => "shared/talk_speaker", :locals => { :talk => talk } %></div>
+<% if changes && (changes.include? :speaker) %></div><% end %>
 
-<% if changes && changes.include? :venue %><div style="background-color: #ffff00"><% end %>
-  <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  t } %></div>
-<% if changes && changes.include? :venue %></div><% end %>
+<% if changes && (changes.include? :venue) %><div style="background-color: #ffff00"><% end %>
+  <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  talk } %></div>
+<% if changes && (changes.include? :venue) %></div><% end %>
 
-<% if changes && changes.include? :time %><div style="background-color: #ffff00"><% end %>
-  <div><%= t.time_to_long_s %></div>
-<% if changes && changes.include? :time %></div><% end %>
+<% if changes && (changes.include? :time) %><div style="background-color: #ffff00"><% end %>
+  <div><%= talk.time_to_long_s %></div>
+<% if changes && (changes.include? :time) %></div><% end %>
 
   <div style="display:block; padding-top: 15px;" >
-<% if changes && changes.include? :abstract %>
+<% if changes && (changes.include? :abstract) %>
     <span style="font-weight: bold; font-size: large; background-color: #ffff00">Abstract</span>
 <% else %>
     <span style="font-weight: bold; font-size: large;">Abstract</span>
 <% end %>
-    <% if t.abstract == "" %>
+    <% if talk.abstract == "" %>
       <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif; font-style: italic;">(No abstract yet)</div>
     <% else %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= t.abstract.html_safe %></div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.abstract.html_safe %></div>
     <% end %>
   </div>
 
-  <% unless t.bio.empty? %>
+  <% unless talk.bio.empty? %>
     <div style="display:block; padding-top: 15px;" >
-<% if changes && changes.include? :bio %>
+<% if changes && (changes.include? :bio) %>
       <span style="font-weight: bold; font-size: large; background-color: #ffff00">Bio</span>
 <% else %>
       <span style="font-weight: bold; font-size: large;">Bio</span>
 <% end %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= t.bio.html_safe %></div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.html_safe %></div>
   </div>
   <% end %>
