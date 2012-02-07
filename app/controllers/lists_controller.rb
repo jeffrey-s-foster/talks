@@ -88,6 +88,13 @@ class ListsController < ApplicationController
     end
   end
 
+  def show_subscribers
+    authorize! :site_admin, :all
+    @list = List.find(params[:id])
+    @subscribers = @list.subscribers.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    render "shared/show_subscribers"
+  end
+
 private
 
   def adjust(params)

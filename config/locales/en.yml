@@ -10,3 +10,4 @@ en:
         opt_email_this_week: "Receive reminers of this week's talks (on Sunday)"
       talk:
         request_reg: "Request registration?"
+        trigger_watch_email: "Send email to watchers when talk created/updated?"

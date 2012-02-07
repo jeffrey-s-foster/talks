@@ -109,6 +109,11 @@
 
 <div class="comment">This talk is organized by <%= @talk.owner.name %></div>
 
+<% if can? :site_admin, :all %>
+  <hr/>
+  <%= link_to "See all subscribers", show_subscribers_talk_path(@talk) %>
+<% end %>
+
 <script>
   $(".register").click(function () { $("body").spin() });
   $(".unregister").click(function () { $("body").spin() });

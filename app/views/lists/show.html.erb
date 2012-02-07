@@ -68,9 +68,15 @@
   <hr/>
   <% if @list.owners.length > 0 %>
     This list is organized by
-    <%= join_with_and(@list.owners.map { |u| u.name }) %>
+    <%= join_with_and(@list.owners.sort { |a,b| a.email <=> b.email }.map { |u| u.name }) %>
   <% end %>
 </div>
+
+<% if can? :site_admin, :all %>
+  <hr/>
+  <%= link_to "See all subscribers", show_subscribers_list_path(@list) %>
+<% end %>
+
 
 <script>
   $(".subscribe").click(function () { $("body").spin() });

@@ -1,3 +1,18 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.jobs {
+    border: 1px solid black;
+    td,th {
+	border: 1px solid black;
+    }
+    td {
+	text-align: right;
+    }
+    tr:nth-child(odd) {background-color: lightgray;}
+}
+.job-actions {
+    border: 1px solid black;
+    padding: 5px;
+}

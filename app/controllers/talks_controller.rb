@@ -26,6 +26,7 @@ class TalksController < ApplicationController
     else
       @lists = (current_user.owned_lists + current_user.poster_lists).sort { |a,b| a.name <=> b.name }.uniq
     end
+    @talk.trigger_watch_email = true
     render :action => "edit"
   end
 
@@ -42,7 +43,12 @@ class TalksController < ApplicationController
     logger.info "Start_time: #{params[:talk][:start_time]}"
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
-      redirect_to @talk
+      if @talk.trigger_watch_email
+        self.delay.email_watchers(@talk, nil)
+        redirect_to @talk, :notice => "Sending talk creation notification to subscribers and watchers..."
+      else
+        redirect_to @talk
+      end
     else
       compute_edit_fields
       render :action => "edit"
@@ -53,14 +59,32 @@ class TalksController < ApplicationController
     @talk = Talk.find(params[:id])
     authorize! :edit, @talk
     compute_edit_fields
+    @talk.trigger_watch_email = true
   end
 
   def update
     @talk = Talk.find(params[:id])
+    @talk_old = @talk.dup
     authorize! :edit, @talk
     adjust params
     if @talk.update_attributes(params[:talk])
-      redirect_to @talk
+      if @talk.trigger_watch_email
+        changes = Set.new
+        changes << :title if old_talk.title != new_talk.title
+        changes << :speaker if ((old_talk.speaker != new_talk.speaker) || (old_talk.speaker_url != new_talk.speaker_url))
+        changes << :venue if ((old_talk.room != new_talk.room) || (old_talk.building != new_talk.building))
+        changes << :time if (old_talk.time_to_long_s != new_talk.time_to_long_s)
+        changes << :abstract if (old_talk.abstract != new_talk.abstract)
+        changes << :bio if (old_talk.bio != new_talk.bio)
+        if changes.empty?
+          redirect_to @talk
+        else
+          self.delay.email_watchers(@talk, changes)
+          redirect_to @talk, :notice => "Sending talk update notification to subscribers and watchers..."
+        end
+      else
+        redirect_to @talk
+      end
     else
       compute_edit_fields
       render :action => "edit"
@@ -165,6 +189,16 @@ class TalksController < ApplicationController
     end
   end
 
+  def show_subscribers
+    authorize! :site_admin, :all
+    @talk = Talk.find(params[:id])
+    @subscribers = []
+    @subscribers += @talk.subscribers
+    @subscribers += (@talk.lists.map { |l| l.subscribers }).flatten
+    @subscribers.sort! { |a,b| a.email_and_name <=> b.email_and_name }
+    render "shared/show_subscribers"
+  end
+
 private
 
   def adjust(params)
@@ -179,7 +213,7 @@ private
     else
       params[:talk][:start_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_start_time]}")
       params[:talk][:end_time] = Chronic.parse("#{params[:temp_date]} #{params[:temp_end_time]}")
-      errors.add(nil, "Malformed date or time") if not (params[:talk][:start_time] && params[:talk][:end_time])
+#      errors.add(nil, "Malformed date or time") if not (params[:talk][:start_time] && params[:talk][:end_time])
     end
 
     lists = []
@@ -207,5 +241,16 @@ private
       @lists = (current_user.owned_lists + current_user.poster_lists).sort { |a,b| a.name <=> b.name }.uniq
     end
   end
+
+  def email_watchers(talk, changes)
+    to_email = []
+    to_email += new_talk.subscribers # all direct subscribers
+    to_email += (new_talk.lists.map { |l| l.subscribers }).flatten # all indirect subscribers
+
+    to_email.each do |u|
+      Notifications.send_talk_change(u, talk, changes).deliver
+    end
+  end
+
 
 end

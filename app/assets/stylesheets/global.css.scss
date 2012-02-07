@@ -23,7 +23,9 @@ table {
 }
 
 h1, h2, h3, h4 {
-    color: $complementary_color;
+    color: black;
+    background-color: $secondary_color_b_2;
+    padding: 3px;
 }
 
 .error, #error_explanation {
@@ -82,7 +84,7 @@ th.align-top {
 }
 
 input[type=submit] {
-    @include button(shiny, $complementary_color_2);
+    @include button(shiny, $secondary_color_b);
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 3px;

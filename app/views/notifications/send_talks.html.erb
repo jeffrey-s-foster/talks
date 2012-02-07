@@ -2,27 +2,7 @@
 
 <% @talks.each do |t| %>
 
-  <div style="font-size: x-large; color: #fe5f5f"><%= t.title %></div>
-  <div style="font-size: large;"><%= render :partial => "shared/talk_speaker", :locals => { :talk => t } %></div>
-  <div><%= render :partial => "shared/talk_venue", :locals => { :talk =>  t } %></div>
-  <div><%= t.time_to_long_s %></div>
-
-  <div style="display:block; padding-top: 15px;" >
-    <span style="font-weight: bold; font-size: large;">Abstract</span>
-    <% if t.abstract == "" %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif; font-style: italic;">(No abstract yet)</div>
-    <% else %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= t.abstract.html_safe %></div>
-    <% end %>
-  </div>
-
-  <% unless t.bio.empty? %>
-    <div style="display:block; padding-top: 15px;" >
-      <span style="font-weight: bold; font-size: large;">Bio</span>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= t.bio.html_safe %></div>
-  </div>
-  <% end %>
-
+  <%= render :partial => "send_talk", :locals => { :talk => t, :changes => nil } %>
   <hr/>
 
 <% end %>

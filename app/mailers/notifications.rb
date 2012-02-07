@@ -5,8 +5,8 @@ class Notifications < ActionMailer::Base
     @subj = subj
 
     mail :to => "#{user.name} <#{user.email}>",
-	:subject => "[talks] #{@subj}",
-	:from => "Talks <jfoster@cs.umd.edu>"
+	:subject => "[Talks] #{@subj}",
+	:from => "Talks <talks@cs.umd.edu>"
   end
 
   def send_external_reg(reg)
@@ -14,7 +14,23 @@ class Notifications < ActionMailer::Base
     @talk = reg.talk
 
     mail :to => "#{@reg.name} <#{@reg.email}>",
-         :subject => "[talks] Registration confirmation",
-         :from => "Talks <jfoster@cs.umd.edu>"
+         :subject => "[Talks] Registration confirmation",
+         :from => "Talks <talks@cs.umd.edu>"
   end
+
+  def send_talk_change(user, talk, changes)
+    @user = user
+    @talk = talk
+    @changes = changes
+    if @changes
+      @subj = "[Talks] Talk update"
+    else
+      @subj = "[Talks] New talk posted"
+    end
+    
+    mail :to => "#{@user.name} <#{@user.email}>",
+         :subject => @subj,
+         :from => "Talks <talks@cs.umd.edu>"
+  end
+
 end

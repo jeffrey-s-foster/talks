@@ -10,6 +10,7 @@ Talks::Application.routes.draw do
       post :add_registrations
       post :external_register
       get :cancel_external_registration
+      get :show_subscribers
     end
   end
 
@@ -17,6 +18,7 @@ Talks::Application.routes.draw do
     member do
       get :subscribe
       get :feed
+      get :show_subscribers
     end
   end
 
@@ -36,6 +38,7 @@ Talks::Application.routes.draw do
 
   namespace :admin do
     get :index
+    get :erase_subscriptions
   end
 
   namespace :jobs do
