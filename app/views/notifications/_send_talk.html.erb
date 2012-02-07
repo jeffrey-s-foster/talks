@@ -47,7 +47,7 @@ parameters:
   </div>
   <% end %>
 
-<% if not (@talk.lists.empty?) %>
+<% if not (talk.lists.empty?) %>
   This talk is part of the following lists: <%= render :partial => "shared/lists_to_links", :locals => { :talk => talk } %>
 <% end %>
 
