@@ -70,12 +70,12 @@ class TalksController < ApplicationController
     if @talk.update_attributes(params[:talk])
       if @talk.trigger_watch_email
         changes = Set.new
-        changes << :title if @talk_old.title != new_talk.title
-        changes << :speaker if ((@talk_old.speaker != new_talk.speaker) || (@talk_old.speaker_url != new_talk.speaker_url))
-        changes << :venue if ((@talk_old.room != new_talk.room) || (@talk_old.building != new_talk.building))
-        changes << :time if (@talk_old.time_to_long_s != new_talk.time_to_long_s)
-        changes << :abstract if (@talk_old.abstract != new_talk.abstract)
-        changes << :bio if (@talk_old.bio != new_talk.bio)
+        changes << :title if @talk_old.title != @talk.title
+        changes << :speaker if ((@talk_old.speaker != @talk.speaker) || (@talk_old.speaker_url != @talk.speaker_url))
+        changes << :venue if ((@talk_old.room != @talk.room) || (@talk_old.building != @talk.building))
+        changes << :time if (@talk_old.time_to_long_s != @talk.time_to_long_s)
+        changes << :abstract if (@talk_old.abstract != @talk.abstract)
+        changes << :bio if (@talk_old.bio != @talk.bio)
         if changes.empty?
           redirect_to @talk
         else
