@@ -81,9 +81,10 @@ also want to make yourself an administrator, which you can do with
 * Add ssl for ical feed?
 
 * Support rss feed?
-  *Only show upcoming talks?
+  * Only show upcoming talks?
 
 * watch implementation
+  * Send email only to new list subscribers if talk is cross-posted to a new list
 
 * write help
 

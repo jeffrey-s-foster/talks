@@ -3,7 +3,7 @@
 parameters:
 
    talk - the talk
-   changes - nil (new talk/no change annotations) or subset of Set(:title, :speaker, :venue, :time, :abstract, :bio)
+   changes - nil (new talk/no change annotations) or subset of Set(:title, :speaker, :venue, :time, :abstract, :bio, :reg)
 
 <% end %>
 
@@ -46,6 +46,20 @@ parameters:
       <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.html_safe %></div>
   </div>
   <% end %>
+
+<% if talk.request_reg %>
+<% if changes && (changes.include? :reg) %><div style="background-color: #ffff00"><% end %>
+    <b>Registration requested:</b>
+<% if changes && (changes.include? :reg) %></div><% end %>
+    The organizer of this talk requests that you register if you are
+    planning to attend. You can register by clicking on the title of
+    the talk to go to the talks server, and registering there.
+
+<% elsif changes && (changes.include? :reg) %>
+
+<div style="background-color: #ffff00">This organizer of this talk no longer requests that you register for the talk</div>
+
+<% end %>
 
 <% if not (talk.lists.empty?) %>
   This talk is part of the following lists: <%= render :partial => "shared/lists_to_links", :locals => { :talk => talk } %>

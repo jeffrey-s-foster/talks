@@ -76,6 +76,7 @@ class TalksController < ApplicationController
         changes << :time if (@talk_old.time_to_long_s != @talk.time_to_long_s)
         changes << :abstract if (@talk_old.abstract != @talk.abstract)
         changes << :bio if (@talk_old.bio != @talk.bio)
+        changes << :reg if (@talk_old.request_reg != @talk.request_reg)
         if changes.empty?
           redirect_to @talk
         else
