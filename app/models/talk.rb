@@ -1,7 +1,7 @@
 class Talk < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_and_belongs_to_many :lists, :include => :subscriptions
-  has_many :subscriptions, :as => :subscribable, :include => :user
+  has_many :subscriptions, :as => :subscribable, :include => :user, :dependent => :destroy
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
   belongs_to :building
   has_many :registrations
