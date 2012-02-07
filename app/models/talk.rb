@@ -123,4 +123,14 @@ class Talk < ActiveRecord::Base
     return k
   end
 
+  def email_watchers(changes)
+    to_email = []
+    to_email += subscribers # all direct subscribers
+    to_email += (lists.map { |l| l.subscribers }).flatten # all indirect subscribers
+
+    to_email.uniq.each do |u|
+      Notifications.send_talk_change(u, self, changes).deliver
+    end
+  end
+
 end
