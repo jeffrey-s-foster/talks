@@ -7,10 +7,6 @@ parameters:
 
 <% end %>
 
-<% unless !changes || changes.empty? %>
-<div style="background-color: #ffff00;">Changes from original talk announcement highlighted</div>
-<% end %>
-
 <% if changes && (changes.include? :title) %><div style="background-color: #ffff00"><% end %>
   <div style="font-size: x-large; color: #fe5f5f;"><%= talk.title %></div>
 <% if changes && (changes.include? :title) %></div><% end %>
@@ -50,3 +46,10 @@ parameters:
       <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.html_safe %></div>
   </div>
   <% end %>
+
+<% unless !changes || changes.empty? %>
+<p>
+<div style="background-color: #ffff00; padding: 5px;">Changes from original talk announcement have been highlighted</div>
+</p>
+<% end %>
+

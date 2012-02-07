@@ -44,7 +44,7 @@ class TalksController < ApplicationController
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
       if @talk.trigger_watch_email
-        self.delay.email_watchers(@talk, nil)
+        email_watchers(@talk, nil)
         redirect_to @talk, :notice => "Sending talk creation notification to subscribers and watchers..."
       else
         redirect_to @talk
@@ -79,7 +79,7 @@ class TalksController < ApplicationController
         if changes.empty?
           redirect_to @talk
         else
-          self.delay.email_watchers(@talk, changes)
+          email_watchers(@talk, changes)
           redirect_to @talk, :notice => "Sending talk update notification to subscribers and watchers..."
         end
       else
@@ -244,13 +244,13 @@ private
 
   def email_watchers(talk, changes)
     to_email = []
-    to_email += new_talk.subscribers # all direct subscribers
-    to_email += (new_talk.lists.map { |l| l.subscribers }).flatten # all indirect subscribers
+    to_email += talk.subscribers # all direct subscribers
+    to_email += (talk.lists.map { |l| l.subscribers }).flatten # all indirect subscribers
 
     to_email.each do |u|
       Notifications.send_talk_change(u, talk, changes).deliver
     end
   end
-
+#  handle_asynchronously :email_watchers
 
 end
