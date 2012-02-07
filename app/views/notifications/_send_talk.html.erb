@@ -8,7 +8,7 @@ parameters:
 <% end %>
 
 <% if changes && (changes.include? :title) %><div style="background-color: #ffff00"><% end %>
-  <div style="font-size: x-large; color: #fe5f5f;"><%= talk.title %></div>
+  <div style="font-size: x-large; color: #fe5f5f;"><%= link_to talk.title, talk_url(talk) %></div>
 <% if changes && (changes.include? :title) %></div><% end %>
 
 <% if changes && (changes.include? :speaker) %><div style="background-color: #ffff00"><% end %>
@@ -46,6 +46,10 @@ parameters:
       <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.html_safe %></div>
   </div>
   <% end %>
+
+<% if not (@talk.lists.empty?) %>
+  This talk is part of the following lists: <%= render :partial => "shared/lists_to_links", :locals => { :talk => talk } %>
+<% end %>
 
 <% unless !changes || changes.empty? %>
 <p>

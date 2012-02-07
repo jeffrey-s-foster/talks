@@ -103,7 +103,7 @@
 
 <div class="lists">
 <% if not (@talk.lists.empty?) %>
-  This talk is part of the following lists: <%= render :partial => "lists_to_links", :locals => {:talk => @talk } %>
+  This talk is part of the following lists: <%= render :partial => "shared/lists_to_links", :locals => { :talk => @talk } %>
 <% end %>
 </div>
 

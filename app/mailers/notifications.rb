@@ -1,4 +1,6 @@
 class Notifications < ActionMailer::Base
+  helper :application
+
   # time_interval can be :today or :this_week
   def send_talks(user, talks, subj)
     @talks = talks.sort { |a,b| a.start_time <=> b.start_time }
@@ -23,9 +25,9 @@ class Notifications < ActionMailer::Base
     @talk = talk
     @changes = changes
     if @changes
-      @subj = "[Talks] Talk update"
+      @subj = "[Talks] Talk update: #{@talk.title}"
     else
-      @subj = "[Talks] New talk posted"
+      @subj = "[Talks] New talk posted: #{@talk.title}"
     end
     
     mail :to => "#{@user.name} <#{@user.email}>",

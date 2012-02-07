@@ -1,8 +1,0 @@
-<% if false %>
-
-  parameters
-  - talk - the talk whose lists to render
-
-<% end %>
-
-<%= join_with_and(talk.lists.sort { |a,b| a.name <=> b.name }.map { |l| link_to l.name, l }).html_safe %>

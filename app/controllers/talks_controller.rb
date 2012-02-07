@@ -247,7 +247,7 @@ private
     to_email += talk.subscribers # all direct subscribers
     to_email += (talk.lists.map { |l| l.subscribers }).flatten # all indirect subscribers
 
-    to_email.each do |u|
+    to_email.uniq.each do |u|
       Notifications.send_talk_change(u, talk, changes).deliver
     end
   end
