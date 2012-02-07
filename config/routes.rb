@@ -38,7 +38,7 @@ Talks::Application.routes.draw do
 
   namespace :admin do
     get :index
-    get :erase_subscriptions
+#    get :erase_subscriptions
   end
 
   namespace :jobs do

@@ -28,6 +28,17 @@ also want to make yourself an administrator, which you can do with
 
 (You can probably set the confirmation info using sqlite3, also.)
 
+== Deployment
+
+* RAILS_ENV=production rake db:setup
+* bundle exec rake assets:precompile
+* config/environments/production.rb, update config.action_mailer.default_url_options
+* config/initializers/devise.rb, update config.mailer_sender
+* app/views/layouts/application.html.erb, change "talk.cs.umd.edu"
+* Register
+* sqlite3 db/development.sqlite3
+  > update users set perm_site_admin = "1" where id = "1";
+
 == Permission model
 
 (See app/models/ability.rb for full details)
@@ -46,12 +57,6 @@ also want to make yourself an administrator, which you can do with
   * A talk may be added to a list by anyone with permission to post to that list
   * A talk may be edited/deleted by the creator of the talk or by an admin of any list the talk is posted to
   * A user may be granted or revoked list poster or admin permission by an admin of that list
-
-== Notes on things that need to change when deployed
-
-* config/environments/production.rb, update config.action_mailer.default_url_options
-* config/initializers/devise.rb, update config.mailer_sender
-* app/views/layouts/application.html.erb, change "talk.cs.umd.edu"
 
 == Miscellaneous
 
@@ -80,13 +85,12 @@ also want to make yourself an administrator, which you can do with
 
 * Add ssl for ical feed?
 
-* Support rss feed?
-  * Only show upcoming talks?
+* rss/ical feeds - only include past n talks, e.g., past 1 year
 
 * watch implementation
-  * Send email only to new list subscribers if talk is cross-posted to a new list
-
-* write help
+  * Send email (only) to new list subscribers if talk is cross-posted to a new list
+  * Send email on cancellation
+  * Indicate in email update whether you are subscribed to the talk or not
 
 * Minor UI suggestion: In the "upcoming talks" it might be nice to
   break it into "talks this week" (interpreted either as next 7 days,
@@ -95,3 +99,7 @@ also want to make yourself an administrator, which you can do with
   "talks further out".
 
 * disable (really) users from cancelling accounts? or enable it fully
+
+* split lists window so list info is on left, talks on right
+
+* what happens to posted talks when a user is deleted?

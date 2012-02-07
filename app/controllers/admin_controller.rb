@@ -4,8 +4,8 @@ class AdminController < ApplicationController
   def index
   end
 
-  def erase_subscriptions
-    Subscription.destroy_all
-    redirect_to admin_index_path
-  end
+#  def erase_subscriptions
+#    Subscription.destroy_all
+#    redirect_to admin_index_path
+#  end
 end
