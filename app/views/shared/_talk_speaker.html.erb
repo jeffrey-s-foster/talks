@@ -14,4 +14,7 @@
   <% else %>
     <i>No speaker yet</i>
   <% end %>
+  <% unless talk.speaker_affiliation.empty? %>
+    - <%= talk.speaker_affiliation %>
+  <% end %>
 </div>
