@@ -31,9 +31,12 @@
   <% end %>
 <% end %>
 
-<hr>
 
-<h1>Next week</h1>
+<% unless (h[:next_week][0].empty? && h[:next_week][1].empty? && h[:next_week][2].empty? && h[:next_week][3].empty? &&
+                  h[:next_week][4].empty? && h[:next_week][5].empty? && h[:next_week][6].empty?) %>
+  <hr/>
+  <h1>Next week</h1>
+<% end %>
 
 <% (0..6).each do |wday| %>
   <% unless h[:next_week][wday].empty? %>
@@ -45,13 +48,11 @@
 <% end %>
 
 <% unless h[:beyond].empty? %>
+  <hr/>
+  <h1>Father ahead</h1>
 
-<hr>
-
-<h1>Father ahead</h1>
-
-<% h[:beyond].each do |t| %>
-  <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-<% end %>
+  <% h[:beyond].each do |t| %>
+    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+  <% end %>
 
 <% end %>
