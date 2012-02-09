@@ -9,8 +9,5 @@
 //= require jquery-ui
 //= require_tree .
 //= require ckeditor/ckeditor
-//= require ckeditor/adapters/jquery
 //= require spin/spin
 //= require spin/jquery.spin
-
-CKEDITOR_BASEPATH = "/assets/ckeditor/";
