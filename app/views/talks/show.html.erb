@@ -36,8 +36,8 @@
   <span class="comment">(cal for this talk only)</span>
 </div>
 
-<%= render :partial => "shared/talk_speaker", :locals => { :talk => @talk } %>
-<%= render :partial => "shared/talk_venue", :locals => { :talk => @talk } %>
+<div class="speaker"><%= render_speaker(@talk).html_safe  %></div>
+<div class="venue"><%= render_venue(@talk).html_safe %></div>
 
 <div class="time"><%= @talk.time_to_long_s  %></div>
 

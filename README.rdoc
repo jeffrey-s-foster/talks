@@ -161,7 +161,7 @@ also want to make yourself an administrator, which you can do with
 * Can you provide a RSS feed for all upcoming talks?  It's great
   that feeds are available by list, but I'm sure that some people
   would be content to take a single feed that encompasses all publicly
-  listed talks.
+  listed talks. Also ical feed
 
 * Individual feed items do not presently include the date, time or
   location information for the talk.  Also, including links to the

@@ -24,8 +24,8 @@
         <span class="badge-watcher-through"></span>
       <% end %>
     </div>
-    <%= render :partial => "shared/talk_speaker", :locals => { :talk => t} %>
-    <%= render :partial => "shared/talk_venue", :locals => { :talk => t } %>
+    <div class="speaker"><%= render_speaker(t).html_safe  %></div>
+    <div class="venue"><%= render_venue(t).html_safe %></div>
     <div class="time"><%= t.time_to_long_s %></div>
   </div>
 <% end %>
