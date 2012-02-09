@@ -43,7 +43,7 @@ class TalksController < ApplicationController
     logger.info "Start_time: #{params[:talk][:start_time]}"
     logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
-      if @talk.trigger_watch_email
+      if params[:talk][:trigger_watch_email] == "1"
         @talk.delay.email_watchers(nil)
         redirect_to @talk, :notice => "Sending talk creation notification to subscribers and watchers..."
       else
@@ -68,7 +68,7 @@ class TalksController < ApplicationController
     authorize! :edit, @talk
     adjust params
     if @talk.update_attributes(params[:talk])
-      if @talk.trigger_watch_email
+      if params[:talk][:trigger_watch_email] == "1"
         changes = Set.new
         changes << :title if @talk_old.title != @talk.title
         changes << :speaker if ((@talk_old.speaker != @talk.speaker) || (@talk_old.speaker_url != @talk.speaker_url))
