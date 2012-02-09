@@ -42,6 +42,17 @@ also want to make yourself an administrator, which you can do with
 * sqlite3 db/development.sqlite3
   > update users set perm_site_admin = "1" where id = "1";
 
+== Update (put this in a capfile)
+
+* git pull
+* bundle --deployment
+* rake assets:precompile
+* cd public
+  * find . -type d -exec chmod go+x {} \;
+  * chmod -R a+r .
+* touch tmp/restart.txt
+* RAILS_ENV=production script/delayed_job restart
+
 == Permission model
 
 (See app/models/ability.rb for full details)

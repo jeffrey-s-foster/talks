@@ -29,12 +29,14 @@
      <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %>
      <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret) %>
      <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
+    <span class="comment">(cal/rss for your subscribed lists/talks)</span>
    </h2>
 <% else %>
    <h2>Your Talks (including past talks)
      <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %>
      <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret) %>
      <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
+    <span class="comment">(cal/rss for your subscribed lists/talks)</span>
    </h2>
 <% end %>
 

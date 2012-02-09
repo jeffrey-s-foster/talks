@@ -33,6 +33,7 @@
     <span class="badge-watcher-through"></span>
   <% end %>
   <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
+  <span class="comment">(cal for this talk only)</span>
 </div>
 
 <%= render :partial => "shared/talk_speaker", :locals => { :talk => @talk } %>
