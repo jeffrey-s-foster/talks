@@ -121,3 +121,37 @@ also want to make yourself an administrator, which you can do with
 * icon for poster?
 
 * what happens if talk cross-posted by another user, then orig user tries to edit the talk?
+
+* Found a typo: "Receive reminers of this week's talks (on Sunday)"
+
+* Also, when I changed my password, it behaved oddly.  It immediately
+  said I was not authorized to access the page I was on, because, I
+  think, it kicked me off of the site.  I had to log in again, and now
+  things seem to be OK.
+
+* Make the date come first (before the talk title, even) and more
+  prominent; people will tend to look for things that are coming up on
+  a certain date. Also when this gets into full swing, there'll be
+  days with more than one talk and it'll help to see at a glance what
+  one's choices are for a given date.
+
+* Have an option for people to subscribe not only to talks but also to
+  Deptl scheduling (meetings, picnics, and maybe even spring break
+  dates, end of classes, last day to submit grades, etc).
+
+* Include (when appropriate) the *kind* of talk: general, special
+  series, etc.
+
+* Talks from outside the dept?
+
+* Dissertation proposals/defesnses/etc
+
+* ssl?
+* https://github.com/plataformatec/devise/wiki/How-To:-Use-SSL-(HTTPS)
+
+* Questions/Suggestion: when I subscribe to RSS Feeds (via Apple
+  Mail), the individual feeds do not give the speaker, date and time
+  of the talk until I click on "Read More." Is this the way you
+  intended it or is it a product of my RSS Reader (is there a better
+  way to read RSS)? If not, perhaps it might be worth adding this
+  information into the feed body for ease of browsing.
