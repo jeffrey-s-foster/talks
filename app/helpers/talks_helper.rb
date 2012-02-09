@@ -51,5 +51,49 @@ module TalksHelper
               .map { |l| link_to l.name, list_url(l) }
               .join "&nbsp;&sdot;&nbsp;").html_safe
   end
+
+  # returns hash map h such that
+  # h[:past] - old talks
+  # h[:today] - today's talks
+  # h[:later_this_week][wday] - talks on wday of this week (wdays start at 0)
+  # h[:next_week][wday] - talks of wday of next week
+  # h[:beyond] - talks after next week
+  def organize_talks(talks)
+    the_past = (Time.now - 1.day).end_of_day
+    today = Time.now.beginning_of_day..Time.now.end_of_day
+    later_this_week = (Time.now.beginning_of_day + 1.day)..(Time.now.end_of_week - 1.day)
+    next_week = (Time.now.beginning_of_week + 6.day)..(Time.now.end_of_week + 6.day)
+    beyond = Time.now.beginning_of_week + 13.day
+    h = Hash.new
+    h[:past] = []
+    h[:today] = []
+    h[:later_this_week] = []
+    (0..6).each { |wday| h[:later_this_week][wday] = [] }
+    h[:next_week] = []
+    (0..6).each { |wday| h[:next_week][wday] = [] }
+    h[:beyond] = []
+
+    talks.each do |t|
+      if t.start_time <= the_past
+        h[:past] << t
+      elsif today.cover? t.start_time
+        h[:today] << t
+      elsif later_this_week.cover? t.start_time
+        h[:later_this_week][t.start_time.wday] << t
+      elsif next_week.cover? t.start_time
+        h[:next_week][t.start_time.wday] << t
+      else
+        h[:beyond] << t
+      end
+    end
+
+    h[:past].sort! { |a,b| a.start_time <=> b.start_time }
+    h[:today].sort! { |a,b| a.start_time <=> b.start_time }
+    h[:later_this_week].each { |ts| ts.sort! { |a,b| a.start_time <=> b.start_time } }
+    h[:next_week].each { |ts| ts.sort! { |a,b| a.start_time <=> b.start_time } }
+    h[:beyond].sort! { |a,b| a.start_time <=> b.start_time }
+
+    return h
+  end
   
 end

@@ -6,27 +6,52 @@
 
 <% end %>
 
-<% talks.each do |t| %>
-  <div class="short-talk">
-    <div class="lists"><%= render_lists(t) %></div>
-    <div class="title">
-      <%= link_to t.title, t %>
-      <% if t.owner? current_user %>
-        <span class="badge-owner"></span>
-      <% end %>
-      <% case subscriptions[t] %>
-      <% when :kind_subscriber %>
-        <span class="badge-subscriber"></span>
-      <% when :kind_watcher %>
-        <span class="badge-watcher"></span>
-      <% when :kind_subscriber_through %>
-        <span class="badge-subscriber-through"></span>
-      <% when :kind_watcher_through %>
-        <span class="badge-watcher-through"></span>
-      <% end %>
-    </div>
-    <div class="speaker"><%= render_speaker(t)  %></div>
-    <div class="venue"><%= render_venue(t) %></div>
-    <div class="time"><%= render_time(t) %></div>
-  </div>
+<% h = organize_talks talks %>
+
+<% unless h[:past].empty? %>
+  <h2>Past talks</h2>
+  <% h[:past].each do |t| %>
+    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+  <% end %>
+<% end %>
+
+<% unless h[:today].empty? %>
+  <h2>Today (<%= Date::DAYNAMES[Time.now.wday] %>)</h2>
+  <% h[:today].each do |t| %>
+    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+  <% end %>
+<% end %>
+
+<% (0..6).each do |wday| %>
+  <% unless h[:later_this_week][wday].empty? %>
+    <h2><%= Date::DAYNAMES[wday] %></h2>
+    <% h[:later_this_week][wday].each do |t| %>
+      <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<hr>
+
+<h1>Next week</h1>
+
+<% (0..6).each do |wday| %>
+  <% unless h[:next_week][wday].empty? %>
+    <h2><%= Date::DAYNAMES[wday] %></h2>
+    <% h[:next_week][wday].each do |t| %>
+      <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% unless h[:beyond].empty? %>
+
+<hr>
+
+<h1>Father ahead</h1>
+
+<% h[:beyond].each do |t| %>
+  <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+<% end %>
+
 <% end %>

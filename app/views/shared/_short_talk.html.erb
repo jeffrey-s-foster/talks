@@ -1,0 +1,30 @@
+<% if false %>
+
+parameters:
+  talk - the talk
+  subscription_kind - what kind of subscription
+
+<% end %>
+
+<div class="short-talk">
+  <div class="lists"><%= render_lists(talk) %></div>
+  <div class="title">
+    <%= link_to talk.title, talk %>
+    <% if talk.owner? current_user %>
+      <span class="badge-owner"></span>
+    <% end %>
+    <% case subscription_kind %>
+    <% when :kind_subscriber %>
+      <span class="badge-subscriber"></span>
+    <% when :kind_watcher %>
+      <span class="badge-watcher"></span>
+    <% when :kind_subscriber_through %>
+      <span class="badge-subscriber-through"></span>
+    <% when :kind_watcher_through %>
+      <span class="badge-watcher-through"></span>
+    <% end %>
+  </div>
+  <div class="speaker"><%= render_speaker(talk)  %></div>
+  <div class="venue"><%= render_venue(talk) %></div>
+  <div class="time"><%= render_time(talk) %></div>
+</div>
