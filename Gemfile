@@ -20,7 +20,7 @@ gem 'bourbon'
 gem 'high_voltage'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "ckeditor", "3.7.0.rc2"
+gem "ckeditor", :git => 'git://github.com/galetahub/ckeditor.git', :ref => 'b336d27'
 
 # Gems used only for assets and not required
 # in production environments by default.
