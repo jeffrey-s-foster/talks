@@ -62,7 +62,7 @@ parameters:
 <% end %>
 
 <% if not (talk.lists.empty?) %>
-  This talk is part of the following lists: <%= render :partial => "shared/lists_to_links", :locals => { :talk => talk } %>
+  This talk is part of the following lists: <%= render_lists(@talk) %>
 <% end %>
 
 <% unless !changes || changes.empty? %>

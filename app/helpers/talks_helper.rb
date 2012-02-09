@@ -44,5 +44,12 @@ module TalksHelper
     end
     return @out.html_safe
   end
+
+  def render_lists(talk)
+    return (talk.lists
+              .sort { |a,b| a.name <=> b.name }
+              .map { |l| link_to l.name, list_url(l) }
+              .join "&nbsp;&sdot;&nbsp;").html_safe
+  end
   
 end

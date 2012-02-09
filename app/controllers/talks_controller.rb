@@ -73,7 +73,7 @@ class TalksController < ApplicationController
         changes << :title if @talk_old.title != @talk.title
         changes << :speaker if ((@talk_old.speaker != @talk.speaker) || (@talk_old.speaker_url != @talk.speaker_url))
         changes << :venue if ((@talk_old.room != @talk.room) || (@talk_old.building != @talk.building))
-        changes << :time if (@talk_old.time_to_long_s != @talk.time_to_long_s)
+        changes << :time if ((@talk_old.start_time != @talk.start_time) || (@talk_old.end_time != @talk.end_time))
         changes << :abstract if (@talk_old.abstract != @talk.abstract)
         changes << :bio if (@talk_old.bio != @talk.bio)
         changes << :reg if (@talk_old.request_reg != @talk.request_reg)
