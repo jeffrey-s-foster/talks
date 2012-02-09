@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
 	    notes = "(No abstract yet)"
 	  end
 	  unless t.bio.empty?
-	    content << "Bio: " << t.bio
+	    notes << "Bio: " << t.bio
 	  end
 	  event.description = notes
         end
