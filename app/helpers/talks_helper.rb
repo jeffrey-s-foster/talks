@@ -12,11 +12,11 @@ module TalksHelper
     unless talk.speaker_url.empty?
       @out = link_to @out, talk.speaker_url
     end
-    return @out
+    return @out.html_safe
   end
 
   def render_venue(talk)
-    return "<i>No venue yet</i>" unless (talk.room || talk.building)
+    return "<i>No venue yet</i>".html_safe unless (talk.room || talk.building)
 
     if talk.building && (not talk.building.name.empty?)
       @out = "#{talk.room} #{talk.building.name} (#{talk.building.abbrv})"
@@ -28,7 +28,21 @@ module TalksHelper
     if talk.building && talk.building.url && (not talk.building.url.empty?)
       @out = link_to @out, talk.building.url
     end
-    return @out
+    return @out.html_safe
   end
 
+  def render_time(talk)
+    if talk.start_time && talk.end_time
+      @out = (talk.start_time.strftime "%A, %B %-d, %Y, ") + (talk.start_time.strftime("%l:%M").lstrip)
+      if ((talk.start_time.hour < 12) == (talk.end_time.hour < 12)) # both am or both pm
+        @out += "-" + (talk.end_time.strftime("%l:%M %P").lstrip)
+      else
+        @out += (talk.start_time.strftime " %P-") + (talk.end_time.strftime("%l:%M %P").lstrip)
+      end
+    else
+      @out = "(Time not yet available)"
+    end
+    return @out.html_safe
+  end
+  
 end

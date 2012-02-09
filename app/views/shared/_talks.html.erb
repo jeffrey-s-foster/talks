@@ -24,8 +24,8 @@
         <span class="badge-watcher-through"></span>
       <% end %>
     </div>
-    <div class="speaker"><%= render_speaker(t).html_safe  %></div>
-    <div class="venue"><%= render_venue(t).html_safe %></div>
-    <div class="time"><%= t.time_to_long_s %></div>
+    <div class="speaker"><%= render_speaker(t)  %></div>
+    <div class="venue"><%= render_venue(t) %></div>
+    <div class="time"><%= render_time(t) %></div>
   </div>
 <% end %>

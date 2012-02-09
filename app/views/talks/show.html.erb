@@ -36,10 +36,9 @@
   <span class="comment">(cal for this talk only)</span>
 </div>
 
-<div class="speaker"><%= render_speaker(@talk).html_safe  %></div>
-<div class="venue"><%= render_venue(@talk).html_safe %></div>
-
-<div class="time"><%= @talk.time_to_long_s  %></div>
+<div class="speaker"><%= render_speaker(@talk)  %></div>
+<div class="venue"><%= render_venue(@talk) %></div>
+<div class="time"><%= render_time(@talk)  %></div>
 
 <hr/>
 

@@ -62,21 +62,6 @@ class Talk < ActiveRecord::Base
       (range == :this_week && this_week?)
   end
 
-  def time_to_long_s
-    t = ""
-    if start_time && end_time
-      t = (start_time.strftime "%A, %B %-d, %Y, ") + (start_time.strftime("%l:%M").lstrip)
-      if ((start_time.hour < 12) == (end_time.hour < 12)) # both am or both pm
-        t << "-" << (end_time.strftime("%l:%M %P").lstrip)
-      else
-        t << (start_time.strftime " %P-") << (end_time.strftime("%l:%M %P").lstrip)
-      end
-    else
-      t = "(Time not yet available)"
-    end
-    return t
-  end
-
   def subscription(user)
     s = Subscription.where(:subscribable_id => id, :subscribable_type => "Talk", :user_id => user.id)
     return nil if s.length == 0

@@ -147,13 +147,6 @@ also want to make yourself an administrator, which you can do with
 * ssl?
 * https://github.com/plataformatec/devise/wiki/How-To:-Use-SSL-(HTTPS)
 
-* Questions/Suggestion: when I subscribe to RSS Feeds (via Apple
-  Mail), the individual feeds do not give the speaker, date and time
-  of the talk until I click on "Read More." Is this the way you
-  intended it or is it a product of my RSS Reader (is there a better
-  way to read RSS)? If not, perhaps it might be worth adding this
-  information into the feed body for ease of browsing.
-
 * cron job not working
 
 * link to it on the dept home page
@@ -163,8 +156,6 @@ also want to make yourself an administrator, which you can do with
   would be content to take a single feed that encompasses all publicly
   listed talks. Also ical feed
 
-* Individual feed items do not presently include the date, time or
-  location information for the talk.  Also, including links to the
-  lists that the talk is associated with at the bottom of the
-  abstract, like the HTML display does, would probably be helpful, as
-  well.
+* including links to the lists that the talk is associated with at the
+  bottom of the abstract, like the HTML display does, would probably
+  be helpful, as well.

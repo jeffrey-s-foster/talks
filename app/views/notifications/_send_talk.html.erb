@@ -12,15 +12,15 @@ parameters:
 <% if changes && (changes.include? :title) %></div><% end %>
 
 <% if changes && (changes.include? :speaker) %><div style="background-color: #ffff00"><% end %>
-  <div style="font-size: large;"><%= render_speaker(talk).html_safe  %></div>
+  <div style="font-size: large;"><%= render_speaker(talk)  %></div>
 <% if changes && (changes.include? :speaker) %></div><% end %>
 
 <% if changes && (changes.include? :venue) %><div style="background-color: #ffff00"><% end %>
-  <div><%= render_venue(talk).html_safe %></div>
+  <div><%= render_venue(talk) %></div>
 <% if changes && (changes.include? :venue) %></div><% end %>
 
 <% if changes && (changes.include? :time) %><div style="background-color: #ffff00"><% end %>
-  <div><%= talk.time_to_long_s %></div>
+  <div><%= render_time(talk) %></div>
 <% if changes && (changes.include? :time) %></div><% end %>
 
   <div style="display:block; padding-top: 15px;" >
