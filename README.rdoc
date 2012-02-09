@@ -35,6 +35,9 @@ also want to make yourself an administrator, which you can do with
 * config/environments/production.rb, update config.action_mailer.default_url_options
 * config/initializers/devise.rb, update config.mailer_sender
 * app/views/layouts/application.html.erb, change "talk.cs.umd.edu"
+* bundle config build.sqlite3 -- --with-sqlite3-include=/usr/local/sqlite-3.7.6.3/include --with-sqlite3-lib=/usr/local/sqlite-3.7.6.3/lib
+* bundle --deployment (install gems locally for phusion passenger)
+  (For us, add /usr/local/ruby-1.9.3-p0/bin to path before doing that)
 * Register
 * sqlite3 db/development.sqlite3
   > update users set perm_site_admin = "1" where id = "1";

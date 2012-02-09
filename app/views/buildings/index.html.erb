@@ -16,7 +16,7 @@
       <td><%= text_field_tag ("building_abbrv_#{b.id}"), b.abbrv, :class => :abbrv %></td>
       <td><%= text_field_tag ("building_name_#{b.id}"), b.name, :class => :name %></td>
       <td><%= text_field_tag ("building_url_#{b.id}"), b.url, :class => :url %></td>
-      <td><span class="comment"><%= link_to 'delete', b, :confirm => 'Are you sure?', :method => :delete, :title => "Delete" %></span></td>
+      <td><span class="comment"><%= link_to 'delete', b, :confirm => 'Are you sure you want to delete this building?', :method => :delete, :title => "Delete" %></span></td>
     </tr>
   <% end %>
   <tr>

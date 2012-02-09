@@ -6,8 +6,8 @@
   <tr>
     <td>
       <%= link_to "edit", edit_user_path(u) %> &nbsp;
-      <%= link_to "delete", user_path(u), :confirm => "Are you sure?", :method => :delete %>
-      <%= link_to "ical_reset", reset_ical_secret_user_path(u), :confirm => "Are you sure?" %>
+      <%= link_to "delete", user_path(u), :confirm => "Are you sure you want to delete this user?", :method => :delete %>
+      <%= link_to "ical_reset", reset_ical_secret_user_path(u), :confirm => "Are you sure you want to reset the ical secret for #{u.email}?" %>
     </td>
     <td><%= u.id %></td>
     <td><%= u.email %></td>
