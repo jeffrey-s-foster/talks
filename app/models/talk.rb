@@ -133,4 +133,14 @@ class Talk < ActiveRecord::Base
     end
   end
 
+  def full_venue
+    if building && (not building.name.empty?)
+      return "#{room} #{building.name} (#{building.abbrv})"
+    elsif building
+      return "#{room} #{building.abbrv}"
+    else
+      return room
+    end
+  end
+
 end

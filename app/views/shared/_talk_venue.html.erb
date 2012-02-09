@@ -9,19 +9,9 @@ parameters:
 <div class="venue">
   <% if not (talk.room || talk.building) %>
     <i>No venue yet</i>
+  <% elsif talk.building && talk.building.url && (not talk.building.url.empty?) %>
+    <%= link_to talk.full_venue, talk.building.url %>
   <% else %>
-    <%
-        loc = talk.room
-        if talk.building && (not talk.building.name.empty?)
-           loc << " #{talk.building.name} (#{talk.building.abbrv})"
-        elsif talk.building
-	   loc << " #{talk.building.abbrv}"
-	end
-     %>
-     <% if talk.building && talk.building.url && (not talk.building.url.empty?) %>
-       <%= link_to loc, talk.building.url %>
-     <% else %>
-       <%= loc %>
-     <% end %>
+    <%= talk.full_venue %>
   <% end %>
 </div>

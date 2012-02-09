@@ -106,3 +106,7 @@ also want to make yourself an administrator, which you can do with
 * split lists window so list info is on left, talks on right
 
 * what happens to posted talks when a user is deleted?
+
+* icon for poster?
+
+* what happens if talk cross-posted by another user, then orig user tries to edit the talk?
