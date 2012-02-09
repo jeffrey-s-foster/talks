@@ -67,6 +67,11 @@ table.talks-table {
 .short-talks {
     padding-left: 50px;
     padding-right: 50px;
+    .lists  a {
+	font-size: small;
+	font-style: italic;
+	text-decoration: none;
+    }
     .title a {
 	font-size: large;
 	color: $primary_color_2;
@@ -80,7 +85,7 @@ table.talks-table {
 	text-decoration: none;
     }
     .time {
-	padding-bottom: 20px;
+	padding-bottom: 30px;
     }
 }
 

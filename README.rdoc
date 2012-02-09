@@ -137,9 +137,6 @@ also want to make yourself an administrator, which you can do with
   Deptl scheduling (meetings, picnics, and maybe even spring break
   dates, end of classes, last day to submit grades, etc).
 
-* Include (when appropriate) the *kind* of talk: general, special
-  series, etc.
-
 * Talks from outside the dept?
 
 * Dissertation proposals/defesnses/etc

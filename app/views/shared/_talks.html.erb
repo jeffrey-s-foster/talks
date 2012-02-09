@@ -8,6 +8,7 @@
 
 <% talks.each do |t| %>
   <div class="short-talk">
+    <div class="lists"><%= render_lists(t) %></div>
     <div class="title">
       <%= link_to t.title, t %>
       <% if t.owner? current_user %>
