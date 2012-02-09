@@ -152,7 +152,3 @@ also want to make yourself an administrator, which you can do with
   that feeds are available by list, but I'm sure that some people
   would be content to take a single feed that encompasses all publicly
   listed talks. Also ical feed
-
-* including links to the lists that the talk is associated with at the
-  bottom of the abstract, like the HTML display does, would probably
-  be helpful, as well.

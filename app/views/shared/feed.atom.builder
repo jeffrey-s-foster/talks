@@ -22,6 +22,10 @@ atom_feed :language => 'en-US' do |feed|
       unless t.bio.empty?
         content += "<br><b>Bio:</b> ".html_safe + t.bio.html_safe
       end
+      unless t.lists.empty?
+        content += "<br>This talk is part of the following lists: ".html_safe + render_lists(t)
+      end
+      content += "<br>".html_safe
       entry.content content, :type => 'html'
       # the strftime is needed to work with Google Reader.
 #      entry.updated(t.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ")) 
