@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     cal = RiCal.Calendar do |cal|
       talks.each do |t|
         cal.event do |event|
-          event.summary = t.title
+          event.summary = "#{t.speaker} - #{t.title}"
           event.dtstart = t.start_time
           event.dtend = t.end_time
           if t.room && t.building
@@ -49,6 +49,17 @@ class ApplicationController < ActionController::Base
           elsif t.room
             event.location = t.room
           end
+	  event.url = talk_url(t)
+          notes = ""
+          unless t.abstract.empty?
+	    notes = t.abstract
+          else
+	    notes = "(No abstract yet)"
+	  end
+	  unless t.bio.empty?
+	    content << "Bio: " << t.bio
+	  end
+	  event.description = notes
         end
       end
     end

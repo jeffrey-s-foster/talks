@@ -6,7 +6,11 @@ atom_feed :language => 'en-US' do |feed|
     feed.entry(t) do |entry|
       entry.url talk_url(t)
       entry.title t.title
-      entry.author t.speaker
+      unless t.speaker_affiliation.empty?
+        entry.author "#{t.speaker} - #{t.speaker_affiliation}"
+      else
+	entry.author t.speaker
+      end
       content = ""
       unless t.abstract.empty?
         content = t.abstract
