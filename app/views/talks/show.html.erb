@@ -4,7 +4,7 @@
     <div class="action-table">
       <% if can? :edit, @talk %>
         <span class="action"><%= link_to "edit", edit_talk_path(@talk) %></span>
-        <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure?', :method => :delete %></span>
+        <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure you want to delete this talk?', :method => :delete %></span>
       <% end %>
       <% if @talk.request_reg %>
         <span class="action register"><%= link_to "register", register_talk_path(@talk, :do => "register") %></span>
