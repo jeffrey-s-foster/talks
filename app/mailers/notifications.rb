@@ -1,5 +1,6 @@
 class Notifications < ActionMailer::Base
   helper :application
+  helper :talks
 
   # time_interval can be :today or :this_week
   def send_talks(user, talks, subj)
