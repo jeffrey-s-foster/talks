@@ -39,7 +39,7 @@ class Talk < ActiveRecord::Base
 
   def self.this_week
     # In Rails 3.2, beginning/end_of_week take a start day parameter
-    where("end_time > ? and start_time < ?", Time.zone.now.beginning_of_week - 1.day, Time.zone.now.end_of_week - 1.day)
+    where("end_time > ? and start_time < ?", (Time.zone.now + 1.day).beginning_of_week - 1.day, (Time.zone.now + 1.day).end_of_week - 1.day)
   end
 
   def upcoming?
@@ -51,7 +51,7 @@ class Talk < ActiveRecord::Base
   end
 
   def this_week?
-    (end_time > Time.zone.now.beginning_of_week - 1.day) && (start_time < Time.zone.now.end_of_week - 1.day)
+    (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
   end
 
   # range may be :all, :today, :this_week, :upcoming
