@@ -61,9 +61,9 @@ module TalksHelper
   def organize_talks(talks)
     the_past = (Time.now - 1.day).end_of_day
     today = Time.now.beginning_of_day..Time.now.end_of_day
-    later_this_week = (Time.now.beginning_of_day + 1.day)..(Time.now.end_of_week - 1.day)
-    next_week = (Time.now.beginning_of_week + 6.day)..(Time.now.end_of_week + 6.day)
-    beyond = Time.now.beginning_of_week + 13.day
+    later_this_week = (Time.now.beginning_of_day + 1.day)..((Time.now + 1.day).end_of_week - 1.day)
+    next_week = ((Time.now + 1.day).beginning_of_week + 6.day)..((Time.now + 1.day).end_of_week + 6.day)
+    beyond = (Time.now + 1.day).beginning_of_week + 13.day
     h = Hash.new
     h[:past] = []
     h[:today] = []
