@@ -66,5 +66,8 @@
     else
       $("#reg_info_row").hide();
   });
-  $("#reg_info_row").hide();
+  if ($("#talk_request_reg").is(":checked"))
+    $("#reg_info_row").show();
+  else
+    $("#reg_info_row").hide();
 </script>
