@@ -14,3 +14,11 @@ Here is the registration information we recorded:
 You may
 <%= link_to "cancel your registration", cancel_external_registration_talk_url(@talk, :registration => @reg,
        :secret => @reg.secret) %> at any time.
+
+<% unless @talk.reg_info.empty? %>
+
+<h2>Additional information</h2>
+
+<%= @talk.reg_info.html_safe %>
+
+<% end %>

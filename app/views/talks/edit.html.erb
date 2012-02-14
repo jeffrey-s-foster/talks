@@ -19,7 +19,6 @@
   </td>
 </tr>
 
-
 <tr class="space-above"><th>Date/time</th>
 <td><%= text_field_tag :temp_date_time %></td></tr>
 <tr><th/><td><span class="comment">MUST contain "from" and "to", e.g., "Jan 5 from 2 to 5pm" or "Tuesday from 10 to 11"</span></td></tr>
@@ -33,6 +32,9 @@
 
 <tr class="space-above"><th class="align-top">Bio</th><td><%= f.text_area :bio, :class => "ckeditor" %></td></tr>
 <tr><th/><td><span class="comment">(May be omitted)</span></td></tr>
+
+<tr class="space-above" id = "reg_info_row"><th class="align-top">Additional reg info</th><td><%= f.text_area :reg_info, :class => "ckeditor" %></td></tr>
+<tr><th/><td><span class="comment">(May be omitted; will be emailed to external participants)</span></td></tr>
 
 <tr class="space-above">
   <th class="align-top">Lists</th>
@@ -58,4 +60,11 @@
 
 <script>
   $("#temp_date").datepicker( { minDate: new Date() } );
+  $("#talk_request_reg").click(function () {
+    if ($("#talk_request_reg").is(":checked"))
+      $("#reg_info_row").show();
+    else
+      $("#reg_info_row").hide();
+  });
+  $("#reg_info_row").hide();
 </script>

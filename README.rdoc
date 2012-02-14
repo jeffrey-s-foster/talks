@@ -148,3 +148,9 @@ also want to make yourself an administrator, which you can do with
   listed talks. Also ical feed
 
 * Clean up this week emails to organize by day of the week
+
+* It'd be nice to have a way to get a list of all talks in the coming
+  week e-mailed to me on Sunday (regardless of my subscriptions). This
+  way I can discover new talks/lists that would be interesting without
+  remembering to check the talks page each week. I think this would
+  probably require creating an "Options" framework.
