@@ -8,9 +8,8 @@ class JobsController < ApplicationController
   def delete
     @job = Delayed::Job.find(params[:id])
     tm = @job.created_at
-    cls = @job.handler.object.class
     @job.destroy
-    flash[:notice] = "Deleted #{cls} job that was created at #{tm}"
+    flash[:notice] = "Deleted job that was created at #{tm}"
 
     redirect_to jobs_index_path
   end
