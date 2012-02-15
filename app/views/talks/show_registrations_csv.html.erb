@@ -1,0 +1,4 @@
+Email,Name,Org,Registered On
+<% @regs.each do |r| %>
+<% if r.user_id > 0 %><%= r.user.email %>,<%= r.user.name %>,<%= r.user.organization %>,<%= r.updated_at %><% else %><%= r.email %>,<%= r.name %>,<%= r.organization %>,<%= r.updated_at %><% end %>
+<% end %>

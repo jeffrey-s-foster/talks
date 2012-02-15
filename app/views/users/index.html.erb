@@ -1,5 +1,8 @@
 <h1>Users</h1>
 
+<p>
+<%= pluralize(@users.length, "user") %>
+
 <table class="users-table" border=1>
   <tr><th>Actions</th><th>Id</th><th>Email</th><th>Name</th><th>Org</th><th>Perms</th><th>Last signed in</th></tr>
   <% @users.each do |u| %>

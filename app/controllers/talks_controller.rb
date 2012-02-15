@@ -132,6 +132,9 @@ class TalksController < ApplicationController
     authorize! :edit, @talk
     @regs = @talk.registrations
     @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    if params[:csv] == "true"
+      render :show_registrations_csv, :layout => false, :content_type => "text/csv"
+    end
   end
 
   def add_registrations

@@ -2,6 +2,11 @@
 
 <p>Talk title: <%= link_to @talk.title, @talk %>
 
+<p>
+<%= pluralize(@regs.length, "registration") %>
+
+(<%= link_to "csv format", show_registrations_talk_path(@talk, :csv => true ) %>)
+
 <table class="regs-table" border=1>
   <tr><th>Actions</th><th>Email</th><th>Name</th><th>Org</th><th>Registered on</th></tr>
 

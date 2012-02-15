@@ -154,3 +154,22 @@ also want to make yourself an administrator, which you can do with
   way I can discover new talks/lists that would be interesting without
   remembering to check the talks page each week. I think this would
   probably require creating an "Options" framework.
+
+* The "Watch" button changes to "Unsubscribe" when you click on it, not "Unwatch".
+
+* I think there's a layout error on the list pages, e.g., on
+  http://talks.cs.umd.edu/lists/1, "Upcoming talks" and "Further
+  ahead" are at different indent levels, compared to the home page. Or
+  is it that "Further ahead" should be hidden unless "See all talks"
+  is clicked? I don't think "See all talks" is necessary, but if you
+  anticipate that there will be an excessive number of talks scheduled
+  ahead of time, use links like "Previous/Next 100 talks".
+
+* Can you include an iCal/RSS feed on the home page too, for all talks?
+
+* For the various badges/image buttons, add tooltips using <img
+  title="tooltip text" alt="long text description" ...>.
+
+* Can you add dates next to the days of week?
+
+* Support email from list organizer to all subscribers.
