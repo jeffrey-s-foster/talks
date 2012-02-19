@@ -11,17 +11,17 @@ parameters:
   <div class="title">
     <%= link_to talk.title, talk %>
     <% if talk.owner? current_user %>
-      <span class="badge-owner"></span>
+      <span class="badge-owner" title="You own this talk"></span>
     <% end %>
     <% case subscription_kind %>
     <% when :kind_subscriber %>
-      <span class="badge-subscriber"></span>
+      <span class="badge-subscriber" title="You are subscribed to this talk"></span>
     <% when :kind_watcher %>
-      <span class="badge-watcher"></span>
+      <span class="badge-watcher" title="You are watching this talk"></span>
     <% when :kind_subscriber_through %>
-      <span class="badge-subscriber-through"></span>
+      <span class="badge-subscriber-through" title="You are subscribed to this talk because you are subscribed to a list containing it"></span>
     <% when :kind_watcher_through %>
-      <span class="badge-watcher-through"></span>
+      <span class="badge-watcher-through" title="You are watching this talk because you are watching a list containing it"></span>
     <% end %>
   </div>
   <div class="speaker"><%= render_speaker(talk)  %></div>

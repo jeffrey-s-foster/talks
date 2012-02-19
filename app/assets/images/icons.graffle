@@ -720,7 +720,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-02-04 21:03:45 +0000</string>
+	<string>2012-02-19 16:54:47 +0000</string>
 	<key>Modifier</key>
 	<string>Jeff Foster</string>
 	<key>NotesVisible</key>
@@ -811,7 +811,7 @@
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{298, 0}, {710, 878}}</string>
+		<string>{{268, 0}, {710, 878}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -825,14 +825,14 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{3, 0}, {140.25, 177}}</string>
+		<string>{{2.5, 0.75}, {70.125, 88.5}}</string>
 		<key>Zoom</key>
-		<real>4</real>
+		<real>8</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
 				<string>Canvas 1</string>
-				<real>4</real>
+				<real>8</real>
 				<real>1</real>
 			</array>
 		</array>

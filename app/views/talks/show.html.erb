@@ -20,17 +20,17 @@
 
 <div class="title">
   <%= @talk.title %>
-  <span class="badge-registered"></span>
-  <span class="badge-subscriber"></span>
-  <span class="badge-watcher"></span>
+  <span class="badge-registered" title="You are registered to attend this talk"></span>
+  <span class="badge-subscriber" title="You are subscribed to this talk"></span>
+  <span class="badge-watcher" title="You are watching this talk"></span>
   <% if @talk.owner? current_user %>
-    <span class="badge-owner"></span>
+    <span class="badge-owner" title="You own this talk"></span>
   <% end %>
   <% case @talk.through current_user %>
   <% when :kind_subscriber_through %>
-    <span class="badge-subscriber-through"></span>
+    <span class="badge-subscriber-through" title="You are subscribed to this talk because you are subscribed to a list containing it"></span>
   <% when :kind_watcher_through %>
-    <span class="badge-watcher-through"></span>
+    <span class="badge-watcher-through" title="You are watching this talk because you are watching a list containing it"></span>
   <% end %>
   <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
   <span class="comment">(cal for this talk only)</span>

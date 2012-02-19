@@ -17,13 +17,13 @@
   <div class="name">
     <%= @list.name %>
     <% if @list.owner? current_user %>
-      <span class="badge-owner"></span>
+      <span class="badge-owner" title="You own this list"></span>
     <% end %>
     <% if @list.poster? current_user %>
-      <span class="badge-poster"></span>
+      <span class="badge-poster" title="You can post to this list"></span>
     <% end %>
-    <span class="badge-subscriber"></span>
-    <span class="badge-watcher"></span>
+    <span class="badge-subscriber" title="You are subscribed to this list"></span>
+    <span class="badge-watcher" title ="You are watching this list"></span>
   </div>
 
   <div class="short-descr"><%= @list.short_descr.html_safe %></div>

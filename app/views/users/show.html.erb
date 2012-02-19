@@ -9,16 +9,16 @@
     <li>
       <%= link_to l.name, l %>
       <% if l.owner? current_user %>
-        <span class="badge-owner"></span>
+        <span class="badge-owner" title="You own this list"></span>
       <% end %>
       <% if l.poster? current_user %>
-        <span class="badge-poster"></span>
+        <span class="badge-poster" title="You can post to this list"></span>
       <% end %>
       <% if @list_subscriptions[l] == :kind_subscriber %>
-        <span class="badge-subscriber"></span>
+        <span class="badge-subscriber" title="You are subscribed to this list"></span>
       <% end %>
       <% if @list_subscriptions[l] == :kind_watcher %>
-        <span class="badge-watcher"></span>
+        <span class="badge-watcher" title="You are watching tihs list"></span>
       <% end %>
     </li>
   <% end %>

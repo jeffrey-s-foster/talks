@@ -138,8 +138,6 @@ also want to make yourself an administrator, which you can do with
 * ssl?
 * https://github.com/plataformatec/devise/wiki/How-To:-Use-SSL-(HTTPS)
 
-* cron job not working
-
 * link to it on the dept home page
 
 * Can you provide a RSS feed for all upcoming talks?  It's great
@@ -167,9 +165,8 @@ also want to make yourself an administrator, which you can do with
 
 * Can you include an iCal/RSS feed on the home page too, for all talks?
 
-* For the various badges/image buttons, add tooltips using <img
-  title="tooltip text" alt="long text description" ...>.
-
 * Can you add dates next to the days of week?
 
 * Support email from list organizer to all subscribers.
+
+* beginning of day on upcoming talks?
