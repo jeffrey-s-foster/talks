@@ -1,8 +1,15 @@
 class TalksController < ApplicationController
 
-  def upcoming
-    @talks = Talk.upcoming.sort { |a,b| a.start_time <=> b.start_time }
+  def index
     fix_range params
+    case params[:range]
+    when :all
+      @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
+      @upcoming = false
+    else
+      @talks = Talk.upcoming.sort { |a,b| a.start_time <=> b.start_time }
+      @upcoming = true
+    end
     if current_user
       @talk_subscriptions = current_user.subscribed_talks(params[:range])
     else
@@ -10,7 +17,7 @@ class TalksController < ApplicationController
     end
   end
 
-  def index
+  def admin_view
     authorize! :site_admin, :all
     @talks = Talk.all
   end
@@ -183,6 +190,15 @@ class TalksController < ApplicationController
       @success = true
     else
       @success = false
+    end
+  end
+
+  def feed
+    @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
+    @title = t :site_name
+    respond_to do |format|
+      format.ics { render :text => (generate_ical @talks) }
+      format.atom { render "shared/feed", :layout => false  }
     end
   end
 

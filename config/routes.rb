@@ -1,6 +1,10 @@
 Talks::Application.routes.draw do
   resources :talks do
     get :upcoming
+    collection do
+      get :admin_view
+      get :feed
+    end
     member do
       get :subscribe
       get :calendar
@@ -51,5 +55,5 @@ Talks::Application.routes.draw do
     get :do_status
   end
   
-  root :to => "talks#upcoming"
+  root :to => "talks#index"
 end

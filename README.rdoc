@@ -28,6 +28,9 @@ also want to make yourself an administrator, which you can do with
 
 (You can probably set the confirmation info using sqlite3, also.)
 
+Also edit config/locals/en.yml, including
+* site_name
+
 == Deployment
 
 * RAILS_ENV=production rake db:setup
@@ -106,12 +109,6 @@ also want to make yourself an administrator, which you can do with
   * Send email on cancellation
   * Indicate in email update whether you are subscribed to the talk or not
 
-* Minor UI suggestion: In the "upcoming talks" it might be nice to
-  break it into "talks this week" (interpreted either as next 7 days,
-  or before 11:59p on the coming Friday -- probably the latter makes
-  more sense and is more consistent with the email semantics) and
-  "talks further out".
-
 * disable (really) users from cancelling accounts? or enable it fully
 
 * split lists window so list info is on left, talks on right
@@ -120,7 +117,8 @@ also want to make yourself an administrator, which you can do with
 
 * icon for poster?
 
-* what happens if talk cross-posted by another user, then orig user tries to edit the talk?
+* what happens if talk cross-posted by another user, then orig user
+  tries to edit the talk?
 
 * Also, when I changed my password, it behaved oddly.  It immediately
   said I was not authorized to access the page I was on, because, I
@@ -140,11 +138,6 @@ also want to make yourself an administrator, which you can do with
 
 * link to it on the dept home page
 
-* Can you provide a RSS feed for all upcoming talks?  It's great
-  that feeds are available by list, but I'm sure that some people
-  would be content to take a single feed that encompasses all publicly
-  listed talks. Also ical feed
-
 * Clean up this week emails to organize by day of the week
 
 * It'd be nice to have a way to get a list of all talks in the coming
@@ -163,10 +156,10 @@ also want to make yourself an administrator, which you can do with
   anticipate that there will be an excessive number of talks scheduled
   ahead of time, use links like "Previous/Next 100 talks".
 
-* Can you include an iCal/RSS feed on the home page too, for all talks?
-
 * Can you add dates next to the days of week?
 
 * Support email from list organizer to all subscribers.
 
 * beginning of day on upcoming talks?
+
+* restrict "all" talks to some time period (1-2 years?)
