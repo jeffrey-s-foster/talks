@@ -1,0 +1,20 @@
+div.columns {
+    display: inline;
+}
+div.left-sidebar {
+    float: left;
+    width: 15%;
+    font-size: small;
+    a { color: gray; }
+    padding: 0px;
+}
+div.center-talks {
+    float: left;
+    width: 60%;
+    position: relative;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding-left: 3px;
+    padding-right: 3px;
+    h1, h2 { margin-top: 0px; margin-left: 0px; }
+}

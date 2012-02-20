@@ -53,17 +53,13 @@ module TalksHelper
   end
 
   # returns hash map h such that
+  # h[:now] - time when everything was computed
   # h[:past] - old talks
   # h[:today] - today's talks
   # h[:later_this_week][wday] - talks on wday of this week (wdays start at 0)
   # h[:next_week][wday] - talks of wday of next week
   # h[:beyond] - talks after next week
   def organize_talks(talks)
-    the_past = (Time.now - 1.day).end_of_day
-    today = Time.now.beginning_of_day..Time.now.end_of_day
-    later_this_week = (Time.now.beginning_of_day + 1.day)..((Time.now + 1.day).end_of_week - 1.day)
-    next_week = ((Time.now + 1.day).beginning_of_week + 6.day)..((Time.now + 1.day).end_of_week + 6.day)
-    beyond = (Time.now + 1.day).beginning_of_week + 13.day
     h = Hash.new
     h[:past] = []
     h[:today] = []
@@ -72,6 +68,14 @@ module TalksHelper
     h[:next_week] = []
     (0..6).each { |wday| h[:next_week][wday] = [] }
     h[:beyond] = []
+
+    h[:now] = Time.now
+
+    the_past = (h[:now] - 1.day).end_of_day
+    today = h[:now].beginning_of_day..h[:now].end_of_day
+    later_this_week = (h[:now].beginning_of_day + 1.day)..((h[:now] + 1.day).end_of_week - 1.day)
+    next_week = ((h[:now] + 1.day).beginning_of_week + 6.day)..((h[:now] + 1.day).end_of_week + 6.day)
+    beyond = (h[:now] + 1.day).beginning_of_week + 13.day
 
     talks.each do |t|
       if t.start_time <= the_past
@@ -94,6 +98,10 @@ module TalksHelper
     h[:beyond].sort! { |a,b| a.start_time <=> b.start_time }
 
     return h
+  end
+
+  def format_day(time)
+    time.strftime("%A, %B %-d, %Y")
   end
   
 end

@@ -37,11 +37,9 @@ table.edit-talk {
   .speaker, .speaker a {
      font-size: large;
      color: black;
-     text-decoration: none;
   }
   .venue, .venue a {
      color: black;
-     text-decoration: none;
   }
   .time {
      padding-bottom: 10px;
@@ -70,7 +68,6 @@ table.talks-table {
     .lists  a {
 	font-size: small;
 	font-style: italic;
-	text-decoration: none;
     }
     .title a {
 	font-size: large;
@@ -82,15 +79,8 @@ table.talks-table {
     }
     .venue, .venue a {
 	color: black;
-	text-decoration: none;
     }
     .time {
 	padding-bottom: 30px;
-    }
-}
-
-.venue {
-    a {
-	text-decoration: none;
     }
 }

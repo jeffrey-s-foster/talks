@@ -1,3 +1,12 @@
+<div class="left-sidebar">
+  <% @lists.each do |l| %>
+    <div>
+      <%= link_to l.name, l %>
+    </div>
+  <% end %>
+</div>
+
+<div class="center-talks">
 <% if @upcoming then %>
   <h1>
     Upcoming Talks
@@ -21,3 +30,4 @@
     <%= link_to "See only upcoming talks", talks_path %>
   <% end %>
 </span>
+</div>

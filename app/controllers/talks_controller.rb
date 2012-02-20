@@ -15,6 +15,7 @@ class TalksController < ApplicationController
     else
       @talk_subscriptions = Hash.new
     end
+    @lists = List.all.sort { |a,b| a.name <=> b.name }
   end
 
   def admin_view

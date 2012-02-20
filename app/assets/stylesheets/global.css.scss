@@ -14,8 +14,7 @@ $complementary_color_2: #55e455;
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 14px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: 0px;
 }
 
 table {
@@ -24,8 +23,13 @@ table {
 
 h1, h2, h3, h4 {
     color: black;
-    background-color: $secondary_color_b_2;
+  /*  background-color: $secondary_color_b_2; */
     padding: 3px;
+}
+
+.main {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .error, #error_explanation {
@@ -50,17 +54,22 @@ p.alert {
 }
 
 div.site-title {
-    font-size: xx-large;
+/*    font-size: 36px;
     font-family: "Gill Sans", sans-serif;
-    font-weight: bold;
+    font-family: "corbel";
+    font-family: rockwell;
+    font-weight: bold; */
     @include linear-gradient(45deg, $primary_color, darken($primary_color, 25%));
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+/*
     a {
       text-decoration: none;
-      color: black;
+      color: white;
     }
+*/
 }
 
 div.login-bar {
@@ -73,7 +82,6 @@ div.login-bar {
     div.left { float: left; padding-left: 10px; text-align: left; width: 50%; };
     div.right { margin-left: 50%; text-align: right; width: 50%; };
     a {
-      text-decoration: none;
       color: black;
     }
 }
@@ -89,4 +97,10 @@ input[type=submit] {
     padding-right: 5px;
     padding-top: 3px;
     padding-bottom: 3px;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }

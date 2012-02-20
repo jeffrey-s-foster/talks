@@ -13,42 +13,44 @@
   <% h[:past].each do |t| %>
     <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
   <% end %>
+  <hr/>
 <% end %>
 
 <% unless h[:today].empty? %>
-  <h2>Today (<%= Date::DAYNAMES[Time.now.wday] %>)</h2>
+  <h2>Today, <%= format_day(h[:now]) %>)</h2>
   <% h[:today].each do |t| %>
     <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
   <% end %>
+  <hr/>
 <% end %>
 
 <% (0..6).each do |wday| %>
   <% unless h[:later_this_week][wday].empty? %>
-    <h2><%= Date::DAYNAMES[wday] %></h2>
+    <h2><%= format_day(h[:now] + wday.day) %></h2>
     <% h[:later_this_week][wday].each do |t| %>
       <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
     <% end %>
+    <hr/>
   <% end %>
 <% end %>
 
 
 <% unless (h[:next_week][0].empty? && h[:next_week][1].empty? && h[:next_week][2].empty? && h[:next_week][3].empty? &&
                   h[:next_week][4].empty? && h[:next_week][5].empty? && h[:next_week][6].empty?) %>
-  <hr/>
   <h1>Next week</h1>
 <% end %>
 
 <% (0..6).each do |wday| %>
   <% unless h[:next_week][wday].empty? %>
-    <h2><%= Date::DAYNAMES[wday] %></h2>
+    <h2><%= format_day(h[:now] + wday.day + 7) %></h2>
     <% h[:next_week][wday].each do |t| %>
       <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
     <% end %>
+  <hr/>
   <% end %>
 <% end %>
 
 <% unless h[:beyond].empty? %>
-  <hr/>
   <h1>Further ahead</h1>
 
   <% h[:beyond].each do |t| %>
