@@ -7,7 +7,8 @@ div.left-sidebar {
     left: 0;
     width: 15%;
     font-size: small;
-    ul { list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom: 2em;}
+    ul { list-style-type: none; margin-left: 10px; padding-left: 0; margin-bottom: 2em;}
+    li { text-indent: -10px; }
     a { color: gray; }
     padding: 1em;
     .title {
