@@ -5,7 +5,11 @@ class Ability
     can :edit, user if user
     user ||= User.new # guest user (not logged in)
 
-    if user.perm_create_talk || user.perm_site_admin
+#    if user.perm_create_talk || user.perm_site_admin
+#      can :create, Talk
+#    end
+
+    if user.perm_site_admin || (not (user.owned_lists.empty?)) || (not (user.poster_lists.empty?))
       can :create, Talk
     end
 

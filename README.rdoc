@@ -63,14 +63,13 @@ Also edit config/locals/en.yml, including
 * Global roles
   * :perm_site_admin - permission to do anything on the site
     * Only admins can create a new list
-  * :perm_create_talk - permission to create a talk
 * Relationships
   * Each talk belongs_to one owner (user, can't be empty)
   * Each talk has_and_belongs_to_many lists (may be empty)
   * Each list has_and_belongs_to_many posters (users)
   * Each list has_and_belongs_to_many admins (users)
 * Local roles
-  * A talk may be created by anyone with :perm_create_talk permission
+  * A talk may be created by anyone who owns or can post to a list
   * A talk may be added to a list by anyone with permission to post to that list
   * A talk may be edited/deleted by the creator of the talk or by an admin of any list the talk is posted to
   * A user may be granted or revoked list poster or admin permission by an admin of that list
@@ -171,3 +170,9 @@ Also edit config/locals/en.yml, including
   at the ends of lines.  On the other, it also removes paragraph
   boundaries, leading to awkward-sounding phrasing.  How about this as
   an alternative: one or fewer CRs -> 0 CR.  >= 2 CRs -> 2 CRs?
+
+* "See all talks" is much like "All talks" which has a different
+  meaning elsewhere in the same application. Maybe "All talks
+  including past ones"?
+
+* Remove create_talk permission from db
