@@ -19,14 +19,6 @@
 	<string>YES</string>
 	<key>ImageCounter</key>
 	<integer>2</integer>
-	<key>ImageLinkBack</key>
-	<array>
-		<dict/>
-	</array>
-	<key>ImageList</key>
-	<array>
-		<string>image1.gif</string>
-	</array>
 	<key>LinksVisible</key>
 	<string>NO</string>
 	<key>MagnetsVisible</key>
@@ -34,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-02-20 00:29:22 +0000</string>
+	<string>2012-02-21 01:16:36 +0000</string>
 	<key>Modifier</key>
 	<string>Jeff Foster</string>
 	<key>NotesVisible</key>
@@ -842,36 +834,6 @@
 			<string>1 pt = 1 px</string>
 			<key>GraphicsList</key>
 			<array>
-				<dict>
-					<key>Bounds</key>
-					<string>{{89.5, 139}, {61, 61}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>ID</key>
-					<integer>4</integer>
-					<key>ImageID</key>
-					<integer>1</integer>
-					<key>Shape</key>
-					<string>Rectangle</string>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-				</dict>
 				<dict>
 					<key>Bounds</key>
 					<string>{{46.5, 46.25}, {353.5, 52}}</string>

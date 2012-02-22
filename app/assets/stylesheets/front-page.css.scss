@@ -2,19 +2,50 @@ div.columns {
     display: inline;
 }
 div.left-sidebar {
-    float: left;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
     width: 15%;
     font-size: small;
+    ul { list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom: 2em;}
     a { color: gray; }
-    padding: 0px;
+    padding: 1em;
+    .title {
+	font-size: larger;
+	font-weight: bold;
+	color: black;
+	margin-bottom: 10px;
+    }
+}
+div.right-scroll-pane {
+    position: absolute;
+    left: 15%;
+    top: 84px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
 }
 div.center-talks {
-    float: left;
-    width: 60%;
-    position: relative;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    padding-left: 3px;
-    padding-right: 3px;
-    h1, h2 { margin-top: 0px; margin-left: 0px; }
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80%;
+    border-left: 2px dashed lightgray;
+    border-right: 2px dashed lightgray;
+    h1 {
+	padding-left: 15px;
+	padding-right: 15px;
+    }
+    h2 { padding-top: 10px; margin-top: 0px; margin-left: 0px; }
+    .past-talks, .this-weeks-talks, .next-weeks-talks, .further-ahead-talks {
+	padding-left: 25px;
+	padding-right: 25px;
+    }
+    .past-talks, .next-weeks-talks {
+	background-color: $background_very_light;
+    }
+    .further-ahead-talks {
+	background-color: $background_light;
+    }
 }

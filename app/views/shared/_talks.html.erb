@@ -7,54 +7,64 @@
 <% end %>
 
 <% h = organize_talks talks %>
+<% @past = (not (h[:past].empty?)) %>
+<% @this_week = (not (h[:today].empty? && h[:later_this_week][0].empty? && h[:later_this_week][1].empty? && h[:later_this_week][2].empty? &&
+   h[:later_this_week][3].empty? && h[:later_this_week][4].empty? && h[:later_this_week][5].empty? && h[:later_this_week][6].empty?)) %>
+<% @next_week = (not (h[:next_week][0].empty? && h[:next_week][1].empty? && h[:next_week][2].empty? && h[:next_week][3].empty? &&
+   h[:next_week][4].empty? && h[:next_week][5].empty? && h[:next_week][6].empty?)) %>
+<% @further_ahead = (not (h[:beyond].empty?)) %>
 
-<% unless h[:past].empty? %>
+<% if @past %>
+  <div class="past-talks">
   <h2>Past talks</h2>
   <% h[:past].each do |t| %>
     <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
   <% end %>
-  <hr/>
+  </div>
 <% end %>
 
-<% unless h[:today].empty? %>
-  <h2>Today, <%= format_day(h[:now]) %>)</h2>
-  <% h[:today].each do |t| %>
-    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-  <% end %>
-  <hr/>
+<% if @this_week %>
+  <div class="this-weeks-talks">  
+    <% unless h[:today].empty? %>
+      <h3>Today, <%= format_day(h[:now]) %></h3>
+      <% h[:today].each do |t| %>
+        <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+      <% end %>
+    <% end %>
+  
+    <% (0..6).each do |wday| %>
+      <% unless h[:later_this_week][wday].empty? then %>
+        <h3><%= format_day(h[:now].beginning_of_week - 1.day + wday.day) %></h3>
+        <% h[:later_this_week][wday].each do |t| %>
+          <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
 <% end %>
 
-<% (0..6).each do |wday| %>
-  <% unless h[:later_this_week][wday].empty? %>
-    <h2><%= format_day(h[:now] + wday.day) %></h2>
-    <% h[:later_this_week][wday].each do |t| %>
+<% if @next_week %>
+  <div class="next-weeks-talks">
+    <h2>Next week</h2>
+
+    <% (0..6).each do |wday| %>
+      <% unless h[:next_week][wday].empty? %>
+        <h3><%= format_day(h[:now].beginning_of_week + 6.day + wday.day) %></h3>
+        <% h[:next_week][wday].each do |t| %>
+          <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @further_ahead %>
+  <div class="further-ahead-talks">
+    <h2>Further ahead</h2>
+
+    <% h[:beyond].each do |t| %>
       <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
     <% end %>
-    <hr/>
-  <% end %>
-<% end %>
-
-
-<% unless (h[:next_week][0].empty? && h[:next_week][1].empty? && h[:next_week][2].empty? && h[:next_week][3].empty? &&
-                  h[:next_week][4].empty? && h[:next_week][5].empty? && h[:next_week][6].empty?) %>
-  <h1>Next week</h1>
-<% end %>
-
-<% (0..6).each do |wday| %>
-  <% unless h[:next_week][wday].empty? %>
-    <h2><%= format_day(h[:now] + wday.day + 7) %></h2>
-    <% h[:next_week][wday].each do |t| %>
-      <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-    <% end %>
-  <hr/>
-  <% end %>
-<% end %>
-
-<% unless h[:beyond].empty? %>
-  <h1>Further ahead</h1>
-
-  <% h[:beyond].each do |t| %>
-    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-  <% end %>
-
+  </div>
 <% end %>

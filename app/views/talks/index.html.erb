@@ -1,33 +1,52 @@
 <div class="left-sidebar">
-  <% @lists.each do |l| %>
-    <div>
-      <%= link_to l.name, l %>
-    </div>
-  <% end %>
-</div>
-
-<div class="center-talks">
-<% if @upcoming then %>
-  <h1>
-    Upcoming Talks
-    <%= link_to (image_tag "calendar.png"), feed_talks_url(:format => :ics, :protocol => "webcal") %>
-    <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom) %>
-    <span class="comment">(cal/rss for all talks)</span>
-    <%= auto_discovery_link_tag(:atom, feed_talks_url(:format => :atom), :action =>"feed") %>
-  </h1>
-<% else %>
-  <h1>All Talks (including past talks)</h1>
+<% if false %>
+  <ul>
+    <li><a href="#past-talks">Past talks</a>
+    <li><a href="#upcoming-talks">Upcoming talks</a>
+    <li><a href="#next-week">Next week</a>
+    <li><a href="#further-ahead">Further ahead</a>
+  </ul>
 <% end %>
 
-<div class="short-talks">
-  <%= render :partial => "shared/talks", :locals => { :talks => @talks, :subscriptions => @talk_subscriptions } %>
+  <ul>
+  <li class="title">All lists</li>
+  <% @lists.each do |l| %>
+      <li><%= link_to l.name, l %></li>
+  <% end %>
+  </ul>
 </div>
 
-<span class="comment">
+<div class="right-scroll-pane">
+  <div class="center-talks">
   <% if @upcoming then %>
-    <%= link_to "See all talks", talks_path(:range => :all) %>
+    <h1>
+      Upcoming Talks
+      <%= link_to (image_tag "calendar.png"), feed_talks_url(:format => :ics, :protocol => "webcal") %>
+      <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom) %>
+      <span class="comment">(cal/rss for all talks)</span>
+      <%= auto_discovery_link_tag(:atom, feed_talks_url(:format => :atom), :action =>"feed") %>
+    </h1>
   <% else %>
-    <%= link_to "See only upcoming talks", talks_path %>
+    <h1>
+      All Talks (including past talks)
+      <%= link_to (image_tag "calendar.png"), feed_talks_url(:format => :ics, :protocol => "webcal") %>
+      <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom) %>
+      <span class="comment">(cal/rss for all talks)</span>
+      <%= auto_discovery_link_tag(:atom, feed_talks_url(:format => :atom), :action =>"feed") %>
+    </h1>
   <% end %>
-</span>
+  
+  <div class="short-talks">
+    <%= render :partial => "shared/talks", :locals => { :talks => @talks, :subscriptions => @talk_subscriptions } %>
+  </div>
+  
+  <span class="comment">
+    <% if @upcoming then %>
+      <%= link_to "See all talks", talks_path(:range => :all) %>
+    <% else %>
+      <%= link_to "See only upcoming talks", talks_path %>
+    <% end %>
+  </span>
+  </div>
+  
 </div>

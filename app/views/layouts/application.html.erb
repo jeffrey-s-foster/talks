@@ -9,17 +9,7 @@
 <body>
 
 <div class="site-title">
-  <%= link_to image_tag("logo.png"), root_path %>
-</div>
-
-<div class="login-bar">
-  <div class="left">
-    <%= link_to "all lists", lists_path %>
-    <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
-    <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
-    <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
-  </div>
-  <div class="right">
+  <div class="account">
     <% if user_signed_in? %>
       <%= link_to current_user.name, current_user %>
     &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -31,13 +21,21 @@
     <% end %>
     &nbsp;&nbsp;|&nbsp;&nbsp;
     <%= link_to "help", page_path("help") %>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <%= link_to "all lists", lists_path %>
+    <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
+    <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
+    <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
   </div>
+  <%= link_to image_tag("logo.png"), root_path %>
 </div>
 
 <div class="main">
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+  <div class="flash">
+    <span class="notice"><%= notice %></span>
+    <span class="alert"><%= alert %></span>
+  </div>
 
 <%= yield %>
 

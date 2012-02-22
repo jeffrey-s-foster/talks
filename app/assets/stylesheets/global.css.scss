@@ -11,6 +11,9 @@ $secondary_color_a_2: #feae5f;
 $secondary_color_b_2: #50b5cc;
 $complementary_color_2: #55e455;
 
+$background_very_light: #fcefe3;
+$background_light: #fce2c9;
+
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 14px;
@@ -46,11 +49,14 @@ h1, h2, h3, h4 {
     font-style: italic;
 }
 
-p.notice {
-    color: blue;
-}
-p.alert {
-    color: red;
+div.flash {
+    float: left;
+    .notice {
+	color: blue;
+    }
+    .alert {
+	color: red;
+    }
 }
 
 div.site-title {
@@ -64,25 +70,13 @@ div.site-title {
     padding-right: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
-/*
-    a {
-      text-decoration: none;
-      color: white;
-    }
-*/
-}
-
-div.login-bar {
-    font-size: tiny;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    background-color: $secondary_color_a;
-    color: black;
-    div.left { float: left; padding-left: 10px; text-align: left; width: 50%; };
-    div.right { margin-left: 50%; text-align: right; width: 50%; };
-    a {
-      color: black;
+    div.account {
+	float: right;
+	color: white;
+	font-size: small;
+	a {
+	    color: white;
+	}
     }
 }
 

@@ -163,3 +163,11 @@ Also edit config/locals/en.yml, including
 * beginning of day on upcoming talks?
 
 * restrict "all" talks to some time period (1-2 years?)
+
+* One anomaly I've noticed in the interface for entering talk data is
+  the deletion of carriage returns in abstracts / bios.  One the one
+  hand, this is useful when e.g. one is cutting and pasting from an
+  e-mail message that includes (emacs-inserted) hard carriage returns
+  at the ends of lines.  On the other, it also removes paragraph
+  boundaries, leading to awkward-sounding phrasing.  How about this as
+  an alternative: one or fewer CRs -> 0 CR.  >= 2 CRs -> 2 CRs?
