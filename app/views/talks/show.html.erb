@@ -5,7 +5,7 @@
         <li><%= link_to l.name, l %></li>
      <% end %>
     <br/>
-    <li class="title">All lists</li>
+    <li class="title"><%= link_to "All lists", root_path %></li>
     <% @lists.each do |l| %>
         <li><%= link_to l.name, l %></li>
     <% end %>

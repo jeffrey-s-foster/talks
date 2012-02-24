@@ -2,8 +2,7 @@ class TalksController < ApplicationController
 
   def index
     fix_range params
-    case params[:range]
-    when :past
+    if params[:range] == :past
       @talks = Talk.past.sort { |a,b|
         [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time]
       }

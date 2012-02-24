@@ -11,21 +11,27 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize! :edit, @user
     fix_range params
-    if params[:range] == :all
+    if params[:range] == :past
       @upcoming = false
     else
       @upcoming = true
     end
     @list_subscriptions = Hash[current_user.subscribed_lists]
-    @lists = (current_user.owned_lists + current_user.poster_lists + @list_subscriptions.keys).sort { |a,b| a.name <=> b.name }.uniq
+    @your_lists = (current_user.owned_lists + current_user.poster_lists + @list_subscriptions.keys).sort { |a,b| a.name <=> b.name }.uniq
+    @lists = List.all.sort { |a,b| a.name <=> b.name }
     @talk_subscriptions = current_user.subscribed_talks(params[:range])
     if @upcoming then
       @talks = current_user.owned_talks.upcoming
     else
-      @talks = current_user.owned_talks
+      @talks = current_user.owned_talks.past
     end
     @talks += @talk_subscriptions.keys
-    @talks.sort! { |a,b| a.start_time <=> b.start_time }.uniq!
+    @talks.uniq!
+    if params[:range] == :past
+      @talks.sort! { |a,b| [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time] }
+    else
+      @talks.sort! { |a,b| a.start_time <=> b.start_time }
+    end
   end
 
   def edit

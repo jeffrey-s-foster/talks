@@ -1,9 +1,13 @@
 <% content_for :left_sidebar do %>
     <ul>
-    <li class="title">All lists</li>
+    <li class="title"><%= link_to "All lists", root_path %></li>
     <% @lists.each do |l| %>
         <li>
-	  <%= link_to l.name, l, :class => (if l == @list then "selected" else "" end) %>
+	   <% if l == @list %>
+	     <span class="selected"><%= l.name %></span>
+	   <% else %>
+	    <%= link_to l.name, l %>
+	   <% end %>
 	</li>
     <% end %>
     </ul>
@@ -11,9 +15,18 @@
 
 <div class="center-header">
   <div class="list">
-    <div class="name"><%= @list.name %></div>
+    <div class="name">
+      <%= @list.name %>
+      <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal"), :title => "ical for this list only" %>
+      <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom), :title => "rss for this list only" %>
+      <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
+    </div>
     <div class="short-descr"><%= @list.short_descr.html_safe %></div>
-    <div class="long-descr"><%= @list.long_descr.html_safe %></div>
+    <% if @upcoming then %>
+      <%= link_to "See past talks", list_path(@list, :range => :past) %>
+    <% else %>
+      <%= link_to "See upcoming talks", @list %>
+    <% end %>
 
     <ul class="properties">
       <% if can? :edit, @list %>
@@ -31,23 +44,9 @@
       <li class="unsubscribed">You are not subscribed to this list. (<%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %>, <%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %>)</li>
     </ul>
   </div>
-
-  <% if @upcoming then %>
-    <span class="title">Upcoming talks</span>
-  <% else %>
-    <span class="title">Past talks</span>
-  <% end %>
-  <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %>
-  <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom) %>
-  <span class="comment">(cal/rss for this list only)</span>
-  <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
-  <br>
-  <% if @upcoming then %>
-    <%= link_to "See past talks", list_path(@list, :range => :past) %>
-  <% else %>
-    <%= link_to "See upcoming talks", @list %>
-  <% end %>
 </div>
+
+<div class="long-descr"><%= @list.long_descr.html_safe %></div>
 
 <div class="short-talks">
   <% if @talks.length == 0 %>

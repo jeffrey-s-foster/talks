@@ -11,9 +11,11 @@
 <div class="site-title">
   <div class="account">
     <% if user_signed_in? %>
-      <%= link_to current_user.name, edit_user_path(current_user) %>
+      Welcome, <%= current_user.name %>!
       &nbsp;&nbsp;|&nbsp;&nbsp;
       <%= link_to "my list", current_user %>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <%= link_to "my profile", edit_user_path(current_user) %>
       <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
       <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
       <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
@@ -47,7 +49,12 @@
     </div>
   </div>
 <% else %>
-  <%= yield %>
+  <div class="flash">
+    <span class="notice"><%= notice %></span>
+    <span class="alert"><%= alert %></span>
+  </div>
+
+    <%= yield %>
 <% end %>
   
 

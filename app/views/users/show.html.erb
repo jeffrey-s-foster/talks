@@ -1,53 +1,31 @@
-<% if can? :edit, current_user %>
-  <%= link_to "Edit profile", edit_user_path %>
+<% content_for :left_sidebar do %>
+    <ul>
+    <li class="title">Your lists</li>
+     <% @your_lists.each do |l| %>
+        <li><%= link_to l.name, l %></li>
+     <% end %>
+    <br/>
+    <li class="title"><%= link_to "All lists", root_path %></li>
+    <% @lists.each do |l| %>
+        <li><%= link_to l.name, l %></li>
+    <% end %>
+    </ul>
 <% end %>
 
-<h2>Your lists</h2>
-
-<ul>
-  <% @lists.each do |l| %>
-    <li>
-      <%= link_to l.name, l %>
-      <% if l.owner? current_user %>
-        <span class="badge-owner" title="You own this list"></span>
-      <% end %>
-      <% if l.poster? current_user %>
-        <span class="badge-poster" title="You can post to this list"></span>
-      <% end %>
-      <% if @list_subscriptions[l] == :kind_subscriber %>
-        <span class="badge-subscriber" title="You are subscribed to this list"></span>
-      <% end %>
-      <% if @list_subscriptions[l] == :kind_watcher %>
-        <span class="badge-watcher" title="You are watching tihs list"></span>
-      <% end %>
-    </li>
+<div class="center-header">
+  <span class="title">Your talks</span>
+  <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %>
+  <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret) %>
+  <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
+  <span class="comment">(cal/rss for your subscribed lists/talks)</span>
+  <br>
+  <% if @upcoming then %>
+    <%= link_to "See past talks", user_path(current_user, :range => :past) %>
+  <% else %>
+    <%= link_to "See upcoming talks", current_user %>
   <% end %>
-</ul>
-
-<% if @upcoming then %>
-   <h2>Your Upcoming Talks
-     <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %>
-     <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret) %>
-     <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
-    <span class="comment">(cal/rss for your subscribed lists/talks)</span>
-   </h2>
-<% else %>
-   <h2>Your Talks (including past talks)
-     <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret) %>
-     <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret) %>
-     <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
-    <span class="comment">(cal/rss for your subscribed lists/talks)</span>
-   </h2>
-<% end %>
-
-<div class="short-talks">
-  <%= render :partial => "shared/talks", :locals => { :talks => @talks, :subscriptions => @talk_subscriptions } %>
 </div>
 
-<span class="comment">
-  <% if @upcoming then %>
-    <%= link_to "See all talks", user_path(current_user, :range => :all) %>
-  <% else %>
-    <%= link_to "See only upcoming talks", current_user %>
-  <% end %>
-</span>
+<div class="short-talks">
+  <%= render :partial => "shared/talks", :locals => { :talks => @talks } %>
+</div>

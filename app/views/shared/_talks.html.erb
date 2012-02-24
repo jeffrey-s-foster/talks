@@ -13,6 +13,7 @@
   <% if (t.past? && last_interval != :past) %>
     </div>
     <div class="past-talks">
+    <div class="header">Past talks</div>
     <% last_interval = :past %>
   <% elsif (t.later_this_week? && last_interval != :later_this_week) %>
     </div>

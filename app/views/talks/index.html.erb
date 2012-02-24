@@ -1,6 +1,6 @@
 <% content_for :left_sidebar do %>
     <ul>
-    <li class="title">All lists</li>
+    <li class="title selected">All lists</li>
     <% @lists.each do |l| %>
         <li><%= link_to l.name, l %></li>
     <% end %>
@@ -8,14 +8,9 @@
 <% end %>
 
 <div class="center-header">
-  <% if @upcoming then %>
-    <span class="title">Upcoming Talks</span>
-  <% else %>
-    <span class="title">Past talks</span>
-  <% end %>
-  <%= link_to (image_tag "calendar.png"), feed_talks_url(:format => :ics, :protocol => "webcal") %>
-  <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom) %>
-  <span class="comment">(cal/rss for all talks)</span>
+  <span class="title">All Talks</span>
+  <%= link_to (image_tag "calendar.png"), feed_talks_url(:format => :ics, :protocol => "webcal"), :title => "ical for all talks" %>
+  <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom), :title => "rss for all talks" %>
   <%= auto_discovery_link_tag(:atom, feed_talks_url(:format => :atom), :action =>"feed") %>
   <br>
   <% if @upcoming then %>
