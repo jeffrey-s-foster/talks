@@ -40,7 +40,7 @@ class Notifications < ActionMailer::Base
     @comments = h[:comments]
     mail :to => "Talks <talks@cs.umd.edu>",
          :subject => h[:subject],
-         :from => "#{h.name} <#{h[:email]}>"
+         :from => "#{h[:name]} <#{h[:email]}>"
   end
 
 end
