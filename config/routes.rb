@@ -4,6 +4,8 @@ Talks::Application.routes.draw do
     collection do
       get :admin_view
       get :feed
+      get :feedback
+      post :receive_feedback
     end
     member do
       get :subscribe

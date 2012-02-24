@@ -217,6 +217,15 @@ class TalksController < ApplicationController
     render "shared/show_subscribers"
   end
 
+  def feedback
+    @lists = List.all.sort { |a,b| a.name <=> b.name }
+  end
+
+  def receive_feedback
+    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments])
+    redirect_to root_path, :notice => "Thank you for your feedback"
+  end
+
 private
 
   def adjust(params)

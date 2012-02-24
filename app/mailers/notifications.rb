@@ -36,4 +36,11 @@ class Notifications < ActionMailer::Base
          :from => "Talks <talks@cs.umd.edu>"
   end
 
+  def send_feedback(h)
+    @comments = h[:comments]
+    mail :to => "Talks <talks@cs.umd.edu>",
+         :subject => h[:subject],
+         :from => h[:email]
+  end
+
 end

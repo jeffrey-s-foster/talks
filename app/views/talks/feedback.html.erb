@@ -1,0 +1,26 @@
+<% content_for :left_sidebar do %>
+  <ul>
+  <li class="title"><%= link_to "All lists", root_path %></li>
+  <% @lists.each do |l| %>
+    <li><%= link_to l.name, l %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+
+<h1>Feedback</h1>
+
+<%= form_tag receive_feedback_talks_path do %>
+
+<table class="feedback">
+<tr><th>Your name</th><td><%= text_field_tag "name" %></td></tr>
+<tr><th>Email address</th><td><%= text_field_tag "email" %></td></tr>
+<tr><th>Subject</th><td><%= text_field_tag "subject" %></td></tr>
+<tr class="space-above"><th class="align-top">Comments</th><td><%= text_area_tag :comments, nil, :class => "ckeditor" %></td></tr>
+</table>
+
+<p>
+  <%= submit_tag 'Submit' %>
+</p>
+
+<% end %>

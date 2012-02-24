@@ -156,3 +156,16 @@ table.talks-table {
     }
 }
 
+.feedback {
+  th {
+    color: $secondary_color_b;
+    text-align: right;
+    padding-right: 10px;
+  };
+  tr.space-above {
+    border-top: 1.5em solid white;
+  };
+  input[type=text] {
+    width: 300px;
+  };
+}
