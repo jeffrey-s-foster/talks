@@ -1,3 +1,19 @@
+<% content_for :left_sidebar do %>
+  <% @lists = List.all.sort { |a,b| a.name <=> b.name } %>
+  <ul>
+  <li class="title"><%= link_to "All lists", root_path %></li>
+  <% @lists.each do |l| %>
+  <li>
+    <% if l == @list %>
+      <span class="selected"><%= l.name %></span>
+    <% else %>
+      <%= link_to l.name, l %>
+    <% end %>
+  </li>
+  <% end %>
+  </ul>
+<% end %>
+
 <h1>Help</h1>
 
 <p>
@@ -47,18 +63,18 @@ may <%= link_to "log in", new_user_session_path %>.
 <p>
 Once you log in to the site, you can subscribe to talks or
 lists. To subscribe to a talk or list, go to its page when you are
-logged in and click the subscribe button. If you want to cancel a
-subscription, click the unsubscribe button.
+logged in and click the subscribe link. If you want to cancel a
+subscription, click the unsubscribelink.
 
 <p>
 Once you have subscribed to some lists or talks, you can go to your
-profile page (click your name above) to see a cumulative list of all
-the upcoming taks you have subscribed to, either directly (by
-subscribing to the talk itself) or indirectly (by subscribing to a
-list containing the talk). Even if a talk appears on multiple lists
-you are subscribed to, you should only see it once on your list. As
-new talks are posted to lists you subscribe to, your list of upcoming
-talks will automatically be updated with those talks.
+"my list" page (the link will be at the top of the screen) to see a
+cumulative list of all the upcoming taks you have subscribed to,
+either directly (by subscribing to the talk itself) or indirectly (by
+subscribing to a list containing the talk). Even if a talk appears on
+multiple lists you are subscribed to, you should only see it once on
+your list. As new talks are posted to lists you subscribe to, your
+list of upcoming talks will automatically be updated with those talks.
 
 <p>
 There are several ways to receive information your upcoming talks
@@ -97,41 +113,6 @@ the talks posted on a list, but you don't necessarily want to attend
 all of them; you can watch the list, and then subscribe individually
 to each talk you want on your upcoming talk list.
 
-<h3>Badges</h3>
-
-<p>
-If you are logged in, you may see a number of badges next to talk
-and list names. The badges have the following meanings:
-
-<table border=1>
-  <tr>
-    <td><span class="badge-subscriber"></span></td>
-    <td>You are subscribed to this talk/list</td>
-  </tr>
-  <tr>
-    <td><span class="badge-watcher"></span></td>
-    <td>You are watching this talk/list</td>
-  </tr>
-  <tr>
-    <td><span class="badge-subscriber-through"></span></td>
-    <td>You are subscribed to this talk because you are subscribed to
-    a list containing it</td>
-  </tr>
-  <tr>
-    <td><span class="badge-watcher-through"></span></td>
-    <td>You are watching this talk because you are watching a list
-    containing it</td>
-  </tr>
-  <tr>
-    <td><span class="badge-registered"></span></td>
-    <td>You are registered for this talk</td>
-  </tr>
-  <tr>
-    <td><span class="badge-owner"></span></td>
-    <td>You are an owner of this talk/list</td>
-  </tr>
-</table>
-
 <h3>Icons</h3>
 
 <p>
@@ -169,15 +150,15 @@ short and long description, set of owners, and set of <i>posters</i>,
 who are people who have permission to add a talk to your list. Note:
 it is possible to remove yourself as an owner, so be sure not to do
 that inadvertantly. You can edit a list by going to the list's page
-and clicking on the edit button. This button will only appear if you
+and clicking on the edit link. This button will only appear if you
 are a list owner; contact the site administrators if you think you
 should be able to edit a list but cannot.
 
 <h2>Posting a talk</h2>
 
 <p>
-If you want to add a new talk to the site, you need a permission added
-to your account; contact the site administrators to request this. Once
+If you want to add a new talk to the site, you need permission to post
+to at least one list. Once
 you have permission, you can <%= link_to "create a new talk",
 new_talk_path %> (another link for this should appear in the bar
 above). Each talk has a title, speaker (with optional associated URL),
@@ -197,7 +178,6 @@ permission. Note: after posting a talk to a list, you automatically
 give permission for the list owner to also edit the talk information.
 
 <p>
-
 When you post or edit a talk, the option "Send email to watchers when
 talk created/updated?" will be selected for you by default. With this
 option selected, anyone subscribing or watching the talk or a list
@@ -219,8 +199,8 @@ When creating a talk, you can optionally specify that the you request
 registration for the talk. If you select this option, then the talk
 page will include instructions asking attendees to register. If an
 attendee is logged into the site, they can register by clicking the
-"register" button; once registered, they can unregister by clicking
-the appropriate button.  If an attendee is not logged into the site
+"register" link; once registered, they can unregister by clicking
+the appropriatelink.  If an attendee is not logged into the site
 and does not want to create an account (i.e., they are an <i>external
 user</i>), they will be presented with a short form to fill out to
 register, including their name, email address, and
@@ -264,3 +244,6 @@ Some icons by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>. Al
 
 <p>
 Web site design inspired by <a href="http://talks.cam.ac.uk/">talks.cam</a>
+
+<p>
+Thanks to <u>Khoo</u> Yit Phang for help with the site design.

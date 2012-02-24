@@ -178,5 +178,3 @@ Also edit config/locals/en.yml, including
 * Remove create_talk permission from db
 
 * Note when can post a talk to a list?
-
-* Fix your past talks - reorder

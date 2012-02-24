@@ -16,17 +16,20 @@ table.edit-list {
 }
 
 .list {
-    padding-bottom: 2em;
     .name {
 	font-size: x-large;
 	color: $secondary_color_b;
     }
     .short_descr {
 	font-size: large;
-    }
+   }
     .long_descr {
 	font-family: $georgia;
     }
+}
+.organizers {
+    font-size: smaller;
+    margin-left: 1em;
 }
 
 .header {

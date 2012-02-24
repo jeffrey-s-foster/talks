@@ -73,10 +73,10 @@
 
 <div class="talk">
 <div class="abstract">
-  <span class="title">Abstract</span>
   <% if @talk.abstract == "" %>
-    <div class="abstract-body">(No abstract yet)</div>
+    <span class="title">No abstract</span>
   <% else %>
+    <span class="title">Abstract</span>
     <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
   <% end %>
 </div>

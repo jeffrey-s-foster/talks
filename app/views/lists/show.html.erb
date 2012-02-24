@@ -21,7 +21,9 @@
       <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom), :title => "rss for this list only" %>
       <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
     </div>
-    <div class="short-descr"><%= @list.short_descr.html_safe %></div>
+    <div class="short-descr">
+      <%= @list.short_descr.html_safe %>
+    </div>
     <% if @upcoming then %>
       <%= link_to "See past talks", list_path(@list, :range => :past) %>
     <% else %>
@@ -44,23 +46,23 @@
       <li class="unsubscribed">You are not subscribed to this list. (<%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %>, <%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %>)</li>
     </ul>
   </div>
+
+    <div class="long-descr"><%= @list.long_descr.html_safe %></div>
 </div>
 
-<div class="long-descr"><%= @list.long_descr.html_safe %></div>
-
 <div class="short-talks">
-  <% if @talks.length == 0 %>
-    No <%= if @upcoming then "upcoming" end %> talks
+    <% if @talks.length == 0 %>
+    <div class="this-weeks-talks">
+      No <%= if @upcoming then "upcoming" end %> talks
+    </div>
   <% end %>
 
   <%= render :partial => "shared/talks", :locals => { :talks => @talks } %>
 </div>
 
 <div class="organizers">
-  <hr/>
   <% if @list.owners.length > 0 %>
-    This list is organized by
-    <%= join_with_and(@list.owners.sort { |a,b| a.email <=> b.email }.map { |u| u.name }) %>
+    This list is organized by <%= join_with_and(@list.owners.sort { |a,b| a.email <=> b.email }.map { |u| u.name }) %>
   <% end %>
 </div>
 
