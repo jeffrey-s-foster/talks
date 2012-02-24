@@ -222,7 +222,7 @@ class TalksController < ApplicationController
   end
 
   def receive_feedback
-    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments])
+    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver
     redirect_to root_path, :notice => "Thank you for your feedback"
   end
 
