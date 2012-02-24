@@ -43,4 +43,11 @@ class Notifications < ActionMailer::Base
          :from => "#{h[:name]} <#{h[:email]}>"
   end
 
+  def send_admin_message(u, h)
+    @message = h[:message]
+    mail :to => "#{u.name} <#{u.email}>",
+         :subject => h[:subject],
+         :from => "Talks <talks@cs.umd.edu>"
+  end
+
 end

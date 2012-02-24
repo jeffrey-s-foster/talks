@@ -44,6 +44,8 @@ Talks::Application.routes.draw do
 
   namespace :admin do
     get :index
+    get :spam
+    post :send_spam
 #    get :erase_subscriptions
   end
 

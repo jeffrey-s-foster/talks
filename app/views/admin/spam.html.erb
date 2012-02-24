@@ -1,0 +1,14 @@
+<h1>Email all users</h1>
+
+<%= form_tag admin_send_spam_path do %>
+
+<table class="feedback">
+<tr><th>Subject</th><td><%= text_field_tag "subject" %></td></tr>
+<tr class="space-above"><th class="align-top">Message</th><td><%= text_area_tag :message, nil, :class => "ckeditor" %></td></tr>
+</table>
+
+<p>
+  <%= submit_tag 'Submit' %>
+</p>
+
+<% end %>
