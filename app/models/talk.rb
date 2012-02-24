@@ -109,20 +109,20 @@ class Talk < ActiveRecord::Base
     not (user && (registrations.where(:user_id => user.id).empty?))
   end
 
-  # returns :nil, :kind_subscriber_through, or :kind_watcher_through
+  # 
   def through(user)
-    return nil unless user
-    k = nil
+    h = Hash.new []
+    return h unless user
     user.subscribed_lists.each do |l, kl|
       if l.talks.exists? self then
         if kl == :kind_subscriber
-          k = :kind_subscriber_through
-        elsif (kl == :kind_watcher) && (k != :kind_subscriber)
-          k = :kind_watcher_through
+          h[:subscriber] += [l]
+        elsif kl == :kind_watcher
+          h[:watcher] += [l]
         end
       end
     end
-    return k
+    return h
   end
 
   def email_watchers(changes)

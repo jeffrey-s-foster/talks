@@ -52,6 +52,13 @@ module TalksHelper
               .join "&nbsp;&sdot;&nbsp;").html_safe
   end
 
+  def render_array_of_lists(lists)
+    return (lists
+              .sort { |a,b| a.name <=> b.name }
+              .map { |l| link_to l.name, list_url(l) }
+              .join "&nbsp;&sdot;&nbsp;").html_safe
+  end
+
   # returns hash map h such that
   # h[:now] - time when everything was computed
   # h[:past] - old talks

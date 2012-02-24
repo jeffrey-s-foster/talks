@@ -1,70 +1,61 @@
-<div class="list-descr">
-  <div class="actions">
-    <div class="action-table">
-      <% if can? :edit, @list %>
-        <div class="action"><%= link_to "edit", edit_list_path(@list) %></div>
-      <% end %>
-      <% if can? :destroy, @list %>
-        <div class="action"><%= link_to"delete", @list, :confirm => 'Are you sure you want to delete this list?', :method => :delete %></div>
-      <% end %>
-    </div>
-    <div class="subscribe-table">
-      <div class="action subscribe"><%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %></div>
-      <div class="action unsubscribe"><%= link_to "unsubscribe", subscribe_list_path(@list, :do => "unsubscribe"), :remote => true %></div>
-      <div class="action watch"><%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %></div>
-    </div>
-  </div>
-  <div class="name">
-    <%= @list.name %>
-    <% if @list.owner? current_user %>
-      <span class="badge-owner" title="You own this list"></span>
+<% content_for :left_sidebar do %>
+    <ul>
+    <li class="title">All lists</li>
+    <% @lists.each do |l| %>
+        <li>
+	  <%= link_to l.name, l, :class => (if l == @list then "selected" else "" end) %>
+	</li>
     <% end %>
-    <% if @list.poster? current_user %>
-      <span class="badge-poster" title="You can post to this list"></span>
-    <% end %>
-    <span class="badge-subscriber" title="You are subscribed to this list"></span>
-    <span class="badge-watcher" title ="You are watching this list"></span>
-  </div>
-
-  <div class="short-descr"><%= @list.short_descr.html_safe %></div>
-
-  <div class="long-descr"><%= @list.long_descr.html_safe %></dev>
-</div>
-
-<hr/>
-
-<% if @upcoming then %>
-  <h2>
-    Upcoming talks
-    <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %>
-    <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom) %>
-    <span class="comment">(cal/rss for this list only)</span>
-    <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
-  </h2>
-<% else %>
-  <h2>
-    All talks (including past talks) <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %>
-    <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom) %>
-    <span class="comment">(cal/rss for this list only)</span>
-    <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
-</h2>
+    </ul>
 <% end %>
+
+<div class="center-header">
+  <div class="list">
+    <div class="name"><%= @list.name %></div>
+    <div class="short-descr"><%= @list.short_descr.html_safe %></div>
+    <div class="long-descr"><%= @list.long_descr.html_safe %></div>
+
+    <ul class="properties">
+      <% if can? :edit, @list %>
+        <li>
+          You may <%= link_to "edit", edit_list_path(@list) %> 
+          <% if can? :destroy, @list %> or <%= link_to "delete", @list, :confirm => 'Are you sure you want to delete this list?', :method => :delete %><% end %>
+          this list.
+          <% if can? :site_admin, :all %>
+            (<%= link_to "See all subscribers", show_subscribers_list_path(@list) %>)
+          <% end %>
+        </li>
+        <% end %>
+      <li class="subscriber">You are subscribed to this list. (<%= link_to"unsubscribe", subscribe_list_path(@list, :do => "unsubscribe"), :remote => true %>, <%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %>)</li>
+      <li class="watcher">You are watching this list. (<%= link_to"unwatch", subscribe_list_path(@list, :do => "unsubscribe"), :remote => true %>, <%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %>)</li>
+      <li class="unsubscribed">You are not subscribed to this list. (<%= link_to "watch", subscribe_list_path(@list, :do => "watch"), :remote => true %>, <%= link_to "subscribe", subscribe_list_path(@list, :do => "subscribe"), :remote => true %>)</li>
+    </ul>
+  </div>
+
+  <% if @upcoming then %>
+    <span class="title">Upcoming talks</span>
+  <% else %>
+    <span class="title">Past talks</span>
+  <% end %>
+  <%= link_to (image_tag "calendar.png"), feed_list_url(@list, :format => :ics, :protocol => "webcal") %>
+  <%= link_to (image_tag "feed.png"), feed_list_url(@list, :format => :atom) %>
+  <span class="comment">(cal/rss for this list only)</span>
+  <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
+  <br>
+  <% if @upcoming then %>
+    <%= link_to "See past talks", list_path(@list, :range => :past) %>
+  <% else %>
+    <%= link_to "See upcoming talks", @list %>
+  <% end %>
+</div>
 
 <div class="short-talks">
   <% if @talks.length == 0 %>
     No <%= if @upcoming then "upcoming" end %> talks
   <% end %>
 
-  <%= render :partial => "shared/talks", :locals => { :talks => @talks, :subscriptions => Hash.new } %>
+  <%= render :partial => "shared/talks", :locals => { :talks => @talks } %>
 </div>
-
-<span class="comment">
-  <% if @upcoming then %>
-    <%= link_to "See all talks", list_path(@list, :range => :all) %>
-    <% else %>
-    <%= link_to "See only upcoming talks", @list %>
-    <% end %>
-</span>
 
 <div class="organizers">
   <hr/>
@@ -74,16 +65,8 @@
   <% end %>
 </div>
 
-<% if can? :site_admin, :all %>
-  <hr/>
-  <%= link_to "See all subscribers", show_subscribers_list_path(@list) %>
-<% end %>
-
-
 <script>
-  $(".subscribe").click(function () { $("body").spin() });
-  $(".watch").click(function () { $("body").spin() });
-  $(".unsubscribe").click(function () { $("body").spin() });
+  $(".properties a[data-remote=true]").click(function () { $(".center-header").spin() });
 </script>
 
 <script>

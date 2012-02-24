@@ -32,7 +32,12 @@
 
 <div class="main">
 
+<% if content_for? :left_sidebar %>
   <div class="left-sidebar">
+    <div class="flash">
+      <span class="notice"><%= notice %></span>
+      <span class="alert"><%= alert %></span>
+    </div>
     <%= yield :left_sidebar %>
   </div>
 
@@ -41,15 +46,10 @@
       <%= yield %>
     </div>
   </div>
-
-  <div class="right-sidebar">
-    <div class="flash">
-      <span class="notice"><%= notice %></span>
-      <span class="alert"><%= alert %></span>
-    </div>
-
-    <%= yield :right_sidebar %>
-  </div>
+<% else %>
+  <%= yield %>
+<% end %>
+  
 
 </div>
 

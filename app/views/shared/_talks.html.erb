@@ -17,7 +17,6 @@
   <% elsif (t.later_this_week? && last_interval != :later_this_week) %>
     </div>
     <div class="this-weeks-talks">
-    <div class="header">This week</div>
     <% last_interval = :later_this_week %>
   <% elsif (t.next_week? && last_interval != :next_week) %>
     </div>
@@ -46,6 +45,7 @@
     <div class="big-time">
       <div class="start-time"><%= t.start_time.strftime "%l:%M %P" %></div>
       <div class="end-time">-<%= t.end_time.strftime "%l:%M %P" %></div>
+      <div class="cal"><%= link_to (image_tag "calendar.png"), calendar_talk_url(t, :format => :ics), :title => "ical for this talk only" %></div>
     </div>
     <div class="body">
       <div class="lists"><%= render_lists(t) %></div>

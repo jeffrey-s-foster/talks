@@ -4,13 +4,7 @@
 
 */
 
-$("body").spin(false);
-
-<% if current_user && (subscribable.owner? current_user) %>
-  $(".badge-owner").show();
-<% else %>
-  $(".badge-owner").hide();
-<% end %>
+$(".center-header").spin(false);
 
 <% if current_user && (subscribable.poster? current_user) %>
   $(".badge-poster").show();
@@ -18,30 +12,42 @@ $("body").spin(false);
   $(".badge-poster").hide();
 <% end %>
 
-<% if current_user && (subscribable.subscriber? current_user) %>
-  $(".badge-subscriber").show();
-  $(".badge-watcher").hide();
-  $(".subscribe").hide();
-  $(".watch").show();
-  $(".unsubscribe").show();
+<% if current_user && (subscribable.respond_to? :through) && (not subscribable.through(current_user)[:subscriber].empty?) %>
+  $(".subscriber-through").show();
+  $(".watcher-through").hide();
+  $(".subscriber").hide();
+  $(".watcher").hide();
+  $(".unsubscribed").hide();
+<% elsif current_user && (subscribable.respond_to? :through) && (not subscribable.through(current_user)[:watcher].empty?) %>
+  $(".subscriber-through").hide();
+  $(".watcher-through").show();
+  $(".subscriber").hide();
+  $(".watcher").hide();
+  $(".unsubscribed").hide();
+<% elsif current_user && (subscribable.subscriber? current_user) %>
+  $(".subscriber-through").hide();
+  $(".watcher-through").hide();
+  $(".subscriber").show();
+  $(".watcher").hide();
+  $(".unsubscribed").hide();
 <% elsif current_user && (subscribable.watcher? current_user) %>
-  $(".badge-subscriber").hide();
-  $(".badge-watcher").show();
-  $(".subscribe").show();
-  $(".watch").hide();
-  $(".unsubscribe").show();
+  $(".subscriber-through").hide();
+  $(".watcher-through").hide();
+  $(".subscriber").hide();
+  $(".watcher").show();
+  $(".unsubscribed").hide();
 <% elsif current_user %>
-  $(".badge-subscriber").hide();
-  $(".badge-watcher").hide();
-  $(".subscribe").show();
-  $(".watch").show();
-  $(".unsubscribe").hide();
+  $(".subscriber-through").hide();
+  $(".watcher-through").hide();
+  $(".subscriber").hide();
+  $(".watcher").hide();
+  $(".unsubscribed").show();
 <% else %>
-  $(".badge-subscriber").hide();
-  $(".badge-watcher").hide();
-  $(".subscribe").hide();
-  $(".watch").hide();
-  $(".unsubscribe").hide();
+  $(".subscriber-through").hide();
+  $(".watcher-through").hide();
+  $(".subscriber").hide();
+  $(".watcher").hide();
+  $(".unsubscribed").hide();
 <% end %>
 
 <% if current_user && (subscribable.respond_to? :registered?) && (subscribable.registered? current_user) %>

@@ -1,85 +1,56 @@
-<div class="show-talk">
-
-  <div class="actions">
-    <div class="action-table">
-      <% if can? :edit, @talk %>
-        <span class="action"><%= link_to "edit", edit_talk_path(@talk) %></span>
-        <span class="action"><%= link_to "delete", @talk, :confirm => 'Are you sure you want to delete this talk?', :method => :delete %></span>
-      <% end %>
-      <% if @talk.request_reg %>
-        <span class="action register"><%= link_to "register", register_talk_path(@talk, :do => "register") %></span>
-        <span class="action unregister"><%= link_to "unregister", register_talk_path(@talk, :do => "unregister") %></span>
-      <% end %>
-    </div>
-    <div class="subscribe-table">
-      <span class="action subscribe"><%= link_to "subscribe", subscribe_talk_path(@talk, :do => "subscribe"), :remote => true %></span>
-      <span class="action unsubscribe"><%= link_to"unsubscribe", subscribe_talk_path(@talk, :do => "unsubscribe"), :remote => true %></span>
-      <div class="action watch"><%= link_to "watch", subscribe_talk_path(@talk, :do => "watch"), :remote => true %></div>
-    </div>
-  </div>
-
-<div class="title">
-  <%= @talk.title %>
-  <span class="badge-registered" title="You are registered to attend this talk"></span>
-  <span class="badge-subscriber" title="You are subscribed to this talk"></span>
-  <span class="badge-watcher" title="You are watching this talk"></span>
-  <% if @talk.owner? current_user %>
-    <span class="badge-owner" title="You own this talk"></span>
-  <% end %>
-  <% case @talk.through current_user %>
-  <% when :kind_subscriber_through %>
-    <span class="badge-subscriber-through" title="You are subscribed to this talk because you are subscribed to a list containing it"></span>
-  <% when :kind_watcher_through %>
-    <span class="badge-watcher-through" title="You are watching this talk because you are watching a list containing it"></span>
-  <% end %>
-  <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics) %>
-  <span class="comment">(cal for this talk only)</span>
-</div>
-
-<div class="speaker"><%= render_speaker(@talk)  %></div>
-<div class="venue"><%= render_venue(@talk) %></div>
-<div class="time"><%= render_time(@talk)  %></div>
-
-<hr/>
-
-<div class="abstract">
-  <span class="title">Abstract</span>
-  <% if @talk.abstract == "" %>
-    <div class="abstract-body">(No abstract yet)</div>
-  <% else %>
-    <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
-  <% end %>
-</div>
-
-<% if (not @talk.bio.empty?) %>
-  <div class="bio">
-    <span class="title">Bio</span>
-    <div class="bio-body"><%= @talk.bio.html_safe %></div>
-  </div>
+<% content_for :left_sidebar do %>
+    <ul>
+    <li class="title">Posted to</li>
+     <% @talk.lists.sort { |a,b| a.name <=> b.name }.each do |l| %>
+        <li><%= link_to l.name, l %></li>
+     <% end %>
+    <br/>
+    <li class="title">All lists</li>
+    <% @lists.each do |l| %>
+        <li><%= link_to l.name, l %></li>
+    <% end %>
+    </ul>
 <% end %>
 
-<% if @talk.request_reg && current_user %>
-  <hr/>
-  <div class="registration not-registered">
-    <b>Registration requested:</b>
-    The organizer of this talk requests that you register if you
-    are planning to attend. You can register by clicking the registration
-    button (upper-right corner of the page). If you change your mind
-    later, you can always unregister.
-  </div>
-  <div class="registration registered">
-    <b>Registration requested:</b> Thank you for registering.
-  </div>
+<div class="center-header">
+  <div class="talk">
+    <div class="title"><%= @talk.title %></div> 
+    <div class="speaker"><%= render_speaker(@talk)  %></div>
+    <div class="venue"><%= render_venue(@talk) %></div>
+    <div class="time"><%= render_time(@talk)  %> <%= link_to (image_tag "calendar.png"), calendar_talk_url(@talk, :format => :ics), :title => "ical for this talk only" %></div>
 
-  <% if can? :edit, @talk %>
-    <p>
-      <%= link_to "Show registrations", show_registrations_talk_path(@talk) %>
-  <% end %>
+    <ul class="properties">
+      <% if can? :edit, @talk %>
+        <li>
+	  You may <%= link_to "edit", edit_talk_path(@talk) %> or <%= link_to "delete", @talk, :confirm => 'Are you sure you want to delete this talk?', :method => :delete %> this talk.
+	  <% if @talk.request_reg %>
+	    (<%= link_to "Show registrations", show_registrations_talk_path(@talk) %>)
+	  <% end %>
+	  <% if can? :site_admin, :all %>
+            (<%= link_to "See all subscribers", show_subscribers_talk_path(@talk) %>)
+	  <% end %>
+	</li>
+      <% end %>
+      <% through = @talk.through current_user %>
+      <li class="subscriber-through">You are subscribed to this talk through <%= render_array_of_lists through[:subscriber] %>.</li>
+      <li class="watcher-through">You are watching this talk through <%= render_array_of_lists through[:watcher] %>.</li>
+      <li class="subscriber">You are subscribed to this talk. (<%= link_to"unsubscribe", subscribe_talk_path(@talk, :do => "unsubscribe"), :remote => true %>, <%= link_to "watch", subscribe_talk_path(@talk, :do => "watch"), :remote => true %>)</li>
+      <li class="watcher">You are watching this talk. (<%= link_to"unwatch", subscribe_talk_path(@talk, :do => "unsubscribe"), :remote => true %>, <%= link_to "subscribe", subscribe_talk_path(@talk, :do => "subscribe"), :remote => true %>)</li>
+      <li class="unsubscribed">You are not subscribed to this talk. (<%= link_to "watch", subscribe_talk_path(@talk, :do => "watch"), :remote => true %>, <%= link_to "subscribe", subscribe_talk_path(@talk, :do => "subscribe"), :remote => true %>)</li>
+      <% if @talk.request_reg && current_user && (@talk.registered? current_user) %>
+        <li class="unregister">Thank you for registering for this talk (<%= link_to "unregister", register_talk_path(@talk, :do => "unregister") %>).</li>
+      <% elsif @talk.request_reg && current_user %>
+        <li class="register">
+	  <span class="alert">Registration:</span>
+	  The organizer of this talk requests that you <%= link_to "register", register_talk_path(@talk, :do => "register") %> if you
+	  are planning to attend. If you change your mind, you can always unregister later.
+	</li>
+      <% end %>
+    </ul>
 
-<% elsif @talk.request_reg && (not current_user) %>
-  <hr/>
+<% if @talk.request_reg && (not current_user) %>
   <div class="registration">
-    <b>Registration requested:</b>
+    <span class="alert">Registration requested:</span>
     The organizer of this talk requests that you register if you
     are planning to attend. There are two ways to register:
     (1) You can create an account on this site (click the "register"
@@ -98,28 +69,30 @@
     <% end %>
   </div>
 <% end %>
-
-<hr/>
-
-<div class="lists">
-<% unless @talk.lists.empty? %>
-  This talk is part of the following lists: <%= render_lists(@talk) %>
-<% end %>
 </div>
 
-<div class="comment">This talk is organized by <%= @talk.owner.name %></div>
+<div class="talk">
+<div class="abstract">
+  <span class="title">Abstract</span>
+  <% if @talk.abstract == "" %>
+    <div class="abstract-body">(No abstract yet)</div>
+  <% else %>
+    <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
+  <% end %>
+</div>
 
-<% if can? :site_admin, :all %>
-  <hr/>
-  <%= link_to "See all subscribers", show_subscribers_talk_path(@talk) %>
+<% if (not @talk.bio.empty?) %>
+  <div class="bio">
+    <span class="title">Bio</span>
+    <div class="bio-body"><%= @talk.bio.html_safe %></div>
+  </div>
 <% end %>
 
+<div class="comment">This talk is organized by <%= @talk.owner.name %></div>
+</div>
+
 <script>
-  $(".register").click(function () { $("body").spin() });
-  $(".unregister").click(function () { $("body").spin() });
-  $(".subscribe").click(function () { $("body").spin() });
-  $(".watch").click(function () { $("body").spin() });
-  $(".unsubscribe").click(function () { $("body").spin() });
+  $(".properties a[data-remote=true]").click(function () { $(".center-header").spin() });
 </script>
 
 <script>

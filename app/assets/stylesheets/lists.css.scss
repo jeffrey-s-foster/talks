@@ -15,7 +15,8 @@ table.edit-list {
   };
 }
 
-.list-descr {
+.list {
+    padding-bottom: 2em;
     .name {
 	font-size: x-large;
 	color: $primary_color_2;
@@ -23,7 +24,9 @@ table.edit-list {
     .short_descr {
 	font-size: large;
     }
-    .long_descr { }
+    .long_descr {
+	font-family: $georgia;
+    }
 }
 
 .header {

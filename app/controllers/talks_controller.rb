@@ -38,6 +38,7 @@ class TalksController < ApplicationController
   def show
     @talk = Talk.find(params[:id])
     @subscription = @talk.subscription current_user if current_user
+    @lists = List.all.sort { |a,b| a.name <=> b.name }
   end
 
   def create
