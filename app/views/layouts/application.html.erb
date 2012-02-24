@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Talks</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
@@ -11,8 +11,13 @@
 <div class="site-title">
   <div class="account">
     <% if user_signed_in? %>
-      <%= link_to current_user.name, current_user %>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
+      <%= link_to current_user.name, edit_user_path(current_user) %>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      <%= link_to "my list", current_user %>
+      <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
+      <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
+      <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
       <%= link_to "log out", destroy_user_session_path(user_session), :method => :delete %>
     <% else %>
        <%= link_to "log in", new_user_session_path %>
@@ -21,23 +26,30 @@
     <% end %>
     &nbsp;&nbsp;|&nbsp;&nbsp;
     <%= link_to "help", page_path("help") %>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <%= link_to "all lists", lists_path %>
-    <% if can? :create, Talk %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new talk", new_talk_path %><% end %>
-    <% if can? :create, List then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "new list", new_list_path %><% end %>
-    <% if can? :site_admin, nil then %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "admin", admin_index_path %><% end %>
   </div>
   <%= link_to image_tag("logo.png"), root_path %>
 </div>
 
 <div class="main">
 
-  <div class="flash">
-    <span class="notice"><%= notice %></span>
-    <span class="alert"><%= alert %></span>
+  <div class="left-sidebar">
+    <%= yield :left_sidebar %>
   </div>
 
-<%= yield %>
+  <div class="right-scroll-pane">
+    <div class="center-pane">
+      <%= yield %>
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+    <div class="flash">
+      <span class="notice"><%= notice %></span>
+      <span class="alert"><%= alert %></span>
+    </div>
+
+    <%= yield :right_sidebar %>
+  </div>
 
 </div>
 

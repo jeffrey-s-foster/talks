@@ -2,69 +2,60 @@
  parameters:
 
    talks - array of talks, sorted and uniqified
-   subscriptions - hash map from talks to subscription kind
 
 <% end %>
 
-<% h = organize_talks talks %>
-<% @past = (not (h[:past].empty?)) %>
-<% @this_week = (not (h[:today].empty? && h[:later_this_week][0].empty? && h[:later_this_week][1].empty? && h[:later_this_week][2].empty? &&
-   h[:later_this_week][3].empty? && h[:later_this_week][4].empty? && h[:later_this_week][5].empty? && h[:later_this_week][6].empty?)) %>
-<% @next_week = (not (h[:next_week][0].empty? && h[:next_week][1].empty? && h[:next_week][2].empty? && h[:next_week][3].empty? &&
-   h[:next_week][4].empty? && h[:next_week][5].empty? && h[:next_week][6].empty?)) %>
-<% @further_ahead = (not (h[:beyond].empty?)) %>
+<% last_talk = nil %>
+<% last_interval = nil %>
 
-<% if @past %>
-  <div class="past-talks">
-  <h2>Past talks</h2>
-  <% h[:past].each do |t| %>
-    <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+<div>
+<% talks.each do |t| %>
+  <% if (t.past? && last_interval != :past) %>
+    </div>
+    <div class="past-talks">
+    <% last_interval = :past %>
+  <% elsif (t.later_this_week? && last_interval != :later_this_week) %>
+    </div>
+    <div class="this-weeks-talks">
+    <div class="header">This week</div>
+    <% last_interval = :later_this_week %>
+  <% elsif (t.next_week? && last_interval != :next_week) %>
+    </div>
+    <div class="next-weeks-talks">
+    <div class="header">Next week</div>
+    <% last_interval = :next_week %>
+  <% elsif (t.further_ahead? && last_interval != :further_ahead) %>
+    </div>
+    <div class="further-ahead-talks">
+    <div class="header">Further ahead</div>
+    <% last_interval = :further_ahead %>
   <% end %>
-  </div>
-<% end %>
-
-<% if @this_week %>
-  <div class="this-weeks-talks">  
-    <% unless h[:today].empty? %>
-      <h3>Today, <%= format_day(h[:now]) %></h3>
-      <% h[:today].each do |t| %>
-        <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
+  <% if (not last_talk) || (t.start_time.to_date != last_talk.start_time.to_date) %>
+    <div class="day">
+      <% if t.start_time.today? %>
+        Today,
+      <% elsif (t.start_time - 1.day).today? %>
+        Tomorrow,
       <% end %>
-    <% end %>
-  
-    <% (0..6).each do |wday| %>
-      <% unless h[:later_this_week][wday].empty? then %>
-        <h3><%= format_day(h[:now].beginning_of_week - 1.day + wday.day) %></h3>
-        <% h[:later_this_week][wday].each do |t| %>
-          <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-        <% end %>
-      <% end %>
-    <% end %>
+      <%= format_day(t.start_time.to_date) %>
+    </div>
+  <% end %>
+  <% last_talk = t %>
 
+  <div class="short-talk">
+    <div class="big-time">
+      <div class="start-time"><%= t.start_time.strftime "%l:%M %P" %></div>
+      <div class="end-time">-<%= t.end_time.strftime "%l:%M %P" %></div>
+    </div>
+    <div class="body">
+      <div class="lists"><%= render_lists(t) %></div>
+      <div class="title">
+	<%= link_to t.title, t %>
+      </div>
+      <div class="speaker"><%= render_speaker(t)  %></div>
+      <div class="venue"><%= render_venue(t) %></div>
+    </div>
   </div>
-<% end %>
 
-<% if @next_week %>
-  <div class="next-weeks-talks">
-    <h2>Next week</h2>
-
-    <% (0..6).each do |wday| %>
-      <% unless h[:next_week][wday].empty? %>
-        <h3><%= format_day(h[:now].beginning_of_week + 6.day + wday.day) %></h3>
-        <% h[:next_week][wday].each do |t| %>
-          <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>
-
-<% if @further_ahead %>
-  <div class="further-ahead-talks">
-    <h2>Further ahead</h2>
-
-    <% h[:beyond].each do |t| %>
-      <%= render :partial => "shared/short_talk", :locals => { :talk => t, :subscription_kind => subscriptions[t] } %>
-    <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>

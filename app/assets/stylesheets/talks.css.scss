@@ -64,13 +64,23 @@ table.talks-table {
 
 .short-talks {
     .lists  a {
-	font-size: small;
+    	font-size: small;
 	font-style: italic;
 	color: $secondary_color_b;
     }
     .title a {
 	font-size: large;
 	color: $primary_color_2;
+    }
+    .header {
+	padding-top: 10px;
+	margin-top: -0.5em;
+	margin-left: 0px;
+	text-align: center;
+	font-weight: normal;
+	font-style: italic;
+	font-size: medium;
+	color: gray;
     }
     .speaker, .speaker a {
 	color: black;
@@ -82,4 +92,27 @@ table.talks-table {
     .time {
 	padding-bottom: 15px;
     }
+    .day {
+	font-size: large;
+	font-weight: bold;
+	padding-top: 1em;
+	padding-bottom: 1em;
+    }
+    .big-time {
+	float: left;
+	height: 100%;
+	.start-time {
+	    text-align: left;
+	    font-weight: bold;
+	}
+	.end-time {
+	    font-size: smaller;
+	    text-align: right;
+	}
+    }
+    .body {
+	padding-left: 5.5em;
+	padding-bottom: 1em;
+    }
 }
+

@@ -3,17 +3,14 @@ class TalksController < ApplicationController
   def index
     fix_range params
     case params[:range]
-    when :all
-      @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
+    when :past
+      @talks = Talk.past.sort { |a,b|
+        [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time]
+      }
       @upcoming = false
     else
       @talks = Talk.upcoming.sort { |a,b| a.start_time <=> b.start_time }
       @upcoming = true
-    end
-    if current_user
-      @talk_subscriptions = current_user.subscribed_talks(params[:range])
-    else
-      @talk_subscriptions = Hash.new
     end
     @lists = List.all.sort { |a,b| a.name <=> b.name }
   end

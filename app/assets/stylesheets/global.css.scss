@@ -11,8 +11,8 @@ $secondary_color_a_2: #feae5f;
 $secondary_color_b_2: #50b5cc;
 $complementary_color_2: #55e455;
 
-$background_very_light: #fcefe3;
-$background_light: #fce2c9;
+$background_very_light: #f9f7f4;
+$background_light: #fcefe3;
 
 body {
     font-family: arial, helvetica, sans-serif;
@@ -27,7 +27,7 @@ table {
 h1, h2, h3, h4 {
     color: black;
   /*  background-color: $secondary_color_b_2; */
-    padding: 3px;
+/*    padding: 3px; */
 }
 
 .main {
@@ -50,7 +50,7 @@ h1, h2, h3, h4 {
 }
 
 div.flash {
-    float: left;
+    float: right;
     .notice {
 	color: blue;
     }

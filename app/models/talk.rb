@@ -33,6 +33,10 @@ class Talk < ActiveRecord::Base
     where("end_time > ?", Time.zone.now)
   end
 
+  def self.past
+    where("end_time < ?", Time.zone.now)
+  end
+
   def self.today
     where("end_time > ? and start_time < ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
   end
@@ -40,6 +44,10 @@ class Talk < ActiveRecord::Base
   def self.this_week
     # In Rails 3.2, beginning/end_of_week take a start day parameter
     where("end_time > ? and start_time < ?", (Time.zone.now + 1.day).beginning_of_week - 1.day, (Time.zone.now + 1.day).end_of_week - 1.day)
+  end
+
+  def past?
+    end_time < Time.zone.now
   end
 
   def upcoming?
@@ -50,8 +58,17 @@ class Talk < ActiveRecord::Base
     (end_time > Time.zone.now.beginning_of_day) && (start_time < Time.zone.now.end_of_day)
   end
 
-  def this_week?
-    (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
+  def later_this_week?
+    (not past?) && (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
+  end
+
+  def next_week?
+    (end_time > (Time.zone.now + 1.day).beginning_of_week + 6.day) && (start_time < (Time.zone.now + 1.day).end_of_week + 6.day)
+  end
+
+  # neither in the past, nor this week, nor next week
+  def further_ahead?
+    not (past? || later_this_week? || next_week?)
   end
 
   # range may be :all, :today, :this_week, :upcoming
