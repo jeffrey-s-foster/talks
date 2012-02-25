@@ -14,7 +14,9 @@ class AdminController < ApplicationController
 
   def self.spam_users(h)
     User.all do |u|
-      Notifications.send_admin_message(u, h).deliver
+      if u.confirmed_at
+        Notifications.send_admin_message(u, h).deliver
+      end
     end
     logger.debug "Messages delivered."
   end
