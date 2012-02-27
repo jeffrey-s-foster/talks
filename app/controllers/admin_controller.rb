@@ -13,7 +13,7 @@ class AdminController < ApplicationController
   end
 
   def self.spam_users(h)
-    User.all do |u|
+    User.all.each do |u|
       if u.confirmed_at
         Notifications.send_admin_message(u, h).deliver
       end
