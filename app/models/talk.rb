@@ -73,7 +73,8 @@ class Talk < ActiveRecord::Base
 
   # range may be :all, :today, :this_week, :upcoming
   def match_range(range)
-    (range == :past && past?) ||
+    (range == :all) ||
+      (range == :past && past?) ||
       (range == :upcoming && upcoming?) ||
       (range == :today && today?) ||
       (range == :this_week && this_week?)
