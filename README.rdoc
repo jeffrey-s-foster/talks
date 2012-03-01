@@ -147,16 +147,6 @@ Also edit config/locals/en.yml, including
 
 * The "Watch" button changes to "Unsubscribe" when you click on it, not "Unwatch".
 
-* I think there's a layout error on the list pages, e.g., on
-  http://talks.cs.umd.edu/lists/1, "Upcoming talks" and "Further
-  ahead" are at different indent levels, compared to the home page. Or
-  is it that "Further ahead" should be hidden unless "See all talks"
-  is clicked? I don't think "See all talks" is necessary, but if you
-  anticipate that there will be an excessive number of talks scheduled
-  ahead of time, use links like "Previous/Next 100 talks".
-
-* Can you add dates next to the days of week?
-
 * Support email from list organizer to all subscribers.
 
 * beginning of day on upcoming talks?
@@ -171,10 +161,12 @@ Also edit config/locals/en.yml, including
   boundaries, leading to awkward-sounding phrasing.  How about this as
   an alternative: one or fewer CRs -> 0 CR.  >= 2 CRs -> 2 CRs?
 
-* "See all talks" is much like "All talks" which has a different
-  meaning elsewhere in the same application. Maybe "All talks
-  including past ones"?
-
-* Remove create_talk permission from db
-
 * Note when can post a talk to a list?
+
+* When receiving an email announcement for a talk, it would be nice to
+  also see *why* one is getting the announcement (e.g., what group the
+  talk is associated with). Otherwise it can be difficult, for
+  example, to distinguish a department-wide speaker (e.g., faculty
+  candidate) from someone speaking in the privacy seminar.
+
+* mobile web site

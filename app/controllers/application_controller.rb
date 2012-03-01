@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
 
   # turn a list of talks into a calendar
   def generate_ical(talks)
+    coder = HTMLEntities.new
     cal = RiCal.Calendar do |cal|
       talks.each do |t|
         cal.event do |event|
@@ -52,12 +53,12 @@ class ApplicationController < ActionController::Base
 	  event.url = talk_url(t)
           notes = ""
           unless t.abstract.empty?
-	    notes = t.abstract
+	    notes = coder.decode(ActionController::Base.helpers.strip_tags(t.abstract))
           else
 	    notes = "(No abstract yet)"
 	  end
 	  unless t.bio.empty?
-	    notes << "Bio: " << t.bio
+	    notes << "Bio: " << coder.decode(ActionController::Base.helpers.strip_tags(t.bio))
 	  end
 	  event.description = notes
         end
