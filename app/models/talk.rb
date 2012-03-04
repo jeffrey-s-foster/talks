@@ -58,6 +58,10 @@ class Talk < ActiveRecord::Base
     (end_time > Time.zone.now.beginning_of_day) && (start_time < Time.zone.now.end_of_day)
   end
 
+  def this_week?
+    (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
+  end
+
   def later_this_week?
     (not past?) && (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
   end
