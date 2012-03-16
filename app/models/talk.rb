@@ -114,7 +114,6 @@ class Talk < ActiveRecord::Base
     not (user && (registrations.where(:user_id => user.id).empty?))
   end
 
-  # 
   def through(user)
     h = Hash.new []
     return h unless user

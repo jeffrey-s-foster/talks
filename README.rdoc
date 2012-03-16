@@ -170,3 +170,13 @@ Also edit config/locals/en.yml, including
   candidate) from someone speaking in the privacy seminar.
 
 * mobile web site
+
+* no email on talk cancellation?
+
+* make it impossible to post talk not on at least one list
+
+* If at some point you feel inspired to create something similar (or
+  even have the very same facility extended) for deptl events more
+  generally (meetings, picnics, etc) that would be even better.
+
+* possibly a search capability would be useful for the site?
