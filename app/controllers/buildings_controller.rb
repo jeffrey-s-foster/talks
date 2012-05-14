@@ -29,7 +29,7 @@ class BuildingsController < ApplicationController
         next
       end
     end
-    redirect_to buildings_index_path, :alert => msg.html_safe
+    redirect_to buildings_index_path, :alert => msg.sanitize
   end
 
   def destroy

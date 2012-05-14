@@ -12,7 +12,7 @@
     <td><%= t.id %></td>
     <td><%= link_to t.title, t %></td>
     <td><%= link_to t.owner.name, edit_user_path(t.owner) %></td>
-    <td><%= (t.lists.sort { |a,b| a.name <=> b.name }.map { |l| link_to l.name, l }).join("&nbsp;&nbsp;&nbsp;").html_safe %></td>
+    <td><%= (t.lists.sort { |a,b| a.name <=> b.name }.map { |l| link_to l.name, l }).join("&nbsp;&nbsp;&nbsp;").sanitize %></td>
   </tr>
 
 

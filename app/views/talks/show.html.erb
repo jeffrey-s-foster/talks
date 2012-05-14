@@ -77,14 +77,14 @@
     <span class="title">No abstract</span>
   <% else %>
     <span class="title">Abstract</span>
-    <div class="abstract-body"><%= @talk.abstract.html_safe %></div>
+    <div class="abstract-body"><%= @talk.abstract.sanitize %></div>
   <% end %>
 </div>
 
 <% if (not @talk.bio.empty?) %>
   <div class="bio">
     <span class="title">Bio</span>
-    <div class="bio-body"><%= @talk.bio.html_safe %></div>
+    <div class="bio-body"><%= @talk.bio.sanitize %></div>
   </div>
 <% end %>
 

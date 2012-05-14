@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
 
   def name_and_email
-    "#{name} &lt;#{email}&gt;".html_safe
+    "#{name} &lt;#{email}&gt;".sanitize
   end
 
   def email_and_name
-    "#{email} (#{name})".html_safe
+    "#{email} (#{name})".sanitize
   end
 
   # TODO: check performance

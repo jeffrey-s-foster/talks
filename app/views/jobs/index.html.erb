@@ -18,7 +18,7 @@
 	<td><%= if j.run_at then j.run_at.localtime end %></td>
 	<td><%= if j.failed_at then j.failed_at.localtime end %></td>
 	<td><%= j.attempts %></td>
-	<td><%= if j.last_error then j.last_error.gsub("\\n", "<br/>").html_safe end %></td>
+	<td><%= if j.last_error then j.last_error.gsub("\\n", "<br/>").sanitize end %></td>
 	<td width=40><%= j.handler.to_s %></td>
 	<td><%= if j.locked_at then j.locked_at.localtime end %></td>
 	<td><%= j.locked_by %></td>

@@ -149,7 +149,11 @@ Also edit config/locals/en.yml, including
 
 * Support email from list organizer to all subscribers.
 
-* beginning of day on upcoming talks?
+* beginning of day on upcoming talks?  In my opinion, the talks on a
+  given day should stay up for that day, and then the whole day moved
+  to "past talks" when the day is over.  Maybe it's just me, but I
+  find it both unsettling and annoying not to see the whole day's list
+  of talks on one display together.
 
 * restrict "all" talks to some time period (1-2 years?)
 
@@ -180,3 +184,7 @@ Also edit config/locals/en.yml, including
   generally (meetings, picnics, etc) that would be even better.
 
 * possibly a search capability would be useful for the site?
+
+* comma after room number
+
+* registration email should come from talk organizer, rather than talks@cs.

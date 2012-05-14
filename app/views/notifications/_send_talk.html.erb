@@ -32,7 +32,7 @@ parameters:
     <% if talk.abstract == "" %>
       <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif; font-style: italic;">(No abstract yet)</div>
     <% else %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.abstract.html_safe %></div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.abstract.sanitize %></div>
     <% end %>
   </div>
 
@@ -43,7 +43,7 @@ parameters:
 <% else %>
       <span style="font-weight: bold; font-size: large;">Bio</span>
 <% end %>
-      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.html_safe %></div>
+      <div style="font-family: Georgia, Cambria, 'Times New Roman', Times, serif;"><%= talk.bio.sanitize %></div>
   </div>
   <% end %>
 

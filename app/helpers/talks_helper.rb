@@ -12,11 +12,11 @@ module TalksHelper
     unless talk.speaker_url.empty?
       @out = link_to @out, talk.speaker_url
     end
-    return @out.html_safe
+    return @out.sanitize
   end
 
   def render_venue(talk)
-    return "<i>No venue yet</i>".html_safe unless (talk.room || talk.building)
+    return "<i>No venue yet</i>".sanitize unless (talk.room || talk.building)
 
     if talk.building && (not talk.building.name.empty?)
       @out = "#{talk.room} #{talk.building.name} (#{talk.building.abbrv})"
@@ -28,7 +28,7 @@ module TalksHelper
     if talk.building && talk.building.url && (not talk.building.url.empty?)
       @out = link_to @out, talk.building.url
     end
-    return @out.html_safe
+    return @out.sanitize
   end
 
   def render_time(talk)
@@ -42,21 +42,21 @@ module TalksHelper
     else
       @out = "(Time not yet available)"
     end
-    return @out.html_safe
+    return @out.sanitize
   end
 
   def render_lists(talk)
     return (talk.lists
               .sort { |a,b| a.name <=> b.name }
               .map { |l| link_to l.name, list_url(l) }
-              .join "&nbsp;&sdot;&nbsp;").html_safe
+              .join "&nbsp;&sdot;&nbsp;").sanitize
   end
 
   def render_array_of_lists(lists)
     return (lists
               .sort { |a,b| a.name <=> b.name }
               .map { |l| link_to l.name, list_url(l) }
-              .join "&nbsp;&sdot;&nbsp;").html_safe
+              .join "&nbsp;&sdot;&nbsp;").sanitize
   end
 
   # returns hash map h such that

@@ -22,7 +22,7 @@
       <%= auto_discovery_link_tag(:atom, feed_list_url(@list, :format => :atom), :action =>"feed") %>
     </div>
     <div class="short-descr">
-      <%= @list.short_descr.html_safe %>
+      <%= @list.short_descr.sanitize %>
     </div>
     <% if @upcoming then %>
       <%= link_to "See past talks", list_path(@list, :range => :past) %>
@@ -47,7 +47,7 @@
     </ul>
   </div>
 
-    <div class="long-descr"><%= @list.long_descr.html_safe %></div>
+    <div class="long-descr"><%= @list.long_descr.sanitize %></div>
 </div>
 
 <div class="short-talks">

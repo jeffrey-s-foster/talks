@@ -25,31 +25,31 @@ class JobsController < ApplicationController
 
   def do_start
     runcmd "#{::Rails.root}/script/delayed_job restart"
-    flash[:notice] = @out.html_safe
+    flash[:notice] = @out.sanitize
     redirect_to jobs_index_path
   end
 
   def do_stop
     runcmd "#{::Rails.root}/script/delayed_job stop"
-    flash[:notice] = @out.html_safe
+    flash[:notice] = @out.sanitize
     redirect_to jobs_index_path
   end
 
   def do_restart
     runcmd "#{::Rails.root}/script/delayed_job restart"
-    flash[:notice] = @out.html_safe
+    flash[:notice] = @out.sanitize
     redirect_to jobs_index_path
   end
 
   def do_reload
     runcmd "#{::Rails.root}/script/delayed_job reload"
-    flash[:notice] = @out.html_safe
+    flash[:notice] = @out.sanitize
     redirect_to jobs_index_path
   end
 
   def do_status
     runcmd "#{::Rails.root}/script/delayed_job status"
-    flash[:notice] = @out.html_safe
+    flash[:notice] = @out.sanitize
     redirect_to jobs_index_path
   end
 
