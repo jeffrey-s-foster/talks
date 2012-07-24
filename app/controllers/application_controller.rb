@@ -43,8 +43,8 @@ class ApplicationController < ActionController::Base
       talks.each do |t|
         cal.event do |event|
           event.summary = "#{t.speaker} - #{t.title}"
-          event.dtstart = t.start_time
-          event.dtend = t.end_time
+          event.dtstart = t.start_time.in_time_zone("US/Eastern")
+          event.dtend = t.end_time.in_time_zone("US/Eastern")
           if t.room && t.building
             event.location = "#{t.room} #{t.building.abbrv}"
           elsif t.room

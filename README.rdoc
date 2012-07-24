@@ -44,6 +44,7 @@ Also edit config/locals/en.yml, including
 * Register
 * sqlite3 db/development.sqlite3
   > update users set perm_site_admin = "1" where id = "1";
+* Edit app/controllers/application_controller#generate_ical so that the two occurrences of "US/Eastern" are in the appropriate time zone.
 
 == Update (put this in a capfile)
 
