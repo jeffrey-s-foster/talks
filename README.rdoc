@@ -51,7 +51,9 @@ Also edit config/locals/en.yml, including
 * bundle --deployment
 * rake assets:precompile
 * cd public
-  * find . -type d -exec chmod go+x {} \;
+  * find . -type d -exec chmod go+x \{\} \;     # or
+  * find . -type d | xargs chmod go+x
+    and
   * chmod -R a+r .
 * touch tmp/restart.txt
 * RAILS_ENV=production script/delayed_job restart
@@ -109,8 +111,6 @@ Also edit config/locals/en.yml, including
   * Indicate in email update whether you are subscribed to the talk or not
 
 * disable (really) users from cancelling accounts? or enable it fully
-
-* split lists window so list info is on left, talks on right
 
 * what happens to posted talks when a user is deleted?
 
@@ -188,3 +188,5 @@ Also edit config/locals/en.yml, including
 * comma after room number
 
 * registration email should come from talk organizer, rather than talks@cs.
+
+* dissertation defense, proposal flags?
