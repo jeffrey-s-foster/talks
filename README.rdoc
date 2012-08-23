@@ -77,11 +77,6 @@ Also edit config/locals/en.yml, including
   * A talk may be edited/deleted by the creator of the talk or by an admin of any list the talk is posted to
   * A user may be granted or revoked list poster or admin permission by an admin of that list
 
-== Miscellaneous
-
-* {Color scheme}[http://colorschemedesigner.com/#0041YqqvKv5v5]
-* {Button generator}[http://www.help4web.net/rss_button/index.php] - left-side background color 23ca23, right-side background color 888888, vertical bar position 12
-
 == TODO list
 
 * LDAP support for UMCP Directory IDs.  Using these is one less
@@ -101,8 +96,6 @@ Also edit config/locals/en.yml, including
 
 * More efficient queries in functions added to models/list.rb,
   models/user.rb, and models/talk.rb
-
-* Add ssl for ical feed?
 
 * rss/ical feeds - only include past n talks, e.g., past 1 year
 
@@ -129,13 +122,6 @@ Also edit config/locals/en.yml, including
   Deptl scheduling (meetings, picnics, and maybe even spring break
   dates, end of classes, last day to submit grades, etc).
 
-* Talks from outside the dept?
-
-* Dissertation proposals/defesnses/etc
-
-* ssl?
-* https://github.com/plataformatec/devise/wiki/How-To:-Use-SSL-(HTTPS)
-
 * link to it on the dept home page
 
 * Clean up this week emails to organize by day of the week
@@ -149,14 +135,6 @@ Also edit config/locals/en.yml, including
 * The "Watch" button changes to "Unsubscribe" when you click on it, not "Unwatch".
 
 * Support email from list organizer to all subscribers.
-
-* beginning of day on upcoming talks?  In my opinion, the talks on a
-  given day should stay up for that day, and then the whole day moved
-  to "past talks" when the day is over.  Maybe it's just me, but I
-  find it both unsettling and annoying not to see the whole day's list
-  of talks on one display together.
-
-* restrict "all" talks to some time period (1-2 years?)
 
 * One anomaly I've noticed in the interface for entering talk data is
   the deletion of carriage returns in abstracts / bios.  One the one
@@ -178,16 +156,30 @@ Also edit config/locals/en.yml, including
 
 * no email on talk cancellation?
 
-* make it impossible to post talk not on at least one list
-
 * If at some point you feel inspired to create something similar (or
   even have the very same facility extended) for deptl events more
   generally (meetings, picnics, etc) that would be even better.
 
 * possibly a search capability would be useful for the site?
 
-* comma after room number
-
 * registration email should come from talk organizer, rather than talks@cs.
 
+--
+
+* comma after room number
+
+* Room/building flip
+
 * dissertation defense, proposal flags?
+
+* beginning of day on upcoming talks?  In my opinion, the talks on a
+  given day should stay up for that day, and then the whole day moved
+  to "past talks" when the day is over.  Maybe it's just me, but I
+  find it both unsettling and annoying not to see the whole day's list
+  of talks on one display together.
+
+* restrict "all" talks to some time period (1-2 years?)
+
+* make it impossible to post talk not on at least one list
+
+* add licensing
