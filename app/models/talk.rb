@@ -33,8 +33,14 @@ class Talk < ActiveRecord::Base
     where("end_time > ?", Time.zone.now)
   end
 
+  # before today
   def self.past
-    where("end_time < ?", Time.zone.now)
+    where("end_time <= ?", Time.zone.now.beginning_of_day)
+  end
+
+  # today or in the future
+  def self.current
+    where("end_time > ?", Time.zone.now.beginning_of_day)
   end
 
   def self.today
@@ -47,11 +53,16 @@ class Talk < ActiveRecord::Base
   end
 
   def past?
-    end_time < Time.zone.now
+    end_time <= Time.zone.now.beginning_of_day
   end
 
   def upcoming?
     end_time > Time.zone.now
+  end
+
+  # today or in the future
+  def current?
+    (end_time > Time.zone.now.beginning_of_day)
   end
 
   def today?
@@ -75,11 +86,12 @@ class Talk < ActiveRecord::Base
     not (past? || later_this_week? || next_week?)
   end
 
-  # range may be :all, :today, :this_week, :upcoming
+  # range may be :all, :today, :this_week, :upcoming, :current
   def match_range(range)
     (range == :all) ||
       (range == :past && past?) ||
       (range == :upcoming && upcoming?) ||
+      (range == :current && current?) ||
       (range == :today && today?) ||
       (range == :this_week && this_week?)
   end

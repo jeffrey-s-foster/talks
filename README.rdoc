@@ -172,12 +172,6 @@ Also edit config/locals/en.yml, including
 
 * dissertation defense, proposal flags?
 
-* beginning of day on upcoming talks?  In my opinion, the talks on a
-  given day should stay up for that day, and then the whole day moved
-  to "past talks" when the day is over.  Maybe it's just me, but I
-  find it both unsettling and annoying not to see the whole day's list
-  of talks on one display together.
-
 * restrict "all" talks to some time period (1-2 years?)
 
 * make it impossible to post talk not on at least one list

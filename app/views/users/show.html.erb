@@ -18,10 +18,10 @@
   <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :title => "rss for your talks" %>
   <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
   <br>
-  <% if @upcoming then %>
+  <% if @current then %>
     <%= link_to "See past talks", user_path(current_user, :range => :past) %>
   <% else %>
-    <%= link_to "See upcoming talks", current_user %>
+    <%= link_to "See current talks", current_user %>
   <% end %>
 </div>
 

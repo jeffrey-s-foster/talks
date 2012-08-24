@@ -6,10 +6,10 @@ class TalksController < ApplicationController
       @talks = Talk.past.sort { |a,b|
         [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time]
       }
-      @upcoming = false
+      @current = false
     else
-      @talks = Talk.upcoming.sort { |a,b| a.start_time <=> b.start_time }
-      @upcoming = true
+      @talks = Talk.current.sort { |a,b| a.start_time <=> b.start_time }
+      @current = true
     end
     @lists = List.all.sort { |a,b| a.name <=> b.name }
   end

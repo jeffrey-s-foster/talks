@@ -10,10 +10,10 @@ class ListsController < ApplicationController
     case params[:range]
     when :past
       @talks = @list.talks.past.sort { |a,b| [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time] }
-      @upcoming = false
+      @current = false
     else
-      @talks = @list.talks.upcoming.sort { |a,b| a.start_time <=> b.start_time }
-      @upcoming = true
+      @talks = @list.talks.current.sort { |a,b| a.start_time <=> b.start_time }
+      @current = true
     end
   end
 

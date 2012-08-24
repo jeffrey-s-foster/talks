@@ -12,16 +12,16 @@ class UsersController < ApplicationController
     authorize! :edit, @user
     fix_range params
     if params[:range] == :past
-      @upcoming = false
+      @current = false
     else
-      @upcoming = true
+      @current = true
     end
     @list_subscriptions = Hash[current_user.subscribed_lists]
     @your_lists = (current_user.owned_lists + current_user.poster_lists + @list_subscriptions.keys).sort { |a,b| a.name <=> b.name }.uniq
     @lists = List.all.sort { |a,b| a.name <=> b.name }
     @talk_subscriptions = current_user.subscribed_talks(params[:range])
-    if @upcoming then
-      @talks = current_user.owned_talks.upcoming
+    if @current then
+      @talks = current_user.owned_talks.current
     else
       @talks = current_user.owned_talks.past
     end

@@ -24,10 +24,10 @@
     <div class="short-descr">
       <%= @list.short_descr.sanitize %>
     </div>
-    <% if @upcoming then %>
+    <% if @current then %>
       <%= link_to "See past talks", list_path(@list, :range => :past) %>
     <% else %>
-      <%= link_to "See upcoming talks", @list %>
+      <%= link_to "See current talks", @list %>
     <% end %>
 
     <ul class="properties">
@@ -53,7 +53,7 @@
 <div class="short-talks">
     <% if @talks.length == 0 %>
     <div class="this-weeks-talks">
-      No <%= if @upcoming then "upcoming" end %> talks
+      No <%= if @current then "current" end %> talks
     </div>
   <% end %>
 

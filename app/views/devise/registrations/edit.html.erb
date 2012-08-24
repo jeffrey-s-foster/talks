@@ -1,12 +1,6 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <p>
-<div>
-<b>Note:</b> This site does not yet use SSL, so please be aware that
-your password will be sent in cleartext.
-</div>
-
-<p>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= f.error_messages :header_message => "Error", :message => nil, :header_tag => :div %>
 

@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
 
   # TODO: check performance
   # Returns hash table mapping talks to subscription kind (:kind_subscriber{_through} or :kind_watcher{_through})
-  # range may be :all, :today, :this_week, :upcoming
+  # range may be :all, :today, :this_week, :upcoming, :current
   def subscribed_talks(range, filter = [:kind_subscriber, :kind_subscriber_through, :kind_watcher, :kind_watcher_through])
-    raise "Argument #{range.inspect} out of range" unless [:past, :today, :this_week, :upcoming, :all].member? range
+    raise "Argument #{range.inspect} out of range" unless [:past, :today, :this_week, :upcoming, :current, :all].member? range
     talks = {} # map from talk to kind
 
     # directly subscribed talks

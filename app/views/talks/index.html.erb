@@ -13,10 +13,10 @@
   <%= link_to (image_tag "feed.png"), feed_talks_url( :format => :atom), :title => "rss for all talks" %>
   <%= auto_discovery_link_tag(:atom, feed_talks_url(:format => :atom), :action =>"feed") %>
   <br>
-  <% if @upcoming then %>
+  <% if @current then %>
     <%= link_to "See past talks", talks_path(:range => :past) %>
   <% else %>
-    <%= link_to "See upcoming talks", talks_path %>
+    <%= link_to "See current talks", talks_path %>
   <% end %>
 </div>
 
