@@ -21,7 +21,7 @@ class TalksController < ApplicationController
 
   def new
     authorize! :create, Talk
-    @talk = Talk.new
+    @talk = Talk.new(:kind => :standard)
     @title = "Create new talk"
     @posted = []
     @talk.owner = current_user

@@ -5,12 +5,7 @@ atom_feed :language => 'en-US' do |feed|
   @talks.each do |t|
     feed.entry(t) do |entry|
       entry.url talk_url(t)
-      entry.title t.title
-#      unless t.speaker_affiliation.empty?
-#        entry.author "#{t.speaker} - #{t.speaker_affiliation}"
-#      else
-#	entry.author t.speaker
-#      end
+      entry.title t.extended_title
       content = render_speaker(t) + "<br>".sanitize
       content += render_venue(t) + "<br>".sanitize
       content += render_time(t) + "<br><br>".sanitize

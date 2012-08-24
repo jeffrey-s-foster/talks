@@ -14,6 +14,22 @@ class Talk < ActiveRecord::Base
 
   attr_accessor :trigger_watch_email
 
+  # The following can be customized, but leave at least :standard in the list.
+  symbolize :kind, :in => {
+    :standard => "Standard",
+    :ms_defense => "MS Defense",
+    :phd_proposal => "PhD Proposal",
+    :phd_defense => "PhD Defense"},
+  :scopes => true, :methods => true
+
+  def extended_title
+    if kind == :standard
+      title
+    else
+      "#{kind_text}:  #{title}"
+    end
+  end
+
   def start_end_same_day
     if start_time && end_time && (start_time.to_date != end_time.to_date)
       errors.add(:internal_error, "- start time and end time must be on same day")

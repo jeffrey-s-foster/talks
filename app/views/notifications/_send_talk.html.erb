@@ -8,7 +8,7 @@ parameters:
 <% end %>
 
 <% if changes && (changes.include? :title) %><div style="background-color: #ffff00"><% end %>
-  <div style="font-size: x-large; color: #fe5f5f;"><%= link_to talk.title, talk_url(talk) %></div>
+  <div style="font-size: x-large; color: #fe5f5f;"><%= link_to talk.extended_title, talk_url(talk) %></div>
 <% if changes && (changes.include? :title) %></div><% end %>
 
 <% if changes && (changes.include? :speaker) %><div style="background-color: #ffff00"><% end %>

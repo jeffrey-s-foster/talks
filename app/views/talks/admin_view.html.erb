@@ -10,7 +10,7 @@
       <%= link_to "delete", t,:confirm => "Are you sure you want to delete this talk?", :method => :delete %>
     </td>
     <td><%= t.id %></td>
-    <td><%= link_to t.title, t %></td>
+    <td><%= link_to t.extended_title, t %></td>
     <td><%= link_to t.owner.name, edit_user_path(t.owner) %></td>
     <td><%= (t.lists.sort { |a,b| a.name <=> b.name }.map { |l| link_to l.name, l }).join("&nbsp;&nbsp;&nbsp;").sanitize %></td>
   </tr>

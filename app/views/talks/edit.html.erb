@@ -12,6 +12,17 @@
 <tr><th>Speaker URL</th><td><%= f.text_field :speaker_url %></td></tr>
 <tr><th>Venue</th><td><%= f.text_field :room %> <%= f.collection_select(:building_id, Building.all.sort { |a,b| a.abbrv <=> b.abbrv}, :id, :abbrv_and_name, :include_blank => true) %><span class="comment">Enter room and building</span></td></tr>
 </td></tr>
+<% if Talk.get_kind_values.length > 1 %>
+  <tr><th class="align-top">Kind of talk</th>
+  <td>
+    <% Talk.get_kind_values.each do |v| %>
+<%# v[0] = string, v[1] = symbol %>
+      <%= f.radio_button :kind, v[1] %>
+      <%= f.label :kind, v[0], :value => v[1] %>
+    <% end %>
+  </td>
+</tr>
+<% end %>
 <tr><th class="align-top">Options</th>
   <td>
     <%= f.check_box :request_reg %> <%= f.label :request_reg %><br>

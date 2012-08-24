@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214001720) do
+ActiveRecord::Schema.define(:version => 20120824200957) do
 
   create_table "buildings", :force => true do |t|
     t.string   "abbrv"
@@ -104,11 +104,12 @@ ActiveRecord::Schema.define(:version => 20120214001720) do
     t.integer  "owner_id"
     t.integer  "building_id"
     t.text     "room"
-    t.text     "speaker_url",         :default => "",    :null => false
-    t.text     "bio",                 :default => "",    :null => false
+    t.text     "speaker_url",         :default => "",         :null => false
+    t.text     "bio",                 :default => "",         :null => false
     t.boolean  "request_reg",         :default => false
     t.text     "speaker_affiliation", :default => ""
     t.text     "reg_info",            :default => ""
+    t.string   "kind",                :default => "standard", :null => false
   end
 
   add_index "talks", ["start_time"], :name => "index_talks_on_start_time"

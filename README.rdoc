@@ -28,8 +28,26 @@ also want to make yourself an administrator, which you can do with
 
 (You can probably set the confirmation info using sqlite3, also.)
 
-Also edit config/locals/en.yml, including
-* site_name
+== Customization
+
+This web app will get some configuration options in the future. For
+now, you need to edit some of the code to customize things:
+
+* Site name: Can be changed by editing "en/site_name" mapping in
+  config/locales/en.yml.
+
+* Talk kinds: By default, talks distinguishes standard talks from MS
+  defenses, PhD proposals, and PhD defenses. This list can be changed
+  by editing the "symbolize :kind" line in app/models/talks.rb. Also change
+  the corresponding translations in config/locales/en.yml.
+
+* Email sender: Edit config/environments/production.rb, line defining
+  config.action_mailer.default_url_options. Also edit
+  config/initializers/devise.rb, line defining config.mail_sender.
+
+* Time zone: Edit app/controllers/application_controller#generate_ical
+  so that the two occurrences of "US/Eastern" are in the appropriate
+  time zone.
 
 == Deployment
 
@@ -44,7 +62,6 @@ Also edit config/locals/en.yml, including
 * Register
 * sqlite3 db/development.sqlite3
   > update users set perm_site_admin = "1" where id = "1";
-* Edit app/controllers/application_controller#generate_ical so that the two occurrences of "US/Eastern" are in the appropriate time zone.
 
 == Update (put this in a capfile)
 
@@ -80,9 +97,7 @@ Also edit config/locals/en.yml, including
 == TODO list
 
 * LDAP support for UMCP Directory IDs.  Using these is one less
-  barrier to adoption, since people already have a directory ID.  Ping
-  Neil for Rails code to do this, since he uses it for his graduate
-  admissions website.
+  barrier to adoption, since people already have a directory ID.
 
   Also see:
 
@@ -98,6 +113,8 @@ Also edit config/locals/en.yml, including
   models/user.rb, and models/talk.rb
 
 * rss/ical feeds - only include past n talks, e.g., past 1 year
+
+* restrict "all" talks to some time period (1-2 years?)
 
 * watch implementation
   * Send email (only) to new list subscribers if talk is cross-posted to a new list
@@ -124,15 +141,13 @@ Also edit config/locals/en.yml, including
 
 * link to it on the dept home page
 
-* Clean up this week emails to organize by day of the week
-
 * It'd be nice to have a way to get a list of all talks in the coming
   week e-mailed to me on Sunday (regardless of my subscriptions). This
   way I can discover new talks/lists that would be interesting without
-  remembering to check the talks page each week. I think this would
-  probably require creating an "Options" framework.
+  remembering to check the talks page each week.
 
-* The "Watch" button changes to "Unsubscribe" when you click on it, not "Unwatch".
+* The "Watch" button changes to "Unsubscribe" when you click on it,
+  not "Unwatch".
 
 * Support email from list organizer to all subscribers.
 
@@ -146,12 +161,6 @@ Also edit config/locals/en.yml, including
 
 * Note when can post a talk to a list?
 
-* When receiving an email announcement for a talk, it would be nice to
-  also see *why* one is getting the announcement (e.g., what group the
-  talk is associated with). Otherwise it can be difficult, for
-  example, to distinguish a department-wide speaker (e.g., faculty
-  candidate) from someone speaking in the privacy seminar.
-
 * mobile web site
 
 * no email on talk cancellation?
@@ -159,8 +168,6 @@ Also edit config/locals/en.yml, including
 * If at some point you feel inspired to create something similar (or
   even have the very same facility extended) for deptl events more
   generally (meetings, picnics, etc) that would be even better.
-
-* possibly a search capability would be useful for the site?
 
 * registration email should come from talk organizer, rather than talks@cs.
 
@@ -170,8 +177,12 @@ Also edit config/locals/en.yml, including
 
 * Room/building flip
 
-* dissertation defense, proposal flags?
-
-* restrict "all" talks to some time period (1-2 years?)
-
 * add licensing
+
+* When receiving an email announcement for a talk, it would be nice to
+  also see *why* one is getting the announcement (e.g., what group the
+  talk is associated with). Otherwise it can be difficult, for
+  example, to distinguish a department-wide speaker (e.g., faculty
+  candidate) from someone speaking in the privacy seminar.
+
+* Clean up this week emails to organize by day of the week

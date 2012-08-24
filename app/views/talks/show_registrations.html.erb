@@ -1,6 +1,6 @@
 <h1>Registrations</h1>
 
-<p>Talk title: <%= link_to @talk.title, @talk %>
+<p>Talk title: <%= link_to @talk.extended_title, @talk %>
 
 <p>
 <%= pluralize(@regs.length, "registration") %>
