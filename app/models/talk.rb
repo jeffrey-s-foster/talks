@@ -10,6 +10,7 @@ class Talk < ActiveRecord::Base
   validate :start_end_not_error
   validate :start_less_than_end
   validates_presence_of :owner
+  validate :at_least_one_list
 
   attr_accessor :trigger_watch_email
 
@@ -26,6 +27,10 @@ class Talk < ActiveRecord::Base
 
   def start_less_than_end
     errors.add(:end_time, "- End time must be greater than start time") if (start_time && end_time && (not (end_time > start_time)))
+  end
+
+  def at_least_one_list
+    errors[:base] << "A talk must belong to at least one list" if lists.length < 1
   end
 
   def self.upcoming

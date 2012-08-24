@@ -28,14 +28,6 @@
 <tr><th>End time</th><td><%= text_field_tag :temp_end_time, @end_time %></td></tr>
 
 
-<tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
-
-<tr class="space-above"><th class="align-top">Bio</th><td><%= f.text_area :bio, :class => "ckeditor" %></td></tr>
-<tr><th/><td><span class="comment">(May be omitted)</span></td></tr>
-
-<tr class="space-above" id = "reg_info_row"><th class="align-top">Additional reg info</th><td><%= f.text_area :reg_info, :class => "ckeditor" %></td></tr>
-<tr><th/><td><span class="comment">(May be omitted; will be emailed to external participants)</span></td></tr>
-
 <tr class="space-above">
   <th class="align-top">Lists</th>
   <td>
@@ -50,6 +42,13 @@
 </tr>
 <% end %>
 
+<tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
+
+<tr class="space-above"><th class="align-top">Bio</th><td><%= f.text_area :bio, :class => "ckeditor" %></td></tr>
+<tr><th/><td><span class="comment">(May be omitted)</span></td></tr>
+
+<tr class="space-above reg-info"><th class="align-top">Additional reg info</th><td><%= f.text_area :reg_info, :class => "ckeditor" %></td></tr>
+<tr class="reg-info"><th/><td><span class="comment">(May be omitted; will be emailed to external participants)</span></td></tr>
 
 </table>
 
@@ -62,12 +61,12 @@
   $("#temp_date").datepicker( { minDate: new Date() } );
   $("#talk_request_reg").click(function () {
     if ($("#talk_request_reg").is(":checked"))
-      $("#reg_info_row").show();
+      $(".reg-info").show();
     else
-      $("#reg_info_row").hide();
+      $(".reg-info").hide();
   });
   if ($("#talk_request_reg").is(":checked"))
-    $("#reg_info_row").show();
+    $(".reg-info").show();
   else
-    $("#reg_info_row").hide();
+    $(".reg-info").hide();
 </script>
