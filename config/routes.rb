@@ -58,6 +58,8 @@ Talks::Application.routes.draw do
     get :do_reload
     get :do_status
   end
+
+  mount Ckeditor::Engine => "/ckeditor"
   
   root :to => "talks#index"
 end

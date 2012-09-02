@@ -8,6 +8,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require_tree .
-//= require ckeditor/ckeditor
+//= require ckeditor/init
 //= require spin/spin
 //= require spin/jquery.spin
