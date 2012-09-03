@@ -59,9 +59,11 @@ now, you need to edit some of the code to customize things:
 * bundle config build.sqlite3 -- --with-sqlite3-include=/usr/local/sqlite-3.7.6.3/include --with-sqlite3-lib=/usr/local/sqlite-3.7.6.3/lib
 * bundle --deployment (install gems locally for phusion passenger)
   (For us, add /usr/local/ruby-1.9.3-p0/bin to path before doing that)
-* Register
+* Register for an account
 * sqlite3 db/development.sqlite3
   > update users set perm_site_admin = "1" where id = "1";
+* Backup/config.rb, edit mail.from and mail.to definitions
+* whenever --update-crontab  # install cron job to send today's and this week's talks, and to backup database daily
 
 == Update (put this in a capfile)
 
@@ -75,6 +77,7 @@ now, you need to edit some of the code to customize things:
   * chmod -R a+r .
 * touch tmp/restart.txt
 * RAILS_ENV=production script/delayed_job restart
+* whenever --update-crontab
 
 == Permission model
 
