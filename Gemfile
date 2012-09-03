@@ -24,7 +24,7 @@ gem 'daemons'
 gem "ckeditor"
 gem "htmlentities"
 gem "sanitize"
-gem "backup"
+gem "backup", "~> 3.0.25"
 gem "mail", "~> 2.4.0" # for backup
 gem "whenever", :require => false
 
