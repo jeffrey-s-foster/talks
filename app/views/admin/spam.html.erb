@@ -4,7 +4,7 @@
 
 <table class="feedback">
 <tr><th>Subject</th><td><%= text_field_tag "subject" %></td></tr>
-<tr class="space-above"><th class="align-top">Message</th><td><%= text_area_tag :message, nil, :class => "ckeditor" %></td></tr>
+<tr class="space-above"><th class="align-top">Message</th><td><%= text_area_tag :message, nil, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
 </table>
 
 <p>

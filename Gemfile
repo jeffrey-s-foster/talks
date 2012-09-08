@@ -21,7 +21,7 @@ gem 'bourbon'
 gem 'high_voltage'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "ckeditor"
+gem "tinymce-rails"
 gem "htmlentities"
 gem "sanitize"
 gem "backup", "~> 3.0.25"

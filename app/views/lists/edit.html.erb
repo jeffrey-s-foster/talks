@@ -10,7 +10,7 @@
       <td><%= if can? :edit_name, @list then f.text_field :name else @list.name end %></td>
     </tr>
   <tr><th>Short description</th><td><%= f.text_field :short_descr %></td></tr>
-  <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "ckeditor" %></td></tr>
+  <tr class="long_description"><th class="align-top">Long description</th><td><%= f.text_area :long_descr, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
   <tr><th class="align-top">Owner(s)</th><td>
       <%= render :partial => "shared/expanding_list", :locals => { :name => "owner", :current_elts => @owners, :all_elts => @users, :elt_to_string => :email_and_name } %>
   </td></tr>

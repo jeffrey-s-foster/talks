@@ -16,7 +16,7 @@
 <tr><th>Your name</th><td><%= text_field_tag "name" %></td></tr>
 <tr><th>Email address</th><td><%= text_field_tag "email" %></td></tr>
 <tr><th>Subject</th><td><%= text_field_tag "subject" %></td></tr>
-<tr class="space-above"><th class="align-top">Comments</th><td><%= text_area_tag :comments, nil, :class => "ckeditor" %></td></tr>
+<tr class="space-above"><th class="align-top">Comments</th><td><%= text_area_tag :comments, nil, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
 </table>
 
 <p>

@@ -53,12 +53,12 @@
 </tr>
 <% end %>
 
-<tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "ckeditor" %></td></tr>
+<tr class="space-above"><th class="align-top">Abstract</th><td><%= f.text_area :abstract, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
 
-<tr class="space-above"><th class="align-top">Bio</th><td><%= f.text_area :bio, :class => "ckeditor" %></td></tr>
+<tr class="space-above"><th class="align-top">Bio</th><td><%= f.text_area :bio, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
 <tr><th/><td><span class="comment">(May be omitted)</span></td></tr>
 
-<tr class="space-above reg-info"><th class="align-top">Additional reg info</th><td><%= f.text_area :reg_info, :class => "ckeditor" %></td></tr>
+<tr class="space-above reg-info"><th class="align-top">Additional reg info</th><td><%= f.text_area :reg_info, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
 <tr class="reg-info"><th/><td><span class="comment">(May be omitted; will be emailed to external participants)</span></td></tr>
 
 </table>
