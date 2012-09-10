@@ -15,8 +15,8 @@
 <div class="center-header">
   <span class="title">Your talks</span>
   <%= link_to (image_tag "calendar.png"), feed_user_url(current_user, :format => :ics, :protocol => "webcal", :key => current_user.ical_secret), :title => "ical for your talks" %>
-  <%= link_to (image_tag "feed.png"), feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :title => "rss for your talks" %>
-  <%= auto_discovery_link_tag(:atom, feed_user_url(@list, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
+  <%= link_to (image_tag "feed.png"), feed_user_url(current_user, :format => :atom, :key => current_user.ical_secret), :title => "rss for your talks" %>
+  <%= auto_discovery_link_tag(:atom, feed_user_url(current_user, :format => :atom, :key => current_user.ical_secret), :action =>"feed") %>
   <br>
   <% if @current then %>
     <%= link_to "See past talks", user_path(current_user, :range => :past) %>
