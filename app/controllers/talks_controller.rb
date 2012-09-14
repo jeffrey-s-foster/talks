@@ -64,7 +64,7 @@ class TalksController < ApplicationController
     @talk = Talk.find(params[:id])
     authorize! :edit, @talk
     compute_edit_fields
-    @talk.trigger_watch_email = true
+    @talk.trigger_watch_email = false
   end
 
   def update
