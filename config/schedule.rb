@@ -3,7 +3,7 @@
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
 
-every 1.week, :at => "12:30am" do
+every :sunday, :at => "12:30am" do
   rake "talks:send_this_week"
 end
 
