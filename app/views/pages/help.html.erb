@@ -178,13 +178,15 @@ permission. Note: after posting a talk to a list, you automatically
 give permission for the list owner to also edit the talk information.
 
 <p>
-When you post or edit a talk, the option "Send email to watchers when
+When you create a new talk, the option "Send email to watchers when
 talk created/updated?" will be selected for you by default. With this
 option selected, anyone subscribing or watching the talk or a list
 containing the talk will get an email announcement containing
 information about the new talk and, if changes were made, highlighting
 those changes. If you don't want users to receive such an email,
-uncheck the box.
+uncheck the box. Note that if you edit a talk, the "Send email..."
+option will <i>not</i> be checked by default, so please check it if
+you want subscribers to be emailed.
 
 <p>
 <b>Important:</b>
@@ -217,6 +219,17 @@ necessary. You can register an external user yourself if you want by
 logging out of the site, going to the talk's page, and entering their
 information. You can ask the site administrators if you need to
 register a user with an account on the site.
+
+<h1>JSON API</h1>
+
+<p>
+Talks currently supports a limited JSON API, as follows:
+<ul>
+<li>index.json - return a list of all upcoming talks. Accepts
+  argument "range=past" or "range=all" to get past or all talks.
+<li>talks/:id.json - return information about a particular talk.
+<li>lists/:id.json - return information about a list, and all its talks.
+</ul>
 
 <h1>Other Information</h1>
 

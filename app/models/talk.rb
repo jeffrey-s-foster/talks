@@ -26,7 +26,7 @@ class Talk < ActiveRecord::Base
     if kind == :standard
       title
     else
-      "#{kind_text}:  #{title}"
+      "#{kind_text}: #{title}"
     end
   end
 

@@ -27,6 +27,7 @@ gem "sanitize"
 gem "backup", "~> 3.0.25"
 gem "mail", "~> 2.4.0" # for backup
 gem "whenever", :require => false
+gem "rabl"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -7,11 +7,17 @@ class TalksController < ApplicationController
         [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time]
       }
       @current = false
+    elsif params[:range] == :all
+      @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
     else
       @talks = Talk.current.sort { |a,b| a.start_time <=> b.start_time }
       @current = true
     end
     @lists = List.all.sort { |a,b| a.name <=> b.name }
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def admin_view
@@ -38,6 +44,10 @@ class TalksController < ApplicationController
     @talk = Talk.find(params[:id])
     @subscription = @talk.subscription current_user if current_user
     @lists = List.all.sort { |a,b| a.name <=> b.name }
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create

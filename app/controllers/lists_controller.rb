@@ -11,9 +11,15 @@ class ListsController < ApplicationController
     when :past
       @talks = @list.talks.past.sort { |a,b| [b.start_time.beginning_of_day, a.start_time] <=> [a.start_time.beginning_of_day, b.start_time] }
       @current = false
+    when :all
+      @talks = @list.talks.sort { |a,b| a.start_time <=> b.start_time }
     else
       @talks = @list.talks.current.sort { |a,b| a.start_time <=> b.start_time }
       @current = true
+    end
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
 

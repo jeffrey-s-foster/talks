@@ -88,7 +88,7 @@
   </div>
 <% end %>
 
-<div class="comment">This talk is organized by <%= @talk.owner.name %></div>
+<div class="comment">This talk is organized by <%= @talk.owner.name.sanitize %></div>
 </div>
 
 <script>
