@@ -225,10 +225,16 @@ register a user with an account on the site.
 <p>
 Talks currently supports a limited JSON API, as follows:
 <ul>
-<li>index.json - return a list of all upcoming talks. Accepts
-  argument "range=past" or "range=all" to get past or all talks.
-<li>talks/:id.json - return information about a particular talk.
-<li>lists/:id.json - return information about a list, and all its talks.
+<li>talks.json - return a list of upcoming talks, on all lists
+<li>talks.json?range=past - return a list of past talks, on all lists
+<li>talks.json?range=all - return a list of all talks, on all lists
+<li>talks/:id.json - return information about talk :id.
+<li>lists/:id.json - return information about a list, and its
+  upcoming talks.
+<li>lists/:id.json?range=past - return information about a list, and its
+  past talks.
+<li>lists/:id.json?range=all - return information about a list, and all its
+  talks.
 </ul>
 
 <h1>Other Information</h1>
