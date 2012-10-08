@@ -1,4 +1,8 @@
 object @talk
+attribute :id
+node :url do |t|
+  talk_url(t)
+end
 node :title do |t| t.extended_title end
 attribute :speaker
 attribute :speaker_affiliation
@@ -29,4 +33,3 @@ node :building_url do |t|
     ""
   end
 end
-# sanitization?
