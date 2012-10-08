@@ -15,6 +15,13 @@ node :building do |t|
     ""
   end
 end
+node :building_abbrv do |t|
+  if t.building
+    t.building.abbrv
+  else
+    ""
+  end
+end
 node :building_url do |t|
   if t.building && t.building.url
     t.building.url
