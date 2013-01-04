@@ -28,6 +28,9 @@ also want to make yourself an administrator, which you can do with
 
 (You can probably set the confirmation info using sqlite3, also.)
 
+Also update config/initializers/secret_token.rb with your own secret
+token. You can use rake secret to generate a fresh secret.
+
 == Customization
 
 This web app will get some configuration options in the future. For
@@ -189,3 +192,16 @@ now, you need to edit some of the code to customize things:
   candidate) from someone speaking in the privacy seminar.
 
 * Clean up this week emails to organize by day of the week
+
+* Better error message when bad email address is put into registration information.
+
+* Double-check logic for owner of list being able to edit talk:
+
+Sent mail to  (15ms)
+Completed 500 Internal Server Error in 36ms
+
+Net::SMTPSyntaxError (501 5.1.3 Bad recipient address syntax):
+  app/controllers/talks_controller.rb:188:in `external_register'
+
+* Fix config/initializers/secret_token.rb to not appear in github at
+  all, in case it misleads someone.
