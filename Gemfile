@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.1.5'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -11,12 +11,12 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'ri_cal'
 gem 'RedCloth', :require => 'redcloth' # needed for rake doc:guides
-gem 'sass'
+#gem 'sass'
 gem 'chronic'
 gem 'devise'
 gem 'dynamic_form'
 gem 'cancan'
-gem 'symbolize', :require => 'symbolize/active_record'
+#gem 'symbolize', :require => 'symbolize/active_record'
 gem 'bourbon'
 gem 'high_voltage'
 gem 'delayed_job_active_record'
@@ -25,17 +25,21 @@ gem "tinymce-rails"
 gem "htmlentities"
 gem "sanitize"
 gem "backup", "~> 3.0.25"
-gem "mail", "~> 2.4.0" # for backup
+gem "mail", "~> 2.5.4" # for backup
 gem "whenever", :require => false
 gem "rabl"
+#gem 'sprockets-rails', :require => 'sprockets/railtie'
+#gem 'sass-rails'
+#gem 'uglifier'
+#gem 'coffee-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-end
+#group :assets do
+#  gem 'sass-rails',   '~> 3.2.3'
+#  gem 'coffee-rails', '~> 3.2.1'
+#  gem 'uglifier', '>= 1.0.3'
+#end
 
 gem 'jquery-rails'
 
