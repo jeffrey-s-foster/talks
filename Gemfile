@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '4.1.5'
 
@@ -16,7 +16,7 @@ gem 'chronic'
 gem 'devise'
 gem 'dynamic_form'
 gem 'cancan'
-#gem 'symbolize', :require => 'symbolize/active_record'
+gem 'symbolize', :require => 'symbolize/active_record'
 gem 'bourbon'
 gem 'high_voltage'
 gem 'delayed_job_active_record'
@@ -29,9 +29,9 @@ gem "mail", "~> 2.5.4" # for backup
 gem "whenever", :require => false
 gem "rabl"
 #gem 'sprockets-rails', :require => 'sprockets/railtie'
-#gem 'sass-rails'
+gem 'sass-rails'
 #gem 'uglifier'
-#gem 'coffee-rails'
+gem 'coffee-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,6 +42,7 @@ gem "rabl"
 #end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

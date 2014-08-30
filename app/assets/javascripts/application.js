@@ -9,5 +9,5 @@
 //= require jquery-ui
 //= require_tree .
 //= require tinymce-jquery
-//= require spin/spin
-//= require spin/jquery.spin
+//= require spin
+//= require jquery.spin
