@@ -114,3 +114,13 @@ Net::SMTPSyntaxError (501 5.1.3 Bad recipient address syntax):
 * Ability to archive old lists
 
 * Email reminders - send one reminder per talk, rather than a digest
+
+* Plain text email option
+
+* Fixed delayed jobs stuff so it actually works
+
+* Feature to mark certain rooms in buildings as special and then use
+their names, like
+
+ When an event is scheduled for CSIC 1115, it should be listed as Horvitz Lecture Hall (CSIC 1115).
+ When an event is scheduled for CSIC 3117, it should be listed as Dante Consulting Classroom (CSIC 3117)

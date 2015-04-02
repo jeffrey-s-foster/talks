@@ -19,3 +19,10 @@ en:
       talk:
         request_reg: "Request registration?"
         trigger_watch_email: "Send email to watchers when talk created/updated?"
+  enumerize:
+    defaults:
+      kind:
+        standard: "Standard"
+        ms_defense: "MS Defense"
+        phd_proposal: "PhD Proposal"
+        phd_defense: "PhD Defense"

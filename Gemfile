@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.5'
+gem 'rails', '4.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -16,7 +16,8 @@ gem 'chronic'
 gem 'devise'
 gem 'dynamic_form'
 gem 'cancan'
-gem 'symbolize', :require => 'symbolize/active_record'
+#gem 'symbolize', :require => 'symbolize/active_record'
+gem 'enumerize'
 gem 'bourbon'
 gem 'high_voltage'
 gem 'delayed_job_active_record'

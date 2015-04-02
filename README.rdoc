@@ -30,8 +30,9 @@ also want to make yourself an administrator, which you can do with
 
 * Secret keys
  * Update config/initializers/secret_token.rb with your own secret
-   token. You can use `rake secret` to generate a fresh secret.
- * Edit config/devise.rb and change the value of config.secret_key.
+   token and secret_key_base. You can use `rake secret` to generate a fresh
+   secret.
+ * Edit config/initializers/devise.rb and change the value of config.secret_key.
 
 == Customization
 

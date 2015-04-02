@@ -1,7 +1,9 @@
 class Talk < ActiveRecord::Base
+  extend Enumerize
+  
   belongs_to :owner, :class_name => "User"
   has_and_belongs_to_many :lists, :include => :subscriptions
-  has_many :subscriptions, :as => :subscribable, :include => :user, :dependent => :destroy
+  has_many :subscriptions, :as => :subscribable, :dependent => :destroy # :include => :user
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
   belongs_to :building
   has_many :registrations
@@ -15,12 +17,16 @@ class Talk < ActiveRecord::Base
   attr_accessor :trigger_watch_email
 
   # The following can be customized, but leave at least :standard in the list.
-  symbolize :kind, :in => {
-    :standard => "Standard",
-    :ms_defense => "MS Defense",
-    :phd_proposal => "PhD Proposal",
-    :phd_defense => "PhD Defense"},
-  :scopes => true, :methods => true
+  # Change text values in config/locales/en.yml
+  enumerize :kind, in: [:standard, :ms_defense, :phd_proposal, :phd_defense]
+
+  
+  # symbolize :kind, :in => {
+  #   :standard => "Standard",
+  #   :ms_defense => "MS Defense",
+  #   :phd_proposal => "PhD Proposal",
+  #   :phd_defense => "PhD Defense"},
+  # :scopes => true, :methods => true
 
   def extended_title
     if kind == :standard
