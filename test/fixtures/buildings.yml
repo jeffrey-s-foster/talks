@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  abbrv: MyString
-  name: MyString
-  url: MyText
+avw:
+  abbrv: AVW
+  name: A.V. Williams Building
+  url: http://www.umd.edu/CampusMaps/bld_detail.cfm?bld_code=AVW
 
-two:
-  abbrv: MyString
-  name: MyString
-  url: MyText
+csic:
+  abbrv: CSI
+  name: Computer Science Instructional Center
+  url: http://www.umd.edu/CampusMaps/bld_detail.cfm?bld_code=CSI
+
+psc:
+  abbrv: PSC
+  name:
+  url:
+ 

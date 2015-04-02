@@ -4,8 +4,52 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+admin:
+  email: "admin@localhost"
+  name: "The Administrator"
+  perm_site_admin: true
+  perm_create_talk: true
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:
+
+user:
+  email: "user@localhost"
+  name: "A User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:
+
+user_no_email_today:
+  email: "user_no_email_today@localhost"
+  name: "Another User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: false
+  opt_email_this_week: true
+  organization:
+
+user_no_email:
+  email: "user_no_email@localhost"
+  name: "User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: false
+  opt_email_this_week: false
+  organization:
+
+hacker:
+  email: "<script>haha</script>"
+  name: "<script>oops</script>"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: false
+  opt_email_this_week: false
+  organization:
