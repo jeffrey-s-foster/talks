@@ -1,7 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+list_0:
+  name: "List Zero"
+  short_descr: "Short Description Zero"
+  long_descr: "Long description zero."
+  talks:
 
-two:
-  name: MyString
+list_1:
+  name: "List One"
+  short_descr: "Short Description One"
+  long_descr: "Long description one."
+  talks: talk_1
+
+list_2:
+  name: "List Two"
+  short_descr: "Short Description Two"
+  long_descr: "Long description two."
+  talks: talk_2, talk_3
+
+list_3:
+  name: "List three"
+  short_descr: "Short Description Three"
+  long_descr: "Long description three."
+  talks: talk_4, talk_5, talk_6

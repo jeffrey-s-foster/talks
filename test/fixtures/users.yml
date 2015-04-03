@@ -4,7 +4,7 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-admin:
+user_admin:
   email: "admin@localhost"
   name: "The Administrator"
   perm_site_admin: true
@@ -14,7 +14,7 @@ admin:
   opt_email_this_week: true
   organization:
 
-user:
+user_plain:
   email: "user@localhost"
   name: "A User"
   perm_site_admin: false
@@ -44,7 +44,7 @@ user_no_email:
   opt_email_this_week: false
   organization:
 
-hacker:
+user_hacker:
   email: "<script>haha</script>"
   name: "<script>oops</script>"
   perm_site_admin: false
