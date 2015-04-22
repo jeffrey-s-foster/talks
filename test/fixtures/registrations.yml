@@ -1,7 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+r_one:
+  talk: talk_10
+  user: user_plain
 
-two:
-  name: MyString
+r_two:
+  talk: talk_11
+  user: user_plain
+
+r_three:
+  talk: talk_11
+  name: "Anonymous User"
+  email: anon@email.com
+  organization: "No org"
+  secret: 12345
+
+r_four:
+  talk: talk_13
+  name: "Anonymous User"
+  email: anon@email.com
+  organization: "No org"
+  secret: 12345

@@ -150,7 +150,7 @@ class Talk < ActiveRecord::Base
   end
 
   def registered?(user)
-    not (user && (registrations.where(:user_id => user.id).empty?))
+    not (registrations.where(:user_id => user.id).empty?)
   end
 
   def through(user)
