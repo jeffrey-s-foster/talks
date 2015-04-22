@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   def feed
     user = User.find(params[:id])
     @title = "Your Talks"
-    @talks = user.subscribed_talks(:all, [:kind_subscriber, :kind_subscriber_through]).keys
+    @talks = user.subscribed_talks(:all, ["kind_subscriber", "kind_subscriber_through"]).keys
     respond_to do |format|
       if params[:key] == user.ical_secret
         format.ics { render :text => (generate_ical @talks) }

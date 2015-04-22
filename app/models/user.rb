@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
   end
 
   # TODO: check performance
-  # Returns hash table mapping talks to subscription kind (:kind_subscriber{_through} or :kind_watcher{_through})
+  # Returns hash table mapping talks to subscription kind ("kind_subscriber{_through}" or "kind_watcher{_through}")
   # range may be :all, :today, :this_week, :upcoming, :current
-  def subscribed_talks(range, filter = [:kind_subscriber, :kind_subscriber_through, :kind_watcher, :kind_watcher_through])
+  def subscribed_talks(range, filter = ["kind_subscriber", "kind_subscriber_through", "kind_watcher", "kind_watcher_through"])
     raise "Argument #{range.inspect} out of range" unless [:past, :today, :this_week, :upcoming, :current, :all].member? range
     talks = {} # map from talk to kind
 
@@ -50,10 +50,10 @@ class User < ActiveRecord::Base
       l.talks.each do |t|
         if t.match_range range then
           case k
-          when :kind_subscriber
-            talks[t] = :kind_subscriber_through if filter.member? :kind_subscriber_through
-          when :kind_watcher
-            talks[t] = :kind_watcher_through if (talks[t] != :kind_subscriber) && (filter.member? :kind_watcher_through)
+          when "kind_subscriber"
+            talks[t] = "kind_subscriber_through" if filter.member? "kind_subscriber_through"
+          when "kind_watcher"
+            talks[t] = "kind_watcher_through" if (talks[t] != "kind_subscriber") && (filter.member? "kind_watcher_through")
           end
         end
       end

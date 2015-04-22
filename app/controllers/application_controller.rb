@@ -16,10 +16,10 @@ class ApplicationController < ActionController::Base
     if s then
       case kind
       when "subscribe"
-        s.kind = :kind_subscriber
+        s.kind = "kind_subscriber"
         s.save
       when "watch"
-        s.kind = :kind_watcher
+        s.kind = "kind_watcher"
         s.save
       when "unsubscribe"
         s.destroy
@@ -27,10 +27,10 @@ class ApplicationController < ActionController::Base
     else
       case kind
       when "subscribe"
-        s = Subscription.new(:subscribable => subscribable, :user => current_user, :kind => :kind_subscriber)
+        s = Subscription.new(:subscribable => subscribable, :user => current_user, :kind => "kind_subscriber")
         s.save
       when "watch"
-        s = Subscription.new(:subscribable => subscribable, :user => current_user, :kind => :kind_watcher)
+        s = Subscription.new(:subscribable => subscribable, :user => current_user, :kind => "kind_watcher")
         s.save
       end
     end

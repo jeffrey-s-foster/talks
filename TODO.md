@@ -126,3 +126,5 @@ their names, like
  When an event is scheduled for CSIC 3117, it should be listed as Dante Consulting Classroom (CSIC 3117)
 
 * Remove perm_create_talk from Users
+
+* Talk#poster? deprecated?

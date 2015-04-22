@@ -53,3 +53,23 @@ user_hacker:
   opt_email_today: false
   opt_email_this_week: false
   organization:
+
+user_list_subscriber:
+  email: "user_list_subscriber@localhost"
+  name: "A User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:
+
+user_talk_subscriber:
+  email: "user_talk_subscriber@localhost"
+  name: "A User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:

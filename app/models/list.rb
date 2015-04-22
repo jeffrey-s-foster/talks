@@ -25,12 +25,12 @@ class List < ActiveRecord::Base
 
   def watcher?(user)
     s = subscription(user)
-    return s && (s.kind == :kind_watcher)
+    return s && (s.kind == "kind_watcher")
   end
 
   def subscriber?(user)
     s = subscription(user)
-    return s && (s.kind == :kind_subscriber)
+    return s && (s.kind == "kind_subscriber")
   end
 
 end

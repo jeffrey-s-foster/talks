@@ -141,12 +141,12 @@ class Talk < ActiveRecord::Base
 
   def subscriber?(user)
     s = subscription(user)
-    return s && (s.kind == :kind_subscriber)
+    return s && (s.kind == "kind_subscriber")
   end
 
   def watcher?(user)
     s = subscription(user)
-    return s && (s.kind == :kind_watcher)
+    return s && (s.kind == "kind_watcher")
   end
 
   def registered?(user)
@@ -158,9 +158,9 @@ class Talk < ActiveRecord::Base
     return h unless user
     user.subscribed_lists.each do |l, kl|
       if l.talks.exists? self then
-        if kl == :kind_subscriber
+        if kl == "kind_subscriber"
           h[:subscriber] += [l]
-        elsif kl == :kind_watcher
+        elsif kl == "kind_watcher"
           h[:watcher] += [l]
         end
       end

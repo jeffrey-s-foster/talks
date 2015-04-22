@@ -1,56 +1,75 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 <% 6.times do |n| %>
-talk_<%= n %>:
-  title: <%= "Title #{n}" %>
-  abstract: <%= "Abstract #{n}." %>
-  speaker: <%= "Speaker #{n}" %>
+talk_1<%= n %>:
+  title: <%= "Title 1#{n}" %>
+  abstract: <%= "Abstract 1#{n}." %>
+  speaker: <%= "Speaker 1#{n}" %>
   start_time: 2015-01-01 <%= 10+n %>:00:00 -5
   end_time: 2015-01-01 <%= 11+n %>:00:00 -5
   building: csic
   room: 1115
   speaker_url: "http://www.cs.umd.edu"
-  bio: <%= "Bio #{n}." %>
+  bio: <%= "Bio 1#{n}." %>
   request_reg: false
-  speaker_affiliation: <%= "Affiliation #{n}" %>
+  speaker_affiliation: <%= "Affiliation 1#{n}" %>
   reg_info:
   kind: "standard"
   owner: user_admin
   lists: list_1
 <% end %>
 
+<% 3.times do |n| %>
+talk_3<%= n %>:
+  title: <%= "Title 3#{n}" %>
+  abstract: <%= "Abstract 3#{n}." %>
+  speaker: <%= "Speaker 3#{n}" %>
+  start_time: 2015-01-01 <%= 10+n %>:00:00 -5
+  end_time: 2015-01-01 <%= 11+n %>:00:00 -5
+  building: csic
+  room: 1115
+  speaker_url: "http://www.cs.umd.edu"
+  bio: <%= "Bio 3#{n}." %>
+  request_reg: false
+  speaker_affiliation: <%= "Affiliation 3#{n}" %>
+  reg_info:
+  kind: "standard"
+  owner: user_admin
+  lists: list_3
+<% end %>
+
 talk_minimal:
   start_time: 2015-01-01 10:00:00 -5
   end_time: 2015-01-01 11:00:00 -5
   owner: user_admin
-  lists: list_1
+  lists: list_0
 
 talk_start_end_different_days:
   start_time: 2015-01-01 23:00:00 -5
   end_time: 2015-01-02 00:00:00 -5
   owner: user_admin
-  lists: list_1
+  lists: list_0
 
 talk_no_start:
   end_time: 2015-01-01 11:00:00 -5
   owner: user_admin
-  lists: list_1
+  lists: list_0
 
 talk_no_end:
   start_time: 2015-01-01 10:00:00 -5
   owner: user_admin
-  lists: list_1
+  lists: list_0
 
 talk_start_before_end:
   start_time: 2015-01-01 11:00:00 -5
   end_time: 2015-01-01 10:00:00 -5
   owner: user_admin
-  lists: list_1
+  lists: list_0
 
 talk_no_owner:
   start_time: 2015-01-01 10:00:00 -5
   end_time: 2015-01-01 11:00:00 -5
-  lists: list_1
+  lists: list_0
 
 talk_no_list:
   start_time: 2015-01-01 10:00:00 -5

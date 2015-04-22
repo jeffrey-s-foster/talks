@@ -1,13 +1,26 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  subscribable_id: 1
-  subscribable_type: MyString
-  user_id: 1
-  kind: MyString
+s_one:
+  subscribable: list_1 (List)
+  user: user_list_subscriber
+  kind: "kind_subscriber"
 
-two:
-  subscribable_id: 1
-  subscribable_type: MyString
-  user_id: 1
-  kind: MyString
+s_two:
+  subscribable: list_2 (List)
+  user: user_list_subscriber
+  kind: "kind_subscriber"
+
+s_three:
+  subscribable: list_3 (List)
+  user: user_list_subscriber
+  kind: "kind_watcher"
+
+s_six:
+  subscribable: talk_minimal (Talk)
+  user: user_list_subscriber
+  kind: :kind_subscriber
+
+s_seven:
+  subscribable: talk_no_start (Talk)
+  user: user_list_subscriber
+  kind: "kind_watcher"
