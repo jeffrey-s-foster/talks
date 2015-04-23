@@ -47,5 +47,86 @@ class TalkTest < ActiveSupport::TestCase
     h2 = {:watcher => [lists(:list_3)]}
     assert_equal h2, talks(:talk_30).through(users(:user_list_subscriber))
   end
-  
+
+
+  test "time" do
+    # All time tests are done in UTC to avoid having tests break
+    # when daylight savings time begins or ends.
+    old_zone = Time.zone
+    Time.zone = 'UTC'
+    travel_to Time.parse("2015-04-22 12:00:00 UTC") do
+      assert     talks(:talk_past).past?
+      assert_not talks(:talk_past).upcoming?
+      assert_not talks(:talk_past).current?
+      assert_not talks(:talk_past).today?
+      assert_not talks(:talk_past).this_week?
+      assert_not talks(:talk_past).later_this_week?
+      assert_not talks(:talk_past).next_week?
+      assert_not talks(:talk_past).further_ahead?
+
+      assert_not talks(:talk_upcoming).past?
+      assert     talks(:talk_upcoming).upcoming?
+      assert     talks(:talk_upcoming).current?
+      assert     talks(:talk_upcoming).today?
+      assert     talks(:talk_upcoming).this_week?
+      assert     talks(:talk_upcoming).later_this_week? # slightly odd defn, but would need to check a lot of logic before changing
+      assert_not talks(:talk_upcoming).next_week?
+      assert_not talks(:talk_upcoming).further_ahead?
+
+      assert_not talks(:talk_current).past?
+      assert     talks(:talk_current).upcoming?
+      assert     talks(:talk_current).current?
+      assert_not talks(:talk_current).today?
+      assert     talks(:talk_current).this_week?
+      assert     talks(:talk_current).later_this_week?
+      assert_not talks(:talk_current).next_week?
+      assert_not talks(:talk_current).further_ahead?
+
+      assert_not talks(:talk_today).past?
+      assert_not talks(:talk_today).upcoming?
+      assert     talks(:talk_today).current?
+      assert     talks(:talk_today).today?
+      assert     talks(:talk_today).this_week?
+      assert     talks(:talk_today).later_this_week?
+      assert_not talks(:talk_today).next_week?
+      assert_not talks(:talk_today).further_ahead?
+
+      assert     talks(:talk_this_week).past?
+      assert_not talks(:talk_this_week).upcoming?
+      assert_not talks(:talk_this_week).current?
+      assert_not talks(:talk_this_week).today?
+      assert     talks(:talk_this_week).this_week?
+      assert_not talks(:talk_this_week).later_this_week?
+      assert_not talks(:talk_this_week).next_week?
+      assert_not talks(:talk_this_week).further_ahead?
+
+      assert_not talks(:talk_later_this_week).past?
+      assert     talks(:talk_later_this_week).upcoming?
+      assert     talks(:talk_later_this_week).current?
+      assert_not talks(:talk_later_this_week).today?
+      assert     talks(:talk_later_this_week).this_week?
+      assert     talks(:talk_later_this_week).later_this_week?
+      assert_not talks(:talk_later_this_week).next_week?
+      assert_not talks(:talk_later_this_week).further_ahead?
+
+      assert_not talks(:talk_next_week).past?
+      assert     talks(:talk_next_week).upcoming?
+      assert     talks(:talk_next_week).current?
+      assert_not talks(:talk_next_week).today?
+      assert_not talks(:talk_next_week).this_week?
+      assert_not talks(:talk_next_week).later_this_week?
+      assert     talks(:talk_next_week).next_week?
+      assert_not talks(:talk_next_week).further_ahead?
+
+      assert_not talks(:talk_further_ahead).past?
+      assert     talks(:talk_further_ahead).upcoming?
+      assert     talks(:talk_further_ahead).current?
+      assert_not talks(:talk_further_ahead).today?
+      assert_not talks(:talk_further_ahead).this_week?
+      assert_not talks(:talk_further_ahead).later_this_week?
+      assert_not talks(:talk_further_ahead).next_week?
+      assert     talks(:talk_further_ahead).further_ahead?
+    end
+    Time.zone = old_zone
+  end
 end

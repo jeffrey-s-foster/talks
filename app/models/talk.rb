@@ -57,60 +57,60 @@ class Talk < ActiveRecord::Base
 
   def self.upcoming
     # use end_time so talks going on now still appear
-    where("end_time > ?", Time.zone.now)
+    where("end_time >= ?", Time.zone.now)
   end
 
   # before today
   def self.past
-    where("end_time <= ?", Time.zone.now.beginning_of_day)
+    where("end_time < ?", Time.zone.now.beginning_of_day)
   end
 
   # today or in the future
   def self.current
-    where("end_time > ?", Time.zone.now.beginning_of_day)
+    where("end_time >= ?", Time.zone.now.beginning_of_day)
   end
 
   def self.today
-    where("end_time > ? and start_time < ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
+    where("end_time >= ? and start_time < ?", Time.zone.now.beginning_of_day, Time.zone.now.end_of_day)
   end
 
   def self.this_week
-    # In Rails 3.2, beginning/end_of_week take a start day parameter
-    where("end_time > ? and start_time < ?", (Time.zone.now + 1.day).beginning_of_week - 1.day, (Time.zone.now + 1.day).end_of_week - 1.day)
+    where("end_time >= ? and start_time < ?", (Time.zone.now + 1.day).beginning_of_week - 1.day, (Time.zone.now + 1.day).end_of_week - 1.day)
   end
 
   def past?
-    end_time <= Time.zone.now.beginning_of_day
+    end_time < Time.zone.now.beginning_of_day
   end
 
   def upcoming?
-    end_time > Time.zone.now
+    end_time >= Time.zone.now
   end
 
   # today or in the future
   def current?
-    (end_time > Time.zone.now.beginning_of_day)
+    (end_time >= Time.zone.now.beginning_of_day)
   end
 
   def today?
-    (end_time > Time.zone.now.beginning_of_day) && (start_time < Time.zone.now.end_of_day)
+    (end_time >= Time.zone.now.beginning_of_day) && (start_time < Time.zone.now.end_of_day)
   end
 
   def this_week?
-    (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
+    (end_time >= (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
   end
 
   def later_this_week?
-    (not past?) && (end_time > (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
+    (not past?) && (end_time >= (Time.zone.now + 1.day).beginning_of_week - 1.day) && (start_time < (Time.zone.now + 1.day).end_of_week - 1.day)
   end
 
   def next_week?
-    (end_time > (Time.zone.now + 1.day).beginning_of_week + 6.day) && (start_time < (Time.zone.now + 1.day).end_of_week + 6.day)
+    (end_time >= (Time.zone.now + 1.day).beginning_of_week + 6.day) && (start_time < (Time.zone.now + 1.day).end_of_week + 6.day)
   end
 
-  # neither in the past, nor this week, nor next week
   def further_ahead?
-    not (past? || later_this_week? || next_week?)
+    (end_time >= (Time.zone.now + 1.day).beginning_of_week + 13.day)
+# neither in the past, nor this week, nor next week
+#    not (past? || later_this_week? || next_week?)
   end
 
   # range may be :all, :today, :this_week, :upcoming, :current
