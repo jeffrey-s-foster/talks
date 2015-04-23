@@ -2,15 +2,14 @@
 
 == Local installation (for testing)
 
-This web app requires Rails 3.1 and was developed under
-ruby-1.9.2-p180. I recommend using {rvm}[http://beginrescueend.com/]
-to install Ruby. Then do
+This web app requires Rails 4.2.1 and Ruby 2.2.2. I recommend using
+{rvm}[http://beginrescueend.com/] to install Ruby. Then do
 
   # skip the following steps if you're already using 1.9.2
-  rvm install ruby-1.9.2
-  rvm 1.9.2
-  rvm default
-  gem install rails
+  rvm install ruby-2.2.2
+  rvm 2.2.2
+  rvm --default use 2.2.2  # optional, makes 2.2.2 the default ruby vresion
+  gem install bundler
 
   cd talks/
   bundle install       # install all necessary packages
@@ -36,7 +35,7 @@ also want to make yourself an administrator, which you can do with
 
 == Customization
 
-This web app will get some configuration options in the future. For
+This web app may get some configuration options in the future. For
 now, you need to edit some of the code to customize things:
 
 * Site name: Can be changed by editing "en/site_name" mapping in
@@ -44,7 +43,7 @@ now, you need to edit some of the code to customize things:
 
 * Talk kinds: By default, talks distinguishes standard talks from MS
   defenses, PhD proposals, and PhD defenses. This list can be changed
-  by editing the "symbolize :kind" line in app/models/talks.rb. Also change
+  by editing the "enumerize :kind" line in app/models/talks.rb. Also change
   the corresponding translations in config/locales/en.yml.
 
 * Email sender: Edit config/environments/production.rb, line defining
