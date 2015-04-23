@@ -128,3 +128,5 @@ their names, like
 * Remove perm_create_talk from Users
 
 * Talk#poster? deprecated?
+
+* talk_test.rb, email_watchers?

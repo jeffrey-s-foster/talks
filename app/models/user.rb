@@ -8,14 +8,14 @@ class User < ActiveRecord::Base
 #  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :perm_site_admin, :perm_create_talk, :organization, :opt_email_today, :opt_email_this_week
 # No longer needed in Rails 4
 
-  has_many :owned_talks, :class_name => "Talk", :foreign_key => "owner_id"
-  has_and_belongs_to_many :owned_lists, :foreign_key => "owner_id", :association_foreign_key => "owned_list_id", :join_table => "lists_owners", :class_name => "List"
-  has_and_belongs_to_many :poster_lists, :foreign_key => "poster_id", :association_foreign_key => "poster_list_id", :join_table => "lists_posters", :class_name => "List"
-  has_many :subscriptions
-  has_many :registrations
+  has_many :owned_talks, class_name: "Talk", foreign_key: "owner_id", inverse_of: :owner
+  has_and_belongs_to_many :owned_lists, foreign_key: "owner_id", association_foreign_key: "owned_list_id", join_table: "lists_owners", class_name: "List"
+  has_and_belongs_to_many :poster_lists, foreign_key: "poster_id", association_foreign_key: "poster_list_id", join_table: "lists_posters", class_name: "List"
+  has_many :subscriptions, inverse_of: :user
+  has_many :registrations, inverse_of: :user
 
-  validates :email, :presence => true, :uniqueness => true
-  validates :name, :presence => true
+  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true
 
   def name_and_email
     "#{name} &lt;#{email}&gt;".sanitize

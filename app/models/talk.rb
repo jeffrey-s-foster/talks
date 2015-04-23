@@ -1,12 +1,12 @@
 class Talk < ActiveRecord::Base
   extend Enumerize
   
-  belongs_to :owner, :class_name => "User"
+  belongs_to :owner, class_name: "User", inverse_of: :owned_talks
   has_and_belongs_to_many :lists, :include => :subscriptions
   has_many :subscriptions, :as => :subscribable, :dependent => :destroy # :include => :user
   has_many :subscribers, :through => :subscriptions, :class_name => "User", :source => :user
   belongs_to :building
-  has_many :registrations
+  has_many :registrations, inverse_of: :talk
 
   validate :start_end_same_day
   validate :start_end_not_error
@@ -157,7 +157,7 @@ class Talk < ActiveRecord::Base
     h = Hash.new []
     return h unless user
     user.subscribed_lists.each do |l, kl|
-      if l.talks.exists? self then
+      if l.talks.exists? self.id then
         if kl == "kind_subscriber"
           h[:subscriber] += [l]
         elsif kl == "kind_watcher"

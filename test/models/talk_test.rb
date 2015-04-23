@@ -40,7 +40,12 @@ class TalkTest < ActiveSupport::TestCase
     assert_not talks(:talk_13).registered?(users(:user_plain))
   end
   
-  # through(user)
-  # email_watchers(changes)
+  test "through" do
+    assert_equal Hash.new, talks(:talk_10).through(nil)
+    h1 = {:subscriber => [lists(:list_1)]}
+    assert_equal h1, talks(:talk_10).through(users(:user_list_subscriber))
+    h2 = {:watcher => [lists(:list_3)]}
+    assert_equal h2, talks(:talk_30).through(users(:user_list_subscriber))
+  end
   
 end
