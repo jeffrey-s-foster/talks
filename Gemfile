@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.6'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -33,6 +33,7 @@ gem "rabl"
 gem 'sass-rails'
 #gem 'uglifier'
 gem 'coffee-rails'
+gem 'require_all'
 
 # Gems used only for assets and not required
 # in production environments by default.
