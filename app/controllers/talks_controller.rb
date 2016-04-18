@@ -18,7 +18,7 @@ class TalksController < ApplicationController
       format.html
       format.json
     end
-  end
+end
 
   def admin_view
     authorize! :site_admin, :all
