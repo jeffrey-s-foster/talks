@@ -61,4 +61,5 @@ gem 'jquery-ui-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'simplecov', :require => false
 end
