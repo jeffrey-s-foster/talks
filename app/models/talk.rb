@@ -109,8 +109,6 @@ class Talk < ActiveRecord::Base
 
   def further_ahead?
     (end_time >= (Time.zone.now + 1.day).beginning_of_week + 13.day)
-# neither in the past, nor this week, nor next week
-#    not (past? || later_this_week? || next_week?)
   end
 
   # range may be :all, :today, :this_week, :upcoming, :current
