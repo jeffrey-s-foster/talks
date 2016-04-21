@@ -130,3 +130,5 @@ their names, like
 * Talk#poster? deprecated?
 
 * talk_test.rb, email_watchers?
+
+* devise config update when 4.1 comes out
