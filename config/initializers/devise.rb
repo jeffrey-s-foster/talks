@@ -203,5 +203,9 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
+  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/ # new default in Devise 4.1
+  config.skip_session_storage = [:http_auth] # Devise 4.1 new default
+  config.reconfirmable = true # Devise 4.1 new default
+
   config.secret_key = 'ada5ccf40d7737fbb0b99007d6b2bcf4740774c3425dc6a34d0c2488bf2a29b5dbeb4b77ad64e5353df98da7b8d6d1ac609394086e24f761956bfb05fb68509b'
 end
