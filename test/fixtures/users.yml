@@ -13,6 +13,8 @@ user_admin:
   opt_email_today: true
   opt_email_this_week: true
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_plain:
   email: "user@localhost"
@@ -23,6 +25,8 @@ user_plain:
   opt_email_today: true
   opt_email_this_week: true
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_no_email_today:
   email: "user_no_email_today@localhost"
@@ -33,6 +37,8 @@ user_no_email_today:
   opt_email_today: false
   opt_email_this_week: true
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_no_email:
   email: "user_no_email@localhost"
@@ -43,6 +49,8 @@ user_no_email:
   opt_email_today: false
   opt_email_this_week: false
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_hacker:
   email: "<script>haha</script>"
@@ -53,6 +61,8 @@ user_hacker:
   opt_email_today: false
   opt_email_this_week: false
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_list_subscriber:
   email: "user_list_subscriber@localhost"
@@ -63,6 +73,8 @@ user_list_subscriber:
   opt_email_today: true
   opt_email_this_week: true
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
 
 user_talk_subscriber:
   email: "user_talk_subscriber@localhost"
@@ -73,3 +85,5 @@ user_talk_subscriber:
   opt_email_today: true
   opt_email_this_week: true
   organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
