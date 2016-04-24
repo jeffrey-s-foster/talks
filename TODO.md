@@ -136,5 +136,3 @@ their names, like
 * Bugs:
   * When you click on "new talks", there is an exception "undefined method
     `get_kind_values' for #<Class:0x007fec38f3a698>"
-  * The registration confirmation link always says confirmation token is
-    invalid.
