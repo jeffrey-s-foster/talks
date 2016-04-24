@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
@@ -69,6 +70,13 @@ class ApplicationController < ActionController::Base
   def fix_range(params)
     params[:range] = :current unless params[:range]
     params[:range] = params[:range].to_sym
+  end
+
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :organization])
   end
 
 end

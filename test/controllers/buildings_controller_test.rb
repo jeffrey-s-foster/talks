@@ -4,6 +4,7 @@ class BuildingsControllerTest < ActionController::TestCase
   setup do
     @avw = buildings(:avw)
     @csic = buildings(:csic)
+    @user_plain = users(:user_plain)
     @user_admin = users(:user_admin)
   end
 
@@ -40,5 +41,17 @@ class BuildingsControllerTest < ActionController::TestCase
     tmp = Building.find_by_abbrv "FOO"
     assert_equal "The Foo Building", tmp.name
     assert_equal "Foo URL", tmp.url
+  end
+
+  test "logged in as unprivileged user" do
+    sign_in @user_plain
+    get :index
+    assert_redirected_to root_path
+    patch :update, id:@avw, abbrv:"foo"
+    assert_redirected_to root_path
+    assert_equal "AVW", buildings(:avw).abbrv
+    delete :destroy, id:@avw
+    assert_redirected_to root_path
+    assert_equal @avw, buildings(:avw)
   end
 end
