@@ -52,11 +52,10 @@ end
 
   def create
     authorize! :create, Talk
-    adjust params
-    @talk = Talk.new(params[:talk])
+    talk_params, lists = adjust params
+    @talk = Talk.new(talk_params)
+    @talk.lists = lists
     @talk.owner = current_user unless can? :edit_owner, @talk
-    logger.info "Start_time: #{params[:talk][:start_time]}"
-    logger.info "End_time: #{params[:talk][:end_time]}"
     if @talk.save
       if params[:talk][:trigger_watch_email] == "1"
         @talk.delay.email_watchers(nil)
@@ -81,9 +80,10 @@ end
     @talk = Talk.find(params[:id])
     @talk_old = @talk.dup
     authorize! :edit, @talk
-    adjust params
-    if @talk.update_attributes(params[:talk])
-      if params[:talk][:trigger_watch_email] == "1"
+    talk_params, lists = adjust params
+    @talk.lists = lists
+    if @talk.update_attributes(talk_params)
+      if talk_params[:trigger_watch_email] == "1"
         changes = Set.new
         changes << :title if @talk_old.title != @talk.title
         changes << :speaker if ((@talk_old.speaker != @talk.speaker) || (@talk_old.speaker_url != @talk.speaker_url))
@@ -261,7 +261,12 @@ private
       next unless can? :add_talk, l
       lists << l
     }
-    params[:talk][:lists] = lists
+
+    return params.require(:talk).permit(:title, :speaker, :speaker_affiliation,
+      :speaker_url, :room, :building_id, :kind, :request_reg,
+      :trigger_watch_email, :owner_id, :abstract, :bio,
+      :reg_info, :start_time, :end_time), lists
+#    params.require(:talk).permit!
   end
 
   def compute_edit_fields
