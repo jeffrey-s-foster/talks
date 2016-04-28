@@ -26,6 +26,11 @@ class TalksControllerTest < ActionController::TestCase
       posted_proto: ""}
   end
 
+  test "should get index" do
+    get :index
+    assert_respose :success
+  end
+
   test "new not logged in" do
     get :new
     assert_redirected_to root_path
