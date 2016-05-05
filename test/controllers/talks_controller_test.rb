@@ -90,4 +90,27 @@ class TalksControllerTest < ActionController::TestCase
     assert_redirected_to talk_path(t)
   end
 
+  test "edit not logged in" do
+    get :edit, id:talks(:talk_owned).id
+    assert_redirected_to root_path
+  end
+
+  test "edit hacker" do
+    sign_in users(:user_hacker)
+    get :edit, id:talks(:talk_owned).id
+    assert_redirected_to root_path
+  end
+
+  test "edit admin" do
+    sign_in users(:user_admin)
+    get :edit, id:talks(:talk_owned).id
+    assert_response :success
+  end
+
+  test "edit owner" do
+    sign_in users(:user_talk_owner)
+    get :edit, id:talks(:talk_owned).id
+    assert_response :success
+  end
+
 end

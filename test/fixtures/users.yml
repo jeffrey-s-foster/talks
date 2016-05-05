@@ -87,3 +87,15 @@ user_talk_subscriber:
   organization:
   encrypted_password: password
   confirmed_at: <%= Time.now %>
+
+user_talk_owner:
+  email: "user_talk_owner@localhost"
+  name: "A User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>

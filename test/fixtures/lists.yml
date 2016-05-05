@@ -23,3 +23,9 @@ list_3:
   short_descr: "Short Description Three"
   long_descr: "Long description three."
   talks: talk_4, talk_5, talk_6
+
+list_owned:
+  name: "List owned"
+  short_descr: "Short Description Owned"
+  long_descr: "Long description owned."
+  talks: talk_owned

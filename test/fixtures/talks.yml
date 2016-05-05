@@ -83,3 +83,9 @@ talk_further_ahead:
   start_time: 2015-05-03 00:00:00 UTC
   end_time: 2015-05-03 00:00:00 UTC
   owner: user_admin
+
+talk_owned:
+  start_time: 2015-01-01 10:00:00 -5
+  end_time: 2015-01-01 11:00:00 -5
+  owner: user_talk_owner
+  lists: list_0
