@@ -44,38 +44,6 @@ talk_minimal:
   owner: user_admin
   lists: list_0
 
-talk_start_end_different_days:
-  start_time: 2015-01-01 23:00:00 -5
-  end_time: 2015-01-02 00:00:00 -5
-  owner: user_admin
-  lists: list_0
-
-talk_no_start:
-  end_time: 2015-01-01 11:00:00 -5
-  owner: user_admin
-  lists: list_0
-
-talk_no_end:
-  start_time: 2015-01-01 10:00:00 -5
-  owner: user_admin
-  lists: list_0
-
-talk_start_before_end:
-  start_time: 2015-01-01 11:00:00 -5
-  end_time: 2015-01-01 10:00:00 -5
-  owner: user_admin
-  lists: list_0
-
-talk_no_owner:
-  start_time: 2015-01-01 10:00:00 -5
-  end_time: 2015-01-01 11:00:00 -5
-  lists: list_0
-
-talk_no_list:
-  start_time: 2015-01-01 10:00:00 -5
-  end_time: 2015-01-01 11:00:00 -5
-  owner: user_admin
-
 talk_past:
   start_time: 2014-01-01 00:00:00 UTC
   end_time: 2014-01-01 01:00:00 UTC
@@ -115,4 +83,3 @@ talk_further_ahead:
   start_time: 2015-05-03 00:00:00 UTC
   end_time: 2015-05-03 00:00:00 UTC
   owner: user_admin
-

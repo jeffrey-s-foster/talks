@@ -11,7 +11,7 @@ class RegistrationsControllerControllerTest < ActionController::TestCase
                         organization: "example",
                         password: "password",
                         password_confirmation: "password"}
-    tmp = User.find_by_email "me@example.com"
+    tmp = User.find_by email:"me@example.com"
     assert_not_nil tmp
   end
 

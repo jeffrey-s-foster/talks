@@ -5,12 +5,49 @@ class TalkTest < ActiveSupport::TestCase
   test "validations" do
     assert talks(:talk_11).valid?
     assert talks(:talk_minimal).valid?
-    assert talks(:talk_start_end_different_days).invalid?
-    assert talks(:talk_no_start).invalid?
-    assert talks(:talk_no_end).invalid?
-    assert talks(:talk_start_before_end).invalid?
-    assert talks(:talk_no_owner).invalid?
-    assert talks(:talk_no_list).invalid?
+
+    talk_start_end_different_days = Talk.new(
+      start_time: "2015-01-01 23:00:00 -5",
+      end_time: "2015-01-02 00:00:00 -5",
+      owner: users(:user_admin),
+      lists: [lists(:list_0)]
+    )
+    assert talk_start_end_different_days.invalid?
+
+    talk_no_start = Talk.new(
+      end_time: "2015-01-01 11:00:00 -5",
+      owner: users(:user_admin),
+      lists: [lists(:list_0)]
+    )
+    assert talk_no_start.invalid?
+
+    talk_no_end = Talk.new(
+      start_time: "2015-01-01 10:00:00 -5",
+      owner: users(:user_admin),
+      lists: [lists(:list_0)]
+    )
+    assert talk_no_end.invalid?
+
+    talk_start_before_end = Talk.new(
+      start_time: "2015-01-01 11:00:00 -5",
+      end_time: "2015-01-01 10:00:00 -5",
+      owner: users(:user_admin),
+      lists: [lists(:list_0)]
+    )
+    assert talk_start_before_end.invalid?
+
+    talk_no_owner = Talk.new(
+      start_time: "2015-01-01 10:00:00 -5",
+      end_time: "2015-01-01 11:00:00 -5",
+      lists: [lists(:list_0)])
+    assert talk_no_owner.invalid?
+
+    talk_no_list = Talk.new(
+      start_time: "2015-01-01 10:00:00 -5",
+      end_time: "2015-01-01 11:00:00 -5",
+      owner: users(:user_admin)
+    )
+    assert talk_no_list.invalid?
   end
 
   test "extended title" do
@@ -20,7 +57,6 @@ class TalkTest < ActiveSupport::TestCase
   test "subscription" do
     assert_equal nil, talks(:talk_11).subscription(users(:user_plain))
     assert_equal subscriptions(:s_six), talks(:talk_minimal).subscription(users(:user_list_subscriber))
-    assert_equal subscriptions(:s_seven), talks(:talk_no_start).subscription(users(:user_list_subscriber))
   end
 
   test "subscriber-watcher?" do
@@ -28,8 +64,6 @@ class TalkTest < ActiveSupport::TestCase
     assert_not talks(:talk_11).watcher?(users(:user_plain))
     assert talks(:talk_minimal).subscriber?(users(:user_list_subscriber))
     assert_not talks(:talk_minimal).watcher?(users(:user_list_subscriber))
-    assert_not talks(:talk_no_start).subscriber?(users(:user_list_subscriber))
-    assert talks(:talk_no_start).watcher?(users(:user_list_subscriber))
     assert_not talks(:talk_11).subscriber?(users(:user_list_subscriber)) # not transitively through lists
     assert_not talks(:talk_31).watcher?(users(:user_list_subscriber)) # not transitively through lists
   end
@@ -39,7 +73,7 @@ class TalkTest < ActiveSupport::TestCase
     assert talks(:talk_10).registered?(users(:user_plain))
     assert_not talks(:talk_13).registered?(users(:user_plain))
   end
-  
+
   test "through" do
     assert_equal Hash.new, talks(:talk_10).through(nil)
     h1 = {:subscriber => [lists(:list_1)]}

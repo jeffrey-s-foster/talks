@@ -33,12 +33,12 @@ class BuildingsControllerTest < ActionController::TestCase
     csic_url_sym = "building_url_#{@csic.id}".to_sym
     post :update, csic_abbrv_sym=>"WVA", csic_name_sym=>"W.V.A. Building", csic_url_sym=>"WVA URL"
     assert_redirected_to buildings_index_path
-    tmp = Building.find_by_abbrv "WVA"
+    tmp = Building.find_by abbrv: "WVA"
     assert_equal "W.V.A. Building", tmp.name
     assert_equal "WVA URL", tmp.url
     post :update, building_abbrv_new:"FOO", building_name_new:"The Foo Building", building_url_new:"Foo URL"
     assert_redirected_to buildings_index_path
-    tmp = Building.find_by_abbrv "FOO"
+    tmp = Building.find_by abbrv: "FOO"
     assert_equal "The Foo Building", tmp.name
     assert_equal "Foo URL", tmp.url
   end

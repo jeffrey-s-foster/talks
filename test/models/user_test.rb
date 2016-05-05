@@ -20,7 +20,7 @@ class UserTest < ActiveSupport::TestCase
 #    assert_equal [talks(:talk_10), talks(:talk_11), talks(:talk_12),
 #                  talks(:talk_13), talks(:talk_14), talks(:talk_15)].sort, lists(:list_1).talks.sort
 #  end
-  
+
   test "subscribed_talks" do
     assert_equal Hash.new, users(:user_plain).subscribed_talks(:all)
     h = {talks(:talk_10) => "kind_subscriber_through",
@@ -33,7 +33,6 @@ class UserTest < ActiveSupport::TestCase
          talks(:talk_31) => "kind_watcher_through",
          talks(:talk_32) => "kind_watcher_through",
          talks(:talk_minimal) => "kind_subscriber",
-         talks(:talk_no_start) => "kind_watcher",
         }
     assert_equal h, users(:user_list_subscriber).subscribed_talks(:all)
   end

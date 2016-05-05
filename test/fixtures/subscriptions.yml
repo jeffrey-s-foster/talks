@@ -19,8 +19,3 @@ s_six:
   subscribable: talk_minimal (Talk)
   user: user_list_subscriber
   kind: :kind_subscriber
-
-s_seven:
-  subscribable: talk_no_start (Talk)
-  user: user_list_subscriber
-  kind: "kind_watcher"

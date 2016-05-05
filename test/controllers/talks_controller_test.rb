@@ -28,7 +28,29 @@ class TalksControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    assert_respose :success
+    assert_response :success
+  end
+
+  test "admin view not logged in" do
+    get :admin_view
+    assert_redirected_to root_path
+  end
+
+  test "admin view hacker" do
+    sign_in users(:user_hacker)
+    get :admin_view
+    assert_redirected_to root_path
+  end
+
+  test "admin view admin" do
+    sign_in users(:user_admin)
+    get :admin_view
+    assert_response :success
+  end
+
+  test "should show" do
+    get :show, id: talks(:talk_11).id
+    assert_response :success
   end
 
   test "new not logged in" do
@@ -63,7 +85,7 @@ class TalksControllerTest < ActionController::TestCase
   test "create admin" do
     sign_in users(:user_admin)
     put :create, @talk_hash
-    t = Talk.find_by_title("Test4298174")
+    t = Talk.find_by title: "Test4298174"
     assert_not_nil t
     assert_redirected_to talk_path(t)
   end
