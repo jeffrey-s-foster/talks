@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       params[:user].delete :perm_site_admin
       params[:user].delete :perm_create_talk
     end
-    if @user.update_attributes(params[:user])
+    if @user.update(params[:user])
       logger.debug "Updated!"
       redirect_to @user
     else
