@@ -161,7 +161,38 @@ class TalksControllerTest < ActionController::TestCase
   test "update owner" do
     sign_in users(:user_talk_owner)
     put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned).id)
-    assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
     assert_redirected_to talk_path(talks(:talk_owned))
+    assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
+  end
+
+  test "destroy not logged in" do
+    id = talks(:talk_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil Talk.find(id)
+  end
+
+  test "destroy hacker" do
+    sign_in(:user_hacker)
+    id = talks(:talk_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil Talk.find(id)
+  end
+
+  test "destroy admin" do
+    sign_in users(:user_admin)
+    id = talks(:talk_owned).id
+    delete :destroy, id: id
+    assert_redirected_to talks_path
+    assert_raises(ActiveRecord::RecordNotFound) { Talk.find(id) }
+  end
+
+  test "destroy owner" do
+    sign_in users(:user_talk_owner)
+    id = talks(:talk_owned).id
+    delete :destroy, id: id
+    assert_redirected_to talks_path
+    assert_raises(ActiveRecord::RecordNotFound) { Talk.find(id) }
   end
 end
