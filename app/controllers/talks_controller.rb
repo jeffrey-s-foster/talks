@@ -102,7 +102,6 @@ end
         redirect_to @talk
       end
     else
-      puts "OOPS!"
       compute_edit_fields
       render :action => "edit"
     end
