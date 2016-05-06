@@ -13,10 +13,10 @@ class BuildingsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
     patch :update, id:@avw, abbrv:"foo"
     assert_redirected_to root_path
-    assert_equal "AVW", buildings(:avw).abbrv
+    assert_equal "AVW", Building.find(buildings(:avw).id).abbrv
     delete :destroy, id:@avw
     assert_redirected_to root_path
-    assert_equal @avw, buildings(:avw)
+    assert_equal @avw, Building.find(buildings(:avw).id)
   end
 
   test "logged in admin" do
@@ -49,9 +49,9 @@ class BuildingsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
     patch :update, id:@avw, abbrv:"foo"
     assert_redirected_to root_path
-    assert_equal "AVW", buildings(:avw).abbrv
+    assert_equal "AVW", Building.find(buildings(:avw).id).abbrv
     delete :destroy, id:@avw
     assert_redirected_to root_path
-    assert_equal @avw, buildings(:avw)
+    assert_equal @avw, Building.find(buildings(:avw).id)
   end
 end
