@@ -29,3 +29,4 @@ list_owned:
   short_descr: "Short Description Owned"
   long_descr: "Long description owned."
   talks: talk_owned
+  owners: user_talk_owner

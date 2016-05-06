@@ -23,7 +23,30 @@ class TalksControllerTest < ActionController::TestCase
       temp_start_time: "",
       temp_end_time: "",
       posted_0: lists(:list_1),
-      posted_proto: ""}
+      posted_proto: ""
+    }
+    @talk_update_hash = {talk: {
+        title: "Test4298174",
+        speaker: "The Speaker",
+        speaker_affiliation: "The Affiliation",
+        speaker_url: "http://www.cs.umd.edu",
+        room: "1115",
+        building_id: buildings(:csic),
+        kind: "standard",
+        request_reg: 0,
+        trigger_watch_email: 0,
+        owner_id: users(:user_talk_owner),
+        abstract: "The Abstract",
+        bio: "The Bio",
+        reg_info: ""
+      },
+      temp_date_time: "",
+      temp_date: "",
+      temp_start_time: "2015-01-01 10:00:00 -0500",
+      temp_end_time: "2015-01-01 11:00:00 -0500",
+      posted_0: lists(:list_owned),
+      posted_proto: ""
+    }
   end
 
   test "should get index" do
@@ -74,12 +97,14 @@ class TalksControllerTest < ActionController::TestCase
   test "create not logged in" do
     put :create, @talk_hash
     assert_redirected_to root_path
+    assert_nil (Talk.find_by title: "Test4298174")
   end
 
   test "create hacker" do
     sign_in users(:user_hacker)
     put :create, @talk_hash
     assert_redirected_to root_path
+    assert_nil (Talk.find_by title: "Test4298174")
   end
 
   test "create admin" do
@@ -91,26 +116,52 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "edit not logged in" do
-    get :edit, id:talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned).id
     assert_redirected_to root_path
   end
 
   test "edit hacker" do
     sign_in users(:user_hacker)
-    get :edit, id:talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned).id
     assert_redirected_to root_path
   end
 
   test "edit admin" do
     sign_in users(:user_admin)
-    get :edit, id:talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned).id
     assert_response :success
   end
 
   test "edit owner" do
     sign_in users(:user_talk_owner)
-    get :edit, id:talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned).id
     assert_response :success
   end
 
+  test "update not logged in" do
+    put :update, @talk_hash.reverse_merge(id: talks(:talk_owned).id)
+    assert_redirected_to root_path
+    assert_equal "Owned", talks(:talk_owned).title
+  end
+
+  test "update hacker" do
+    sign_in users(:user_hacker)
+    put :update, @talk_hash.reverse_merge(id: talks(:talk_owned).id)
+    assert_redirected_to root_path
+    assert_equal "Owned", talks(:talk_owned).title
+  end
+
+  test "update admin" do
+    sign_in users(:user_admin)
+    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned).id)
+    assert_redirected_to talk_path(talks(:talk_owned))
+    assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
+  end
+
+  test "update owner" do
+    sign_in users(:user_talk_owner)
+    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned).id)
+    assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
+    assert_redirected_to talk_path(talks(:talk_owned))
+  end
 end

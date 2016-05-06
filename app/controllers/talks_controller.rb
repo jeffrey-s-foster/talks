@@ -82,7 +82,7 @@ end
     authorize! :edit, @talk
     talk_params, lists = adjust params
     @talk.lists = lists
-    if @talk.update_attributes(talk_params)
+    if @talk.update!(talk_params)
       if talk_params[:trigger_watch_email] == "1"
         changes = Set.new
         changes << :title if @talk_old.title != @talk.title
@@ -102,6 +102,7 @@ end
         redirect_to @talk
       end
     else
+      puts "OOPS!"
       compute_edit_fields
       render :action => "edit"
     end

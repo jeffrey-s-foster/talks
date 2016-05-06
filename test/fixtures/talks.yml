@@ -5,8 +5,8 @@ talk_1<%= n %>:
   title: <%= "Title 1#{n}" %>
   abstract: <%= "Abstract 1#{n}." %>
   speaker: <%= "Speaker 1#{n}" %>
-  start_time: 2015-01-01 <%= 10+n %>:00:00 -5
-  end_time: 2015-01-01 <%= 11+n %>:00:00 -5
+  start_time: 2015-01-01 <%= 10+n %>:00:00 -0500
+  end_time: 2015-01-01 <%= 11+n %>:00:00 -0500
   building: csic
   room: 1115
   speaker_url: "http://www.cs.umd.edu"
@@ -24,8 +24,8 @@ talk_3<%= n %>:
   title: <%= "Title 3#{n}" %>
   abstract: <%= "Abstract 3#{n}." %>
   speaker: <%= "Speaker 3#{n}" %>
-  start_time: 2015-01-01 <%= 10+n %>:00:00 -5
-  end_time: 2015-01-01 <%= 11+n %>:00:00 -5
+  start_time: 2015-01-01 <%= 10+n %>:00:00 -0500
+  end_time: 2015-01-01 <%= 11+n %>:00:00 -0500
   building: csic
   room: 1115
   speaker_url: "http://www.cs.umd.edu"
@@ -39,8 +39,8 @@ talk_3<%= n %>:
 <% end %>
 
 talk_minimal:
-  start_time: 2015-01-01 10:00:00 -5
-  end_time: 2015-01-01 11:00:00 -5
+  start_time: 2015-01-01 10:00:00 -0500
+  end_time: 2015-01-01 11:00:00 -0500
   owner: user_admin
   lists: list_0
 
@@ -85,7 +85,18 @@ talk_further_ahead:
   owner: user_admin
 
 talk_owned:
-  start_time: 2015-01-01 10:00:00 -5
-  end_time: 2015-01-01 11:00:00 -5
+  title: "Owned"
+  abstract: "The Abstract"
+  speaker: "The Speaker"
+  start_time: 2015-01-01 10:00:00 -0500
+  end_time: 2015-01-01 11:00:00 -0500
+  building: csic
+  room: 1115
+  speaker_url: "http://www.cs.umd.edu"
+  bio: "The Bio"
+  request_reg: false
+  speaker_affiliation: "The Affiliation"
+  reg_info:
+  kind: "standard"
   owner: user_talk_owner
-  lists: list_0
+  lists: list_owned
