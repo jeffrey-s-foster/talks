@@ -195,4 +195,24 @@ class TalksControllerTest < ActionController::TestCase
     assert_redirected_to talks_path
     assert_raises(ActiveRecord::RecordNotFound) { Talk.find(id) }
   end
+
+  test "subscribe subscribe unsubscribe" do
+    u = users(:user_plain)
+    sign_in u
+    id = talks(:talk_11)
+    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
+    get :subscribe, id: id, do: :subscribe
+    assert_includes(u.subscribed_talks(:all, ["kind_subscriber"]), talks(:talk_11))
+    get :subscribe, id: id, do: :unsubscribe
+    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
+  end
+
+  test "subscribe watch" do
+    u = users(:user_plain)
+    sign_in u
+    id = talks(:talk_11)
+    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
+    get :subscribe, id: id, do: :watch
+    assert_includes(u.subscribed_talks(:all, ["kind_watcher"]), talks(:talk_11))
+  end
 end
