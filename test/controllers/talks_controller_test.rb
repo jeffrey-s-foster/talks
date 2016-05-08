@@ -326,4 +326,12 @@ class TalksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "receive feedback" do
+    assert_difference('ActionMailer::Base.deliveries.size', 1) {
+      post :receive_feedback, name: "name", email: "email@example.com",
+        subject: "Feedback", comments: "Comments"
+    }
+    assert_redirected_to root_path
+  end
+
 end

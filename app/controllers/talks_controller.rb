@@ -238,7 +238,7 @@ end
   end
 
   def receive_feedback
-    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver
+    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver_now
     redirect_to root_path, :notice => "Thank you for your feedback"
   end
 
