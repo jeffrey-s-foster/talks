@@ -294,4 +294,14 @@ class TalksControllerTest < ActionController::TestCase
     }
     assert_nil(Registration.find_by(talk_id: t.id, name: "registrant"))
   end
+
+  test "feed and calendar" do
+    get :feed, format: :atom
+    assert_response :success
+    get :feed, format: :ics
+    assert_response :success
+    get :calendar, id: talks(:talk_11).id, format: :ics
+    assert_response :success
+  end
+
 end
