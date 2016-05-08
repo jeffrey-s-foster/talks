@@ -226,4 +226,9 @@ class TalksControllerTest < ActionController::TestCase
     get :register, id: t.id, do: :unregister
     assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
   end
+
+  test "show registrations not logged in" do
+    get :show_registrations, talks(:talk_register)
+    assert_redircted_to root_path
+  end
 end
