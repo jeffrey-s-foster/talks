@@ -100,3 +100,20 @@ talk_owned:
   kind: "standard"
   owner: user_talk_owner
   lists: list_owned
+
+talk_register:
+  title: "Owned"
+  abstract: "The Abstract"
+  speaker: "The Speaker"
+  start_time: 2015-01-01 10:00:00 -0500
+  end_time: 2015-01-01 11:00:00 -0500
+  building: csic
+  room: 1115
+  speaker_url: "http://www.cs.umd.edu"
+  bio: "The Bio"
+  request_reg: true
+  speaker_affiliation: "The Affiliation"
+  reg_info: "A registration message"
+  kind: "standard"
+  owner: user_admin
+  lists: list_0

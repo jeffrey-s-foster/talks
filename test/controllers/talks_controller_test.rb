@@ -215,4 +215,15 @@ class TalksControllerTest < ActionController::TestCase
     get :subscribe, id: id, do: :watch
     assert_includes(u.subscribed_talks(:all, ["kind_watcher"]), talks(:talk_11))
   end
+
+  test "talk register" do
+    u = users(:user_plain)
+    t = talks(:talk_register)
+    sign_in u
+    assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
+    get :register, id: t.id, do: :register
+    assert_not_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
+    get :register, id: t.id, do: :unregister
+    assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
+  end
 end
