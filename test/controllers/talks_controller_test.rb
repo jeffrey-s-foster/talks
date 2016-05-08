@@ -228,7 +228,13 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "show registrations not logged in" do
-    get :show_registrations, talks(:talk_register)
-    assert_redircted_to root_path
+    get :show_registrations, id: talks(:talk_register)
+    assert_redirected_to root_path
+  end
+
+  test "show registraitons owner" do
+    sign_in users(:user_admin)
+    get :show_registrations, id: talks(:talk_register)
+    assert_response :success
   end
 end
