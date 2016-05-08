@@ -237,4 +237,16 @@ class TalksControllerTest < ActionController::TestCase
     get :show_registrations, id: talks(:talk_register)
     assert_response :success
   end
+
+  test "add registrations" do
+    sign_in users(:user_admin)
+    t = talks(:talk_register)
+    u0 = users(:user_plain)
+    u1 = users(:user_talk_owner)
+    assert_nil(Registration.find_by(user_id: u0.id, talk_id: t.id))
+    assert_nil(Registration.find_by(user_id: u1.id, talk_id: t.id))
+    post :add_registrations, id: t.id, user_0: u0.id, user_1: u1.id
+    assert_not_nil(Registration.find_by(user_id: u0.id, talk_id: t.id))
+    assert_not_nil(Registration.find_by(user_id: u1.id, talk_id: t.id))
+  end
 end

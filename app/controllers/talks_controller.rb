@@ -126,6 +126,7 @@ end
   def register
     t = Talk.find(params[:id])
     r = Registration.where(:talk_id => t, :user_id => current_user)
+    raise "Attempt to register for talk without registration" if not t.request_reg
     logger.error "Inconsistency, r is #{r}" if r.length > 1
     case params[:do]
     when "register"
@@ -144,6 +145,7 @@ end
 
   def show_registrations
     @talk = Talk.find(params[:id])
+    raise "Attempt to register for talk without registration" if not @talk.request_reg
     authorize! :edit, @talk
     @regs = @talk.registrations
     @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
@@ -155,6 +157,7 @@ end
   def add_registrations
     authorize! :site_admin, :all
     t = Talk.find(params[:id])
+    raise "Attempt to register for talk without registration" if not t.request_reg
     params.each_pair { |k,v|
       next unless k =~ /user_(\d+)/
       next if v == ""
@@ -171,12 +174,14 @@ end
     r = Registration.find(params[:id])
     t = r.talk
     authorize! :edit, r.talk
+    raise "Attempt to register for talk without registration" if not t.request_reg
     r.destroy
     redirect_to show_registrations_talk_path(t)
   end
 
   def external_register
     @talk = Talk.find(params[:id])
+    raise "Attempt to register for talk without registration" if not @talk.request_reg
     @reg = Registration.new(:talk_id => @talk.id,
                             :user_id => 0,
                             :name => params[:name],
