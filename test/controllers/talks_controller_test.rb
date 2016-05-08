@@ -304,4 +304,26 @@ class TalksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "show subscribers not logged in" do
+    get :show_subscribers, id: talks(:talk_11)
+    assert_redirected_to root_path
+  end
+
+  test "show subscribers hacker" do
+    sign_in users(:user_hacker)
+    get :show_subscribers, id: talks(:talk_11)
+    assert_redirected_to root_path
+  end
+
+  test "show subscribers admin" do
+    sign_in users(:user_admin)
+    get :show_subscribers, id: talks(:talk_11)
+    assert_response :success
+  end
+
+  test "feedback" do
+    get :feedback
+    assert_response :success
+  end
+
 end
