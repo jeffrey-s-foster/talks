@@ -227,9 +227,21 @@ class TalksControllerTest < ActionController::TestCase
     assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
   end
 
+  test "talk register bogus" do
+    u = users(:user_plain)
+    t = talks(:talk_12)
+    sign_in u
+    assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
+    assert_raises(RuntimeError) { get :register, id: t.id, do: :register }
+  end
+
   test "show registrations not logged in" do
     get :show_registrations, id: talks(:talk_register)
     assert_redirected_to root_path
+  end
+
+  test "show registrations bogus" do
+    assert_raises(RuntimeError) { get :show_registrations, id: talks(:talk_12) }
   end
 
   test "show registraitons owner" do
@@ -238,7 +250,7 @@ class TalksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "add registrations" do
+  test "add cancel registrations" do
     sign_in users(:user_admin)
     t = talks(:talk_register)
     u0 = users(:user_plain)
@@ -246,7 +258,40 @@ class TalksControllerTest < ActionController::TestCase
     assert_nil(Registration.find_by(user_id: u0.id, talk_id: t.id))
     assert_nil(Registration.find_by(user_id: u1.id, talk_id: t.id))
     post :add_registrations, id: t.id, user_0: u0.id, user_1: u1.id
-    assert_not_nil(Registration.find_by(user_id: u0.id, talk_id: t.id))
-    assert_not_nil(Registration.find_by(user_id: u1.id, talk_id: t.id))
+    r0 = Registration.find_by(user_id: u0.id, talk_id: t.id)
+    assert_not_nil r0
+    r1 = Registration.find_by(user_id: u1.id, talk_id: t.id)
+    assert_not_nil r1
+    post :cancel_registration, id: r0.id
+    assert_nil(Registration.find_by(user_id: u0.id, talk_id: t.id))
+  end
+
+  test "add registrations bogus" do
+    sign_in users(:user_admin)
+    t = talks(:talk_12)
+    u0 = users(:user_plain)
+    u1 = users(:user_talk_owner)
+    assert_raises(RuntimeError) { post :add_registrations, id: t.id, user_0: u0.id, user_1: u1.id }
+  end
+
+  test "external register and cancel" do
+    t = talks(:talk_register)
+    assert_difference('ActionMailer::Base.deliveries.size', 1) {
+      post :external_register, id: t.id,
+        name: "registrant",
+        email: "registrant@example.com",
+        organization: "organization"
+    }
+    r = Registration.find_by(talk_id: t.id, name: "registrant")
+    assert_not_nil r
+    assert_no_difference('ActionMailer::Base.deliveries.size') {
+      # try to cancel without secret
+      get :cancel_external_registration, id: t.id, registration: r.id, secret: 0
+    }
+    assert_not_nil(Registration.find_by(talk_id: t.id, name: "registrant"))
+    assert_difference('ActionMailer::Base.deliveries.size', 1) {
+      get :cancel_external_registration, id: t.id, registration: r.id, secret: r.secret
+    }
+    assert_nil(Registration.find_by(talk_id: t.id, name: "registrant"))
   end
 end

@@ -174,7 +174,7 @@ end
     r = Registration.find(params[:id])
     t = r.talk
     authorize! :edit, r.talk
-    raise "Attempt to register for talk without registration" if not t.request_reg
+#    raise "Attempt to register for talk without registration" if not t.request_reg
     r.destroy
     redirect_to show_registrations_talk_path(t)
   end
@@ -190,7 +190,7 @@ end
                             :secret => SecureRandom.base64,
                             )
     if @reg.save
-      Notifications.send_external_reg(@reg).deliver
+      Notifications.send_external_reg(@reg).deliver_now
     else
       render :action => :show
     end
@@ -201,6 +201,7 @@ end
     if @reg && (@reg.secret == params[:secret])
       @reg.destroy
       @success = true
+      Notifications.send_cancel_reg(@reg).deliver_now
     else
       @success = false
     end
