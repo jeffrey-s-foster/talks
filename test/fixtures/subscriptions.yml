@@ -18,4 +18,19 @@ s_three:
 s_six:
   subscribable: talk_minimal (Talk)
   user: user_list_subscriber
-  kind: :kind_subscriber
+  kind: "kind_subscriber"
+
+s_today:
+  subscribable: talk_subscribed_direct (Talk)
+  user: user_to_email
+  kind: "kind_subscriber"
+
+s_today_list:
+  subscribable: list_subscribed (List)
+  user: user_to_email
+  kind: "kind_subscriber"
+
+s_tomorrow:
+  subscribable: talk_subscribed_direct_tomorrow (Talk)
+  user: user_to_email
+  kind: "kind_subscriber"

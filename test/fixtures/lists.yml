@@ -4,13 +4,13 @@ list_0:
   name: "List Zero"
   short_descr: "Short Description Zero"
   long_descr: "Long description zero."
-  talks:
+  talks: talk_minimal, talk_register
 
 list_1:
   name: "List One"
   short_descr: "Short Description One"
   long_descr: "Long description one."
-  talks: talk_1
+  talks: talk_11, talk_12, talk_13, talk_14, talk_15, talk_16
 
 list_2:
   name: "List Two"
@@ -22,7 +22,13 @@ list_3:
   name: "List three"
   short_descr: "Short Description Three"
   long_descr: "Long description three."
-  talks: talk_4, talk_5, talk_6
+  talks: talk_31, talk_32, talk_33
+
+list_99:
+  name: "List ninety-nine"
+  short_descr: "Short Description Ninety-Nine"
+  long_descr: "Long description ninety-nine"
+  talks: talk_subscribed_direct, talk_subscribed_direct_tomorrow
 
 list_owned:
   name: "List owned"
@@ -30,3 +36,10 @@ list_owned:
   long_descr: "Long description owned."
   talks: talk_owned
   owners: user_talk_owner
+
+list_subscribed:
+  name: "List subscribed"
+  short_descr: "Short descr subscribed"
+  long_descr: "Long descr subscribed"
+  talks: talk_subscribed_indirect, talk_subscribed_indirect_tomorrow
+  owners: user_admin

@@ -66,7 +66,7 @@ user_hacker:
 
 user_list_subscriber:
   email: "user_list_subscriber@localhost"
-  name: "A User"
+  name: "Subscriber"
   perm_site_admin: false
   perm_create_talk: false
   ical_secret: "12345"
@@ -91,6 +91,18 @@ user_talk_subscriber:
 user_talk_owner:
   email: "user_talk_owner@localhost"
   name: "A User"
+  perm_site_admin: false
+  perm_create_talk: false
+  ical_secret: "12345"
+  opt_email_today: true
+  opt_email_this_week: true
+  organization:
+  encrypted_password: password
+  confirmed_at: <%= Time.now %>
+
+user_to_email:
+  email: "user_to_email@localhost"
+  name: "User to Email"
   perm_site_admin: false
   perm_create_talk: false
   ical_secret: "12345"
