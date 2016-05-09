@@ -22,7 +22,7 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "show" do
-    get :show, id: lists(:list_1).id
+    get :show, id: lists(:list_1)
     assert_response :success
   end
 
@@ -67,30 +67,30 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "edit not logged in" do
-    get :edit, id: lists(:list_owned).id
+    get :edit, id: lists(:list_owned)
     assert_redirected_to root_path
   end
 
   test "edit hacker" do
     sign_in users(:user_hacker)
-    get :edit, id: lists(:list_owned).id
+    get :edit, id: lists(:list_owned)
     assert_redirected_to root_path
   end
 
   test "edit admin" do
     sign_in users(:user_admin)
-    get :edit, id: lists(:list_owned).id
+    get :edit, id: lists(:list_owned)
     assert_response :success
   end
 
   test "edit owner" do
     sign_in users(:user_talk_owner)
-    get :edit, id: lists(:list_owned).id
+    get :edit, id: lists(:list_owned)
     assert_response :success
   end
 
   test "update not logged in" do
-    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned))
     l = List.find(lists(:list_owned).id)
     assert_equal "List owned", l.name # user can't change name
     assert_not_includes(lists(:list_owned).owners, @admin)
@@ -100,7 +100,7 @@ class ListsControllerTest < ActionController::TestCase
 
   test "update hacker" do
     sign_in users(:user_hacker)
-    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned))
     l = List.find(lists(:list_owned).id)
     assert_equal "List owned", l.name # user can't change name
     assert_not_includes(lists(:list_owned).owners, @admin)
@@ -112,7 +112,7 @@ class ListsControllerTest < ActionController::TestCase
     sign_in users(:user_admin)
     assert_not_includes(lists(:list_owned).owners, @admin)
     assert_not_includes(lists(:list_owned).posters, @plain)
-    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned))
     l = List.find(lists(:list_owned).id)
     assert_not_nil l
     assert_includes(l.owners, @admin)
@@ -125,7 +125,7 @@ class ListsControllerTest < ActionController::TestCase
     sign_in users(:user_talk_owner)
     assert_not_includes(lists(:list_owned).owners, @admin)
     assert_not_includes(lists(:list_owned).posters, @plain)
-    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned))
     l = List.find(lists(:list_owned).id)
     assert_not_nil l
     assert_includes(l.owners, @admin)
@@ -164,5 +164,28 @@ class ListsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
     assert_not_nil List.find(id) # only admin can delete list
   end
+
+  test "subscribe subscribe unsubscribe" do
+    u = users(:user_plain)
+    sign_in u
+    l = lists(:list_0)
+    assert_not_includes(u.subscribed_lists, [l, "kind_subscriber"])
+    assert_not_includes(u.subscribed_lists, [l, "kind_watcher"])
+    get :subscribe, id: l, do: :subscribe
+    assert_includes(u.subscribed_lists, [l, "kind_subscriber"])
+    get :subscribe, id: l, do: :unsubscribe
+    assert_not_includes(u.subscribed_lists, [l, "kind_subscriber"])
+  end
+
+  test "subscribe watch" do
+    u = users(:user_plain)
+    sign_in u
+    l = lists(:list_0)
+    assert_not_includes(u.subscribed_lists, [l, "kind_subscriber"])
+    assert_not_includes(u.subscribed_lists, [l, "kind_watcher"])
+    get :subscribe, id: l, do: :watch
+    assert_includes(u.subscribed_lists, [l, "kind_watcher"])
+  end
+
 
 end
