@@ -1,4 +1,4 @@
-class Notifications < ActionMailer::Base
+class TheMailer < ApplicationMailer
   helper :application
   helper :talks
 
@@ -8,8 +8,7 @@ class Notifications < ActionMailer::Base
     @subj = subj
 
     mail :to => "#{user.name} <#{user.email}>",
-	:subject => "[Talks] #{@subj}",
-	:from => "Talks <talks@cs.umd.edu>"
+	:subject => "[Talks] #{@subj}"
   end
 
   def send_external_reg(reg)
@@ -17,8 +16,7 @@ class Notifications < ActionMailer::Base
     @talk = reg.talk
 
     mail :to => "#{@reg.name} <#{@reg.email}>",
-         :subject => "[Talks] Registration confirmation",
-         :from => "Talks <talks@cs.umd.edu>"
+         :subject => "[Talks] Registration confirmation"
   end
 
   def send_cancel_reg(reg)
@@ -26,8 +24,7 @@ class Notifications < ActionMailer::Base
     @talk = reg.talk
 
     mail :to => "#{@reg.name} <#{@reg.email}>",
-         :subject => "[Talks] Registration cancellation",
-         :from => "Talks <talks@cs.umd.edu>"
+         :subject => "[Talks] Registration cancellation"
   end
 
   def send_talk_change(user, talk, changes)
@@ -41,8 +38,7 @@ class Notifications < ActionMailer::Base
     end
 
     mail :to => "#{@user.name} <#{@user.email}>",
-         :subject => @subj,
-         :from => "Talks <talks@cs.umd.edu>"
+         :subject => @subj
   end
 
   def send_feedback(h)
@@ -55,8 +51,7 @@ class Notifications < ActionMailer::Base
   def send_admin_message(u, h)
     @message = h[:message]
     mail :to => "#{u.name} <#{u.email}>",
-         :subject => h[:subject],
-         :from => "Talks <talks@cs.umd.edu>"
+         :subject => h[:subject]
   end
 
 end

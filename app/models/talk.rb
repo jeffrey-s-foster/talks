@@ -1,6 +1,6 @@
 class Talk < ActiveRecord::Base
   extend Enumerize
-  
+
   belongs_to :owner, class_name: "User", inverse_of: :owned_talks
   has_and_belongs_to_many :lists, :include => :subscriptions
   has_many :subscriptions, :as => :subscribable, :dependent => :destroy # :include => :user
@@ -20,7 +20,7 @@ class Talk < ActiveRecord::Base
   # Change text values in config/locales/en.yml
   enumerize :kind, in: [:standard, :ms_defense, :phd_proposal, :phd_defense]
 
-  
+
   # symbolize :kind, :in => {
   #   :standard => "Standard",
   #   :ms_defense => "MS Defense",
@@ -172,7 +172,7 @@ class Talk < ActiveRecord::Base
     to_email += (lists.map { |l| l.subscribers }).flatten # all indirect subscribers
 
     to_email.uniq.each do |u|
-      Notifications.send_talk_change(u, self, changes).deliver
+      TheMailer.send_talk_change(u, self, changes).deliver_now
     end
   end
 

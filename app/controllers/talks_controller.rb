@@ -190,7 +190,7 @@ end
                             :secret => SecureRandom.base64,
                             )
     if @reg.save
-      Notifications.send_external_reg(@reg).deliver_now
+      TheMailer.send_external_reg(@reg).deliver_now
     else
       render :action => :show
     end
@@ -201,7 +201,7 @@ end
     if @reg && (@reg.secret == params[:secret])
       @reg.destroy
       @success = true
-      Notifications.send_cancel_reg(@reg).deliver_now
+      TheMailer.send_cancel_reg(@reg).deliver_now
     else
       @success = false
     end
@@ -238,7 +238,7 @@ end
   end
 
   def receive_feedback
-    Notifications.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver_now
+    TheMailer.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver_now
     redirect_to root_path, :notice => "Thank you for your feedback"
   end
 
