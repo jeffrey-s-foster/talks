@@ -85,7 +85,6 @@ class TalksControllerTest < ActionController::TestCase
     sign_in users(:user_hacker)
     get :new
     assert_redirected_to root_path
-    sign_out users(:user_hacker)
   end
 
   test "new admin" do

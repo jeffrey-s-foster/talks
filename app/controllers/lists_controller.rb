@@ -34,15 +34,17 @@ class ListsController < ApplicationController
   end
 
   def edit
-    authorize! :edit, List
     @list = List.find(params[:id])
+    authorize! :edit, @list
     compute_edit_fields
   end
 
   def create
     authorize! :create, List
-    adjust params
-    @list = List.new(params[:list])
+    list_params, owners, posters = adjust params
+    @list = List.new(list_params)
+    @list.owners = owners
+    @list.posters = posters
 
     if @list.save
       redirect_to @list, notice: 'List was successfully created.'
@@ -53,11 +55,11 @@ class ListsController < ApplicationController
   end
 
   def update
-    authorize! :edit, List
     @list = List.find(params[:id])
-    adjust params
+    authorize! :edit, @list
+    list_params, owners, posters = adjust params
     if not (can? :edit_name, @list) then
-      params[:list].delete :name
+      list_params.delete :name
     end
 
     if @list.update(params[:list])
@@ -111,7 +113,6 @@ private
       next if v == ""
       owners << User.find(v)
     }
-    params[:list][:owners] = owners
 
     posters = []
     params.each_pair { |k,v|
@@ -119,7 +120,8 @@ private
       next if v == ""
       posters << User.find(v)
     }
-    params[:list][:posters] = posters
+    return params[:list].permit(:name, :short_descr, :long_descr),
+      owners, posters
   end
 
   def compute_edit_fields
