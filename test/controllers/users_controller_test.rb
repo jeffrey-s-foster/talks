@@ -35,4 +35,26 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "edit not logged in" do
+    get :edit, id: users(:user_plain)
+    assert_redirected_to root_path
+  end
+
+  test "edit hacker" do
+    get :edit, id: users(:user_plain)
+    assert_redirected_to root_path
+  end
+
+  test "edit admin" do
+    sign_in users(:user_admin)
+    get :edit, id: users(:user_plain)
+    assert_response :success
+  end
+
+  test "edit user" do
+    sign_in users(:user_plain)
+    get :edit, id: users(:user_plain)
+    assert_response :success
+  end
+
 end
