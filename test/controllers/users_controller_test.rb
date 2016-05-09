@@ -146,4 +146,28 @@ class UsersControllerTest < ActionController::TestCase
     assert u.perm_create_talk
   end
 
+  test "destroy not logged in" do
+    id = users(:user_plain).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil User.find(id)
+  end
+
+  test "destroy logged in" do
+    sign_in(:user_plain)
+    id = users(:user_plain).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil User.find(id)
+  end
+
+  test "destroy admin" do
+    sign_in users(:user_admin)
+    id = users(:user_plain).id
+    delete :destroy, id: id
+    assert_redirected_to users_path
+    assert_raises(ActiveRecord::RecordNotFound) { User.find(id) }
+  end
+
+
 end
