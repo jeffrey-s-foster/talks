@@ -2,13 +2,11 @@ class TheMailer < ApplicationMailer
   helper :application
   helper :talks
 
-  # time_interval can be :today or :this_week
   def send_talks(user, talks, subj)
     @talks = talks.sort { |a,b| a.start_time <=> b.start_time }
     @subj = subj
-
     mail :to => "#{user.name} <#{user.email}>",
-	:subject => "[Talks] #{@subj}"
+         :subject => "[Talks] #{@subj}"
   end
 
   def send_external_reg(reg)
