@@ -61,6 +61,8 @@ class ListsControllerTest < ActionController::TestCase
     put :create, @list_hash
     l = List.find_by name: "Test4298174"
     assert_not_nil l
+    assert_includes(l.owners, @admin)
+    assert_includes(l.posters, @plain)
     assert_redirected_to list_path(l)
   end
 
@@ -87,5 +89,49 @@ class ListsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "update not logged in" do
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    l = List.find(lists(:list_owned).id)
+    assert_equal "List owned", l.name # user can't change name
+    assert_not_includes(lists(:list_owned).owners, @admin)
+    assert_not_includes(lists(:list_owned).posters, @plain)
+    assert_redirected_to root_path
+  end
+
+  test "update hacker" do
+    sign_in users(:user_hacker)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    l = List.find(lists(:list_owned).id)
+    assert_equal "List owned", l.name # user can't change name
+    assert_not_includes(lists(:list_owned).owners, @admin)
+    assert_not_includes(lists(:list_owned).posters, @plain)
+    assert_redirected_to root_path
+  end
+
+  test "update admin" do
+    sign_in users(:user_admin)
+    assert_not_includes(lists(:list_owned).owners, @admin)
+    assert_not_includes(lists(:list_owned).posters, @plain)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    l = List.find(lists(:list_owned).id)
+    assert_not_nil l
+    assert_includes(l.owners, @admin)
+    assert_includes(l.posters, @plain)
+    assert_equal "Test4298174", l.name
+    assert_redirected_to list_path(l)
+  end
+
+  test "update owner" do
+    sign_in users(:user_talk_owner)
+    assert_not_includes(lists(:list_owned).owners, @admin)
+    assert_not_includes(lists(:list_owned).posters, @plain)
+    put :update, @list_hash.reverse_merge(id: lists(:list_owned).id)
+    l = List.find(lists(:list_owned).id)
+    assert_not_nil l
+    assert_includes(l.owners, @admin)
+    assert_includes(l.posters, @plain)
+    assert_equal "List owned", l.name # user can't change name
+    assert_redirected_to list_path(l)
+  end
 
 end

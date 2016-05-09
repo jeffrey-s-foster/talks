@@ -62,7 +62,11 @@ class ListsController < ApplicationController
       list_params.delete :name
     end
 
-    if @list.update(params[:list])
+    @list.attributes = list_params
+    @list.owners = owners
+    @list.posters = posters
+
+    if @list.save
       redirect_to @list, notice: 'List was successfully updated.'
     else
       compute_edit_fields
