@@ -72,7 +72,7 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "should show" do
-    get :show, id: talks(:talk_11).id
+    get :show, id: talks(:talk_11)
     assert_response :success
   end
 
@@ -115,30 +115,30 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "edit not logged in" do
-    get :edit, id: talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned)
     assert_redirected_to root_path
   end
 
   test "edit hacker" do
     sign_in users(:user_hacker)
-    get :edit, id: talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned)
     assert_redirected_to root_path
   end
 
   test "edit admin" do
     sign_in users(:user_admin)
-    get :edit, id: talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned)
     assert_response :success
   end
 
   test "edit owner" do
     sign_in users(:user_talk_owner)
-    get :edit, id: talks(:talk_owned).id
+    get :edit, id: talks(:talk_owned)
     assert_response :success
   end
 
   test "update not logged in" do
-    put :update, @talk_hash.reverse_merge(id: talks(:talk_owned).id)
+    put :update, @talk_hash.reverse_merge(id: talks(:talk_owned))
     assert_redirected_to root_path
     assert_equal "Owned", talks(:talk_owned).title
   end
@@ -152,14 +152,14 @@ class TalksControllerTest < ActionController::TestCase
 
   test "update admin" do
     sign_in users(:user_admin)
-    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned).id)
+    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned))
     assert_redirected_to talk_path(talks(:talk_owned))
     assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
   end
 
   test "update owner" do
     sign_in users(:user_talk_owner)
-    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned).id)
+    put :update, @talk_update_hash.reverse_merge(id: talks(:talk_owned))
     assert_redirected_to talk_path(talks(:talk_owned))
     assert_equal "Test4298174", Talk.find(talks(:talk_owned).id).title
   end
@@ -198,21 +198,21 @@ class TalksControllerTest < ActionController::TestCase
   test "subscribe subscribe unsubscribe" do
     u = users(:user_plain)
     sign_in u
-    id = talks(:talk_11)
-    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
-    get :subscribe, id: id, do: :subscribe
-    assert_includes(u.subscribed_talks(:all, ["kind_subscriber"]), talks(:talk_11))
-    get :subscribe, id: id, do: :unsubscribe
-    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
+    t = talks(:talk_11)
+    assert_not_includes(u.subscribed_talks(:all), t)
+    get :subscribe, id: t, do: :subscribe
+    assert_includes(u.subscribed_talks(:all, ["kind_subscriber"]), t)
+    get :subscribe, id: t, do: :unsubscribe
+    assert_not_includes(u.subscribed_talks(:all), t)
   end
 
   test "subscribe watch" do
     u = users(:user_plain)
     sign_in u
-    id = talks(:talk_11)
-    assert_not_includes(u.subscribed_talks(:all), talks(:talk_11))
-    get :subscribe, id: id, do: :watch
-    assert_includes(u.subscribed_talks(:all, ["kind_watcher"]), talks(:talk_11))
+    t = talks(:talk_11)
+    assert_not_includes(u.subscribed_talks(:all), t)
+    get :subscribe, id: t, do: :watch
+    assert_includes(u.subscribed_talks(:all, ["kind_watcher"]), t)
   end
 
   test "talk register" do
@@ -231,7 +231,7 @@ class TalksControllerTest < ActionController::TestCase
     t = talks(:talk_12)
     sign_in u
     assert_nil(Registration.find_by(user_id: u.id, talk_id: t.id))
-    assert_raises(RuntimeError) { get :register, id: t.id, do: :register }
+    assert_raises(RuntimeError) { get :register, id: t, do: :register }
   end
 
   test "show registrations not logged in" do
@@ -270,13 +270,13 @@ class TalksControllerTest < ActionController::TestCase
     t = talks(:talk_12)
     u0 = users(:user_plain)
     u1 = users(:user_talk_owner)
-    assert_raises(RuntimeError) { post :add_registrations, id: t.id, user_0: u0.id, user_1: u1.id }
+    assert_raises(RuntimeError) { post :add_registrations, id: t, user_0: u0.id, user_1: u1.id }
   end
 
   test "external register and cancel" do
     t = talks(:talk_register)
     assert_difference('ActionMailer::Base.deliveries.size', 1) {
-      post :external_register, id: t.id,
+      post :external_register, id: t,
         name: "registrant",
         email: "registrant@example.com",
         organization: "organization"
@@ -285,13 +285,13 @@ class TalksControllerTest < ActionController::TestCase
     assert_not_nil r
     assert_no_difference('ActionMailer::Base.deliveries.size') {
       # try to cancel without secret
-      get :cancel_external_registration, id: t.id, registration: r.id, secret: 0
+      get :cancel_external_registration, id: t, registration: r.id, secret: 0
     }
     assert_not_nil(Registration.find_by(talk_id: t.id, name: "registrant"))
     assert_difference('ActionMailer::Base.deliveries.size', 1) {
-      get :cancel_external_registration, id: t.id, registration: r.id, secret: r.secret
+      get :cancel_external_registration, id: t, registration: r.id, secret: r.secret
     }
-    assert_nil(Registration.find_by(talk_id: t.id, name: "registrant"))
+    assert_nil(Registration.find_by(talk_id: t, name: "registrant"))
   end
 
   test "feed and calendar" do
@@ -299,7 +299,7 @@ class TalksControllerTest < ActionController::TestCase
     assert_response :success
     get :feed, format: :ics
     assert_response :success
-    get :calendar, id: talks(:talk_11).id, format: :ics
+    get :calendar, id: talks(:talk_11), format: :ics
     assert_response :success
   end
 
