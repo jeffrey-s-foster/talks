@@ -117,7 +117,7 @@ class ListsControllerTest < ActionController::TestCase
     assert_not_nil l
     assert_includes(l.owners, @admin)
     assert_includes(l.posters, @plain)
-    assert_equal "Test4298174", l.name
+    assert_equal @list_hash[:list][:name], l.name
     assert_redirected_to list_path(l)
   end
 

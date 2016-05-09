@@ -42,16 +42,16 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     authorize! :edit, @user
-    if params[:user][:password].blank?
-      params[:user].delete :password
-      params[:user].delete :password_confirmation
+    up = user_params
+    if up[:password].blank?
+      up.delete :password
+      up.delete :password_confirmation
     end
     unless can? :site_admin, :all
-      params[:user].delete :perm_site_admin
-      params[:user].delete :perm_create_talk
+      up.delete :perm_site_admin
+      up.delete :perm_create_talk
     end
-    if @user.update(params[:user])
-      logger.debug "Updated!"
+    if @user.update(up)
       redirect_to @user
     else
       render :action => "edit"
@@ -95,6 +95,12 @@ private
       current_user.update_attribute(:ical_secret, SecureRandom.base64)
     end
     true
+  end
+
+  def user_params
+    return params.require(:user).permit(:name, :email, :organization,
+      :password, :password_confirmation, :opt_email_today,
+      :opt_email_this_week, :perm_site_admin, :perm_create_talk)
   end
 
 end
