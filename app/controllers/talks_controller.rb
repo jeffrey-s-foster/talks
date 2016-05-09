@@ -58,7 +58,7 @@ end
     @talk.owner = current_user unless can? :edit_owner, @talk
     if @talk.save
       if params[:talk][:trigger_watch_email] == "1"
-        @talk.delay.email_watchers(nil)
+#        @talk.delay.email_watchers(nil)
         redirect_to @talk, :notice => "Sending talk creation notification to subscribers and watchers..."
       else
         redirect_to @talk
@@ -95,7 +95,7 @@ end
         if changes.empty?
           redirect_to @talk
         else
-          @talk.delay.email_watchers(changes)
+#          @talk.delay.email_watchers(changes)
           redirect_to @talk, :notice => "Sending talk update notification to subscribers and watchers..."
         end
       else

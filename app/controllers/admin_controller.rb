@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   end
 
   def send_spam
-    AdminController.delay.spam_users(:subject => params[:subject], :message => params[:message])
+#    AdminController.delay.spam_users(:subject => params[:subject], :message => params[:message])
     redirect_to admin_index_path, :notice => "Sending message to all users..."
   end
 
