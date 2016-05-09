@@ -169,5 +169,17 @@ class UsersControllerTest < ActionController::TestCase
     assert_raises(ActiveRecord::RecordNotFound) { User.find(id) }
   end
 
+  test "feed" do
+    u = users(:user_plain)
+    get :feed, id: u, key: u.ical_secret, format: :atom
+    assert_response :success
+    get :feed, id: u, key: u.ical_secret, format: :ics
+    assert_response :success
+    get :feed, id: u, key: 0, format: :atom
+    assert_response :forbidden
+    get :feed, id: u, key: 0, format: :ics
+    assert_response :forbidden
+  end
+
 
 end
