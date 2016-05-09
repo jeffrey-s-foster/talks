@@ -181,5 +181,31 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :forbidden
   end
 
+  test "reset_ical_secret logged in" do
+    sign_in users(:user_plain)
+    u = users(:user_plain)
+    assert_equal "12345", u.ical_secret
+    get :reset_ical_secret, id: u
+    assert_redirected_to users_path
+    assert_nil User.find(u.id).ical_secret
+  end
+
+  test "reset_ical_secret admin" do
+    sign_in users(:user_admin)
+    u = users(:user_plain)
+    sign_in u
+    assert_equal "12345", u.ical_secret
+    get :reset_ical_secret, id: u
+    assert_redirected_to users_path
+    assert_nil User.find(u.id).ical_secret
+  end
+
+  test "reset_ical_secret hacker" do
+    sign_in users(:user_hacker)
+    u = users(:user_plain)
+    get :reset_ical_secret, id: u
+    assert_redirected_to root_path
+    assert_not_nil User.find(u.id).ical_secret
+  end
 
 end
