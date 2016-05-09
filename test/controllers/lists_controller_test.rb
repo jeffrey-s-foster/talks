@@ -187,5 +187,29 @@ class ListsControllerTest < ActionController::TestCase
     assert_includes(u.subscribed_lists, [l, "kind_watcher"])
   end
 
+  test "feed" do
+    get :feed, id: lists(:list_0), format: :atom
+    assert_response :success
+    get :feed, id: lists(:list_0), format: :ics
+    assert_response :success
+  end
+
+  test "show subscribers not logged in" do
+    get :show_subscribers, id: lists(:list_0)
+    assert_redirected_to root_path
+  end
+
+  test "show subscribers hacker" do
+    sign_in users(:user_hacker)
+    get :show_subscribers, id: lists(:list_0)
+    assert_redirected_to root_path
+  end
+
+  test "show subscribers admin" do
+    sign_in users(:user_admin)
+    get :show_subscribers, id: lists(:list_0)
+    assert_response :success
+  end
+
 
 end
