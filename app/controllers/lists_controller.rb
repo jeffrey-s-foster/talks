@@ -75,11 +75,11 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, List
     @list = List.find(params[:id])
+    authorize! :destroy, @list
     @list.destroy
 
-    redirect_to lists_url
+    redirect_to root_path
   end
 
   def subscribe

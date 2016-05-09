@@ -134,4 +134,35 @@ class ListsControllerTest < ActionController::TestCase
     assert_redirected_to list_path(l)
   end
 
+  test "destroy not logged in" do
+    id = lists(:list_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil List.find(id)
+  end
+
+  test "destroy hacker" do
+    sign_in(:user_hacker)
+    id = lists(:list_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil List.find(id)
+  end
+
+  test "destroy admin" do
+    sign_in users(:user_admin)
+    id = lists(:list_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_raises(ActiveRecord::RecordNotFound) { List.find(id) }
+  end
+
+  test "destroy owner" do
+    sign_in users(:user_talk_owner)
+    id = lists(:list_owned).id
+    delete :destroy, id: id
+    assert_redirected_to root_path
+    assert_not_nil List.find(id) # only admin can delete list
+  end
+
 end
