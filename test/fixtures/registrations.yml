@@ -9,9 +9,10 @@ r_two:
   user: user_plain
 
 r_three:
-  talk: talk_11
+  talk: talk_register
   name: "Anonymous User"
   email: anon@email.com
+  user_id: 0
   organization: "No org"
   secret: 12345
 
