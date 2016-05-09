@@ -134,3 +134,5 @@ their names, like
 * devise config update when 4.1 comes out
 
 * trigger_watch_email shouldn't be a param for a talk
+
+* "My list" on user#show includes owned talks, but these are not included in emails or feeds (not in subscribed)
