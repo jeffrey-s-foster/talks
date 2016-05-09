@@ -12,4 +12,27 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "show not logged in" do
+    get :show, id: users(:user_plain)
+    assert_redirected_to root_path
+  end
+
+  test "show admin" do
+    sign_in users(:user_admin)
+    get :show, id: users(:user_plain)
+    assert_response :success
+  end
+
+  test "show hacker" do
+    sign_in users(:user_hacker)
+    get :show, id: users(:user_plain)
+    assert_redirected_to root_path
+  end
+
+  test "show logged in" do
+    sign_in users(:user_plain)
+    get :show, id: users(:user_plain)
+    assert_response :success
+  end
+
 end
