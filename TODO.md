@@ -134,7 +134,3 @@ their names, like
 * devise config update when 4.1 comes out
 
 * trigger_watch_email shouldn't be a param for a talk
-
-* Bugs:
-  * When you click on "new talks", there is an exception "undefined method
-    `get_kind_values' for #<Class:0x007fec38f3a698>"
