@@ -136,3 +136,5 @@ their names, like
 * trigger_watch_email shouldn't be a param for a talk
 
 * "My list" on user#show includes owned talks, but these are not included in emails or feeds (not in subscribed)
+
+* Rails 5, comment out line "config.log_level = :debug" in production.rb (no longer necessary)
