@@ -32,7 +32,7 @@ gem "whenever", :require => false
 gem "rabl"
 #gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'sass-rails'
-#gem 'uglifier'
+gem 'uglifier'
 gem 'coffee-rails'
 gem 'require_all'
 
@@ -53,11 +53,14 @@ gem 'jquery-ui-rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :development do
+  gem 'capistrano', '~> 3.1'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-passenger'
+end
 
 group :test do
   # Pretty printed test output
