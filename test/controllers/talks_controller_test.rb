@@ -274,6 +274,7 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "external register and cancel" do
+    ActionMailer::Base.deliveries = []
     t = talks(:talk_register)
     assert_difference('ActionMailer::Base.deliveries.size', 1) {
       post :external_register, id: t,
@@ -326,6 +327,7 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   test "receive feedback" do
+    ActionMailer::Base.deliveries = []
     assert_difference('ActionMailer::Base.deliveries.size', 1) {
       post :receive_feedback, name: "name", email: "email@example.com",
         subject: "Feedback", comments: "Comments"

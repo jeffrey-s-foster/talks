@@ -2,6 +2,7 @@ require 'test_helper'
 
 class TheMailerTest < ActionMailer::TestCase
   test "send talks" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_talk_owner)
     t = u.subscribed_talks(:all)
     m = "The message"
@@ -11,6 +12,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send reg" do
+    ActionMailer::Base.deliveries = []
     r = registrations(:r_three)
     email = TheMailer.send_external_reg(r).deliver_now
     assert_not ActionMailer::Base.deliveries.empty?
@@ -18,6 +20,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send cancel reg" do
+    ActionMailer::Base.deliveries = []
     r = registrations(:r_three)
     email = TheMailer.send_cancel_reg(r).deliver_now
     assert_not ActionMailer::Base.deliveries.empty?
@@ -25,6 +28,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send new" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_talk_owner)
     t = talks(:talk_owned)
     email = TheMailer.send_talk_change(u, t, nil).deliver_now
@@ -33,6 +37,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send update" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_talk_owner)
     t = talks(:talk_owned)
     changes = Set.new [:title]
@@ -42,6 +47,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send feedback" do
+    ActionMailer::Base.deliveries = []
     email = TheMailer.send_feedback(subject: "Feedback", name: "me",
       email: "me@me.com", comments: "My comments").deliver_now
     assert_not ActionMailer::Base.deliveries.empty?
@@ -51,6 +57,7 @@ class TheMailerTest < ActionMailer::TestCase
   end
 
   test "send admin message" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_plain)
     email = TheMailer.send_admin_message(u, subject: "Subject",
       message: "Message").deliver_now

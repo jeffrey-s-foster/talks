@@ -2,6 +2,7 @@ class TalksTaskTest < ActionMailer::TestCase
   # Inherits from ActionMailer::TestCase so mailings are reset
 
   test "send today" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_to_email)
     travel_to Time.parse("2016-05-08 12:30:00 UTC") do
       Rake::Task['talks:send_today'].invoke
@@ -17,6 +18,7 @@ class TalksTaskTest < ActionMailer::TestCase
   end
 
   test "send this week" do
+    ActionMailer::Base.deliveries = []
     u = users(:user_to_email)
     travel_to Time.parse("2016-05-08 12:30:00 UTC") do
       Rake::Task['talks:send_this_week'].invoke
