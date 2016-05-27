@@ -138,3 +138,5 @@ their names, like
 * "My list" on user#show includes owned talks, but these are not included in emails or feeds (not in subscribed)
 
 * Rails 5, comment out line "config.log_level = :debug" in production.rb (no longer necessary)
+
+* Use hash#dig for RDL::Info#get, eventually
