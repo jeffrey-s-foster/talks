@@ -139,6 +139,8 @@ class UsersControllerTest < ActionController::TestCase
   test "update hacker admin" do
     sign_in users(:user_admin)
     old = User.find(users(:user_hacker).id)
+    assert_not old.perm_site_admin
+    assert_not old.perm_create_talk
     put :update, id: old, user: @user_update_hacker_hash
     assert_redirected_to user_path(users(:user_hacker))
     u = User.find(old.id)
