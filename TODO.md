@@ -140,3 +140,5 @@ their names, like
 * Rails 5, comment out line "config.log_level = :debug" in production.rb (no longer necessary)
 
 * Use hash#dig for RDL::Info#get, eventually
+
+* Feedback, enforce 5000 char limit with some javascript

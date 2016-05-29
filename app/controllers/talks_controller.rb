@@ -238,7 +238,7 @@ end
   end
 
   def receive_feedback
-    TheMailer.send_feedback(:name => params[:name], :email => params[:email], :subject => params[:subject], :comments => params[:comments]).deliver_now
+    TheMailer.send_feedback(:name => params[:name].truncate(255), :email => params[:email].truncate(255), :subject => params[:subject].truncate(255), :comments => params[:comments].truncate(5000)).deliver_now
     redirect_to root_path, :notice => "Thank you for your feedback"
   end
 

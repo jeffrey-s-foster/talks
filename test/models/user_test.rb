@@ -36,4 +36,35 @@ class UserTest < ActiveSupport::TestCase
         }
     assert_equal h, users(:user_list_subscriber).subscribed_talks(:all)
   end
+
+  test "validations" do
+    okay = User.new(
+      name: "Some Name",
+      email: "email@example.com",
+      organization: "The Organization",
+      password: "password",
+    )
+    assert okay.valid?
+    bad_name = User.new(
+      name: "a" * 256,
+      email: "email@example.com",
+      organization: "The Organization",
+      password: "password",
+    )
+    assert bad_name.invalid?
+    bad_email = User.new(
+      name: "Some Name",
+      email: "a" * 256,
+      organization: "The Organization",
+      password: "password",
+    )
+    assert bad_email.invalid?
+    bad_org = User.new(
+      name: "Some Name",
+      email: "email@example.com",
+      organization: "a" * 256,
+      password: "password",
+    )
+    assert bad_org.invalid?
+  end
 end

@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
+  validates_length_of :name, maximum: 255
+  validates_length_of :email, maximum: 255
+  validates_length_of :organization, maximum: 255
 
   def name_and_email
     "#{name} &lt;#{email}&gt;".sanitize

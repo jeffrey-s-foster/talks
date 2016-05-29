@@ -2,16 +2,16 @@
 
 <p>
 <%= form_for @user do |f| %>
-  <%= f.error_messages :header_message => "Error", :message => nil, :header_tag => :div %>
+  <%= f.error_messages header_message: "Error", message: nil, header_tag: :div %>
 
   <div><%= f.label :name %><br />
-  <%= f.text_field :name, :value => @user.name %></div>
+  <%= f.text_field :name, value: @user.name, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <%= f.email_field :email, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :organization %> (may leave blank for umd)<br/>
-  <%= f.text_field :organization %></div>
+  <%= f.text_field :organization, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password %></div>
@@ -26,6 +26,6 @@
     <div><%= f.check_box :perm_site_admin %> <%= f.label :perm_site_admin %>
     <div><%= f.check_box :perm_create_talk %> <%= f.label :perm_create_talk %>
   <% end %>
-  
+
   <div><%= f.submit "Update" %></div>
 <% end %>

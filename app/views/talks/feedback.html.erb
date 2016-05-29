@@ -13,10 +13,11 @@
 <%= form_tag receive_feedback_talks_path do %>
 
 <table class="feedback">
-<tr><th>Your name</th><td><%= text_field_tag "name" %></td></tr>
-<tr><th>Email address</th><td><%= text_field_tag "email" %></td></tr>
-<tr><th>Subject</th><td><%= text_field_tag "subject" %></td></tr>
-<tr class="space-above"><th class="align-top">Comments</th><td><%= text_area_tag :comments, nil, :class => "tinymce", :rows => 20, :cols => 84 %></td></tr>
+<tr><th>Your name</th><td><%= text_field_tag "name", nil, maxlength: 255 %></td></tr>
+<tr><th>Email address</th><td><%= text_field_tag "email", nil, maxlength: 255 %></td></tr>
+<tr><th>Subject</th><td><%= text_field_tag "subject", nil, maxlength: 255 %></td></tr>
+<tr class="space-above"><th class="align-top">Comments</th><td><%= text_area_tag :comments, nil, class: "tinymce", rows: 20, cols: 84 %></td></tr>
+<tr><th/><td>(5000 chars max)</td></tr>
 </table>
 
 <p>

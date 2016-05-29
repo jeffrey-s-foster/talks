@@ -1,17 +1,17 @@
 <h2>Registration</h2>
 
 <p>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= f.error_messages :header_message => "Error", :message => nil, :header_tag => :div %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_messages header_message: "Error", message: nil, header_tag: :div %>
 
   <div><%= f.label :name %><br />
-  <%= f.text_field :name %></div>
+  <%= f.text_field :name, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <%= f.email_field :email, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :organization %> (may leave blank for umd) <br/>
-  <%= f.text_field :organization %></div>
+  <%= f.text_field :organization, size: 50, maxlength: 255 %></div>
 
   <div><%= f.label :password %><br />
   <%= f.password_field :password %></div>
