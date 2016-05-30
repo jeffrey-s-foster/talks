@@ -22,7 +22,7 @@ server "talkshost.cs.umd.edu", user: 'jfoster_rr', roles: %w{app db web} #:prima
 # role :db,  %w{deploy@example.com}
 
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle}
-set :linked_files, %w{db/production.sqlite3 config/database.yml config/secret_token.rb}
+set :linked_files, %w{db/production.sqlite3 config/database.yml config/initializers/secret_token.rb}
 
 # Configuration
 # =============
