@@ -1,14 +1,14 @@
-= Talks.cs.umd.edu
+# Talks.cs.umd.edu
 
-== Local installation (for testing)
+## Local installation (for testing)
 
-This web app requires Rails 4.2.1 and Ruby 2.2.2. I recommend using
-{rvm}[http://beginrescueend.com/] to install Ruby. Then do
+This web app requires Rails 4.2.6 and Ruby 2.3.1. I recommend using
+[rvm](https://rvm.io) to install Ruby. Then do
 
-  # skip the following steps if you're already using 1.9.2
-  rvm install ruby-2.2.2
-  rvm 2.2.2
-  rvm --default use 2.2.2  # optional, makes 2.2.2 the default ruby vresion
+  # skip the following steps if you're already using 2.3.1
+  rvm install ruby-2.3.1
+  rvm 2.3.1
+  rvm --default use 2.3.1  # optional, makes 2.3.1 the default ruby vresion
   gem install bundler
 
   cd talks/
@@ -19,11 +19,11 @@ This web app requires Rails 4.2.1 and Ruby 2.2.2. I recommend using
 Then go to localhost:3000 and create an account for yourself. The
 email sending probably won't work if you're on a local machine, so
 look in log/development.log for the confirmation email that was sent
-(search for "Confirm my account"), and enter the link. You'll probably
+(search for "Confirm my account"), and http get the link. You'll probably
 also want to make yourself an administrator, which you can do with
 
   sqlite3 db/development.sqlite3
-  > update users set perm_site_admin = "1" where id = "1";
+  > update users set perm_site_admin # "1" where id # "1";
 
 (You can probably set the confirmation info using sqlite3, also.)
 
@@ -31,7 +31,7 @@ also want to make yourself an administrator, which you can do with
   token and secret_key_base. You can use `rake secret` to generate a fresh
   secret.
 
-== Customization
+## Customization
 
 This web app may get some configuration options in the future. For
 now, you need to edit some of the code to customize things:
@@ -52,24 +52,33 @@ now, you need to edit some of the code to customize things:
   so that the two occurrences of "US/Eastern" are in the appropriate
   time zone.
 
-== Deployment
+## Deployment
 
-* RAILS_ENV=production rake db:setup
+### With Capistrano
+
+There's a `Capfile` in the root directory to support deployment with
+[Capistrano](http://capistranorb.com). Edit files in `config/deploy`
+to set up beta testing and/or deployment environments. You'll need
+to put `config/database.yml` and `config/initializers/secret_token.rb`
+in `/deploy_to/shared`.
+
+### Manually
+
+* Deploy:
+* RAILS_ENV#production rake db:setup
 * bundle exec rake assets:precompile
 * config/environments/production.rb, update config.action_mailer.default_url_options
 * config/initializers/devise.rb, update config.mailer_sender
 * app/views/layouts/application.html.erb, change "talk.cs.umd.edu"
-* bundle config build.sqlite3 -- --with-sqlite3-include=/usr/local/sqlite-3.7.6.3/include --with-sqlite3-lib=/usr/local/sqlite-3.7.6.3/lib
+* bundle config build.sqlite3 -- --with-sqlite3-include#/usr/local/sqlite-3.7.6.3/include --with-sqlite3-lib#/usr/local/sqlite-3.7.6.3/lib
 * bundle --deployment (install gems locally for phusion passenger)
-  (For us, add /usr/local/ruby-1.9.3-p0/bin to path before doing that)
 * Register for an account
 * sqlite3 db/development.sqlite3
-  > update users set perm_site_admin = "1" where id = "1";
+  > update users set perm_site_admin # "1" where id # "1";
 * Backup/config.rb, edit mail.from and mail.to definitions
 * whenever --update-crontab  # install cron job to send today's and this week's talks, and to backup database daily
 
-== Update (put this in a capfile)
-
+* Update:
 * git pull
 * bundle --deployment
 * bundle exec rake assets:precompile
@@ -79,10 +88,10 @@ now, you need to edit some of the code to customize things:
     and
   * chmod -R a+r .
 * touch tmp/restart.txt
-* RAILS_ENV=production script/delayed_job restart
+* RAILS_ENV#production script/delayed_job restart
 * whenever --update-crontab
 
-== Permission model
+## Permission model
 
 (See app/models/ability.rb for full details)
 
