@@ -29,7 +29,7 @@ class ListsController < ApplicationController
     @title = "Create new list"
     @owners = []
     @posters = []
-    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @users = User.order(:email)
     render :action => "edit"
   end
 
@@ -132,6 +132,6 @@ private
     @title = "Edit list"
     @owners = @list.owners.sort { |a,b| a.email_and_name <=> b.email_and_name }
     @posters = @list.posters.sort { |a,b| a.email_and_name <=> b.email_and_name }
-    @users = User.all.sort { |a,b| a.email_and_name <=> b.email_and_name }
+    @users = User.order(:email)
   end
 end
