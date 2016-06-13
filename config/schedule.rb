@@ -11,8 +11,8 @@ every 1.day, :at => "12:30am" do
   rake "talks:send_today"
 end
 
-every 1.day, :at => "12:30am"  do
-  command "backup perform --trigger talks_backup --root-path #{File.expand_path("../../Backup", __FILE__)}"
-end
+# every 1.day, :at => "12:30am"  do
+#   command "backup perform --trigger talks_backup --root-path #{File.expand_path("../../Backup", __FILE__)}"
+# end
 
 # Learn more: http://github.com/javan/whenever
