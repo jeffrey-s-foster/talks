@@ -142,3 +142,5 @@ their names, like
 * Use hash#dig for RDL::Info#get, eventually
 
 * Feedback, enforce 5000 char limit with some javascript
+
+* Super isn't handled correctly by wrapping straetgy, fixing it will be complex.
