@@ -51,17 +51,17 @@ class ApplicationController < ActionController::Base
           elsif t.room
             event.location = t.room
           end
-	  event.url = talk_url(t)
-          notes = ""
-          unless t.abstract.empty?
-	    notes = coder.decode(ActionController::Base.helpers.strip_tags(t.abstract))
-          else
-	    notes = "(No abstract yet)"
-	  end
-	  unless t.bio.empty?
-	    notes << "Bio: " << coder.decode(ActionController::Base.helpers.strip_tags(t.bio))
-	  end
-	  event.description = notes
+	        event.url = talk_url(t)
+          # notes = ""
+          # unless t.abstract.empty?
+	        #    notes = coder.decode(ActionController::Base.helpers.strip_tags(t.abstract))
+          # else
+	        #    notes = "(No abstract yet)"
+	        # end
+	        # unless t.bio.empty?
+	        #    notes << "Bio: " << coder.decode(ActionController::Base.helpers.strip_tags(t.bio))
+	        # end
+	        # event.description = notes
         end
       end
     end
