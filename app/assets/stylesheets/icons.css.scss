@@ -1,5 +1,5 @@
 @mixin badge {
-    @include inline-block;
+    display: inline-block;
     background-image: url(icons.png);
     background-repeat: no-repeat;
     width: 16px;
