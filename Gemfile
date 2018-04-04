@@ -5,7 +5,7 @@ gem 'rails', '4.2.10'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'  # workaround for bug with rails 4.2
 gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
