@@ -8,7 +8,7 @@ class TalksController < ApplicationController
       }
       @current = false
     elsif params[:range] == :all
-      @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
+      @talks = Talk.all_recent.sort { |a,b| a.start_time <=> b.start_time }
     else
       @talks = Talk.current.sort { |a,b| a.start_time <=> b.start_time }
       @current = true
@@ -208,7 +208,7 @@ end
   end
 
   def feed
-    @talks = Talk.all.sort { |a,b| a.start_time <=> b.start_time }
+    @talks = Talk.all_recent.sort { |a,b| a.start_time <=> b.start_time }
     @title = t :site_name
     respond_to do |format|
       format.ics { render :text => (generate_ical @talks) }

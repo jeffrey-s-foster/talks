@@ -62,7 +62,7 @@ class Talk < ActiveRecord::Base
 
   # before today
   def self.past
-    where("end_time < ?", Time.zone.now.beginning_of_day)
+    where("end_time < ? and end_time >= ?", Time.zone.now.beginning_of_day, Time.zone.now - 1.year)
   end
 
   # today or in the future
@@ -76,6 +76,10 @@ class Talk < ActiveRecord::Base
 
   def self.this_week
     where("end_time >= ? and start_time < ?", (Time.zone.now + 1.day).beginning_of_week - 1.day, (Time.zone.now + 1.day).end_of_week - 1.day)
+  end
+
+  def self.all_recent
+    where("end_time >= ?", Time.zone.now - 1.year)
   end
 
   def past?
