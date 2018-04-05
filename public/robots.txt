@@ -5,7 +5,4 @@
 # Disallow: /
 
 User-Agent: *
-Disallow: /*.ics$
-Disallow: /*.json$
-Disallow: /*.atom$
-Disallow: /*.rss$
+Disallow: /talks/feed.atom
